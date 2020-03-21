@@ -1,2 +1,7 @@
 # sonya
-iyilik rengi derneği, admin paneli.
+iyilik rengi derneği, admin dashboard.
+
+
+
+
+

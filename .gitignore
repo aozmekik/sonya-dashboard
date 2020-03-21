@@ -1,3 +1,9 @@
+# app_public/node_modules
+# it's because lots of dev tools hangs in there. ~500Mib
+# just a guess, but deployment will be around ~12Mib.
+# so, for devs stuff you should npm install in app_public
+app_public/node_modules
+
 # Logs
 logs
 *.log
