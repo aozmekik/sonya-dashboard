@@ -18,5 +18,9 @@
     "morgan": "~1.9.1",
     "nodemon": "^2.0.2",
     "pug": "^2.0.4"
+  },
+  "resolutions": {
+    "@babel/preset-env": "^7.8.7",
+    "@babel/compat-data": "~7.8.0"
   }
 }

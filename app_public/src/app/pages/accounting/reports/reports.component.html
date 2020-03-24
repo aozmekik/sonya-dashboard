@@ -1,0 +1,84 @@
+<nb-card>
+  <nb-card-header>Using the Grid</nb-card-header>
+  <nb-card-body>
+    <form>
+      <div class="form-group row">
+        <label for="typeId" class="label col-sm-3 col-form-label">Tip</label>
+        <div class="col-sm-9">
+          <nb-select id="typeId" [(selected)]="currentActivityType" status="primary">
+            <nb-option *ngFor="let activityType of activityTypes" [value]="activityType"> {{ activityType }}</nb-option>
+          </nb-select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="uyeId" class="label col-sm-3 col-form-label">Üye/Cari/Diğer</label>
+        <div class="col-sm-9">
+          <nb-select id="uyeId" [(selected)]="currentAbouts">
+            <nb-option *ngFor="let activityAbout of activityAbouts" [value]="activityAbout">
+              {{ activityAbout }}</nb-option>
+          </nb-select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="dateId" class="label col-sm-3 col-form-label">Tarih</label>
+        <div class="col-sm-9">
+          <input nbInput fullWidth
+                 placeholder="Tarih"
+                 [nbDatepicker]="formpicker" id="dateId">
+          <nb-datepicker #formpicker></nb-datepicker>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="checkId" class="label col-sm-3 col-form-label">Makbuz/Fatura No</label>
+        <div class="col-sm-9">
+          <input type="text" nbInput fullWidth id="checkId" placeholder="Makbuz/Fatura No">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="bankId" class="label col-sm-3 col-form-label">Kasa</label>
+        <div class="col-sm-9">
+          <nb-select id="bankId" [(selected)]="currentBankSafe">
+            <nb-option *ngFor="let activityBankSafe of activityBankSafes" [value]="activityBankSafe">
+              {{ activityBankSafe }}</nb-option>
+          </nb-select>
+        </div>
+      </div>
+      <div class="form-group row">
+      <label for="campaignId" class="label col-sm-3 col-form-label">Kampanya</label>
+      <div class="col-sm-9">
+        <nb-select id="campaignId" fullWidth placeholder="Seçin" [(selected)]="currentCampaign">
+          <nb-option value="1">Kampanya1</nb-option>
+        </nb-select>
+      </div>
+      </div>
+      <div class="form-group row">
+        <label for="nameId" class="label col-sm-3 col-form-label">İsim</label>
+        <div class="col-sm-9">
+          <input type="text" nbInput fullWidth id="nameId" placeholder="İsim">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="accountTypeId" class="label col-sm-3 col-form-label">Hesap Tipi</label>
+        <div class="col-sm-9">
+          <nb-select id="accountTypeId" fullWidth placeholder="Seçin" [(selected)]="currentCampaign">
+            <nb-option value="1">Bağış</nb-option>
+            <nb-option value="1">Ödeme</nb-option>
+          </nb-select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="commentId" class="label col-sm-3 col-form-label">Açıklama</label>
+        <div class="col-sm-9">
+          <input type="text" nbInput fullWidth id="commentId" placeholder="Açıklama">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="moneyId" class="label col-sm-3 col-form-label">Tutar</label>
+        <div class="col-sm-9">
+          <input type="number" nbInput fullWidth id="moneyId" placeholder="Tutar">
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
