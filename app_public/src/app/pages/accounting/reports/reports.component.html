@@ -1,11 +1,12 @@
 <nb-card>
   <nb-card-header>Using the Grid</nb-card-header>
   <nb-card-body>
-    <form>
+    <form #userForm="ngForm">
+      {{userForm.value | json }}
       <div class="form-group row">
         <label for="typeId" class="label col-sm-3 col-form-label">Tip</label>
         <div class="col-sm-9">
-          <nb-select id="typeId" [(selected)]="currentActivityType" status="primary">
+          <nb-select id="typeId" [(selected)]="currentActivityType" status="primary" name="activityType" ngModel>
             <nb-option *ngFor="let activityType of activityTypes" [value]="activityType"> {{ activityType }}</nb-option>
           </nb-select>
         </div>
@@ -14,7 +15,7 @@
       <div class="form-group row">
         <label for="uyeId" class="label col-sm-3 col-form-label">Üye/Cari/Diğer</label>
         <div class="col-sm-9">
-          <nb-select id="uyeId" [(selected)]="currentAbouts">
+          <nb-select id="uyeId" [(selected)]="currentAbouts" name="about" ngModel>
             <nb-option *ngFor="let activityAbout of activityAbouts" [value]="activityAbout">
               {{ activityAbout }}</nb-option>
           </nb-select>
@@ -25,20 +26,21 @@
         <div class="col-sm-9">
           <input nbInput fullWidth
                  placeholder="Tarih"
-                 [nbDatepicker]="formpicker" id="dateId">
+                 [nbDatepicker]="formpicker" id="dateId" name="date" ngModel>
           <nb-datepicker #formpicker></nb-datepicker>
         </div>
       </div>
       <div class="form-group row">
         <label for="checkId" class="label col-sm-3 col-form-label">Makbuz/Fatura No</label>
         <div class="col-sm-9">
-          <input type="text" nbInput fullWidth id="checkId" placeholder="Makbuz/Fatura No">
+          <input type="text" status="danger" class="form-control is-invalid" nbInput fullWidth
+                 id="checkId" placeholder="Makbuz/Fatura No" name="scriptNo" ngModel>
         </div>
       </div>
       <div class="form-group row">
         <label for="bankId" class="label col-sm-3 col-form-label">Kasa</label>
         <div class="col-sm-9">
-          <nb-select id="bankId" [(selected)]="currentBankSafe">
+          <nb-select  id="bankId" [(selected)]="currentBankSafe" name="bankSafe" ngModel>
             <nb-option *ngFor="let activityBankSafe of activityBankSafes" [value]="activityBankSafe">
               {{ activityBankSafe }}</nb-option>
           </nb-select>
@@ -47,7 +49,8 @@
       <div class="form-group row">
       <label for="campaignId" class="label col-sm-3 col-form-label">Kampanya</label>
       <div class="col-sm-9">
-        <nb-select id="campaignId" fullWidth placeholder="Seçin" [(selected)]="currentCampaign">
+        <nb-select id="campaignId" fullWidth placeholder="Seçin" [(selected)]="currentCampaign"
+                   name="campaign" ngModel>
           <nb-option value="1">Kampanya1</nb-option>
         </nb-select>
       </div>
@@ -55,13 +58,14 @@
       <div class="form-group row">
         <label for="nameId" class="label col-sm-3 col-form-label">İsim</label>
         <div class="col-sm-9">
-          <input type="text" nbInput fullWidth id="nameId" placeholder="İsim">
+          <input type="text" nbInput fullWidth id="nameId" placeholder="İsim" name="name" ngModel>
         </div>
       </div>
       <div class="form-group row">
         <label for="accountTypeId" class="label col-sm-3 col-form-label">Hesap Tipi</label>
         <div class="col-sm-9">
-          <nb-select id="accountTypeId" fullWidth placeholder="Seçin" [(selected)]="currentCampaign">
+          <nb-select id="accountTypeId" fullWidth placeholder="Seçin" [(selected)]="currentCampaign"
+                    name="accountType" ngModel>
             <nb-option value="1">Bağış</nb-option>
             <nb-option value="1">Ödeme</nb-option>
           </nb-select>
@@ -70,13 +74,15 @@
       <div class="form-group row">
         <label for="commentId" class="label col-sm-3 col-form-label">Açıklama</label>
         <div class="col-sm-9">
-          <input type="text" nbInput fullWidth id="commentId" placeholder="Açıklama">
+          <input type="text" nbInput fullWidth id="commentId" placeholder="Açıklama"
+                 name="comment" ngModel>
         </div>
       </div>
       <div class="form-group row">
         <label for="moneyId" class="label col-sm-3 col-form-label">Tutar</label>
         <div class="col-sm-9">
-          <input type="number" nbInput fullWidth id="moneyId" placeholder="Tutar">
+          <input type="number" nbInput fullWidth id="moneyId" placeholder="Tutar"
+                 name="amount" ngModel>
         </div>
       </div>
     </form>
