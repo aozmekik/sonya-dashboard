@@ -13,6 +13,7 @@ import {
 } from '@nebular/theme';
 import { ReportsComponent } from './reports/reports.component';
 import {CommonModule} from '@angular/common';
+import { AccountTypesPipe } from './pipes/account-types.pipe';
 
 @NgModule ({
   imports: [
@@ -30,6 +31,7 @@ import {CommonModule} from '@angular/common';
   declarations: [
     ...routedComponents,
     ReportsComponent,
+    AccountTypesPipe,
   ],
 })
 export class AccountingModule { }

@@ -1,35 +1,6 @@
 import { Activity } from './activity';
 
-interface IHash { // to convert enum types to string.
-  [type: number]: string;
-}
-
 export class ActivitiesData {
-  /*
-   * hash-table definitions might seem unnecessary here.
-   * grabbing strings from enum types could have been done
-   * in a little faster way with string arrays and enum indexes.
-   * but, I didn't go with that design choice. (which is error prone)
-   * since enums might change in future, indexes can shift and
-   * cause bad errors. robustness preferred to fastness here.
-   */
-  public static ActivityTypes: IHash = {
-    [Activity.Type.Income]: 'Gelir',
-    [Activity.Type.Outgo]: 'Gider',
-    [Activity.Type.Transfer]: 'Transfer',
-    [Activity.Type.Virman]: 'Virman',
-  };
-  public static ActivityAbouts: IHash = {
-    [Activity.About.Current]: 'Cari',
-    [Activity.About.Member]: 'Üye',
-    [Activity.About.Other]: 'Diğer',
-  };
-  public static ActivityBankSafes: IHash = {
-    [Activity.BankSafe.Bank]: 'Banka',
-    [Activity.BankSafe.Bill]: 'Senet',
-    [Activity.BankSafe.TLSafe]: 'TL Kasa',
-  };
-
   public static AccountType: [
     {_id: '123', name: 'hesaptipi1'}, {_id: '124', name: 'hesaptipi2'},
   ];
@@ -68,11 +39,11 @@ export class ActivitiesData {
    */
   private static adjust(a: Activity): any {
     return {
-      activityType: this.ActivityTypes[a.activityType],
-      about:  this.ActivityAbouts[a.about],
+      activityType: Activity.ActivityTypes[a.activityType],
+      about:  Activity.ActivityAbouts[a.about],
       _date: a._date.toLocaleDateString(), // cleanier date, and turkish.
       scriptNo: a.scriptNo,
-      bankSafe: this.ActivityBankSafes[a.bankSafe],
+      bankSafe: Activity.ActivityBankSafes[a.bankSafe],
       name: a.name,
       campaign: a.campaign,
       accountType: a.accountType.name,
