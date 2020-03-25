@@ -4,6 +4,8 @@
 # so, for devs stuff you should npm install in app_public
 app_public/node_modules
 
+app_public/build
+
 # Logs
 logs
 *.log

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-
 import { AccountingRoutingModule, routedComponents } from './accounting-routing.module';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {
@@ -13,7 +12,6 @@ import {
 } from '@nebular/theme';
 import { ReportsComponent } from './reports/reports.component';
 import {CommonModule} from '@angular/common';
-import { AccountTypesPipe } from './pipes/account-types.pipe';
 
 @NgModule ({
   imports: [
@@ -31,7 +29,6 @@ import { AccountTypesPipe } from './pipes/account-types.pipe';
   declarations: [
     ...routedComponents,
     ReportsComponent,
-    AccountTypesPipe,
   ],
 })
 export class AccountingModule { }
