@@ -5,6 +5,7 @@
 app_public/node_modules
 
 app_public/build
+.idea
 
 # Logs
 logs

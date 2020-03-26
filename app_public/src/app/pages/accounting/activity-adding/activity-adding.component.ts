@@ -12,20 +12,18 @@ import {Activity} from '../activity';
 
 @Component({
   selector: 'ngx-reports',
-  templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.scss'],
+  templateUrl: './activity-adding.component.html',
+  styleUrls: ['./activity-adding.component.scss'],
 })
-export class ReportsComponent implements OnInit {
-  public activityTypes = this.table2array(Activity.ActivityTypes);
-  public activityAbouts = this.table2array(Activity.ActivityAbouts);
-  public activityBankSafes = this.table2array(Activity.ActivityBankSafes);
+export class ActivityAddingComponent implements OnInit {
+  public activityTypes = Activity.table2array(Activity.ActivityTypes);
+  public activityAbouts = Activity.table2array(Activity.ActivityAbouts);
+  public activityBankSafes = Activity.table2array(Activity.ActivityBankSafes);
   public currentCampaign = 'campaign';
 
   public activityModel = Activity.default();
   constructor() {}
-  private table2array(table): string[] {
-    return Object.keys(table).map(key => table[key]);
-  }
+
   ngOnInit() {
   }
 }

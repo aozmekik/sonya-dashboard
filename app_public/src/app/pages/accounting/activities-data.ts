@@ -14,7 +14,7 @@ export class ActivitiesData {
     bankSafe: Activity.BankSafe.Bank,
     name: 'Semih Özmekik',
     campaign: 'Campaign02',
-    accountType: {_id: '2', name: 'selam'},
+    accountType: {_id: 'ID', name: 'selam', type: Activity.Type.Outgo, state: true},
     comment: 'Lorem ipsum sir color dir amet liranta coreasta simonya malaefti',
     amount: 100,
   },
@@ -26,7 +26,7 @@ export class ActivitiesData {
     scriptNo: 'A11234',
     bankSafe: Activity.BankSafe.Bank, name: 'Yasin Kömürcü',
     campaign: 'Campaign1',
-    accountType: {_id: '1', name: 'test'},
+      accountType: {_id: 'ID', name: 'Tip', type: Activity.Type.Outgo, state: true},
     comment: 'Lorem ipsum sir color dir amet liranta coreasta simonya malaefti',
     amount: 100,
   }];

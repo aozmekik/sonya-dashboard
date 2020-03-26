@@ -14,7 +14,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
-    title: 'Yevmiye Defteri',
+    title: 'Muhasebe',
     icon: 'layout-outline',
     children: [
       {
@@ -22,12 +22,26 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/accounting/activities',
       },
       {
-        title: 'Raporlar',
-        link: '/pages/accounting/reports',
+        title: 'Hareket Girişi',
+        link: '/pages/accounting/activity-adding',
       },
       {
         title: 'Hesap Tipleri',
-        link: '/pages/yevmiye-defteri/hesap-tipleri',
+        link: '/pages/accounting/types',
+      },
+    ],
+  },
+  {
+    title: 'Kampanyalar',
+    icon: 'layout-outline',
+    children: [
+      {
+        title: 'Kampanya Girişi',
+        link: '/pages/campaigns/campaign-list',
+      },
+      {
+        title: 'Kampanya Listesi',
+        link: '/pages/campaings/adding-campaign',
       },
     ],
   },
@@ -85,20 +99,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
 
-  {
-    title: 'Kampanyalar',
-    icon: 'layout-outline',
-    children: [
-      {
-        title: 'Kampanya Girişi',
-        link: '/pages/kampanyalar/yeni-kampanya-girisi',
-      },
-      {
-        title: 'Kampanya Listesi',
-        link: '/pages/kampanyalar/kampanya-listesi',
-      },
-    ],
-  },
   {
     title: 'Dernek Bilgileri',
     icon: 'layout-outline',

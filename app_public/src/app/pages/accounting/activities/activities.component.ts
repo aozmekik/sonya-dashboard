@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
 import {ActivitiesData} from '../activities-data';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-activities',
@@ -10,10 +11,7 @@ import {ActivitiesData} from '../activities-data';
 })
 export class ActivitiesComponent {
 
-  // @ViewChild('contentTemplate', { static: true }) contentTemplate: TemplateRef<any>;
-  // @ViewChild('disabledEsc', { read: TemplateRef, static: true }) disabledEscTemplate: TemplateRef<HTMLElement>;
-  constructor() {
-    // const data = this.service.getData();
+  constructor(private router: Router) {
     const mydata = this.data.getData();
     this.source.load(mydata);
   }
@@ -35,7 +33,6 @@ export class ActivitiesComponent {
     },
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
     },
     columns:  {
       activityType: {
@@ -87,11 +84,18 @@ export class ActivitiesComponent {
   source = new LocalDataSource();
   data = new ActivitiesData();
 
-  onDeleteConfirm(event): void {
+  onDelete(event): void {
     if (window.confirm('Kaydı silmek istediğinize emin misiniz?')) {
       event.confirm.resolve();
     } else {
       event.confirm.reject();
     }
+  }
+
+  /**
+   * links to adding-account page.
+   */
+  onCreate() {
+    this.router.navigateByUrl('/pages/accounting/activity-adding');
   }
 }

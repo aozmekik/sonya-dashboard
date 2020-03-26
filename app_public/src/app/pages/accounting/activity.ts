@@ -6,6 +6,9 @@ export namespace Activity {
   export interface AccountTypes {
     _id: string;
     name: string;
+    type: Type;
+    state: boolean; // active or passive.
+    // kind: string; an uncertain future feature.
   }
 
   export const enum Type {
@@ -61,7 +64,7 @@ export class Activity {
     activity.bankSafe = Activity.BankSafe.Bank;
     activity.campaign = '';
     activity.name = '';
-    activity.accountType = {_id: 'ID', name: 'Tip'};
+    activity.accountType = {_id: 'ID', name: 'Tip', type: Activity.Type.Outgo, state: true};
     activity.comment = '';
     activity.amount = null;
     return activity;
@@ -91,5 +94,8 @@ export class Activity {
     [Activity.BankSafe.Bill]: 'Senet',
     [Activity.BankSafe.TLSafe]: 'TL Kasa',
   };
+  public static table2array(table): string[] {
+    return Object.keys(table).map(key => table[key]);
+  }
 }
 

@@ -8,10 +8,13 @@ import {
   NbCardModule, NbDatepickerModule,
   NbInputModule,
   NbRadioModule,
-  NbSelectModule,
+  NbSelectModule, NbWindowModule,
 } from '@nebular/theme';
-import { ReportsComponent } from './reports/reports.component';
+import { ActivityAddingComponent } from './activity-adding/activity-adding.component';
 import {CommonModule} from '@angular/common';
+import { AccountTypesComponent } from './account-types/account-types.component';
+import { WindowFormComponent } from './account-types/window-form/window-form.component';
+import {ThemeModule} from '../../@theme/theme.module';
 
 @NgModule ({
   imports: [
@@ -25,10 +28,15 @@ import {CommonModule} from '@angular/common';
     NbButtonModule,
     CommonModule,
     NbDatepickerModule,
+    ThemeModule,
+    NbWindowModule.forChild(),
   ],
   declarations: [
     ...routedComponents,
-    ReportsComponent,
+    ActivityAddingComponent,
+    AccountTypesComponent,
+    WindowFormComponent,
   ],
+  entryComponents: [WindowFormComponent],
 })
 export class AccountingModule { }
