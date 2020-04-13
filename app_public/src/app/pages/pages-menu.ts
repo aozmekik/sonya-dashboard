@@ -3,7 +3,7 @@ import { NbMenuItem } from '@nebular/theme';
 // dashboard's language is turkish, therefore titles will also be in turkish.
 // to prevent complications, paths are also kept in turkish.
 
-export const MENU_ITEMS: NbMenuItem[] = [
+export const MENU_ITEMS: NbMenuItem[] = [ // TODO. consider integrating. cameras.
   {
     title: 'Panel',
     icon: 'home-outline',
@@ -36,12 +36,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'layout-outline',
     children: [
       {
-        title: 'Kampanya Girişi',
+        title: 'Kampanya Listesi',
         link: '/pages/campaigns/campaign-list',
       },
       {
-        title: 'Kampanya Listesi',
-        link: '/pages/campaings/adding-campaign',
+        title: 'Kampanya Girişi',
+        link: '/pages/campaigns/campaign-adding',
       },
     ],
   },

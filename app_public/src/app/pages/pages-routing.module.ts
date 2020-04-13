@@ -18,6 +18,11 @@ const routes: Routes = [{
         .then(m => m.AccountingModule),
     },
     {
+      path: 'campaigns',
+      loadChildren: () => import('./campaigns/campaigns.module')
+        .then(m => m.CampaignsModule),
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

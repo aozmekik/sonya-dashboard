@@ -53,7 +53,7 @@ export class Activity {
    * factory design pattern.
    */
   private constructor() { }
-  public static activity = new Activity();
+  // public static activity = new Activity();
   public static default(): Activity {
     const activity = new Activity();
     activity._id = 'ID';

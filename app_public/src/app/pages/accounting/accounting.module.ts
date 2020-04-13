@@ -33,8 +33,8 @@ import {ThemeModule} from '../../@theme/theme.module';
   ],
   declarations: [
     ...routedComponents,
-    ActivityAddingComponent,
-    AccountTypesComponent,
+    // ActivityAddingComponent,
+    // AccountTypesComponent,
     WindowFormComponent,
   ],
   entryComponents: [WindowFormComponent],
