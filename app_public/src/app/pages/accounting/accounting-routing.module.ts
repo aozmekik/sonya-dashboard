@@ -32,4 +32,5 @@ export const routedComponents = [
   AccountingComponent,
   ActivitiesComponent,
   ActivityAddingComponent,
+  AccountTypesComponent,
 ];

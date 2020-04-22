@@ -1,21 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
-import { Campaign } from '../campaign';
+import { CampaignsData } from './../campaigns-data';
+import {Component} from '@angular/core';
+import { LocalDataSource } from 'ng2-smart-table';
+import {Router} from '@angular/router';
 
-// TODO. change the key of campaings to the tree names. probably they must be same (for some reason)
-
-interface TreeNode<T> {
-  data: T;
-  children?: TreeNode<T>[];
-  expanded?: boolean; 
-}
-
-interface FSEntry {
-  name: string;
-  size: string;
-  kind: string;
-  items?: number;
-}
 
 @Component({
   selector: 'ngx-campaign-list',
@@ -24,96 +11,73 @@ interface FSEntry {
 })
 export class CampaignListComponent {
 
-  columnNames = ['Kampanya İsmi', 'Hisse Bedeli',  'Toplam', 'Başlangıç Tarihi', 'Bitiş Tarihi']
-  customColumn = 'name';
-  defaultColumns = [ 'share', 'total', 'startingDate', 'dueDate'];
-  allColumns = [ this.customColumn, ...this.defaultColumns ];
-
-  dataSource: NbTreeGridDataSource<FSEntry>;
-
-  sortColumn: string;
-  sortDirection: NbSortDirection = NbSortDirection.NONE;
-
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<FSEntry>) {
-    this.dataSource = this.dataSourceBuilder.create(this.data);
+ 
+  constructor(private router: Router) {
+    const mydata = CampaignsData.getData();
+    this.source.load(mydata);
   }
+  settings = {
+    actions: {
+      columnTitle: 'Eylemler',
+    },
+    mode: 'external',
+    noDataMessage: 'Kayıt Bulunamadı',
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+    },
+    edit: {
+      editButtonContent: '<i class="nb-edit"></i>',
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+    },
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+    },
+    columns:  {
+      name: {
+        title: 'Kampanya Adı',
+        type: 'string',
+      },
+      share: {
+        title: 'Hisse Bedeli',
+        type: 'string',
+      },
+      goal: {
+        title: 'Kampanya Hedefi',
+        type: 'string',
+      },
+      total: {
+        title: 'Alınan Hisseler',
+        type: 'string',
+      },
+      startingDate: {
+        title: 'Başlangıç Tarihi',
+        type: 'string',
+      },
+      dueDate: {
+        title: 'Bitiş Tarihi',
+        type: 'string',
+      },
+    },
+  };
 
-  updateSort(sortRequest: NbSortRequest): void {
-    this.sortColumn = sortRequest.column;
-    this.sortDirection = sortRequest.direction;
-  }
+  source = new LocalDataSource();
 
-  getSortDirection(column: string): NbSortDirection {
-    if (this.sortColumn === column) {
-      return this.sortDirection;
+  onDelete(event): void {
+    if (window.confirm('Kaydı silmek istediğinize emin misiniz?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
     }
-    return NbSortDirection.NONE;
   }
 
-  private data: TreeNode<Campaign>[] = [
-    {
-      data: Campaign.default(),
-      
-
-    },
-
-    {
-      data: Campaign.default(),
-    },
-    
-    {
-      data: Campaign.default(),
-    },
-  ];
-
-  // private data: TreeNode<FSEntry>[] = [
-  //   {
-  //     data: { name: 'Projects', size: '1.8 MB', items: 5, kind: 'dir' },
-  //     children: [
-  //       { data: { name: 'project-1.doc', kind: 'doc', size: '240 KB' } },
-  //       { data: { name: 'project-2.doc', kind: 'doc', size: '290 KB' } },
-  //       { data: { name: 'project-3', kind: 'txt', size: '466 KB' } },
-  //       { data: { name: 'project-4.docx', kind: 'docx', size: '900 KB' } },
-  //     ],
-  //   },
-  //   {
-  //     data: { name: 'Reports', kind: 'dir', size: '400 KB', items: 2 },
-  //     children: [
-  //       { data: { name: 'Report 1', kind: 'doc', size: '100 KB' } },
-  //       { data: { name: 'Report 2', kind: 'doc', size: '300 KB' } },
-  //     ],
-  //   },
-  //   {
-  //     data: { name: 'Other', kind: 'dir', size: '109 MB', items: 2 },
-  //     children: [
-  //       { data: { name: 'backup.bkp', kind: 'bkp', size: '107 MB' } },
-  //       { data: { name: 'secret-note.txt', kind: 'txt', size: '2 MB' } },
-  //     ],
-  //   },
-  // ];
-
-  getShowOn(index: number) {
-    const minWithForMultipleColumns = 400;
-    const nextColumnStep = 100;
-    return minWithForMultipleColumns + (nextColumnStep * index);
+  /**
+   * links to adding-campaign page.
+   */
+  onCreate() {
+    this.router.navigateByUrl('/pages/accounting/activity-adding');
   }
-}
 
-@Component({
-  selector: 'ngx-fs-icon',
-  template: `
-    <nb-tree-grid-row-toggle [expanded]="expanded" *ngIf="isDir(); else fileIcon">
-    </nb-tree-grid-row-toggle>
-    <ng-template #fileIcon>
-      <nb-icon icon="file-text-outline"></nb-icon>
-    </ng-template>
-  `,
-})
-export class FsIconComponent {
-  @Input() kind: string;
-  @Input() expanded: boolean;
-
-  isDir(): boolean {
-    return this.kind === 'dir';
-  }
 }

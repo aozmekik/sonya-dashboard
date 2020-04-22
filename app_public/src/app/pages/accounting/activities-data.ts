@@ -1,4 +1,4 @@
-import { Activity } from './activity';
+import { Activity } from './activity'; // TODO. this is going to be a service. will be deleted also.
 
 export class ActivitiesData {
   public static AccountType: [

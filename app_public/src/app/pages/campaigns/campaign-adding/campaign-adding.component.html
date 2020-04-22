@@ -1,3 +1,101 @@
-<p>
-  campaign-adding works!
-</p>
+<nb-card>
+  <nb-card-header>Kampanya Girişi</nb-card-header>
+  <nb-card-body>
+    <form #userForm="ngForm">
+      <hr />
+      {{campaignModel | json }}
+      <hr />
+
+      <!-- campaign name -->
+      <div class="form-group row">
+        <label for="nameId" class="label col-sm-3 col-form-label">İsim</label>
+        <div class="col-sm-9">
+          <input type="text" required #name="ngModel" pattern="^[a-zA-Z öçşiğüÖÇŞİĞÜ]+$"
+                 [class.status-danger]="name.touched && name.invalid" class="form-control"
+                 [class.is-invalid]="name.touched && name.invalid" nbInput fullWidth id="nameId" name="name"
+                 placeholder="Kampanya İsmi" [(ngModel)] = "campaignModel.name">
+          <div *ngIf="name.errors && (name.invalid && name.touched)">
+            <div class="text-danger" *ngIf="name.errors.pattern">
+              Sadece harf içerebilir.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- campaign share price -->
+      <div class="form-group row">
+        <label for="priceId" class="label col-sm-3 col-form-label">Hisse Bedeli</label>
+        <div class="col-sm-9">
+          <input type="text" required #share="ngModel" pattern="^[0-9]+$"
+                 [class.status-danger]="share.touched && share.invalid" class="form-control"
+                 nbInput name="share" fullWidth id="priceId"
+                 placeholder="Hisse Bedeli" [(ngModel)] = "campaignModel.share">
+          <div *ngIf="share.errors && (share.invalid && share.touched)">
+            <div class="text-danger" *ngIf="share.errors.pattern">
+              Sadece rakam içerebilir.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- campaign goal price -->
+      <div class="form-group row">
+        <label for="goalId" class="label col-sm-3 col-form-label">Hedef Hisse</label>
+        <div class="col-sm-9">
+          <input type="text" required #goal="ngModel" pattern="^[0-9]+$"
+                 [class.status-danger]="goal.touched && goal.invalid" class="form-control"
+                 nbInput name="goal" fullWidth id="goalId"
+                 placeholder="Hedef Tutar" [(ngModel)] = "campaignModel.goal">
+          <div *ngIf="goal.errors && (goal.invalid && goal.touched)">
+            <div class="text-danger" *ngIf="goal.errors.pattern">
+              Sadece rakam içerebilir.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- campaign total price -->
+      <div class="form-group row">
+        <label for="totalId" class="label col-sm-3 col-form-label">Toplam Hisse</label>
+        <div class="col-sm-9">
+          <input type="text" required #total="ngModel" pattern="^[0-9]+$"
+                 [class.status-danger]="total.touched && total.invalid" class="form-control"
+                 nbInput name="total" fullWidth id="totalId"
+                 placeholder="Toplamda Alınan Hisse" [(ngModel)] = "campaignModel.total">
+          <div *ngIf="total.errors && (total.invalid && total.touched)">
+            <div class="text-danger" *ngIf="total.errors.pattern">
+              Sadece rakam içerebilir.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- campaign starting date -->
+      <div class="form-group row">
+        <label for="startingDateId" class="label col-sm-3 col-form-label">Tarih</label>
+        <div class="col-sm-9">
+          <input nbInput fullWidth name="startingDate" required #startingDate="ngModel"
+                 [class.status-danger]="startingDate.touched && startingDate.invalid"
+                 [class.is-invalid]="startingDate.touched && startingDate.invalid"
+                 placeholder="aa/gün/yıl" contentEditable="false" [readOnly]="true"
+                 [nbDatepicker]="formpicker" id="startingDateId" [(ngModel)]="campaignModel.startingDate">
+          <nb-datepicker #formpicker></nb-datepicker>
+        </div>
+      </div>
+
+      <!-- campaign due date -->
+      <div class="form-group row">
+        <label for="dueDateId" class="label col-sm-3 col-form-label">Tarih</label>
+        <div class="col-sm-9">
+          <input nbInput fullWidth name="startingDate" required #startingDate="ngModel"
+                 [class.status-danger]="startingDate.touched && startingDate.invalid"
+                 [class.is-invalid]="startingDate.touched && startingDate.invalid"
+                 placeholder="aa/gün/yıl" contentEditable="false" [readOnly]="true"
+                 [nbDatepicker]="formpicker" id="dueDateId" [(ngModel)]="campaignModel.dueDate">
+          <nb-datepicker #formpicker></nb-datepicker>
+        </div>
+      </div>
+
+    </form>
+  </nb-card-body>
+</nb-card>
