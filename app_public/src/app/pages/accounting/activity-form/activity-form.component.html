@@ -1,0 +1,118 @@
+<nb-card>
+  <nb-card-body>
+    <form #userForm="ngForm">
+      <hr />
+      {{activityModel | json }}
+      <hr />
+      <div class="form-group row">
+        <label for="typeId" class="label col-sm-3 col-form-label">Tip</label>
+        <div class="col-sm-9">
+          <nb-select id="typeId" [(selected)]="activityModel.activityType" status="primary">
+            <nb-option *ngFor="let activityType of activityTypes; let i='index'" [value]="i">
+              {{ activityType }} </nb-option>
+          </nb-select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="uyeId" class="label col-sm-3 col-form-label">Üye/Cari/Diğer</label>
+        <div class="col-sm-9">
+          <nb-select id="uyeId" [(selected)]="activityModel.about">
+            <nb-option *ngFor="let activityAbout of activityAbouts; let i='index'" [value]="i">
+              {{ activityAbout }}</nb-option>
+          </nb-select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="dateId" class="label col-sm-3 col-form-label">Tarih</label>
+        <div class="col-sm-9">
+          <input nbInput fullWidth name="date" required #date="ngModel"
+                 [class.status-danger]="date.touched && date.invalid"
+                 [class.is-invalid]="date.touched && date.invalid"
+                 placeholder="aa/gün/yıl" contentEditable="false" [readOnly]="true"
+                 [nbDatepicker]="formpicker" id="dateId" [(ngModel)]="activityModel._date">
+          <nb-datepicker [max]="activityModel._date" #formpicker></nb-datepicker>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="checkId" class="label col-sm-3 col-form-label">Makbuz/Fatura No</label>
+        <div class="col-sm-9">
+          <input type="text" required #scriptNo="ngModel" pattern="^[A-Za-z0-9]+$"
+                 [class.status-danger]="scriptNo.touched && scriptNo.invalid"
+                 [class.is-invalid]="scriptNo.touched && scriptNo.invalid" class="form-control"
+                 nbInput fullWidth id="checkId" placeholder="Makbuz/Fatura No" name="scriptNo"
+                 [(ngModel)] = "activityModel.scriptNo">
+                  <div *ngIf="scriptNo.errors && (scriptNo.invalid && scriptNo.touched)">
+                    <div class="text-danger" *ngIf="scriptNo.errors.pattern">
+                      Sadece harf ve rakam içerebilir.
+                    </div>
+                  </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="bankId" class="label col-sm-3 col-form-label">Kasa</label>
+        <div class="col-sm-9">
+          <nb-select  id="bankId" [(selected)]="activityModel.bankSafe">
+            <nb-option *ngFor="let activityBankSafe of activityBankSafes; let i='index'" [value]="i">
+              {{ activityBankSafe }}</nb-option>
+          </nb-select>
+        </div>
+      </div>
+      <div class="form-group row">
+      <label for="campaignId" class="label col-sm-3 col-form-label">Kampanya</label>
+      <div class="col-sm-9">
+        <nb-select id="campaignId" fullWidth name="campaign" placeholder="Seçin" [(selected)]="activityModel.campaign"
+                   >
+          <nb-option value="1">Kampanya1</nb-option>
+        </nb-select>
+      </div>
+      </div>
+      <div class="form-group row">
+        <label for="nameId" class="label col-sm-3 col-form-label">İsim</label>
+        <div class="col-sm-9">
+          <input type="text" required #name="ngModel" pattern="^[a-zA-Z öçşiğüÖÇŞİĞÜ]+$"
+                 [class.status-danger]="name.touched && name.invalid" class="form-control"
+                 [class.is-invalid]="name.touched && name.invalid" nbInput fullWidth id="nameId" name="name"
+                 placeholder="İsim" [(ngModel)] = "activityModel.name">
+          <div *ngIf="name.errors && (name.invalid && name.touched)">
+            <div class="text-danger" *ngIf="name.errors.pattern">
+              Sadece harf içerebilir.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="accountTypeId" class="label col-sm-3 col-form-label">Hesap Tipi</label>
+        <div class="col-sm-9">
+          <nb-select id="accountTypeId" fullWidth placeholder="Seçin" [(selected)]="currentCampaign">
+            <nb-option value="1">Bağış</nb-option>
+            <nb-option value="1">Ödeme</nb-option>
+          </nb-select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="commentId" class="label col-sm-3 col-form-label">Açıklama</label>
+        <div class="col-sm-9">
+          <input type="text" required #comment="ngModel"
+                 [class.status-danger]="comment.touched && comment.invalid" class="form-control"
+                 [class.is-invalid]="comment.touched && comment.invalid" nbInput fullWidth name="comment" id="commentId" placeholder="Açıklama"
+                 [(ngModel)] = "activityModel.comment">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="moneyId" class="label col-sm-3 col-form-label">Tutar</label>
+        <div class="col-sm-9">
+          <input type="text" required #amount="ngModel" pattern="^[0-9]+$"
+                 [class.status-danger]="amount.touched && amount.invalid" class="form-control"
+                 nbInput name="amount" fullWidth id="moneyId"
+                 placeholder="Tutar" [(ngModel)] = "activityModel.amount">
+          <div *ngIf="amount.errors && (amount.invalid && amount.touched)">
+            <div class="text-danger" *ngIf="amount.errors.pattern">
+              Sadece rakam içerebilir.
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

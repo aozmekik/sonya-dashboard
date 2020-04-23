@@ -4,7 +4,7 @@
  * this is the very early prototype of the campaign model.
  */
 
-export class Campaign { // TODO. decide on this, is total a total price or a total share.
+export class Campaign {
     _id: string;
     name: string;
     share: number; // share price.
@@ -12,6 +12,7 @@ export class Campaign { // TODO. decide on this, is total a total price or a tot
     total: number; // how many shares has been taken.
     startingDate: Date;
     dueDate: Date;
+    active: boolean;
 
     public static default(): Campaign {
         const campaign = {
@@ -21,7 +22,8 @@ export class Campaign { // TODO. decide on this, is total a total price or a tot
             goal: 1000,
             total: 2,
             startingDate: new Date(),
-            dueDate: new Date()
+            dueDate: new Date(),
+            active: true,
         }
         return campaign;
     }

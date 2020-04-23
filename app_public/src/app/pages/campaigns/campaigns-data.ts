@@ -11,6 +11,7 @@ export class CampaignsData {
             total: 200,
             startingDate: new Date(),
             dueDate: new Date(),
+            active: true,
         }, 
         {
             _id: "id",
@@ -20,6 +21,7 @@ export class CampaignsData {
             total: 200,
             startingDate: new Date(),
             dueDate: new Date(),
+            active: true,
         },
     ] 
 

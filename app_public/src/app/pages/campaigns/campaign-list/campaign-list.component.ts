@@ -2,6 +2,8 @@ import { CampaignsData } from './../campaigns-data';
 import {Component} from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import {Router} from '@angular/router';
+import { CampaignEditWindowFormComponent } from '../campaign-editing-window/campaign-editing-window.component';
+import { NbWindowService } from '@nebular/theme';
 
 
 @Component({
@@ -11,8 +13,9 @@ import {Router} from '@angular/router';
 })
 export class CampaignListComponent {
 
+  // TODO. some graphs features will be added in the future to observe the data.
  
-  constructor(private router: Router) {
+  constructor(private router: Router, private windowService: NbWindowService) {
     const mydata = CampaignsData.getData();
     this.source.load(mydata);
   }
@@ -45,7 +48,7 @@ export class CampaignListComponent {
         type: 'string',
       },
       goal: {
-        title: 'Kampanya Hedefi',
+        title: 'Hedef Hisse',
         type: 'string',
       },
       total: {
@@ -60,6 +63,10 @@ export class CampaignListComponent {
         title: 'Bitiş Tarihi',
         type: 'string',
       },
+      active: {
+        title: "Aktif",
+        type: "string",
+      }
     },
   };
 
@@ -79,5 +86,14 @@ export class CampaignListComponent {
   onCreate() {
     this.router.navigateByUrl('/pages/accounting/activity-adding');
   }
+
+   /**
+   * creates a form window when + is clicked.
+   * @param e is the event.
+   */
+  public onEdit() {
+    this.windowService.open(CampaignEditWindowFormComponent, { title: 'Kampanya Ekle' });
+  }
+
 
 }

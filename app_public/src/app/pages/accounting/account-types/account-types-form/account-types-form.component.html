@@ -1,7 +1,7 @@
 <nb-card>
   <nb-card-body>
     <form #userForm="ngForm">
-      {{activityType | json }}
+      {{accountTypeModel | json }}
       <hr />
 
       <div class="form-group row">
@@ -11,14 +11,14 @@
                  [class.status-danger]="name.touched && name.invalid" class="form-control"
                  [class.is-invalid]="name.touched && name.invalid" nbInput fullWidth name="comment" id="commentId"
                  placeholder="Hesap Tipi Adı"
-                 [(ngModel)] = "activityType.name">
+                 [(ngModel)] = "accountTypeModel.name">
         </div>
       </div>
 
       <div class="form-group row">
         <label for="typeId" class="label col-sm-3 col-form-label">Tip</label>
         <div class="col-sm-9">
-          <nb-select id="typeId" [(selected)]="activityType.type" status="primary">
+          <nb-select id="typeId" [(selected)]="accountTypeModel.type" status="primary">
             <nb-option *ngFor="let activityType of activityTypes; let i='index'" [value]="i">
               {{ activityType }} </nb-option>
           </nb-select>
@@ -28,7 +28,7 @@
       <div class="form-group row">
         <label for="typeId" class="label col-sm-3 col-form-label">Durum</label>
         <div class="col-sm-9">
-          <nb-select id="stateId" [(selected)]="activityType.state" status="primary">
+          <nb-select id="stateId" [(selected)]="accountTypeModel.state" status="primary">
             <<nb-option [value]="true">Aktif</nb-option>
             <nb-option [value]="false">Pasif</nb-option>
           </nb-select>

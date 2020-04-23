@@ -1,17 +1,19 @@
+import { ActivityEditingWindowComponent } from './../activity-editing-window/activity-editing-window.component';
 import {Component} from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 
 import {ActivitiesData} from '../activities-data';
 import {Router} from '@angular/router';
+import { NbWindowService } from '@nebular/theme';
 
 @Component({
-  selector: 'ngx-activities',
-  templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.scss'],
+  selector: 'ngx-activity-list',
+  templateUrl: './activity-list.component.html',
+  styleUrls: ['./activity-list.component.scss'],
 })
 export class ActivitiesComponent {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private windowService: NbWindowService) {
     const mydata = this.data.getData();
     this.source.load(mydata);
   }
@@ -98,4 +100,13 @@ export class ActivitiesComponent {
   onCreate() {
     this.router.navigateByUrl('/pages/accounting/activity-adding');
   }
+
+
+   /**
+   * creates a form window for to edit the campaign, when edit is clicked.
+   */
+  public onEdit() {
+    this.windowService.open(ActivityEditingWindowComponent, { title: 'Hesap Aktivesi Düzenle' });
+  }
+
 }

@@ -19,7 +19,7 @@ export const MENU_ITEMS: NbMenuItem[] = [ // TODO. consider integrating. cameras
     children: [
       {
         title: 'Hareketler',
-        link: '/pages/accounting/activities',
+        link: '/pages/accounting/activity-list',
       },
       {
         title: 'Hareket Girişi',
@@ -27,7 +27,7 @@ export const MENU_ITEMS: NbMenuItem[] = [ // TODO. consider integrating. cameras
       },
       {
         title: 'Hesap Tipleri',
-        link: '/pages/accounting/types',
+        link: '/pages/accounting/activity-types',
       },
     ],
   },

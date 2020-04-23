@@ -9,15 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CampaignAddingComponent implements OnInit {
 
-  public campaignModel: Campaign;
+  public campaign: Campaign = CampaignsData.getData()[0];
 
-  constructor() { 
-    this.campaignModel = CampaignsData.getData()[0];
-  }
+  constructor() { }
 
   ngOnInit() {
   }
 
 }
-
-

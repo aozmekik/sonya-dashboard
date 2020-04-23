@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {Activity} from '../activity';
 import {NbWindowService} from '@nebular/theme';
-import {WindowFormComponent} from './window-form/window-form.component';
+import {AccountTypeAddingWindowComponent} from './account-type-adding-window/account-type-adding-window.component';
 
 @Component({
   selector: 'ngx-account-types',
@@ -61,7 +61,7 @@ export class AccountTypesComponent implements OnInit {
    * @param e is the event.
    */
   public onCreate(e) {
-    this.windowService.open(WindowFormComponent, { title: `Hesap Tipi Ekle` });
+    this.windowService.open(AccountTypeAddingWindowComponent, { title: `Hesap Tipi Ekle` });
   }
 
 }

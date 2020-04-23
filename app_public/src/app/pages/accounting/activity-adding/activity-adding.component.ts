@@ -16,12 +16,8 @@ import {Activity} from '../activity';
   styleUrls: ['./activity-adding.component.scss'],
 })
 export class ActivityAddingComponent implements OnInit {
-  public activityTypes = Activity.table2array(Activity.ActivityTypes);
-  public activityAbouts = Activity.table2array(Activity.ActivityAbouts);
-  public activityBankSafes = Activity.table2array(Activity.ActivityBankSafes);
-  public currentCampaign = 'campaign';
 
-  public activityModel = Activity.default();
+  public activity: Activity = Activity.default();
   constructor() {}
 
   ngOnInit() {

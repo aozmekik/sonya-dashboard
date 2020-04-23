@@ -10,11 +10,12 @@ import {
   NbRadioModule,
   NbSelectModule, NbWindowModule,
 } from '@nebular/theme';
-import { ActivityAddingComponent } from './activity-adding/activity-adding.component';
 import {CommonModule} from '@angular/common';
-import { AccountTypesComponent } from './account-types/account-types.component';
-import { WindowFormComponent } from './account-types/window-form/window-form.component';
+import { AccountTypeAddingWindowComponent } from './account-types/account-type-adding-window/account-type-adding-window.component';
 import {ThemeModule} from '../../@theme/theme.module';
+import { ActivityFormComponent } from './activity-form/activity-form.component';
+import { ActivityEditingWindowComponent } from './activity-editing-window/activity-editing-window.component';
+import { AccountTypesFormComponent } from './account-types/account-types-form/account-types-form.component';
 
 @NgModule ({
   imports: [
@@ -33,10 +34,11 @@ import {ThemeModule} from '../../@theme/theme.module';
   ],
   declarations: [
     ...routedComponents,
-    // ActivityAddingComponent,
-    // AccountTypesComponent,
-    WindowFormComponent,
+    ActivityFormComponent,
+    ActivityEditingWindowComponent,
+    AccountTypesFormComponent,
+    AccountTypeAddingWindowComponent,
   ],
-  entryComponents: [WindowFormComponent],
+  entryComponents: [AccountTypeAddingWindowComponent, ActivityEditingWindowComponent],
 })
 export class AccountingModule { }

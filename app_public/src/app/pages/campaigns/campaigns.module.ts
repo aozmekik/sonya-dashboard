@@ -1,11 +1,13 @@
+import { CampaignFormComponent } from './campaign-form/campaign-form.component';
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbIconModule, NbInputModule, NbDatepickerModule, NbRadioModule, NbSelectModule, NbButtonModule} from '@nebular/theme';
+import { NbCardModule, NbIconModule, NbInputModule, NbDatepickerModule, NbRadioModule, NbSelectModule, NbButtonModule, NbWindowModule} from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { CampaignsRoutingModule, routedComponents } from './campaigns-routing.module';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CampaignEditWindowFormComponent } from './campaign-editing-window/campaign-editing-window.component';
 
 @NgModule({
   imports: [
@@ -21,10 +23,13 @@ import { CommonModule } from '@angular/common';
     NbSelectModule,
     NbButtonModule,
     CommonModule,
-    // NbWindowModule.forChild(),
+    NbWindowModule.forChild(),
   ],
   declarations: [
     ...routedComponents,
+    CampaignEditWindowFormComponent,
+    CampaignFormComponent,
   ],
+  entryComponents: [CampaignEditWindowFormComponent],
 })
 export class CampaignsModule { }
