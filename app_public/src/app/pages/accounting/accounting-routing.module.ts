@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AccountingComponent } from './accounting.component';
-import {ActivitiesComponent} from './activity-list/activity-list.component';
+import {ActivityListComponent} from './activity-list/activity-list.component';
 import {ActivityAddingComponent} from './activity-adding/activity-adding.component';
 import {AccountTypesComponent} from './account-types/account-types.component';
 
@@ -11,12 +11,12 @@ const routes: Routes = [{
   component: AccountingComponent,
   children: [{
     path: 'activity-list',
-    component: ActivitiesComponent,
+    component: ActivityListComponent,
   }, {
     path: 'activity-adding',
     component: ActivityAddingComponent,
   }, {
-    path: 'activity-types',
+    path: 'account-types',
     component: AccountTypesComponent,
   },
   ],
@@ -30,7 +30,7 @@ export class AccountingRoutingModule { }
 
 export const routedComponents = [
   AccountingComponent,
-  ActivitiesComponent,
+  ActivityListComponent,
   ActivityAddingComponent,
   AccountTypesComponent,
 ];

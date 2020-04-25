@@ -84,7 +84,7 @@ export class CampaignListComponent {
    * links to adding-campaign page.
    */
   onCreate() {
-    this.router.navigateByUrl('/pages/accounting/activity-adding');
+    this.router.navigateByUrl('/pages/campaigns/campaign-adding');
   }
 
    /**
@@ -92,7 +92,7 @@ export class CampaignListComponent {
    * @param e is the event.
    */
   public onEdit() {
-    this.windowService.open(CampaignEditWindowFormComponent, { title: 'Kampanya Ekle' });
+    this.windowService.open(CampaignEditWindowFormComponent, { title: 'Kampanya Düzenle' });
   }
 
 

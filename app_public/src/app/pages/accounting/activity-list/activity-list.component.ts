@@ -11,7 +11,7 @@ import { NbWindowService } from '@nebular/theme';
   templateUrl: './activity-list.component.html',
   styleUrls: ['./activity-list.component.scss'],
 })
-export class ActivitiesComponent {
+export class ActivityListComponent {
 
   constructor(private router: Router, private windowService: NbWindowService) {
     const mydata = this.data.getData();
