@@ -12,22 +12,22 @@ export namespace Activity {
   }
 
   export const enum Type {
-    Income,
-    Outgo,
-    Transfer,
-    Virman,
+    INCOME,
+    OUTGO,
+    TRANSFER,
+    VIRMAN,
   }
 
   export const enum About { // not sure about this name though.
-    Member,
-    Current, // for cari in turkish.
-    Other,
+    MEMBER,
+    CURRENT, // for cari in turkish.
+    OTHER,
   }
 
   export const enum BankSafe {
-    TLSafe,
-    Bank,
-    Bill,
+    TLSAFE,
+    BANK,
+    BILL,
   }
 
   export interface IHash { // to convert enum types to string.
@@ -57,14 +57,14 @@ export class Activity {
   public static default(): Activity {
     const activity = new Activity();
     activity._id = 'ID';
-    activity.activityType = Activity.Type.Income;
-    activity.about = Activity.About.Member;
+    activity.activityType = Activity.Type.INCOME;
+    activity.about = Activity.About.MEMBER;
     activity._date = new Date();
     activity.scriptNo = '';
-    activity.bankSafe = Activity.BankSafe.Bank;
+    activity.bankSafe = Activity.BankSafe.BANK;
     activity.campaign = '';
     activity.name = '';
-    activity.accountType = {_id: 'ID', name: 'Tip', type: Activity.Type.Outgo, state: true};
+    activity.accountType = {_id: 'ID', name: 'Tip', type: Activity.Type.OUTGO, state: true};
     activity.comment = '';
     activity.amount = null;
     return activity;
@@ -79,20 +79,20 @@ export class Activity {
   * cause bad errors. robustness preferred to fastness here.
   */
   public static ActivityTypes: Activity.IHash = {
-    [Activity.Type.Income]: 'Gelir',
-    [Activity.Type.Outgo]: 'Gider',
-    [Activity.Type.Transfer]: 'Transfer',
-    [Activity.Type.Virman]: 'Virman',
+    [Activity.Type.INCOME]: 'Gelir',
+    [Activity.Type.OUTGO]: 'Gider',
+    [Activity.Type.TRANSFER]: 'Transfer',
+    [Activity.Type.VIRMAN]: 'Virman',
   };
   public static ActivityAbouts: Activity.IHash = {
-    [Activity.About.Current]: 'Cari',
-    [Activity.About.Member]: 'Üye',
-    [Activity.About.Other]: 'Diğer',
+    [Activity.About.CURRENT]: 'Cari',
+    [Activity.About.MEMBER]: 'Üye',
+    [Activity.About.OTHER]: 'Diğer',
   };
   public static ActivityBankSafes: Activity.IHash = {
-    [Activity.BankSafe.Bank]: 'Banka',
-    [Activity.BankSafe.Bill]: 'Senet',
-    [Activity.BankSafe.TLSafe]: 'TL Kasa',
+    [Activity.BankSafe.BANK]: 'Banka',
+    [Activity.BankSafe.BILL]: 'Senet',
+    [Activity.BankSafe.TLSAFE]: 'TL Kasa',
   };
   public static table2array(table): string[] {
     return Object.keys(table).map(key => table[key]);
