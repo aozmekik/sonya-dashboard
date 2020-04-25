@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AccountTypesFormComponent implements OnInit {
 
   public activityTypes = Activity.table2array(Activity.ActivityTypes);
-  @Input() accountTypeModel = {_id: 'A', name: 'semih', type: Activity.Type.Outgo,
+  @Input() accountTypeModel = {_id: 'A', name: 'semih', type: Activity.Type.OUTGO,
     state: true};
   
   constructor() { }

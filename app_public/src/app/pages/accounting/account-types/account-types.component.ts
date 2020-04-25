@@ -11,8 +11,8 @@ import {AccountTypeAddingWindowComponent} from './account-type-adding-window/acc
 })
 export class AccountTypesComponent implements OnInit {
 
-  data = [{_id: 'A', name: 'semih', type: Activity.Type.Income, state: true},
-          {_id: 'B', name: 'yasin', type: Activity.Type.Outgo, state: false},
+  data = [{_id: 'A', name: 'semih', type: Activity.Type.INCOME, state: true},
+          {_id: 'B', name: 'yasin', type: Activity.Type.OUTGO, state: false},
   ];
   source = new LocalDataSource();
   constructor(private windowService: NbWindowService) { this.source.load(this.data); }

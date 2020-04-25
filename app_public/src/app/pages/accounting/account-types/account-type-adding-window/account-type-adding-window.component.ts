@@ -7,7 +7,7 @@ import {Activity} from '../../activity';
   styleUrls: ['account-type-adding-window.component.scss'],
 })
 export class AccountTypeAddingWindowComponent {
-  public accountType = {_id: 'A', name: 'semih', type: Activity.Type.Outgo,
+  public accountType = {_id: 'A', name: 'semih', type: Activity.Type.OUTGO,
     state: true};
   constructor(public windowRef: NbWindowRef) {}
 
