@@ -1,0 +1,16 @@
+<nb-card>
+  <nb-card-header>
+    Envanter Listesi
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (delete)="onDelete($event)"
+      (create)="onCreate()"
+      (edit)="onEdit()"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

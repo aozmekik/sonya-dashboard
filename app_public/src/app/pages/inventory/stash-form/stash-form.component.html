@@ -1,0 +1,62 @@
+<nb-card>
+ <nb-card-body>
+    <form #userForm="ngForm">
+      <hr />
+      {{ stashModel | json }}
+      <hr />
+
+      <!-- stash name -->
+      <div class="form-group row">
+        <label for="nameId" class="label col-sm-3 col-form-label">Stok Adı</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            required
+            #name="ngModel"
+            pattern="^[a-zA-Z öçşiğüÖÇŞİĞÜ]+$"
+            [class.status-danger]="name.touched && name.invalid"
+            class="form-control"
+            [class.is-invalid]="name.touched && name.invalid"
+            nbInput
+            fullWidth
+            id="nameId"
+            name="name"
+            placeholder="Stok Adı"
+            [(ngModel)]="stashModel.name"
+          />
+          <div *ngIf="name.errors && name.invalid && name.touched">
+            <div class="text-danger" *ngIf="name.errors.pattern">
+              Sadece harf içerebilir.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- items in stash -->
+      <div class="form-group row">
+        <label for="moneyId" class="label col-sm-3 col-form-label">Stok Adeti</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            required
+            #amount="ngModel"
+            pattern="^[0-9]+$"
+            [class.status-danger]="amount.touched && amount.invalid"
+            class="form-control"
+            nbInput
+            name="amount"
+            fullWidth
+            id="moneyId"
+            placeholder="Stok Adeti"
+            [(ngModel)]="stashModel.total"
+          />
+          <div *ngIf="amount.errors && amount.invalid && amount.touched">
+            <div class="text-danger" *ngIf="amount.errors.pattern">
+              Sadece rakam içerebilir.
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
