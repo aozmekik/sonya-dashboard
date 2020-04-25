@@ -27,7 +27,7 @@ export const MENU_ITEMS: NbMenuItem[] = [ // TODO. consider integrating. cameras
       },
       {
         title: 'Hesap Tipleri',
-        link: '/pages/accounting/activity-types',
+        link: '/pages/accounting/account-types',
       },
     ],
   },
@@ -50,22 +50,22 @@ export const MENU_ITEMS: NbMenuItem[] = [ // TODO. consider integrating. cameras
     icon: 'edit-2-outline',
     children: [
       {
-        title: 'Üye Girişi',
-        link: '/pages/uye-girisi/uye-girisi',
+        title: 'Üye Listesi',
+        link: '/pages/members/member-list',
       },
 
       {
-        title: 'Üye Listesi',
-        link: '/pages/uye-girisi/uye-listesi',
+        title: 'Üye Girişi',
+        link: '/pages/members/member-adding',
       },
 
       {
         title: 'Gruplar',
-        link: '/pages/üye-girisi/gruplar',
+        link: '/pages/members/member-groups',
       },
       {
         title: 'Raporlar',
-        link: '/pages/üye-girisi/raporlar',
+        link: '/pages/members/member-reports',
       },
     ],
   },
