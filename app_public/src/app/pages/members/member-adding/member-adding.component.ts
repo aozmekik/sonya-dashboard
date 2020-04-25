@@ -1,6 +1,6 @@
 import { MembersData } from "./../members-data";
 import { Member } from "./../member";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit} from "@angular/core";
 
 @Component({
   selector: "ngx-member-adding",

@@ -34,11 +34,14 @@ import { ThemeModule } from "../../@theme/theme.module";
     NbRadioModule,
     NbSelectModule,
     NbButtonModule,
-    CommonModule,
     NbWindowModule.forChild(),
   ],
   declarations: [
     ...routedComponents,
+    MemberEditingWindowFormComponent,
+    MemberFormComponent,
+  ],
+  exports: [
     MemberEditingWindowFormComponent,
     MemberFormComponent,
   ],
