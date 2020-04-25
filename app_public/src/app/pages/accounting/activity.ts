@@ -30,11 +30,11 @@ export namespace Activity {
     BILL,
   }
 
-  export interface IHash { // to convert enum types to string.
+  export interface IHash {
+    // to convert enum types to string.
     [type: number]: string;
   }
 }
-
 
 export class Activity {
   _id: string; // mongoDB object id.
@@ -52,50 +52,54 @@ export class Activity {
   /**
    * factory design pattern.
    */
-  private constructor() { }
+  private constructor() {}
   // public static activity = new Activity();
   public static default(): Activity {
     const activity = new Activity();
-    activity._id = 'ID';
+    activity._id = "ID";
     activity.activityType = Activity.Type.INCOME;
     activity.about = Activity.About.MEMBER;
     activity._date = new Date();
-    activity.scriptNo = '';
+    activity.scriptNo = "";
     activity.bankSafe = Activity.BankSafe.BANK;
-    activity.campaign = '';
-    activity.name = '';
-    activity.accountType = {_id: 'ID', name: 'Tip', type: Activity.Type.OUTGO, state: true};
-    activity.comment = '';
+    activity.campaign = "";
+    activity.name = "";
+    activity.accountType = {
+      _id: "ID",
+      name: "Tip",
+      type: Activity.Type.OUTGO,
+      state: true,
+    };
+    activity.comment = "";
     activity.amount = null;
     return activity;
   }
 
   /*
-  * hash-table definitions might seem unnecessary here.
-  * grabbing strings from enum types could have been done
-  * in a little faster way with string arrays and enum indexes.
-  * but, I didn't go with that design choice. (which is error prone)
-  * since enums might change in future, indexes can shift and
-  * cause bad errors. robustness preferred to fastness here.
-  */
+   * hash-table definitions might seem unnecessary here.
+   * grabbing strings from enum types could have been done
+   * in a little faster way with string arrays and enum indexes.
+   * but, I didn't go with that design choice. (which is error prone)
+   * since enums might change in future, indexes can shift and
+   * cause bad errors. robustness preferred to fastness here.
+   */
   public static ActivityTypes: Activity.IHash = {
-    [Activity.Type.INCOME]: 'Gelir',
-    [Activity.Type.OUTGO]: 'Gider',
-    [Activity.Type.TRANSFER]: 'Transfer',
-    [Activity.Type.VIRMAN]: 'Virman',
+    [Activity.Type.INCOME]: "Gelir",
+    [Activity.Type.OUTGO]: "Gider",
+    [Activity.Type.TRANSFER]: "Transfer",
+    [Activity.Type.VIRMAN]: "Virman",
   };
   public static ActivityAbouts: Activity.IHash = {
-    [Activity.About.CURRENT]: 'Cari',
-    [Activity.About.MEMBER]: 'Üye',
-    [Activity.About.OTHER]: 'Diğer',
+    [Activity.About.CURRENT]: "Cari",
+    [Activity.About.MEMBER]: "Üye",
+    [Activity.About.OTHER]: "Diğer",
   };
   public static ActivityBankSafes: Activity.IHash = {
-    [Activity.BankSafe.BANK]: 'Banka',
-    [Activity.BankSafe.BILL]: 'Senet',
-    [Activity.BankSafe.TLSAFE]: 'TL Kasa',
+    [Activity.BankSafe.BANK]: "Banka",
+    [Activity.BankSafe.BILL]: "Senet",
+    [Activity.BankSafe.TLSAFE]: "TL Kasa",
   };
   public static table2array(table): string[] {
-    return Object.keys(table).map(key => table[key]);
+    return Object.keys(table).map((key) => table[key]);
   }
 }
-

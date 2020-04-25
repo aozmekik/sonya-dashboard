@@ -23,6 +23,11 @@ const routes: Routes = [{
         .then(m => m.CampaignsModule),
     },
     {
+      path: 'members',
+      loadChildren: () => import('./members/members.module')
+        .then(m => m.MembersModule),
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

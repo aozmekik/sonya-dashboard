@@ -1,31 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import {LocalDataSource} from 'ng2-smart-table';
-import {Activity} from '../activity';
-import {NbWindowService} from '@nebular/theme';
-import {AccountTypeAddingWindowComponent} from './account-type-adding-window/account-type-adding-window.component';
+import { Component, OnInit } from "@angular/core";
+import { LocalDataSource } from "ng2-smart-table";
+import { Activity } from "../activity";
+import { NbWindowService } from "@nebular/theme";
+import { AccountTypeAddingWindowComponent } from "./account-type-adding-window/account-type-adding-window.component";
 
 @Component({
-  selector: 'ngx-account-types',
-  templateUrl: './account-types.component.html',
-  styleUrls: ['./account-types.component.scss'],
+  selector: "ngx-account-types",
+  templateUrl: "./account-types.component.html",
+  styleUrls: ["./account-types.component.scss"],
 })
 export class AccountTypesComponent implements OnInit {
-
-  data = [{_id: 'A', name: 'semih', type: Activity.Type.INCOME, state: true},
-          {_id: 'B', name: 'yasin', type: Activity.Type.OUTGO, state: false},
+  data = [
+    { _id: "A", name: "semih", type: Activity.Type.INCOME, state: true },
+    { _id: "B", name: "yasin", type: Activity.Type.OUTGO, state: false },
   ];
   source = new LocalDataSource();
-  constructor(private windowService: NbWindowService) { this.source.load(this.data); }
-
-  ngOnInit() {
+  constructor(private windowService: NbWindowService) {
+    this.source.load(this.data);
   }
+
+  ngOnInit() {}
 
   settings = {
     actions: {
-      columnTitle: 'Eylemler',
+      columnTitle: "Eylemler",
     },
-    mode: 'external',
-    noDataMessage: 'Kayıt Bulunamadı',
+    mode: "external",
+    noDataMessage: "Kayıt Bulunamadı",
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -42,16 +43,16 @@ export class AccountTypesComponent implements OnInit {
     },
     columns: {
       name: {
-        title: 'Hesap Tipi Adı',
-        type: 'string',
+        title: "Hesap Tipi Adı",
+        type: "string",
       },
       type: {
-        title: 'Hesap Tipi',
-        type: 'string',
+        title: "Hesap Tipi",
+        type: "string",
       },
       state: {
-        title: 'Durum',
-        type: 'boolean',
+        title: "Durum",
+        type: "boolean",
       },
     },
   };
@@ -61,7 +62,8 @@ export class AccountTypesComponent implements OnInit {
    * @param e is the event.
    */
   public onCreate(e) {
-    this.windowService.open(AccountTypeAddingWindowComponent, { title: `Hesap Tipi Ekle` });
+    this.windowService.open(AccountTypeAddingWindowComponent, {
+      title: `Hesap Tipi Ekle`,
+    });
   }
-
 }

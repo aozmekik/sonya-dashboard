@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Activity} from '../activity';
+import { Component, OnInit } from "@angular/core";
+import { Activity } from "../activity";
 
 /**
  * form component, for adding an accounting record.
@@ -11,15 +11,13 @@ import {Activity} from '../activity';
  */
 
 @Component({
-  selector: 'ngx-reports',
-  templateUrl: './activity-adding.component.html',
-  styleUrls: ['./activity-adding.component.scss'],
+  selector: "ngx-reports",
+  templateUrl: "./activity-adding.component.html",
+  styleUrls: ["./activity-adding.component.scss"],
 })
 export class ActivityAddingComponent implements OnInit {
-
   public activity: Activity = Activity.default();
   constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {Activity} from '../activity';
+import { Component, OnInit, Input } from "@angular/core";
+import { Activity } from "../activity";
 
 /**
  * form component, for adding an accounting record.
@@ -11,19 +11,18 @@ import {Activity} from '../activity';
  */
 
 @Component({
-  selector: 'ngx-activity-form',
-  templateUrl: './activity-form.component.html',
-  styleUrls: ['./activity-form.component.scss'],
+  selector: "ngx-activity-form",
+  templateUrl: "./activity-form.component.html",
+  styleUrls: ["./activity-form.component.scss"],
 })
 export class ActivityFormComponent implements OnInit {
   public activityTypes = Activity.table2array(Activity.ActivityTypes);
   public activityAbouts = Activity.table2array(Activity.ActivityAbouts);
   public activityBankSafes = Activity.table2array(Activity.ActivityBankSafes);
-  public currentCampaign = 'campaign';
+  public currentCampaign = "campaign";
 
   @Input() activityModel = Activity.default();
   constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

@@ -1,28 +1,27 @@
-import { ActivityEditingWindowComponent } from './../activity-editing-window/activity-editing-window.component';
-import {Component} from '@angular/core';
-import { LocalDataSource } from 'ng2-smart-table';
+import { ActivityEditingWindowComponent } from "./../activity-editing-window/activity-editing-window.component";
+import { Component } from "@angular/core";
+import { LocalDataSource } from "ng2-smart-table";
 
-import {ActivitiesData} from '../activities-data';
-import {Router} from '@angular/router';
-import { NbWindowService } from '@nebular/theme';
+import { ActivitiesData } from "../activities-data";
+import { Router } from "@angular/router";
+import { NbWindowService } from "@nebular/theme";
 
 @Component({
-  selector: 'ngx-activity-list',
-  templateUrl: './activity-list.component.html',
-  styleUrls: ['./activity-list.component.scss'],
+  selector: "ngx-activity-list",
+  templateUrl: "./activity-list.component.html",
+  styleUrls: ["./activity-list.component.scss"],
 })
 export class ActivityListComponent {
-
   constructor(private router: Router, private windowService: NbWindowService) {
     const mydata = this.data.getData();
     this.source.load(mydata);
   }
   settings = {
     actions: {
-      columnTitle: 'Eylemler',
+      columnTitle: "Eylemler",
     },
-    mode: 'external',
-    noDataMessage: 'Kayıt Bulunamadı',
+    mode: "external",
+    noDataMessage: "Kayıt Bulunamadı",
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -36,49 +35,49 @@ export class ActivityListComponent {
     delete: {
       deleteButtonContent: '<i class="nb-trash"></i>',
     },
-    columns:  {
+    columns: {
       activityType: {
-        title: 'Tip',
-        type: 'string',
+        title: "Tip",
+        type: "string",
       },
       about: {
-        title: 'Üye/\nCari/\nDiğer',
-        type: 'string',
+        title: "Üye/\nCari/\nDiğer",
+        type: "string",
       },
       _date: {
-        title: '\tTarih',
-        type: 'Date',
-        width: '4.5cm',
+        title: "\tTarih",
+        type: "Date",
+        width: "4.5cm",
       },
       scriptNo: {
-        title: 'Makbuz/\nFatura No',
-        type: 'string',
+        title: "Makbuz/\nFatura No",
+        type: "string",
       },
       bankSafe: {
-        title: 'Kasa',
-        type: 'string',
+        title: "Kasa",
+        type: "string",
       },
       campaign: {
-        title: 'Kampanya',
-        type: 'string',
+        title: "Kampanya",
+        type: "string",
       },
       name: {
-        title: 'İsim',
-        type: 'string',
-        width: '8cm',
+        title: "İsim",
+        type: "string",
+        width: "8cm",
       },
       accountType: {
-        title: 'Hesap Tipi',
-        type: 'string',
+        title: "Hesap Tipi",
+        type: "string",
       },
       comment: {
-        title: 'Açıklama',
-        type: 'string',
-        width: '12cm',
+        title: "Açıklama",
+        type: "string",
+        width: "12cm",
       },
       amount: {
-        title: 'Tutar',
-        type: 'string',
+        title: "Tutar",
+        type: "string",
       },
     },
   };
@@ -87,7 +86,7 @@ export class ActivityListComponent {
   data = new ActivitiesData();
 
   onDelete(event): void {
-    if (window.confirm('Kaydı silmek istediğinize emin misiniz?')) {
+    if (window.confirm("Kaydı silmek istediğinize emin misiniz?")) {
       event.confirm.resolve();
     } else {
       event.confirm.reject();
@@ -98,15 +97,15 @@ export class ActivityListComponent {
    * links to adding-account page.
    */
   onCreate() {
-    this.router.navigateByUrl('/pages/accounting/activity-adding');
+    this.router.navigateByUrl("/pages/accounting/activity-adding");
   }
 
-
-   /**
+  /**
    * creates a form window for to edit the campaign, when edit is clicked.
    */
   public onEdit() {
-    this.windowService.open(ActivityEditingWindowComponent, { title: 'Hesap Aktivesi Düzenle' });
+    this.windowService.open(ActivityEditingWindowComponent, {
+      title: "Hesap Aktivesi Düzenle",
+    });
   }
-
 }
