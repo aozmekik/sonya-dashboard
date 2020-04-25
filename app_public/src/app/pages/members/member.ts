@@ -3,7 +3,8 @@
 export namespace Member {
   export const enum Group {
     COMMITTEE, // from steering committee
-    ASSOCIATE, // reguler member.
+    ACTIVE, // active member can change database by taking an item from stash.
+    PASSIVE, // viewer member.
   }
 
   export interface IHash {
@@ -17,7 +18,6 @@ export namespace Member {
  * very earlier prototype of a model.
  */
 export class Member {
-  // TODO. just copy paste it. couldn't find the error.
   _id: string;
   name: string;
   regDate: Date; // date of registration.
@@ -26,8 +26,9 @@ export class Member {
   group: Member.Group; // group of the member.
 
   public static groups: Member.IHash = {
-    [Member.Group.ASSOCIATE]: "Normal",
-    [Member.Group.COMMITTEE]: "Kurul",
+    [Member.Group.COMMITTEE]: "Yönetici Üye",
+    [Member.Group.ACTIVE]: "Aktif Üye",
+    [Member.Group.PASSIVE]: "Pasif Üye",
   };
 
   public static table2array(table): string[] {
