@@ -81,6 +81,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: "Stok Girişi",
         link: "/pages/inventory/stash-adding",
       },
+      {
+        title: "Stok Hareketleri",
+        link: "/pages/inventory/stash-change-request-list",
+      }
     ],
   },
 

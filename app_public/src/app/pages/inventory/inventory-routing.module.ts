@@ -1,3 +1,4 @@
+import { StashChangeRequestListComponent } from './stash-change-request-list/stash-change-request-list.component';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { InventoryComponent } from './inventory.component';
@@ -18,6 +19,10 @@ const routes: Routes = [
         path: "stash-adding",
         component: StashAddingComponent,
       },
+      {
+        path: "stash-change-request-list",
+        component: StashChangeRequestListComponent,
+      }
     ],
   },
 ];
@@ -32,4 +37,5 @@ export const routedComponents = [
   InventoryComponent,
   InventoryListComponent,
   StashAddingComponent,
+  StashChangeRequestListComponent,
 ];
