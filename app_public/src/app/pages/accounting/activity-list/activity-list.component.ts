@@ -5,6 +5,7 @@ import { LocalDataSource } from "ng2-smart-table";
 import { ActivitiesData } from "../activities-data";
 import { Router } from "@angular/router";
 import { NbWindowService } from "@nebular/theme";
+import { Activity } from "../activity";
 
 @Component({
   selector: "ngx-activity-list",
@@ -12,13 +13,16 @@ import { NbWindowService } from "@nebular/theme";
   styleUrls: ["./activity-list.component.scss"],
 })
 export class ActivityListComponent {
-  constructor(private router: Router, private windowService: NbWindowService) {
+  constructor(
+    private router: Router,
+    private windowService: NbWindowService,
+  ) {
     const mydata = this.data.getData();
     this.source.load(mydata);
   }
   settings = {
     actions: {
-      columnTitle: "Eylemler",
+      columnTitle: "Eylemler",  
     },
     mode: "external",
     noDataMessage: "Kayıt Bulunamadı",
@@ -39,15 +43,26 @@ export class ActivityListComponent {
       activityType: {
         title: "Tip",
         type: "string",
+        valuePrepareFunction: (value) => {
+          return Activity.ActivityTypes[value];
+        },
+        width: "3%",
       },
       about: {
         title: "Üye/\nCari/\nDiğer",
         type: "string",
+        valuePrepareFunction: (value) => {
+          return Activity.ActivityAbouts[value];
+        },
+        width: "3%",
       },
       _date: {
         title: "\tTarih",
         type: "Date",
-        width: "4.5cm",
+        valuePrepareFunction: (value) => {
+          return value.toLocaleDateString();
+        },
+        width: "1%",
       },
       scriptNo: {
         title: "Makbuz/\nFatura No",
@@ -56,28 +71,38 @@ export class ActivityListComponent {
       bankSafe: {
         title: "Kasa",
         type: "string",
+        valuePrepareFunction: (value) => {
+          return Activity.ActivityBankSafes[value];
+        },
       },
       campaign: {
         title: "Kampanya",
         type: "string",
+        width: "1%",
       },
       name: {
         title: "İsim",
         type: "string",
-        width: "8cm",
       },
       accountType: {
         title: "Hesap Tipi",
         type: "string",
+        valuePrepareFunction: (value) => {
+          return value.name;
+        },
+        width: "1%",
       },
       comment: {
         title: "Açıklama",
         type: "string",
-        width: "12cm",
       },
       amount: {
         title: "Tutar",
         type: "string",
+        valuePrepareFunction: (value) => {
+          return value + "₺";
+        },
+        width: "1%",
       },
     },
   };
@@ -93,6 +118,7 @@ export class ActivityListComponent {
     }
   }
 
+ 
   /**
    * links to adding-account page.
    */

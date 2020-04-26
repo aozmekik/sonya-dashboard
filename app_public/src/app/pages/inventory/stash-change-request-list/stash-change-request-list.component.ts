@@ -52,6 +52,9 @@ export class StashChangeRequestListComponent {
       date: {
         title: "Alınma Tarihi",
         type: "string",
+        valuePrepareFunction: (value) => {
+          return value.toLocaleDateString();
+        },
       },
       changer: {
         title: "Alan Üye",
