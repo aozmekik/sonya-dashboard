@@ -9,7 +9,7 @@ export class MembersData {
       regDate: new Date(),
       unregDate: new Date(),
       active: true,
-      group: Member.Group.ASSOCIATE,
+      group: Member.Group.ACTIVE,
     },
     {
       _id: "id",
@@ -17,7 +17,7 @@ export class MembersData {
       regDate: new Date(),
       unregDate: new Date(),
       active: true,
-      group: Member.Group.ASSOCIATE,
+      group: Member.Group.ACTIVE,
     },
   ];
 

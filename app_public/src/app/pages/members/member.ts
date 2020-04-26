@@ -34,4 +34,8 @@ export class Member {
   public static table2array(table): string[] {
     return Object.keys(table).map(key => table[key]);
   }
+
+  public toString = (): string => {
+    return name;
+  }
 }
