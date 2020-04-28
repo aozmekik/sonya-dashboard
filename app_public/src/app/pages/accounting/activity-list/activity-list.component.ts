@@ -6,6 +6,10 @@ import { ActivitiesData } from "../activities-data";
 import { Router } from "@angular/router";
 import { NbWindowService } from "@nebular/theme";
 import { Activity } from "../activity";
+import { Utils } from '../../../utils/utils.module';
+
+// TODO. small icon to tables.
+// TODO. add a selector for campaign.
 
 @Component({
   selector: "ngx-activity-list",
@@ -19,10 +23,15 @@ export class ActivityListComponent {
   ) {
     const mydata = this.data.getData();
     this.source.load(mydata);
+    // this.settings['columns']['activityType'].editor.config.completer.data = mydata;
   }
+
+  source = new LocalDataSource();
+  data = new ActivitiesData();
+
   settings = {
     actions: {
-      columnTitle: "Eylemler",  
+      columnTitle: "Eylemler",
     },
     mode: "external",
     noDataMessage: "Kayıt Bulunamadı",
@@ -47,6 +56,13 @@ export class ActivityListComponent {
           return Activity.ActivityTypes[value];
         },
         width: "3%",
+        filter: {
+          type: "list",
+          config: {
+            selectText: "Seç.",
+            list: Utils.table2selector(Activity.ActivityTypes),
+          },
+        },
       },
       about: {
         title: "Üye/\nCari/\nDiğer",
@@ -54,14 +70,18 @@ export class ActivityListComponent {
         valuePrepareFunction: (value) => {
           return Activity.ActivityAbouts[value];
         },
-        width: "3%",
+        filter: {
+          type: "list",
+          config: {
+            selectText: "Seç.",
+            list: Utils.table2selector(Activity.ActivityAbouts),
+          },
+        },
       },
       _date: {
         title: "\tTarih",
         type: "Date",
-        valuePrepareFunction: (value) => {
-          return value.toLocaleDateString();
-        },
+        valuePrepareFunction: Utils.datePrepareFunction,
         width: "1%",
       },
       scriptNo: {
@@ -74,6 +94,13 @@ export class ActivityListComponent {
         valuePrepareFunction: (value) => {
           return Activity.ActivityBankSafes[value];
         },
+        filter: {
+          type: "list",
+          config: {
+            selectText: "Seç.",
+            list: Utils.table2selector(Activity.ActivityBankSafes),
+          },
+        },
       },
       campaign: {
         title: "Kampanya",
@@ -83,6 +110,16 @@ export class ActivityListComponent {
       name: {
         title: "İsim",
         type: "string",
+        filter: {
+          type: "completer",
+          config: {
+            completer: {
+              data: this.data.getData(),
+              searchFields: "name",
+              titleField: "name",
+            },
+          },
+        },
       },
       accountType: {
         title: "Hesap Tipi",
@@ -107,8 +144,6 @@ export class ActivityListComponent {
     },
   };
 
-  source = new LocalDataSource();
-  data = new ActivitiesData();
 
   onDelete(event): void {
     if (window.confirm("Kaydı silmek istediğinize emin misiniz?")) {

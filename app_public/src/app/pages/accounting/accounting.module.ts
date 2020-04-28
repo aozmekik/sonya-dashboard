@@ -1,3 +1,4 @@
+import { UtilsModule } from './../../utils/utils.module';
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
@@ -25,6 +26,7 @@ import { AccountTypesFormComponent } from "./account-types/account-types-form/ac
 @NgModule({
   imports: [
     AccountingRoutingModule,
+    UtilsModule,
     Ng2SmartTableModule,
     NbCardModule,
     FormsModule,
