@@ -1,3 +1,6 @@
+import { TrafficListService } from './mock/traffic-list.service';
+import { TrafficBarData } from './data/traffic-bar';
+import { StatsProgressBarService } from './mock/stats-progress-bar.service';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
@@ -9,13 +12,20 @@ import { AnalyticsService } from './utils';
 import { UserData } from './data/users';
 import { UserService } from './mock/users.service';
 import { MockDataModule } from './mock/mock-data.module';
+import { StatsBarData } from './data/stats-bar';
+import { StatsBarService } from './mock/stats-bar.service';
+import { StatsProgressBarData } from './data/stats-progress-bar';
+import { ProfitBarAnimationChartData } from './data/profit-bar-animation-chart';
+import { ProfitBarAnimationChartService } from './mock/profit-bar-animation-chart.service';
+import { TrafficBarService } from './mock/traffic-bar.service';
+import { TrafficListData } from './data/traffic-list';
 
 const socialLinks = [
-  {
-    url: 'https://github.com/akveo/nebular',
-    target: '_blank',
-    icon: 'github',
-  },
+  // {
+  //   url: 'https://github.com/akveo/nebular',
+  //   target: '_blank',
+  //   icon: 'github',
+  // },
   {
     url: 'https://www.facebook.com/akveo/',
     target: '_blank',
@@ -30,6 +40,11 @@ const socialLinks = [
 
 const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
+  { provide: StatsBarData, useClass: StatsBarService},
+  { provide: StatsProgressBarData, useClass: StatsProgressBarService},
+  { provide: ProfitBarAnimationChartData, useClass: ProfitBarAnimationChartService},
+  { provide: TrafficBarData, useClass: TrafficBarService},
+  { provide: TrafficListData, useClass: TrafficListService},
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
