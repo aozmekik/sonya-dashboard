@@ -19,6 +19,10 @@ import { ProfitBarAnimationChartData } from './data/profit-bar-animation-chart';
 import { ProfitBarAnimationChartService } from './mock/profit-bar-animation-chart.service';
 import { TrafficBarService } from './mock/traffic-bar.service';
 import { TrafficListData } from './data/traffic-list';
+import { OrdersChartData } from './data/orders-chart';
+import { OrdersChartService } from './mock/orders-chart.service';
+import { OrdersProfitChartData } from './data/orders-profit-chart';
+import { OrdersProfitChartService } from './mock/orders-profit-chart.service';
 
 const socialLinks = [
   // {
@@ -45,6 +49,8 @@ const DATA_SERVICES = [
   { provide: ProfitBarAnimationChartData, useClass: ProfitBarAnimationChartService},
   { provide: TrafficBarData, useClass: TrafficBarService},
   { provide: TrafficListData, useClass: TrafficListService},
+  { provide: OrdersChartData, useClass: OrdersChartService},
+  { provide: OrdersProfitChartData, useClass: OrdersProfitChartService},
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {

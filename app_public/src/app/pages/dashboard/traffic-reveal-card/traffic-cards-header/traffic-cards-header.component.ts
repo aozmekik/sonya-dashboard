@@ -27,6 +27,11 @@ export class TrafficCardsHeaderComponent implements OnDestroy {
 
   changePeriod(period: string): void {
     this.type = period;
+    // switch (period){
+    //   case 'hafta': period = 'week'; break;
+    //   case 'ay': period = 'month'; break;
+    //   case 'yıl': period = 'year'; break;
+    // }
     this.periodChange.emit(period);
   }
 

@@ -1,3 +1,9 @@
+import { LegendChartComponent } from './charts-panel/legend-chart/legend-chart.component';
+import { OrdersProfitChartService } from './../../@core/mock/orders-profit-chart.service';
+import { OrdersChartService } from './../../@core/mock/orders-chart.service';
+import { OrdersChartComponent } from './charts-panel/charts/orders-chart.component';
+import { ProfitChartComponent } from './charts-panel/charts/profit-chart.component';
+import { ChartsPanelComponent } from './charts-panel/charts-panel.component';
 import { TrafficBarService } from './../../@core/mock/traffic-bar.service';
 import { TrafficListService } from './../../@core/mock/traffic-list.service';
 import { TrafficFrontCardComponent } from './traffic-reveal-card/front-side/traffic-front-card.component';
@@ -10,7 +16,7 @@ import { StatsCardFrontComponent } from './profit-card/front-side/stats-card-fro
 import { LayoutService } from './../../@core/utils/layout.service';
 import { StatsProgressBarService } from './../../@core/mock/stats-progress-bar.service';
 import { NgModule } from '@angular/core';
-import { NbCardModule, NbProgressBarModule, NbThemeService, NbIconModule, NbListComponent, NbListModule, NbSelectModule } from '@nebular/theme';
+import { NbCardModule, NbProgressBarModule, NbThemeService, NbIconModule, NbListComponent, NbListModule, NbSelectModule, NbTabsetModule } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
@@ -25,6 +31,8 @@ import { TrafficBackCardComponent } from './traffic-reveal-card/back-side/traffi
 import { TrafficCardsHeaderComponent } from './traffic-reveal-card/traffic-cards-header/traffic-cards-header.component';
 import { TrafficRevealCardComponent } from './traffic-reveal-card/traffic-reveal-card.component';
 import { PeriodsService } from '../../@core/mock/periods.service';
+import { ChartPanelSummaryComponent } from './charts-panel/chart-panel-summary/chart-panel-summary.component';
+import { ChartPanelHeaderComponent } from './charts-panel/chart-panel-header/chart-panel-header.component';
 
 @NgModule({
   imports: [
@@ -37,6 +45,10 @@ import { PeriodsService } from '../../@core/mock/periods.service';
     NbIconModule,
     NbListModule,
     NbSelectModule,
+    NbTabsetModule,
+    // NbButtonModule,
+    // LeafletModule,
+    // NbButtonModule,
   ],
   declarations: [
     ProgressSectionComponent, // TODO. arrange this. too much for one file.
@@ -52,6 +64,12 @@ import { PeriodsService } from '../../@core/mock/periods.service';
     TrafficFrontCardComponent,
     TrafficCardsHeaderComponent,
     TrafficRevealCardComponent,
+    ChartsPanelComponent,
+    ProfitChartComponent,
+    OrdersChartComponent,
+    ChartPanelSummaryComponent,
+    ChartPanelHeaderComponent,
+    LegendChartComponent,
   ],
   providers: [
     StatsProgressBarService,
@@ -62,6 +80,8 @@ import { PeriodsService } from '../../@core/mock/periods.service';
     TrafficListService,
     TrafficBarService,
     PeriodsService,
+    OrdersChartService,
+    OrdersProfitChartService,
   ]
 })
 export class DashboardModule { }
