@@ -122,7 +122,7 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
           data: this.profitChartData.data[0],
         },
         {
-          name: 'Yükleme',
+          name: 'Stok Yükleme',
           type: 'bar',
           barWidth: '20%',
           itemStyle: {
@@ -139,7 +139,7 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
           data: this.profitChartData.data[1],
         },
         {
-          name: 'Harcama',
+          name: 'Stok Harcama',
           type: 'bar',
           barWidth: '20%',
           itemStyle: {

@@ -1,3 +1,5 @@
+import { ElectricityService } from './electricity.service';
+import { UserActivityService } from './user-activity.service';
 import { OrdersChartService } from './orders-chart.service';
 import { TrafficListService } from './traffic-list.service';
 import { TrafficBarService } from './traffic-bar.service';
@@ -23,6 +25,8 @@ const SERVICES = [
   OrdersChartService, 
   OrdersProfitChartService,
   ProfitChartService,
+  UserActivityService,
+  ElectricityService,
 ];
 
 @NgModule({

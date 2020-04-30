@@ -23,6 +23,8 @@ import { OrdersChartData } from './data/orders-chart';
 import { OrdersChartService } from './mock/orders-chart.service';
 import { OrdersProfitChartData } from './data/orders-profit-chart';
 import { OrdersProfitChartService } from './mock/orders-profit-chart.service';
+import { UserActivityData } from './data/user-activity';
+import { UserActivityService } from './mock/user-activity.service';
 
 const socialLinks = [
   // {
@@ -51,6 +53,7 @@ const DATA_SERVICES = [
   { provide: TrafficListData, useClass: TrafficListService},
   { provide: OrdersChartData, useClass: OrdersChartService},
   { provide: OrdersProfitChartData, useClass: OrdersProfitChartService},
+  { provide: UserActivityData, useClass: UserActivityService},
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {

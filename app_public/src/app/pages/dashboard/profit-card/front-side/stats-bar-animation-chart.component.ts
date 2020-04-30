@@ -57,7 +57,7 @@ export class StatsBarAnimationChartComponent implements AfterViewInit, OnDestroy
         bottom: 0,
       },
       legend: {
-        data: ['gelir', 'orders'],
+        data: ['Bağış', 'Stok'],
         borderWidth: 0,
         borderRadius: 0,
         itemWidth: 15,
@@ -120,13 +120,13 @@ export class StatsBarAnimationChartComponent implements AfterViewInit, OnDestroy
       ],
       series: [
         {
-          name: 'gelir',
+          name: 'Bağış',
           type: 'bar',
           data: this.linesData.firstLine,
           animationDelay: idx => idx * 10,
         },
         {
-          name: 'orders',
+          name: 'Stok',
           type: 'bar',
           data: this.linesData.secondLine,
           animationDelay: idx => idx * 10 + 100,

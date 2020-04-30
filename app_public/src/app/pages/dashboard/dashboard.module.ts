@@ -1,3 +1,7 @@
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { ElectricityService } from './../../@core/mock/electricity.service';
+import { ElectricityChartComponent } from './electricity/electricity-chart/electricity-chart.component';
+import { ElectricityComponent } from './electricity/electricity.component';
 import { LegendChartComponent } from './charts-panel/legend-chart/legend-chart.component';
 import { OrdersProfitChartService } from './../../@core/mock/orders-profit-chart.service';
 import { OrdersChartService } from './../../@core/mock/orders-chart.service';
@@ -33,6 +37,8 @@ import { TrafficRevealCardComponent } from './traffic-reveal-card/traffic-reveal
 import { PeriodsService } from '../../@core/mock/periods.service';
 import { ChartPanelSummaryComponent } from './charts-panel/chart-panel-summary/chart-panel-summary.component';
 import { ChartPanelHeaderComponent } from './charts-panel/chart-panel-header/chart-panel-header.component';
+import { UserActivityService } from '../../@core/mock/user-activity.service';
+import { UserActivityComponent } from './user-activity/user-activity.component';
 
 @NgModule({
   imports: [
@@ -70,6 +76,10 @@ import { ChartPanelHeaderComponent } from './charts-panel/chart-panel-header/cha
     ChartPanelSummaryComponent,
     ChartPanelHeaderComponent,
     LegendChartComponent,
+    UserActivityComponent,
+    ElectricityChartComponent,
+    ElectricityComponent,
+    PieChartComponent,
   ],
   providers: [
     StatsProgressBarService,
@@ -82,6 +92,8 @@ import { ChartPanelHeaderComponent } from './charts-panel/chart-panel-header/cha
     PeriodsService,
     OrdersChartService,
     OrdersProfitChartService,
+    UserActivityService,
+    ElectricityService,
   ]
 })
 export class DashboardModule { }
