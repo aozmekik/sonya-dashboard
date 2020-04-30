@@ -11,6 +11,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: "/pages/iot-dashboard",
   },
   {
+    title: "Kamera",
+    icon: "home-outline",
+    link: "/pages/camera",
+  },
+  {
     title: "Yönet",
     group: true,
   },

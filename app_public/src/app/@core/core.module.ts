@@ -1,3 +1,6 @@
+import { SecurityCamerasService } from './mock/security-cameras.service';
+import { LayoutService } from './utils/layout.service';
+import { PlayerService } from './utils/player.service';
 import { TrafficListService } from './mock/traffic-list.service';
 import { TrafficBarData } from './data/traffic-bar';
 import { StatsProgressBarService } from './mock/stats-progress-bar.service';
@@ -25,6 +28,7 @@ import { OrdersProfitChartData } from './data/orders-profit-chart';
 import { OrdersProfitChartService } from './mock/orders-profit-chart.service';
 import { UserActivityData } from './data/user-activity';
 import { UserActivityService } from './mock/user-activity.service';
+import { SecurityCamerasData } from './data/security-cameras';
 
 const socialLinks = [
   // {
@@ -54,6 +58,7 @@ const DATA_SERVICES = [
   { provide: OrdersChartData, useClass: OrdersChartService},
   { provide: OrdersProfitChartData, useClass: OrdersProfitChartService},
   { provide: UserActivityData, useClass: UserActivityService},
+  { provide: SecurityCamerasData, useClass: SecurityCamerasService},
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
@@ -102,6 +107,8 @@ export const NB_CORE_PROVIDERS = [
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
   },
   AnalyticsService,
+  LayoutService,
+  PlayerService,
 ];
 
 @NgModule({
