@@ -1,3 +1,5 @@
+import { Utils } from '../../utils/utils.module';
+
 export namespace Activity {
   /**
    * types of accounts that can be added (perhaps also according to campaigns)
@@ -28,11 +30,6 @@ export namespace Activity {
     TLSAFE,
     BANK,
     BILL,
-  }
-
-  export interface IHash {
-    // to convert enum types to string.
-    [type: number]: string;
   }
 }
 
@@ -83,23 +80,22 @@ export class Activity {
    * since enums might change in future, indexes can shift and
    * cause bad errors. robustness preferred to fastness here.
    */
-  public static ActivityTypes: Activity.IHash = {
+
+   // TODO. make readonly.
+  public static ActivityTypes: Utils.IHash = {
     [Activity.Type.INCOME]: "Gelir",
     [Activity.Type.OUTGO]: "Gider",
     [Activity.Type.TRANSFER]: "Transfer",
     [Activity.Type.VIRMAN]: "Virman",
   };
-  public static ActivityAbouts: Activity.IHash = {
+  public static ActivityAbouts: Utils.IHash = {
     [Activity.About.CURRENT]: "Cari",
     [Activity.About.MEMBER]: "Üye",
     [Activity.About.OTHER]: "Diğer",
   };
-  public static ActivityBankSafes: Activity.IHash = {
+  public static ActivityBankSafes: Utils.IHash = {
     [Activity.BankSafe.BANK]: "Banka",
     [Activity.BankSafe.BILL]: "Senet",
     [Activity.BankSafe.TLSAFE]: "TL Kasa",
   };
-  public static table2array(table): string[] {
-    return Object.keys(table).map((key) => table[key]);
-  }
 }

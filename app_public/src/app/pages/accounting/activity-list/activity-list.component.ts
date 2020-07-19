@@ -153,7 +153,7 @@ export class ActivityListComponent {
     }
   }
 
- 
+
   /**
    * links to adding-account page.
    */

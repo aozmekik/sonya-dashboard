@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Activity } from "../activity";
+import { Utils } from '../../../utils/utils.module';
 
 /**
  * form component, for adding an accounting record.
@@ -16,9 +17,9 @@ import { Activity } from "../activity";
   styleUrls: ["./activity-form.component.scss"],
 })
 export class ActivityFormComponent implements OnInit {
-  public activityTypes = Activity.table2array(Activity.ActivityTypes);
-  public activityAbouts = Activity.table2array(Activity.ActivityAbouts);
-  public activityBankSafes = Activity.table2array(Activity.ActivityBankSafes);
+  public activityTypes = Utils.table2array(Activity.ActivityTypes);
+  public activityAbouts = Utils.table2array(Activity.ActivityAbouts);
+  public activityBankSafes = Utils.table2array(Activity.ActivityBankSafes);
   public currentCampaign = "campaign";
 
   @Input() activityModel = Activity.default();
