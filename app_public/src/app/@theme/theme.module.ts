@@ -29,6 +29,8 @@ import {
   RoundPipe,
   TimingPipe,
   NumberWithCommasPipe,
+  MemberGroupPipe,
+  FamilyAreaPipe,
 } from './pipes';
 import {
   OneColumnLayoutComponent,
@@ -70,6 +72,8 @@ const PIPES = [
   RoundPipe,
   TimingPipe,
   NumberWithCommasPipe,
+  MemberGroupPipe,
+  FamilyAreaPipe,
 ];
 
 @NgModule({
@@ -86,7 +90,7 @@ export class ThemeModule {
           {
             name: 'default',
           },
-          [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME, DARK_THEME ],
+          [DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME, DARK_THEME],
         ).providers,
       ],
     };
