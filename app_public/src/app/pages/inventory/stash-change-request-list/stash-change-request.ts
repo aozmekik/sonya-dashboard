@@ -37,7 +37,7 @@ export namespace StashChangeRequest {
  * this change request will be done by the active members which has only a taking interface
  * from a stash. a possible scenario would be: member requests a taking change from stash,
  * then database will be changed due to given taking information. then admin will see
- * those changes on the panel, and (first case) if she approves it nothing changes
+ * those changes on the panel, and (in the first case) if she approves it, nothing changes
  * (since the database has already been changed). this is just a way of saying, 
  * 'ok, everything is cool with that change.' Or (second case) she might disapprove this
  * change and database will change back to it's previous state as if this change has never
