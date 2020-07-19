@@ -3,7 +3,10 @@ import { Component } from "@angular/core";
 import { LocalDataSource } from "ng2-smart-table";
 import { Router } from "@angular/router";
 import { NbWindowService } from "@nebular/theme";
-import { MemberEditingWindowFormComponent } from "../member-editing-window/member-editing-window.component";
+import { MemberEditingWindowComponent } from "../member-editing-window/member-editing-window.component";
+import { Utils } from '../../../utils/utils.module';
+import { Member } from '../member';
+import { MemberViewingWindowComponent } from '../member-viewing-window/member-viewing-window.component';
 
 @Component({
   selector: "ngx-member-list",
@@ -42,14 +45,20 @@ export class MemberListComponent {
       regDate: {
         title: "Kayıt Tarihi",
         type: "string",
+        valuePrepareFunction: Utils.datePrepareFunction,
+
       },
       unregDate: {
         title: "Kayıt Durdurulma Tarihi",
         type: "string",
+        valuePrepareFunction: Utils.datePrepareFunction,
       },
       group: {
         title: "Grup",
         type: "string",
+        valuePrepareFunction: (value) => {
+          return Member.groups[value];
+        },
       },
       active: {
         title: "Aktif",
@@ -75,12 +84,22 @@ export class MemberListComponent {
     this.router.navigateByUrl("/pages/members/member-adding");
   }
 
+  onSelect(event)
+  {
+    this.windowService.open(MemberViewingWindowComponent, {
+      title: "Üye Bilgileri",
+      context: {
+        member: event.data
+      }
+    });
+  }
+
   /**
    * creates an editing form window when edit is clicked.
    * @param e is the event.
    */
   public onEdit() {
-    this.windowService.open(MemberEditingWindowFormComponent, {
+    this.windowService.open(MemberEditingWindowComponent, {
       title: "Üye Düzenle",
     });
   }

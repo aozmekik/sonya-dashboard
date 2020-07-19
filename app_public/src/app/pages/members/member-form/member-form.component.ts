@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Member } from "../member";
+import { Utils } from '../../../utils/utils.module';
 
 @Component({
   selector: "ngx-member-form",
@@ -9,7 +10,7 @@ import { Member } from "../member";
 
 // TODO. add selector for activeness.
 export class MemberFormComponent implements OnInit {
-  public groups: string[] = Member.table2array(Member.groups);
+  public groups: string[] = Utils.table2array(Member.groups);
   @Input() memberModel: Member;
 
   constructor() {}

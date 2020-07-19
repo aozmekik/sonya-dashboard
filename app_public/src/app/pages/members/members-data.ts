@@ -1,4 +1,5 @@
 import { Member } from "./member";
+import { Family } from '../families/family';
 
 // only for representative frontend. will be deleted soon.
 export class MembersData {
@@ -10,6 +11,12 @@ export class MembersData {
       unregDate: new Date(),
       active: true,
       group: Member.Group.ACTIVE,
+      telephone: 12344569,
+      address: "address#1",
+      activeArea: Family.Area.ANATOLIA,
+      age: 20,
+      gender: Member.Gender.FEMALE,
+      job: "job#1",
     },
     {
       _id: "id",
@@ -18,6 +25,12 @@ export class MembersData {
       unregDate: new Date(),
       active: true,
       group: Member.Group.ACTIVE,
+      telephone: 12344569,
+      address: "address#2",
+      activeArea: Family.Area.EUROPE,
+      age: 20,
+      gender: Member.Gender.MALE,
+      job: "job#2",
     },
   ];
 

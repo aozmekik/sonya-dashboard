@@ -1,0 +1,95 @@
+<nb-card>
+  <nb-card-body>
+    <form #userForm="ngForm">
+      <div class="row show-grid">
+        <label for="nameId" class="label col-sm-3 col-form-label">İsim: </label>
+        <div class="col-sm-9 label col-form-label">
+          <div>{{member.name}}</div>
+        </div>
+      </div>
+
+      <div class="row show-grid">
+        <label for="nameId" class="label col-sm-3 col-form-label">Kayıt: </label>
+        <div class="col-sm-9 label col-form-label">
+          <div>{{member.regDate | date:'medium' }}</div>
+        </div>
+      </div>
+
+      <div class="row show-grid">
+        <label for="nameId" class="label col-sm-3 col-form-label">Kayıt Silme: </label>
+        <div class="col-sm-9 label col-form-label">
+          <div>{{member.unregDate | date:'medium' }}</div>
+        </div>
+      </div>
+
+      <div class="row show-grid">
+        <label for="nameId" class="label col-sm-3 col-form-label">Aktif: </label>
+        <div class="col-sm-9 label col-form-label">
+          <div>{{member.activeArea}}</div>
+        </div>
+      </div>
+
+      <div class="row show-grid">
+        <label for="nameId" class="label col-sm-3 col-form-label">Grup: </label>
+        <div class="col-sm-9 label  col-form-label">
+          <div>{{member.group | memberGroup}}</div>
+        </div>
+      </div>
+
+      <div class="row show-grid">
+        <label for="nameId" class="label col-sm-3 col-form-label">Telefon: </label>
+        <div class="col-sm-9 label  col-form-label">
+          <div>{{member.telephone}}</div>
+        </div>
+      </div>
+
+      <div class="row show-grid">
+        <label for="nameId" class="label col-sm-3 col-form-label">Adres: </label>
+        <div class="col-sm-9 label  col-form-label">
+          <div>{{member.address}}</div>
+        </div>
+      </div>
+
+      <div class="row show-grid">
+        <label for="nameId" class="label col-sm-3 col-form-label">Bölge: </label>
+        <div class="col-sm-9 label col-form-label">
+          <div>{{member.activeArea | area}}</div>
+        </div>
+      </div>
+
+      <div class="row show-grid">
+        <label for="nameId" class="label col-sm-3 col-form-label">Yaş: </label>
+        <div class="col-sm-9 label col-form-label">
+          <div>{{member.age}}</div>
+        </div>
+      </div>
+
+      <div class="row show-grid">
+        <label for="nameId" class="label col-sm-3 col-form-label">Cinsiyet: </label>
+        <div class="col-sm-9 label col-form-label">
+          <div>{{member.gender}}</div>
+        </div>
+      </div>
+
+      <div class="row show-grid">
+        <label for="nameId" class="label col-sm-3 col-form-label">İş: </label>
+        <div class="col-sm-9 label  col-form-label">
+          <div>{{member.job}}</div>
+        </div>
+      </div>
+
+
+
+    </form>
+  </nb-card-body>
+</nb-card>
+<!-- 
+<nb-card>
+  <nb-card-body>
+    <div class="row show-grid">
+      <div class="col-md-0">
+        <div>.col-md-1</div>
+      </div>
+      </div>
+  </nb-card-body>
+</nb-card> -->

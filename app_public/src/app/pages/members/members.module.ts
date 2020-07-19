@@ -1,3 +1,4 @@
+import { MemberViewingWindowComponent } from './member-viewing-window/member-viewing-window.component';
 import { FormsModule } from "@angular/forms";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 import { MemberFormComponent } from "./member-form/member-form.component";
@@ -7,7 +8,7 @@ import {
   routedComponents,
   MembersRoutingModule,
 } from "./members-routing.module";
-import { MemberEditingWindowFormComponent } from "./member-editing-window/member-editing-window.component";
+import { MemberEditingWindowComponent } from "./member-editing-window/member-editing-window.component";
 import {
   NbWindowModule,
   NbButtonModule,
@@ -38,13 +39,15 @@ import { ThemeModule } from "../../@theme/theme.module";
   ],
   declarations: [
     ...routedComponents,
-    MemberEditingWindowFormComponent,
+    MemberEditingWindowComponent,
+    MemberViewingWindowComponent,
     MemberFormComponent,
   ],
   exports: [
-    MemberEditingWindowFormComponent,
+    MemberEditingWindowComponent,
+    MemberViewingWindowComponent,
     MemberFormComponent,
   ],
-  entryComponents: [MemberEditingWindowFormComponent],
+  entryComponents: [MemberEditingWindowComponent, MemberViewingWindowComponent],
 })
-export class MembersModule {}
+export class MembersModule { }

@@ -8,7 +8,7 @@ import { Member } from "../member";
   templateUrl: "./member-editing-window.component.html",
   styleUrls: ["./member-editing-window.component.scss"],
 })
-export class MemberEditingWindowFormComponent {
+export class MemberEditingWindowComponent { // TODO I changed this.
   public member: Member = MembersData.getData()[0];
 
   constructor(public windowRef: NbWindowRef) {}
