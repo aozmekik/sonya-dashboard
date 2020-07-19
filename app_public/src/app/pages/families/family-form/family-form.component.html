@@ -1,0 +1,131 @@
+<nb-card>
+<nb-card-body>
+    <form #userForm="ngForm">
+      <hr />
+      {{ familyModel | json }}
+      <hr />
+
+      <!-- family name -->
+      <div class="form-group row">
+        <label for="nameId" class="label col-sm-3 col-form-label">İsim</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            required
+            #name="ngModel"
+            pattern="^[a-zA-Z öçşiğüÖÇŞİĞÜ]+$"
+            [class.status-danger]="name.touched && name.invalid"
+            class="form-control"
+            [class.is-invalid]="name.touched && name.invalid"
+            nbInput
+            fullWidth
+            id="nameId"
+            name="name"
+            placeholder="Aile İsmi"
+            [(ngModel)]="familyModel.name"
+          />
+          <div *ngIf="name.errors && name.invalid && name.touched">
+            <div class="text-danger" *ngIf="name.errors.pattern">
+              Sadece harf içerebilir.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- family registration  date -->
+      <div class="form-group row">
+        <label for="startingDateId" class="label col-sm-3 col-form-label"
+          >Kayıt Tarihi</label
+        >
+        <div class="col-sm-9">
+          <input
+            nbInput
+            fullWidth
+            name="startingDate"
+            required
+            #startingDate="ngModel"
+            [class.status-danger]="startingDate.touched && startingDate.invalid"
+            [class.is-invalid]="startingDate.touched && startingDate.invalid"
+            placeholder="aa/gün/yıl"
+            contentEditable="false"
+            [readOnly]="true"
+            [nbDatepicker]="startingDatePicker"
+            id="startingDateId"
+            [(ngModel)]="familyModel.regDate"
+          />
+          <nb-datepicker #startingDatePicker></nb-datepicker>
+        </div>
+      </div>
+
+      <!-- member unregistration date -->
+      <div class="form-group row">
+        <label for="dueDateId" class="label col-sm-3 col-form-label"
+          >Kayıt Silinme Tarihi</label
+        >
+        <div class="col-sm-9">
+          <input
+            nbInput
+            fullWidth
+            name="startingDate"
+            required
+            #startingDate="ngModel"
+            [class.status-danger]="startingDate.touched && startingDate.invalid"
+            [class.is-invalid]="startingDate.touched && startingDate.invalid"
+            placeholder="aa/gün/yıl"
+            contentEditable="false"
+            [readOnly]="true"
+            [nbDatepicker]="dueDatePicker"
+            id="dueDateId"
+            [(ngModel)]="familyModel.unregDate"
+          />
+          <nb-datepicker #dueDatePicker></nb-datepicker>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="typeId" class="label col-sm-3 col-form-label">Bölge</label>
+        <div class="col-sm-9">
+          <nb-select
+            id="typeId"
+            [(selected)]="familyModel.area"
+            status="primary"
+          >
+            <nb-option *ngFor="let area of areas; let i = index" [value]="i">
+              {{ area }}
+            </nb-option>
+          </nb-select>
+        </div>
+      </div>
+
+
+      <!-- number of members in family -->
+      <div class="form-group row">
+        <label for="checkId" class="label col-sm-3 col-form-label"
+          >Aile Üye Sayısı</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            required
+            #scriptNo="ngModel"
+            pattern="^[A-Za-z0-9]+$"
+            [class.status-danger]="scriptNo.touched && scriptNo.invalid"
+            [class.is-invalid]="scriptNo.touched && scriptNo.invalid"
+            class="form-control"
+            nbInput
+            fullWidth
+            id="checkId"
+            placeholder="Makbuz/Fatura No"
+            name="scriptNo"
+            [(ngModel)]="familyModel.memberCount"
+          />
+          <div *ngIf="scriptNo.errors && scriptNo.invalid && scriptNo.touched">
+            <div class="text-danger" *ngIf="scriptNo.errors.pattern">
+              Sadece harf ve rakam içerebilir.
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

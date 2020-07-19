@@ -94,6 +94,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
 
   {
+    title: "Aileler",
+    icon: "layout-outline",
+    children: [
+      {
+        title: "Aile Listesi",
+        link: "/pages/families/family-list",
+      },
+      {
+        title: "Aile Girişi",
+        link: "/pages/families/family-adding",
+      },
+    ],
+  },
+
+
+  {
     title: "Karar Defteri",
     icon: "layout-outline",
     children: [

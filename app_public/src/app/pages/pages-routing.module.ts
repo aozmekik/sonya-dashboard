@@ -37,9 +37,17 @@ const routes: Routes = [
       },
       {
         path: "inventory",
-        loadChildren: () => 
-        import("./inventory/inventory.module").then((m) => m.InventoryModule),
+        loadChildren: () =>
+          import("./inventory/inventory.module").then((m) => m.InventoryModule),
       },
+
+      {
+        path: "families",
+        loadChildren: () =>
+          import("./families/families.module").then((m) => m.FamiliesModule),
+
+      },
+
       {
         path: "",
         redirectTo: "dashboard",
@@ -53,4 +61,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule {}
+export class PagesRoutingModule { }
