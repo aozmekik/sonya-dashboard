@@ -4,6 +4,7 @@ import { LocalDataSource } from "ng2-smart-table";
 import { Router } from "@angular/router";
 import { CampaignEditWindowFormComponent } from "../campaign-editing-window/campaign-editing-window.component";
 import { NbWindowService } from "@nebular/theme";
+import { Utils } from '../../../utils/utils.module';
 
 @Component({
   selector: "ngx-campaign-list",
@@ -56,10 +57,12 @@ export class CampaignListComponent {
       startingDate: {
         title: "Başlangıç Tarihi",
         type: "string",
+        valuePrepareFunction: Utils.datePrepareFunction,
       },
       dueDate: {
         title: "Bitiş Tarihi",
         type: "string",
+        valuePrepareFunction: Utils.datePrepareFunction,
       },
       active: {
         title: "Aktif",

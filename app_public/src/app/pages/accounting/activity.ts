@@ -81,19 +81,18 @@ export class Activity {
    * cause bad errors. robustness preferred to fastness here.
    */
 
-   // TODO. make readonly.
-  public static ActivityTypes: Utils.IHash = {
+  public static readonly ActivityTypes: Utils.IHash = {
     [Activity.Type.INCOME]: "Gelir",
     [Activity.Type.OUTGO]: "Gider",
     [Activity.Type.TRANSFER]: "Transfer",
     [Activity.Type.VIRMAN]: "Virman",
   };
-  public static ActivityAbouts: Utils.IHash = {
+  public static readonly ActivityAbouts: Utils.IHash = {
     [Activity.About.CURRENT]: "Cari",
     [Activity.About.MEMBER]: "Üye",
     [Activity.About.OTHER]: "Diğer",
   };
-  public static ActivityBankSafes: Utils.IHash = {
+  public static readonly ActivityBankSafes: Utils.IHash = {
     [Activity.BankSafe.BANK]: "Banka",
     [Activity.BankSafe.BILL]: "Senet",
     [Activity.BankSafe.TLSAFE]: "TL Kasa",

@@ -8,11 +8,10 @@ import { Router } from "@angular/router";
 import { NbWindowService } from "@nebular/theme";
 import { Activity } from "../activity";
 import { Utils } from '../../../utils/utils.module';
-import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 import { RowIconComponent } from './activity-type-row-handler/row-icon.component';
 
 // TODO. add a selector for campaign.
-// TODO. add a view component.
+// TODO. add a view component. [scriptNo, comment]
 
 @Component({
   selector: "ngx-activity-list",
@@ -23,7 +22,7 @@ export class ActivityListComponent {
   constructor(
     private router: Router,
     private windowService: NbWindowService,
-    iconsLibrary: NbIconLibraries
+    iconsLibrary: NbIconLibraries,
   ) {
     const mydata = this.data.getData();
     this.source.load(mydata);
@@ -60,7 +59,7 @@ export class ActivityListComponent {
         title: "Tip",
         type: 'custom',
         renderComponent: RowIconComponent,
-        width: "3%",
+        width: "10%",
         filter: {
           type: "list",
           config: {
@@ -87,15 +86,11 @@ export class ActivityListComponent {
         title: "\tTarih",
         type: "Date",
         valuePrepareFunction: Utils.datePrepareFunction,
-        width: "1%",
-      },
-      scriptNo: {
-        title: "Makbuz/\nFatura No",
-        type: "string",
       },
       bankSafe: {
         title: "Kasa",
         type: "string",
+        width: "10%",
         valuePrepareFunction: (value) => {
           return Activity.ActivityBankSafes[value];
         },
@@ -110,7 +105,6 @@ export class ActivityListComponent {
       campaign: {
         title: "Kampanya",
         type: "string",
-        width: "1%",
       },
       name: {
         title: "İsim",
@@ -118,6 +112,7 @@ export class ActivityListComponent {
         filter: {
           type: "completer",
           config: {
+            selectText: "Arat...",
             completer: {
               data: this.data.getData(),
               searchFields: "name",
@@ -132,11 +127,6 @@ export class ActivityListComponent {
         valuePrepareFunction: (value) => {
           return value.name;
         },
-        width: "1%",
-      },
-      comment: {
-        title: "Açıklama",
-        type: "string",
       },
       amount: {
         title: "Tutar",
@@ -144,7 +134,6 @@ export class ActivityListComponent {
         valuePrepareFunction: (value) => {
           return value + "₺";
         },
-        width: "1%",
       },
     },
   };
