@@ -15,6 +15,7 @@ export class MemberViewingWindowComponent {
   }
 
   // TODO. add pipe for gender.
+  // TODO. aile üye sayısı string alıyor
 
   close() {
     this.windowRef.close();

@@ -18,7 +18,7 @@ import {
   NbMenuModule,
   NbSidebarModule,
   NbToastrModule,
-  NbWindowModule, NbWindowService,
+  NbWindowModule,
 } from '@nebular/theme';
 
 @NgModule({

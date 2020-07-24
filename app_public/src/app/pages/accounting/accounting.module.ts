@@ -1,3 +1,5 @@
+import { GenericComponentsModule } from './../generic-components/form-rows/generic-components.module';
+import { CustomSelectorComponent } from './../generic-components/form-rows/custom-selector/custom-selector.component';
 import { RowIconComponent } from './activity-list/activity-type-row-handler/row-icon.component';
 import { UtilsModule } from './../../utils/utils.module';
 import { NgModule } from "@angular/core";
@@ -41,6 +43,7 @@ import { AccountTypesFormComponent } from "./account-types/account-types-form/ac
     ThemeModule,
     NbWindowModule.forChild(),
     NbIconModule,
+    GenericComponentsModule,
   ],
   declarations: [
     ...routedComponents,

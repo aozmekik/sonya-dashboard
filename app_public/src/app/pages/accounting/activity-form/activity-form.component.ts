@@ -1,3 +1,4 @@
+import { CustomSelectorComponent } from './../../generic-components/form-rows/custom-selector/custom-selector.component';
 import { Component, OnInit, Input } from "@angular/core";
 import { Activity } from "../activity";
 import { Utils } from '../../../utils/utils.module';
@@ -17,7 +18,7 @@ import { Utils } from '../../../utils/utils.module';
   styleUrls: ["./activity-form.component.scss"],
 })
 export class ActivityFormComponent implements OnInit {
-  public activityTypes = Utils.table2array(Activity.ActivityTypes);
+  public activityTypes = Utils.table2array(Activity.ActivityTypes); // FIXME. try changing the order.
   public activityAbouts = Utils.table2array(Activity.ActivityAbouts);
   public activityBankSafes = Utils.table2array(Activity.ActivityBankSafes);
   public currentCampaign = "campaign";
@@ -26,4 +27,10 @@ export class ActivityFormComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+
+  public changeActivityType(event: any)
+  {
+    this.activityModel.activityType = event;
+  }
 }

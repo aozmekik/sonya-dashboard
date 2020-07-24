@@ -4,7 +4,9 @@
       <hr />
       {{ activityModel | json }}
       <hr />
-      <div class="form-group row">
+
+      <ngx-custom-selector rowName="Tip" [selectingList]="activityTypes" (selectedChange)="changeActivityType($event)"></ngx-custom-selector>
+      <!-- <div class="form-group row">
         <label for="typeId" class="label col-sm-3 col-form-label">Tip</label>
         <div class="col-sm-9">
           <nb-select
@@ -20,7 +22,7 @@
             </nb-option>
           </nb-select>
         </div>
-      </div>
+      </div> -->
 
       <div class="form-group row">
         <label for="uyeId" class="label col-sm-3 col-form-label"
