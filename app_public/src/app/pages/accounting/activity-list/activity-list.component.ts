@@ -1,15 +1,18 @@
 import { ActivityEditingWindowComponent } from "./../activity-editing-window/activity-editing-window.component";
 import { Component } from "@angular/core";
 import { LocalDataSource } from "ng2-smart-table";
+import { NbIconLibraries } from '@nebular/theme';
 
 import { ActivitiesData } from "../activities-data";
 import { Router } from "@angular/router";
 import { NbWindowService } from "@nebular/theme";
 import { Activity } from "../activity";
 import { Utils } from '../../../utils/utils.module';
+import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
+import { RowIconComponent } from './activity-type-row-handler/row-icon.component';
 
-// TODO. small icon to tables.
 // TODO. add a selector for campaign.
+// TODO. add a view component.
 
 @Component({
   selector: "ngx-activity-list",
@@ -20,11 +23,15 @@ export class ActivityListComponent {
   constructor(
     private router: Router,
     private windowService: NbWindowService,
+    iconsLibrary: NbIconLibraries
   ) {
     const mydata = this.data.getData();
     this.source.load(mydata);
     // this.settings['columns']['activityType'].editor.config.completer.data = mydata;
+
+    iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
   }
+
 
   source = new LocalDataSource();
   data = new ActivitiesData();
@@ -51,10 +58,8 @@ export class ActivityListComponent {
     columns: {
       activityType: {
         title: "Tip",
-        type: "string",
-        valuePrepareFunction: (value) => {
-          return Activity.ActivityTypes[value];
-        },
+        type: 'custom',
+        renderComponent: RowIconComponent,
         width: "3%",
         filter: {
           type: "list",

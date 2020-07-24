@@ -1,3 +1,4 @@
+import { RowIconComponent } from './activity-list/activity-type-row-handler/row-icon.component';
 import { UtilsModule } from './../../utils/utils.module';
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -15,6 +16,7 @@ import {
   NbRadioModule,
   NbSelectModule,
   NbWindowModule,
+  NbIconModule,
 } from "@nebular/theme";
 import { CommonModule } from "@angular/common";
 import { AccountTypeAddingWindowComponent } from "./account-types/account-type-adding-window/account-type-adding-window.component";
@@ -38,6 +40,7 @@ import { AccountTypesFormComponent } from "./account-types/account-types-form/ac
     NbDatepickerModule,
     ThemeModule,
     NbWindowModule.forChild(),
+    NbIconModule,
   ],
   declarations: [
     ...routedComponents,
@@ -45,10 +48,12 @@ import { AccountTypesFormComponent } from "./account-types/account-types-form/ac
     ActivityEditingWindowComponent,
     AccountTypesFormComponent,
     AccountTypeAddingWindowComponent,
+    RowIconComponent,
   ],
   entryComponents: [
     AccountTypeAddingWindowComponent,
     ActivityEditingWindowComponent,
+    RowIconComponent,
   ],
 })
 export class AccountingModule {}

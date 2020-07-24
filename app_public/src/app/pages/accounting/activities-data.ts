@@ -28,7 +28,7 @@ export class ActivitiesData {
     },
     {
       _id: "590d8dc7a7cb5b8e3f1bfc48",
-      activityType: Activity.Type.INCOME,
+      activityType: Activity.Type.VIRMAN,
       about: Activity.About.CURRENT,
       _date: new Date(),
       scriptNo: "A11234",
@@ -66,7 +66,7 @@ export class ActivitiesData {
     },
     {
       _id: "590d8dc7a7cb5b8e3f1bfc48",
-      activityType: Activity.Type.OUTGO,
+      activityType: Activity.Type.TRANSFER,
       about: Activity.About.CURRENT,
       _date: new Date(),
       scriptNo: "A11234",

@@ -1,3 +1,4 @@
+import { RowIconComponent } from './activity-list/activity-type-row-handler/row-icon.component';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
