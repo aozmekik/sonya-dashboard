@@ -3,7 +3,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Utils } from '../../../../utils/utils.module';
 @Component({
     selector: 'ngx-color',
-    // template: `<div class="ngx-color-class" style.background-color="#f3000e"> Test </div>`,
     templateUrl: "./row-icon.component.html",
     styleUrls: ['./row-icon.component.scss'],
 })
@@ -15,6 +14,13 @@ export class RowIconComponent implements OnInit {
         [Activity.Type.OUTGO]: "arrow-down-c",
         [Activity.Type.TRANSFER]: "arrow-swap",
         [Activity.Type.VIRMAN]: "arrow-swap",
+    };
+
+    public statuses: Utils.IHash = {
+        [Activity.Type.INCOME]: "success",
+        [Activity.Type.OUTGO]: "danger",
+        [Activity.Type.TRANSFER]: "basic",
+        [Activity.Type.VIRMAN]: "basic",
     };
 
     public types = Activity.ActivityTypes;
