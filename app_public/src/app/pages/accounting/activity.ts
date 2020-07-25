@@ -37,7 +37,7 @@ export class Activity {
   _id: string; // mongoDB object id.
   activityType: Activity.Type; // incomes, outgoes, transfer, (also virman).
   about: Activity.About; // member, current (cari), other
-  _date: Date;
+  date: string;
   scriptNo: string; // in turkish, makbuz/fatura no.
   bankSafe: Activity.BankSafe;
   campaign: string;
@@ -56,7 +56,7 @@ export class Activity {
     activity._id = "ID";
     activity.activityType = Activity.Type.INCOME;
     activity.about = Activity.About.MEMBER;
-    activity._date = new Date();
+    activity.date = new Date().toLocaleString();
     activity.scriptNo = "";
     activity.bankSafe = Activity.BankSafe.BANK;
     activity.campaign = "";
