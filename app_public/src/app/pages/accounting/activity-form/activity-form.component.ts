@@ -1,4 +1,3 @@
-import { CustomSelectorComponent } from './../../generic-components/form-rows/custom-selector/custom-selector.component';
 import { Component, OnInit, Input } from "@angular/core";
 import { Activity } from "../activity";
 import { Utils } from '../../../utils/utils.module';
@@ -27,10 +26,4 @@ export class ActivityFormComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
-
-  public changeActivityType(event: any)
-  {
-    this.activityModel.activityType = event;
-  }
 }

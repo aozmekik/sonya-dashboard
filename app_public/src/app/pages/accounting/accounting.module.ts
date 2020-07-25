@@ -1,5 +1,4 @@
-import { GenericComponentsModule } from './../generic-components/form-rows/generic-components.module';
-import { CustomSelectorComponent } from './../generic-components/form-rows/custom-selector/custom-selector.component';
+import { GenericComponentsModule } from '../generic-components/generic-components.module';
 import { RowIconComponent } from './activity-list/activity-type-row-handler/row-icon.component';
 import { UtilsModule } from './../../utils/utils.module';
 import { NgModule } from "@angular/core";

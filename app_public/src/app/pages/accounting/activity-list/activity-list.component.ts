@@ -84,8 +84,7 @@ export class ActivityListComponent {
       },
       _date: {
         title: "\tTarih",
-        type: "Date",
-        valuePrepareFunction: Utils.datePrepareFunction,
+        type: "string",
       },
       bankSafe: {
         title: "Kasa",
