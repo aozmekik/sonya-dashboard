@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'ngx-custom-date-picker',
@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./custom-date-picker.component.scss']
 })
 export class CustomDatePickerComponent implements OnInit {
+  @Output() dateSelectChange: EventEmitter<String> = new EventEmitter<String>();
+  @Input() dateSelect: Date;
 
-  constructor() { }
+  public today: Date;
+  @Input() rowName: string;
+
+  constructor() {
+    this.today = new Date();
+  }
 
   ngOnInit() {
+  }
+
+  public onDateSelectChange(date: Date) {
+    this.dateSelectChange.emit(date.toLocaleDateString());
   }
 
 }

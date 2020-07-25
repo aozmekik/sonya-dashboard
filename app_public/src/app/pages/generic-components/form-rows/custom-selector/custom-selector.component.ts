@@ -9,6 +9,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class CustomSelectorComponent implements OnInit {
   @Input() rowName: string;
   @Input() selectingList: string[];
+  @Input() selected: any;
   @Output() selectedChange = new EventEmitter<any>();
 
 
@@ -17,9 +18,9 @@ export class CustomSelectorComponent implements OnInit {
   ngOnInit() {
   }
 
-  public onSelectedChange(event: any)
+  public onSelectedChange()
   {
-    this.selectedChange.emit(event);
+    this.selectedChange.emit(this.selected);
   }
 
 }

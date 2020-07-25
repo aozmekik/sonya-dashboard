@@ -1,0 +1,38 @@
+<div class="form-group row">
+  <label for="checkId" class="label col-sm-3 col-form-label"
+    >{{rowName}}</label
+  >
+  <div class="col-sm-9">
+    <input
+      type="text"
+      required
+      #scriptNo="ngModel"
+      [pattern]="regexPattern"
+      [class.status-danger]="scriptNo.touched && scriptNo.invalid"
+      [class.is-invalid]="scriptNo.touched && scriptNo.invalid"
+      class="form-control"
+      nbInput
+      fullWidth
+      id="checkId"
+      [placeholder]="rowName"
+      name="scriptNo"
+      [(ngModel)]="data"
+      (change)="onDataChange()"
+    />
+    <div *ngIf="scriptNo.errors && scriptNo.invalid && scriptNo.touched">
+      <div class="text-danger" *ngIf="scriptNo.errors.pattern && alpha && numeric; else elseBlock1">
+        Sadece harf ve rakam içerebilir.
+      </div>
+      <ng-template #elseBlock1>
+      <div class="text-danger" *ngIf="scriptNo.errors.pattern && alpha; else elseBlock2">
+        Sadece harf içerebilir.
+      </div>
+    </ng-template>
+    <ng-template #elseBlock2>
+      <div class="text-danger" *ngIf="scriptNo.errors.pattern && numeric">
+        Sadece rakam içerebilir.
+      </div>
+    </ng-template>
+    </div>
+  </div>
+</div>

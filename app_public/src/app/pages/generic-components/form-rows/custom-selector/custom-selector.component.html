@@ -1,9 +1,10 @@
 <div class="form-group row">
-  <label for="typeId" class="label col-sm-3 col-form-label">{{rowName}}</label>
+  <label for="selectorID" class="label col-sm-3 col-form-label">{{rowName}}</label>
   <div class="col-sm-9">
     <nb-select
-      id="typeId"
-      (selectedChange)="onSelectedChange($event)"
+      id="selectorID"
+      [(selected)]="selected"
+      (selectedChange)="onSelectedChange()"
       status="primary"
     >
       <nb-option

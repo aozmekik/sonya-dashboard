@@ -1,3 +1,9 @@
-<p>
-  custom-date-picker works!
-</p>
+<div class="form-group row">
+  <label for="dateId" class="label col-sm-3 col-form-label">{{rowName}}</label>
+  <div class="col-sm-9">
+    <input nbInput fullWidth name="date" required #date="ngModel" [class.status-danger]="date.touched && date.invalid"
+      [class.is-invalid]="date.touched && date.invalid" placeholder="aa/gün/yıl" contentEditable="false"
+      [readOnly]="true" [nbDatepicker]="formpicker" id="dateId" [(ngModel)]="dateSelect" />
+    <nb-datepicker [max]="today" #formpicker (dateChange)="onDateSelectChange($event)"></nb-datepicker>
+  </div>
+</div>
