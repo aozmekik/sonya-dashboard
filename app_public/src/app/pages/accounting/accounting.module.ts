@@ -2,7 +2,7 @@ import { GenericComponentsModule } from '../generic-components/generic-component
 import { RowIconComponent } from './activity-list/activity-type-row-handler/row-icon.component';
 import { UtilsModule } from './../../utils/utils.module';
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import {
   AccountingRoutingModule,
@@ -40,6 +40,7 @@ import { AccountTypesFormComponent } from "./account-types/account-types-form/ac
     CommonModule,
     NbDatepickerModule,
     ThemeModule,
+    ReactiveFormsModule,
     NbWindowModule.forChild(),
     NbIconModule,
     GenericComponentsModule,

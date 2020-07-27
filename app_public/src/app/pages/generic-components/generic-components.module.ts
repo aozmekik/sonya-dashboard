@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomSelectorComponent } from './form-rows/custom-selector/custom-selector.component';
 import { CustomDatePickerComponent } from './form-rows/custom-date-picker/custom-date-picker.component';
 import { NgModule } from '@angular/core';
@@ -22,6 +22,7 @@ import { CustomInputBoxComponent } from './form-rows/custom-input-box/custom-inp
     FormsModule,
     NbDatepickerModule,
     NbInputModule,
+    ReactiveFormsModule,
   ]
 })
 export class GenericComponentsModule { }
