@@ -9,8 +9,14 @@ export namespace Activity {
     _id: string;
     name: string;
     type: Type;
-    state: boolean; // active or passive.
+    status: Status; // active or passive.
     // kind: string; an uncertain future feature.
+  }
+
+  export const enum Status
+  {
+    ACTIVE,
+    PASSIVE,
   }
 
   export const enum Type {
@@ -65,7 +71,7 @@ export class Activity {
       _id: "ID",
       name: "Tip",
       type: Activity.Type.OUTGO,
-      state: true,
+      status: Activity.Status.ACTIVE,
     };
     activity.comment = "";
     activity.amount = null;
@@ -97,4 +103,9 @@ export class Activity {
     [Activity.BankSafe.BILL]: "Senet",
     [Activity.BankSafe.TLSAFE]: "TL Kasa",
   };
+
+  public static readonly Statuses: Utils.IHash = {
+    [Activity.Status.ACTIVE]: "Aktif",
+    [Activity.Status.PASSIVE]: "Pasif",
+  }
 }

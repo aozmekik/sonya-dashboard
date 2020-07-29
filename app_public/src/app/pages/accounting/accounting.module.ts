@@ -25,6 +25,7 @@ import { ThemeModule } from "../../@theme/theme.module";
 import { ActivityFormComponent } from "./activity-form/activity-form.component";
 import { ActivityEditingWindowComponent } from "./activity-editing-window/activity-editing-window.component";
 import { AccountTypesFormComponent } from "./account-types/account-types-form/account-types-form.component";
+import { AccountTypeEditingWindowComponent } from './account-types/account-type-editing-window/account-type-editing-window.component';
 
 @NgModule({
   imports: [
@@ -51,10 +52,12 @@ import { AccountTypesFormComponent } from "./account-types/account-types-form/ac
     ActivityEditingWindowComponent,
     AccountTypesFormComponent,
     AccountTypeAddingWindowComponent,
+    AccountTypeEditingWindowComponent,
     RowIconComponent,
   ],
   entryComponents: [
     AccountTypeAddingWindowComponent,
+    AccountTypeEditingWindowComponent,
     ActivityEditingWindowComponent,
     RowIconComponent,
   ],

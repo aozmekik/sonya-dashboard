@@ -3,6 +3,7 @@ import { LocalDataSource } from "ng2-smart-table";
 import { Activity } from "../activity";
 import { NbWindowService } from "@nebular/theme";
 import { AccountTypeAddingWindowComponent } from "./account-type-adding-window/account-type-adding-window.component";
+import { AccountTypeEditingWindowComponent } from './account-type-editing-window/account-type-editing-window.component';
 
 @Component({
   selector: "ngx-account-types",
@@ -11,15 +12,15 @@ import { AccountTypeAddingWindowComponent } from "./account-type-adding-window/a
 })
 export class AccountTypesComponent implements OnInit {
   data = [
-    { _id: "A", name: "semih", type: Activity.Type.INCOME, state: true },
-    { _id: "B", name: "yasin", type: Activity.Type.OUTGO, state: false },
+    { _id: "A", name: "semih", type: Activity.Type.INCOME, status: Activity.Status.ACTIVE },
+    { _id: "B", name: "yasin", type: Activity.Type.OUTGO, status: Activity.Status.PASSIVE },
   ];
   source = new LocalDataSource();
   constructor(private windowService: NbWindowService) {
     this.source.load(this.data);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   settings = {
     actions: {
@@ -63,7 +64,16 @@ export class AccountTypesComponent implements OnInit {
    */
   public onCreate(e) {
     this.windowService.open(AccountTypeAddingWindowComponent, {
-      title: `Hesap Tipi Ekle`,
+      title: "Hesap Tipi Ekle",
+    });
+  }
+
+  public onEdit(event) {
+    this.windowService.open(AccountTypeEditingWindowComponent, {
+      title: "Hesap Tipi Düzenle",
+      context:{
+        accountType: event.data
+      }
     });
   }
 }
