@@ -14,21 +14,20 @@ export class ActivityFormComponent implements OnInit {
   public activityAbouts = Utils.table2array(Activity.ActivityAbouts);
   public activityBankSafes = Utils.table2array(Activity.ActivityBankSafes);
 
-  public activityForm: FormGroup;
+  @Input() model: Activity = Activity.default();
+  public form: FormGroup;
+  
   constructor(private formBuilder: FormBuilder) { }
-
-  @Input() activityModel: Activity = Activity.default();
-
   ngOnInit() {
     /* those keys are strict literals and hard-coded in the .html file */
-    this.activityForm = this.formBuilder.group(this.activityModel);
+    this.form = this.formBuilder.group(this.model);
   }
   public onSubmit(): void {
-    console.log(this.activityForm.value);
+    console.log(this.form.value);
   }
 
   public updateDate(event: string)
   {
-    this.activityForm.controls['date'].setValue(event);
+    this.form.controls['date'].setValue(event);
   }
 }

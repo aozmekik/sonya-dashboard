@@ -1,34 +1,34 @@
 <nb-card>
   <nb-card-body>
-    <form [(formGroup)]="activityForm" >
+    <form [(formGroup)]="form" >
       <hr />
-      {{ activityForm.value | json }}
+      {{ form.value | json }}
       <hr />
 
-      <ngx-custom-selector rowName="Tip" [selectingList]="activityTypes" [(formGroup)]="activityForm" formControlName="activityType">
+      <ngx-custom-selector rowName="Tip" [selectingList]="activityTypes" [(formGroup)]="form" formControlName="activityType">
       </ngx-custom-selector>
-      <ngx-custom-selector rowName="Üye/Cari/Diğer" [selectingList]="activityAbouts" [(formGroup)]="activityForm" formControlName="about">
+      <ngx-custom-selector rowName="Üye/Cari/Diğer" [selectingList]="activityAbouts" [(formGroup)]="form" formControlName="about">
       </ngx-custom-selector>
       <ngx-custom-date-picker rowName="Tarih" (dateSelectChange)="updateDate($event)"></ngx-custom-date-picker>
-      <ngx-custom-input-box  rowName="Makbuz/Fatura No" [(formGroup)]="activityForm" formControlName="scriptNo">
+      <ngx-custom-input-box  rowName="Makbuz/Fatura No" [(formGroup)]="form" formControlName="scriptNo">
       </ngx-custom-input-box>
-      <ngx-custom-selector rowName="Kasa" [selectingList]="activityBankSafes" [(formGroup)]="activityForm" formControlName="accountType">
+      <ngx-custom-selector rowName="Kasa" [selectingList]="activityBankSafes" [(formGroup)]="form" formControlName="accountType">
       </ngx-custom-selector>
-      <ngx-custom-selector rowName="Kampanya" [selectingList]="activityBankSafes" [(formGroup)]="activityForm" formControlName="campaign">
+      <ngx-custom-selector rowName="Kampanya" [selectingList]="activityBankSafes" [(formGroup)]="form" formControlName="campaign">
       </ngx-custom-selector>
-      <ngx-custom-input-box  rowName="İsim" [numeric]="false" [(formGroup)]="activityForm" formControlName="name">
+      <ngx-custom-input-box  rowName="İsim" [numeric]="false" [(formGroup)]="form" formControlName="name">
       </ngx-custom-input-box>
-      <ngx-custom-selector rowName="Kasa" [selectingList]="activityBankSafes" [(formGroup)]="activityForm" formControlName="bankSafe" >
+      <ngx-custom-selector rowName="Kasa" [selectingList]="activityBankSafes" [(formGroup)]="form" formControlName="bankSafe" >
       </ngx-custom-selector>
-      <ngx-custom-input-box rowName="Açıklama" [numeric]="false" [alpha]="false" [(formGroup)]="activityForm"
+      <ngx-custom-input-box rowName="Açıklama" [numeric]="false" [alpha]="false" [(formGroup)]="form"
         formControlName="comment">
       </ngx-custom-input-box>
-      <ngx-custom-input-box rowName="Tutar" [alpha]="false" [(formGroup)]="activityForm" formControlName="amount">
+      <ngx-custom-input-box rowName="Tutar" [alpha]="false" [(formGroup)]="form" formControlName="amount">
       </ngx-custom-input-box>
 
       <div class="form-group row">
         <div class="offset-sm-3 col-sm-9">
-          <button (click)="onSubmit()" nbButton status="primary" hero [disabled]="activityForm.invalid">
+          <button (click)="onSubmit()" nbButton status="primary" hero [disabled]="form.invalid">
             Aktiviteyi Ekle
           </button>
         </div>
