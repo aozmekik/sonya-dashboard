@@ -1,14 +1,8 @@
 <div class="form-group row" [formGroup]="formGroup">
   <label class="label col-sm-3 col-form-label">{{rowName}}</label>
   <div class="col-sm-9">
-    <nb-select
-      status="primary"
-      [formControlName]="formControlName"
-    >
-      <nb-option
-        *ngFor="let select of selectingList; let i = index"
-        [value]="i"
-      >
+    <nb-select status="primary" [formControlName]="formControlName">
+      <nb-option *ngFor="let select of selectingList; let i = index" [value]="i">
         {{ select }}
       </nb-option>
     </nb-select>

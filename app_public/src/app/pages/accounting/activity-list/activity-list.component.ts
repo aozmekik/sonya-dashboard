@@ -26,7 +26,6 @@ export class ActivityListComponent {
   ) {
     const mydata = this.data.getData();
     this.source.load(mydata);
-    // this.settings['columns']['activityType'].editor.config.completer.data = mydata;
 
     iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
   }
@@ -157,9 +156,12 @@ export class ActivityListComponent {
   /**
    * creates a form window for to edit the campaign, when edit is clicked.
    */
-  public onEdit() {
+  public onEdit(event) {
     this.windowService.open(ActivityEditingWindowComponent, {
       title: "Hesap Aktivesi Düzenle",
+      context: {
+        activity: event.data
+      }
     });
   }
 }

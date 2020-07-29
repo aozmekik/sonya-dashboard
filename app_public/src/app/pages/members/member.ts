@@ -34,9 +34,9 @@ export class Member {
   gender: Member.Gender;
   job: string;
 
-    public static groups: Utils.IHash = {
-      [Member.Group.COMMITTEE]: "Yönetici Üye",
-      [Member.Group.ACTIVE]: "Aktif Üye",
-      [Member.Group.PASSIVE]: "Pasif Üye",
-    };
+  public static groups: Utils.IHash = {
+    [Member.Group.COMMITTEE]: "Yönetici Üye",
+    [Member.Group.ACTIVE]: "Aktif Üye",
+    [Member.Group.PASSIVE]: "Pasif Üye",
+  };
 }

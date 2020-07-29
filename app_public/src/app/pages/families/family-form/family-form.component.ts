@@ -10,7 +10,7 @@ import { Utils } from '../../../utils/utils.module';
 
 // TODO. add selector for activeness.
 export class FamilyFormComponent implements OnInit {
-  public areas: string[] = Utils.table2array(Family.Areas);
+  public areas: string[] = Utils.keys(Family.Areas);
   @Input() familyModel: Family;
 
   constructor() {}
