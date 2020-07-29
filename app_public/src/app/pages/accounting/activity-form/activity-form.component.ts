@@ -15,6 +15,7 @@ export class ActivityFormComponent implements OnInit {
   public activityBankSafes = Utils.keys(Activity.ActivityBankSafes);
 
   @Input() model: Activity = Activity.default();
+  @Input() buttonName: string;
   public form: FormGroup;
   
   constructor(private formBuilder: FormBuilder) { }

@@ -1,5 +1,4 @@
-import { ActivitiesData } from "./../activities-data";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { NbWindowRef } from "@nebular/theme";
 import { Activity } from "../activity";
 
@@ -9,7 +8,7 @@ import { Activity } from "../activity";
   styleUrls: ["./activity-editing-window.component.scss"],
 })
 export class ActivityEditingWindowComponent implements OnInit {
-  public activity: Activity = new ActivitiesData().getData()[0];
+  @Input() activity: Activity;
 
   constructor(public windowRef: NbWindowRef) {}
 
