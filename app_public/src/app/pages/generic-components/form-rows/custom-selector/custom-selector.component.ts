@@ -1,5 +1,4 @@
-import { Activity } from './../../../accounting/activity';
-import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, forwardRef} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from '@angular/forms';
 
 @Component({

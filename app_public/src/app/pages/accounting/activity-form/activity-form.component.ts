@@ -3,6 +3,7 @@ import { Activity } from "../activity";
 import { Utils } from '../../../utils/utils.module';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
+
 @Component({
   selector: "ngx-activity-form",
   templateUrl: "./activity-form.component.html",
@@ -20,9 +21,7 @@ export class ActivityFormComponent implements OnInit {
 
   ngOnInit() {
     /* those keys are strict literals and hard-coded in the .html file */
-    this.activityForm = this.formBuilder.group(
-      this.activityModel
-    );
+    this.activityForm = this.formBuilder.group(this.activityModel);
   }
   public onSubmit(): void {
     console.log(this.activityForm.value);
