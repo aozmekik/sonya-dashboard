@@ -20,7 +20,7 @@ export namespace Utils {
     return selector;
   }
 
-  export function table2array(table): string[] {
+  export function keys(table): string[] {
     return Object.keys(table).map((key) => table[key]);
   }
 }

@@ -10,7 +10,7 @@ import { Utils } from '../../../utils/utils.module';
 
 // TODO. add selector for activeness.
 export class MemberFormComponent implements OnInit {
-  public groups: string[] = Utils.table2array(Member.groups);
+  public groups: string[] = Utils.keys(Member.groups);
   @Input() memberModel: Member;
 
   constructor() {}

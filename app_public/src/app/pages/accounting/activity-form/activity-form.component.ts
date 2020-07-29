@@ -10,9 +10,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ["./activity-form.component.scss"],
 })
 export class ActivityFormComponent implements OnInit {
-  public activityTypes = Utils.table2array(Activity.ActivityTypes); // FIXME. try changing the order.
-  public activityAbouts = Utils.table2array(Activity.ActivityAbouts);
-  public activityBankSafes = Utils.table2array(Activity.ActivityBankSafes);
+  public activityTypes = Utils.keys(Activity.ActivityTypes); // FIXME. try changing the order.
+  public activityAbouts = Utils.keys(Activity.ActivityAbouts);
+  public activityBankSafes = Utils.keys(Activity.ActivityBankSafes);
 
   @Input() model: Activity = Activity.default();
   public form: FormGroup;
