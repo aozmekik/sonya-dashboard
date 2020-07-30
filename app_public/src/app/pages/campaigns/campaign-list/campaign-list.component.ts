@@ -2,7 +2,7 @@ import { CampaignsData } from "./../campaigns-data";
 import { Component } from "@angular/core";
 import { LocalDataSource } from "ng2-smart-table";
 import { Router } from "@angular/router";
-import { CampaignEditWindowFormComponent } from "../campaign-editing-window/campaign-editing-window.component";
+import { CampaignEditingWindowComponent } from "../campaign-editing-window/campaign-editing-window.component";
 import { NbWindowService } from "@nebular/theme";
 import { Utils } from '../../../utils/utils.module';
 
@@ -93,7 +93,7 @@ export class CampaignListComponent {
    * @param e is the event.
    */
   public onEdit() {
-    this.windowService.open(CampaignEditWindowFormComponent, {
+    this.windowService.open(CampaignEditingWindowComponent, {
       title: "Kampanya Düzenle",
     });
   }

@@ -8,10 +8,12 @@ import { NbWindowRef } from "@nebular/theme";
   templateUrl: "./campaign-editing-window.component.html",
   styleUrls: ["./campaign-editing-window.component.scss"],
 })
-export class CampaignEditWindowFormComponent {
+export class CampaignEditingWindowComponent implements OnInit {
   public campaign: Campaign = CampaignsData.getData()[0];
 
-  constructor(public windowRef: NbWindowRef) {}
+  constructor(public windowRef: NbWindowRef) { }
+  ngOnInit(): void {
+  }
 
   close() {
     this.windowRef.close();
