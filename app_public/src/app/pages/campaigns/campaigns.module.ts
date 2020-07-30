@@ -1,3 +1,4 @@
+import { GenericComponentsModule } from './../generic-components/generic-components.module';
 import { CampaignFormComponent } from "./campaign-form/campaign-form.component";
 import { NgModule } from "@angular/core";
 import {
@@ -17,9 +18,9 @@ import {
   CampaignsRoutingModule,
   routedComponents,
 } from "./campaigns-routing.module";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { CampaignEditWindowFormComponent } from "./campaign-editing-window/campaign-editing-window.component";
+import { CampaignEditingWindowComponent } from "./campaign-editing-window/campaign-editing-window.component";
 
 @NgModule({
   imports: [
@@ -35,13 +36,15 @@ import { CampaignEditWindowFormComponent } from "./campaign-editing-window/campa
     NbSelectModule,
     NbButtonModule,
     CommonModule,
+    ReactiveFormsModule,
     NbWindowModule.forChild(),
+    GenericComponentsModule,
   ],
   declarations: [
     ...routedComponents,
-    CampaignEditWindowFormComponent,
+    CampaignEditingWindowComponent,
     CampaignFormComponent,
   ],
-  entryComponents: [CampaignEditWindowFormComponent],
+  entryComponents: [CampaignEditingWindowComponent],
 })
 export class CampaignsModule {}

@@ -1,3 +1,4 @@
+import { CustomFormComponent } from './../../generic-components/custom-form/custom-form.component';
 import { Component, OnInit, Input } from "@angular/core";
 import { Activity } from "../activity";
 import { Utils } from '../../../utils/utils.module';
@@ -9,29 +10,19 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   templateUrl: "./activity-form.component.html",
   styleUrls: ["./activity-form.component.scss"],
 })
-export class ActivityFormComponent implements OnInit {
-  public activityTypes = Utils.keys(Activity.ActivityTypes); // FIXME. try changing the order.
+export class ActivityFormComponent extends CustomFormComponent<Activity> implements OnInit {
+  public activityTypes = Utils.keys(Activity.ActivityTypes);
   public activityAbouts = Utils.keys(Activity.ActivityAbouts);
   public activityBankSafes = Utils.keys(Activity.ActivityBankSafes);
 
-  @Input() model: Activity = Activity.default();
-  @Input() buttonName: string;
-  @Input() disable: string;
-  public form: FormGroup;
-
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder) {
+    super(formBuilder);
+   }
   ngOnInit() {
-    /* those keys are strict literals and hard-coded in the .html file */
-    this.form = this.formBuilder.group(this.model);
-    if (this.disable) {
-      this.form.controls[this.disable].disable();
-    }
+    super.ngOnInit();
   }
   public onSubmit(): void {
-    console.log(this.form.value);
+    console.log(this.form.value); // FIXME. carefull with disabled fields.
   }
 
-  // public updateDate(event: string) {
-  //   this.form.controls['date'].setValue(event);
-  // }
 }

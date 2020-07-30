@@ -2,13 +2,14 @@ import { Activity } from "./../../activity";
 import { Component, OnInit, Input, Output } from "@angular/core";
 import { Utils } from '../../../../utils/utils.module';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { CustomFormComponent } from '../../../generic-components/custom-form/custom-form.component';
 
 @Component({
   selector: "ngx-account-types-form",
   templateUrl: "./account-types-form.component.html",
   styleUrls: ["./account-types-form.component.scss"],
 })
-export class AccountTypesFormComponent implements OnInit {
+export class AccountTypesFormComponent extends CustomFormComponent<Activity.AccountTypes> implements OnInit {
   public readonly activityTypes = Utils.keys(Activity.ActivityTypes);
   public readonly statuses = Utils.keys(Activity.Statuses);
 
@@ -18,14 +19,13 @@ export class AccountTypesFormComponent implements OnInit {
     type: Activity.Type.OUTGO,
     status: Activity.Status.ACTIVE,
   };
-  @Input() buttonName: string;
 
-  public form: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder) { 
+    super(formBuilder);
+  }
 
   ngOnInit() {
-    /* those keys are strict literals and hard-coded in the .html file */
-    this.form = this.formBuilder.group(this.model);
+    super.ngOnInit();
   }
 
   public onSubmit(): void {
