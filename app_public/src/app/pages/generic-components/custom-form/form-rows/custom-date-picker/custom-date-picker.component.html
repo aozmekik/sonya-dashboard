@@ -1,0 +1,21 @@
+<div class="form-group row" [formGroup]="formGroup">
+  <label class="label col-sm-3 col-form-label">{{rowName}}</label>
+  <div *ngIf="maxToday; else elseBlock">
+    <div class="col-sm-9">
+      <input nbInput fullWidth name="date" [disabled]="disabled" required
+        [class.status-danger]="getData.touched && getData.invalid"
+        [class.is-invalid]="getData.touched && getData.invalid" placeholder="aa/gün/yıl" contentEditable="false"
+        [readOnly]="true" [nbDatepicker]="formpicker" [(ngModel)]="_date" [ngModelOptions]="{standalone: true}" />
+      <nb-datepicker [max]="today" #formpicker (dateChange)="changeDate($event)"></nb-datepicker>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <div class="col-sm-9">
+      <input nbInput fullWidth name="date" [disabled]="disabled" required
+        [class.status-danger]="getData.touched && getData.invalid"
+        [class.is-invalid]="getData.touched && getData.invalid" placeholder="aa/gün/yıl" contentEditable="false"
+        [readOnly]="true" [nbDatepicker]="formpicker" [(ngModel)]="_date" [ngModelOptions]="{standalone: true}" />
+      <nb-datepicker #formpicker (dateChange)="changeDate($event)"></nb-datepicker>
+    </div>
+  </ng-template>
+</div>

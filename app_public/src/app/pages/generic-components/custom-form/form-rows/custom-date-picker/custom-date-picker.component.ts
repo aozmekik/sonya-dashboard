@@ -38,6 +38,7 @@ export class CustomDatePickerComponent implements OnInit, ControlValueAccessor {
 
   @Input() formGroup: FormGroup;
   @Input() formControlName: string;
+  @Input() maxToday: boolean = true;
 
   public _date: Date;
   public today: Date;
