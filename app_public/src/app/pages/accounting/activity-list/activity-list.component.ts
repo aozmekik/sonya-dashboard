@@ -81,7 +81,7 @@ export class ActivityListComponent {
           },
         },
       },
-      _date: {
+      date: {
         title: "\tTarih",
         type: "string",
       },

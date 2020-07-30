@@ -9,7 +9,7 @@
       </ngx-custom-selector>
       <ngx-custom-selector rowName="Üye/Cari/Diğer" [selectingList]="activityAbouts" [(formGroup)]="form" formControlName="about">
       </ngx-custom-selector>
-      <ngx-custom-date-picker rowName="Tarih" (dateSelectChange)="updateDate($event)"></ngx-custom-date-picker>
+      <ngx-custom-date-picker rowName="Tarih" [(formGroup)]="form" formControlName="date"></ngx-custom-date-picker> 
       <ngx-custom-input-box  rowName="Makbuz/Fatura No" [(formGroup)]="form" formControlName="scriptNo">
       </ngx-custom-input-box>
       <ngx-custom-selector rowName="Kasa" [selectingList]="activityBankSafes" [(formGroup)]="form" formControlName="accountType">

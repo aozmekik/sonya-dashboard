@@ -16,19 +16,22 @@ export class ActivityFormComponent implements OnInit {
 
   @Input() model: Activity = Activity.default();
   @Input() buttonName: string;
+  @Input() disable: string;
   public form: FormGroup;
-  
+
   constructor(private formBuilder: FormBuilder) { }
   ngOnInit() {
     /* those keys are strict literals and hard-coded in the .html file */
     this.form = this.formBuilder.group(this.model);
+    if (this.disable) {
+      this.form.controls[this.disable].disable();
+    }
   }
   public onSubmit(): void {
     console.log(this.form.value);
   }
 
-  public updateDate(event: string)
-  {
-    this.form.controls['date'].setValue(event);
-  }
+  // public updateDate(event: string) {
+  //   this.form.controls['date'].setValue(event);
+  // }
 }
