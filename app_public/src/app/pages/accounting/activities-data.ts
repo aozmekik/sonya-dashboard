@@ -1,4 +1,5 @@
 import { Activity } from "./activity"; // TODO. this is going to be a service. will be deleted also.
+import { Status } from '../../@core/data/status';
 
 export class ActivitiesData {
   public static AccountType: [
@@ -20,7 +21,7 @@ export class ActivitiesData {
         _id: "ID",
         name: "selam",
         type: Activity.Type.OUTGO,
-        status: Activity.Status.ACTIVE,
+        status: Status.ACTIVE,
       },
       comment:
         "Lorem ipsum sir color dir amet liranta coreasta simonya malaefti",
@@ -39,7 +40,7 @@ export class ActivitiesData {
         _id: "ID",
         name: "Tip",
         type: Activity.Type.OUTGO,
-        status: Activity.Status.ACTIVE,
+        status: Status.ACTIVE,
       },
       comment:
         "Lorem ipsum sir color dir amet liranta coreasta simonya malaefti",
@@ -58,7 +59,7 @@ export class ActivitiesData {
         _id: "ID",
         name: "Tip",
         type: Activity.Type.OUTGO,
-        status: Activity.Status.ACTIVE,
+        status: Status.ACTIVE,
       },
       comment:
         "Lorem ipsum sir color dir amet liranta coreasta simonya malaefti",
@@ -77,7 +78,7 @@ export class ActivitiesData {
         _id: "ID",
         name: "Tip",
         type: Activity.Type.OUTGO,
-        status: Activity.Status.ACTIVE,
+        status: Status.ACTIVE,
       },
       comment:
         "Lorem ipsum sir color dir amet liranta coreasta simonya malaefti",
@@ -96,7 +97,7 @@ export class ActivitiesData {
         _id: "ID",
         name: "Tip",
         type: Activity.Type.OUTGO,
-        status: Activity.Status.ACTIVE,
+        status: Status.ACTIVE,
       },
       comment:
         "Lorem ipsum sir color dir amet liranta coreasta simonya malaefti",

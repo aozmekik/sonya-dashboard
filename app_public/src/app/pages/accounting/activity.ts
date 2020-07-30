@@ -1,4 +1,5 @@
 import { Utils } from '../../utils/utils.module';
+import { Status } from '../../@core/data/status';
 
 export namespace Activity {
   /**
@@ -11,12 +12,6 @@ export namespace Activity {
     type: Type;
     status: Status; // active or passive.
     // kind: string; an uncertain future feature.
-  }
-
-  export const enum Status
-  {
-    ACTIVE,
-    PASSIVE,
   }
 
   export const enum Type {
@@ -71,7 +66,7 @@ export class Activity {
       _id: "ID",
       name: "Tip",
       type: Activity.Type.OUTGO,
-      status: Activity.Status.ACTIVE,
+      status: Status.ACTIVE,
     };
     activity.comment = "";
     activity.amount = null;
@@ -104,8 +99,4 @@ export class Activity {
     [Activity.BankSafe.TLSAFE]: "TL Kasa",
   };
 
-  public static readonly Statuses: Utils.IHash = {
-    [Activity.Status.ACTIVE]: "Aktif",
-    [Activity.Status.PASSIVE]: "Pasif",
-  }
 }

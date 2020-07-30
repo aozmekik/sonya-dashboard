@@ -4,6 +4,7 @@ import { Activity } from "../activity";
 import { NbWindowService } from "@nebular/theme";
 import { AccountTypeAddingWindowComponent } from "./account-type-adding-window/account-type-adding-window.component";
 import { AccountTypeEditingWindowComponent } from './account-type-editing-window/account-type-editing-window.component';
+import { Status } from '../../../@core/data/status';
 
 @Component({
   selector: "ngx-account-types",
@@ -12,8 +13,8 @@ import { AccountTypeEditingWindowComponent } from './account-type-editing-window
 })
 export class AccountTypesComponent implements OnInit {
   data = [
-    { _id: "A", name: "semih", type: Activity.Type.INCOME, status: Activity.Status.ACTIVE },
-    { _id: "B", name: "yasin", type: Activity.Type.OUTGO, status: Activity.Status.PASSIVE },
+    { _id: "A", name: "semih", type: Activity.Type.INCOME, status: Status.ACTIVE },
+    { _id: "B", name: "yasin", type: Activity.Type.OUTGO, status: Status.PASSIVE },
   ];
   source = new LocalDataSource();
   constructor(private windowService: NbWindowService) {
