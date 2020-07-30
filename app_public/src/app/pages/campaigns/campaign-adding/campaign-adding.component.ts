@@ -8,9 +8,10 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./campaign-adding.component.scss"],
 })
 export class CampaignAddingComponent implements OnInit {
-  public campaign: Campaign = CampaignsData.getData()[0];
+  public campaign: Campaign = Campaign.default();
 
   constructor() {}
+
 
   ngOnInit() {}
 }

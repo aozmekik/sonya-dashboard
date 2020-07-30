@@ -1,8 +1,8 @@
+import { statusValues } from './../../../@core/data/status';
 import { CustomFormComponent } from './../../generic-components/custom-form/custom-form.component';
-import { CampaignsData } from '../campaigns-data';
 import { Campaign } from '../campaign';
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'ngx-campaign-form',
@@ -12,12 +12,15 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 
 // TODO. add selector for activeness.
 export class CampaignFormComponent extends CustomFormComponent<Campaign> implements OnInit {
+  public statuses = statusValues;
+  
   constructor(public formBuilder: FormBuilder) {
     super(formBuilder);
   }
 
   ngOnInit() {
     super.ngOnInit();
+    console.log(this.statuses);
   }
 
   onSubmit(): void {

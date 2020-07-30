@@ -57,14 +57,12 @@ export class CampaignListComponent {
       startingDate: {
         title: "Başlangıç Tarihi",
         type: "string",
-        valuePrepareFunction: Utils.datePrepareFunction,
       },
       dueDate: {
         title: "Bitiş Tarihi",
         type: "string",
-        valuePrepareFunction: Utils.datePrepareFunction,
       },
-      active: {
+      status: {
         title: "Aktif",
         type: "string",
       },
@@ -92,9 +90,14 @@ export class CampaignListComponent {
    * creates a form window when + is clicked.
    * @param e is the event.
    */
-  public onEdit() {
+  public onEdit(event) {
     this.windowService.open(CampaignEditingWindowComponent, {
       title: "Kampanya Düzenle",
+      context: {
+        campaign: event.data
+      }
     });
   }
+
+
 }

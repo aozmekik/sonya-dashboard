@@ -1,4 +1,5 @@
 import { Campaign } from "./campaign";
+import { Status } from '../../@core/data/status';
 
 export class CampaignsData {
   private static campaigns: Campaign[] = [
@@ -8,9 +9,9 @@ export class CampaignsData {
       share: 50,
       goal: 1000,
       total: 200,
-      startingDate: new Date(),
-      dueDate: new Date(),
-      active: true,
+      startingDate: new Date().toLocaleString(),
+      dueDate: new Date().toLocaleString(),
+      status: Status.ACTIVE,
     },
     {
       _id: "id",
@@ -18,9 +19,9 @@ export class CampaignsData {
       share: 60,
       goal: 1000,
       total: 200,
-      startingDate: new Date(),
-      dueDate: new Date(),
-      active: true,
+      startingDate: new Date().toLocaleString(),
+      dueDate: new Date().toLocaleString(),
+      status: Status.ACTIVE,
     },
   ];
 

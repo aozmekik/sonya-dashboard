@@ -1,5 +1,5 @@
 import { CampaignsData } from "../campaigns-data";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Campaign } from "../campaign";
 import { NbWindowRef } from "@nebular/theme";
 
@@ -9,7 +9,7 @@ import { NbWindowRef } from "@nebular/theme";
   styleUrls: ["./campaign-editing-window.component.scss"],
 })
 export class CampaignEditingWindowComponent implements OnInit {
-  public campaign: Campaign = CampaignsData.getData()[0];
+  @Input() campaign: Campaign;
 
   constructor(public windowRef: NbWindowRef) { }
   ngOnInit(): void {

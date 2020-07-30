@@ -3,26 +3,28 @@
  * this is the very early prototype of the campaign model.
  */
 
+import { Status } from '../../@core/data/status';
+
 export class Campaign {
   _id: string;
   name: string;
   share: number; // share price.
   goal: number; // goal price for this campaign.
   total: number; // how many shares has been taken.
-  startingDate: Date;
-  dueDate: Date;
-  active: boolean;
+  startingDate: string;
+  dueDate: string;
+  status: Status;
 
   public static default(): Campaign {
     const campaign = {
       _id: "id123",
-      name: "campaign#1",
-      share: 200,
-      goal: 1000,
-      total: 2,
-      startingDate: new Date(),
-      dueDate: new Date(),
-      active: true,
+      name: "",
+      share: null,
+      goal: null,
+      total: null,
+      startingDate: new Date().toLocaleString(),
+      dueDate: new Date().toLocaleDateString(),
+      status: Status.ACTIVE,
     };
     return campaign;
   }

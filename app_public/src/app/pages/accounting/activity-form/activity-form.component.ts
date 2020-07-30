@@ -2,7 +2,7 @@ import { CustomFormComponent } from './../../generic-components/custom-form/cust
 import { Component, OnInit, Input } from "@angular/core";
 import { Activity } from "../activity";
 import { Utils } from '../../../utils/utils.module';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
