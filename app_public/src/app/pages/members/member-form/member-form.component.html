@@ -1,118 +1,43 @@
 <nb-card>
-<nb-card-body>
-    <form #userForm="ngForm">
+  <nb-card-body>
+    <form [(formGroup)]="form">
       <hr />
-      {{ memberModel | json }}
+      {{ form.value | json }}
       <hr />
 
-      <!-- member name -->
+
+      <ngx-custom-input-box rowName="İsim" [numeric]="false" [(formGroup)]="form" formControlName="name">
+      </ngx-custom-input-box>
+      <ngx-custom-date-picker rowName="Kayıt Tarihi" [(formGroup)]="form" formControlName="regDate">
+      </ngx-custom-date-picker>
+      <ngx-custom-selector rowName="Tip" [selectingList]="groups" [(formGroup)]="form" formControlName="group">
+      </ngx-custom-selector>
+      <ngx-custom-selector rowName="Durum" [selectingList]="statuses" [(formGroup)]="form"
+        formControlName="active">
+      </ngx-custom-selector>
+      <ngx-custom-input-box rowName="Telefon" [minLength]="11" [maxLength]="11" [alpha]="false" [(formGroup)]="form" formControlName="telephone">
+      </ngx-custom-input-box>
+      <ngx-custom-input-box rowName="Adres" [(formGroup)]="form" formControlName="address">
+      </ngx-custom-input-box>
+      <ngx-custom-selector rowName="Bölge" [selectingList]="areas" [(formGroup)]="form"
+        formControlName="activeArea">
+      </ngx-custom-selector>
+      <ngx-custom-input-box rowName="Yaş" [alpha]="false" [(formGroup)]="form" formControlName="age">
+      </ngx-custom-input-box>
+      <ngx-custom-selector rowName="Cinsiyet" [selectingList]="genders" [(formGroup)]="form"
+        formControlName="gender">
+      </ngx-custom-selector>
+      <ngx-custom-input-box rowName="Meslek" [numeric]="false" [(formGroup)]="form" formControlName="job">
+      </ngx-custom-input-box>
+
       <div class="form-group row">
-        <label for="nameId" class="label col-sm-3 col-form-label">İsim</label>
-        <div class="col-sm-9">
-          <input
-            type="text"
-            required
-            #name="ngModel"
-            pattern="^[a-zA-Z öçşiğüÖÇŞİĞÜ]+$"
-            [class.status-danger]="name.touched && name.invalid"
-            class="form-control"
-            [class.is-invalid]="name.touched && name.invalid"
-            nbInput
-            fullWidth
-            id="nameId"
-            name="name"
-            placeholder="Kampanya İsmi"
-            [(ngModel)]="memberModel.name"
-          />
-          <div *ngIf="name.errors && name.invalid && name.touched">
-            <div class="text-danger" *ngIf="name.errors.pattern">
-              Sadece harf içerebilir.
-            </div>
-          </div>
+        <div class="offset-sm-3 col-sm-9">
+          <button (click)="onSubmit()" nbButton status="primary" hero [disabled]="form.invalid">
+            {{buttonName}}
+          </button>
         </div>
       </div>
 
-      <!-- member registration  date -->
-      <div class="form-group row">
-        <label for="startingDateId" class="label col-sm-3 col-form-label"
-          >Kayıt Tarihi</label
-        >
-        <div class="col-sm-9">
-          <input
-            nbInput
-            fullWidth
-            name="startingDate"
-            required
-            #startingDate="ngModel"
-            [class.status-danger]="startingDate.touched && startingDate.invalid"
-            [class.is-invalid]="startingDate.touched && startingDate.invalid"
-            placeholder="aa/gün/yıl"
-            contentEditable="false"
-            [readOnly]="true"
-            [nbDatepicker]="startingDatePicker"
-            id="startingDateId"
-            [(ngModel)]="memberModel.regDate"
-          />
-          <nb-datepicker #startingDatePicker></nb-datepicker>
-        </div>
-      </div>
-
-      <!-- member unregistration date -->
-      <div class="form-group row">
-        <label for="dueDateId" class="label col-sm-3 col-form-label"
-          >Tarih</label
-        >
-        <div class="col-sm-9">
-          <input
-            nbInput
-            fullWidth
-            name="startingDate"
-            required
-            #startingDate="ngModel"
-            [class.status-danger]="startingDate.touched && startingDate.invalid"
-            [class.is-invalid]="startingDate.touched && startingDate.invalid"
-            placeholder="aa/gün/yıl"
-            contentEditable="false"
-            [readOnly]="true"
-            [nbDatepicker]="dueDatePicker"
-            id="dueDateId"
-            [(ngModel)]="memberModel.unregDate"
-          />
-          <nb-datepicker #dueDatePicker></nb-datepicker>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label for="typeId" class="label col-sm-3 col-form-label">Tip</label>
-        <div class="col-sm-9">
-          <nb-select
-            id="typeId"
-            [(selected)]="memberModel.group"
-            status="primary"
-          >
-            <nb-option *ngFor="let group of groups; let i = index" [value]="i">
-              {{ group }}
-            </nb-option>
-          </nb-select>
-        </div>
-      </div>
-
-      <!-- membership activity -->
-      <div class="form-group row">
-        <label for="activityId" class="label col-sm-3 col-form-label"
-          >Durum</label
-        >
-        <div class="col-sm-9">
-          <nb-select
-            id="stateId"
-            [(selected)]="memberModel.active"
-            status="primary"
-          >
-            <nb-option [value]="true">Aktif</nb-option>
-            <nb-option [value]="false">Pasif</nb-option>
-          </nb-select>
-        </div>
-      </div>
     </form>
   </nb-card-body>
 </nb-card>

@@ -1,5 +1,6 @@
+import { GenericComponentsModule } from './../generic-components/generic-components.module';
 import { MemberViewingWindowComponent } from './member-viewing-window/member-viewing-window.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 import { MemberFormComponent } from "./member-form/member-form.component";
 import { NgModule } from "@angular/core";
@@ -36,6 +37,8 @@ import { ThemeModule } from "../../@theme/theme.module";
     NbSelectModule,
     NbButtonModule,
     NbWindowModule.forChild(),
+    GenericComponentsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     ...routedComponents,
