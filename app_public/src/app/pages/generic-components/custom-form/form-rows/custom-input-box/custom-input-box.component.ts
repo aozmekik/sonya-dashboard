@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges, forwardRef, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormGroup, ControlValueAccessor, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ngx-custom-input-box',
@@ -27,6 +27,8 @@ export class CustomInputBoxComponent implements OnInit, ControlValueAccessor {
   private readonly regexAlphaNumeric: string = "^[A-Za-z0-9]+$";
   private readonly regexAlpha: string = "^[a-zA-Z öçşiğüÖÇŞİĞÜ]+$";
   private readonly regexNumeric: string = "^[0-9]+$";
+  @Input() minLength: number = 1;
+  @Input() maxLength: number = 64;
 
 
   constructor(private cd: ChangeDetectorRef) { }
@@ -40,14 +42,23 @@ export class CustomInputBoxComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.alpha && this.numeric)
+    if (this.alpha && this.numeric) {
       this.regexPattern = this.regexAlphaNumeric;
-    else if (this.alpha)
+      this.formGroup.controls[this.formControlName].setValidators([Validators.minLength(this.minLength), Validators.maxLength(this.maxLength)]);
+    }
+    else if (this.alpha) {
       this.regexPattern = this.regexAlpha;
-    else if (this.numeric)
+      this.formGroup.controls[this.formControlName].setValidators([Validators.minLength(this.minLength), Validators.maxLength(this.maxLength)]);
+    }
+    else if (this.numeric) {
       this.regexPattern = this.regexNumeric;
+      this.formGroup.controls[this.formControlName].setValidators([Validators.minLength(this.minLength), Validators.maxLength(this.maxLength)]);
+    }
     else
+    {
       this.regexPattern = "";
+      this.formGroup.controls[this.formControlName].setValidators([Validators.minLength(this.minLength), Validators.maxLength(this.maxLength)]);
+    }
   }
 
   get getData(): any {
