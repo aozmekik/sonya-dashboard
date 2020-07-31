@@ -1,5 +1,6 @@
 import { Member } from "./member";
 import { Family } from '../families/family';
+import { Status } from '../../@core/data/status';
 
 // only for representative frontend. will be deleted soon.
 export class MembersData {
@@ -9,7 +10,7 @@ export class MembersData {
       name: "member_name#1",
       regDate: new Date(),
       unregDate: new Date(),
-      active: true,
+      active: Status.ACTIVE,
       group: Member.Group.ACTIVE,
       telephone: 12344569,
       address: "address#1",
@@ -23,7 +24,7 @@ export class MembersData {
       name: "member_name#2",
       regDate: new Date(),
       unregDate: new Date(),
-      active: true,
+      active: Status.ACTIVE,
       group: Member.Group.ACTIVE,
       telephone: 12344569,
       address: "address#2",

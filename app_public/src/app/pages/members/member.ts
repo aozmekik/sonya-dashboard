@@ -1,5 +1,6 @@
 import { Utils } from '../../utils/utils.module';
 import { Family } from '../families/family';
+import { Status } from '../../@core/data/status';
 
 export namespace Member {
   export const enum Group {
@@ -23,7 +24,7 @@ export class Member {
   name: string;
   regDate: Date; /* date of registration. */
   unregDate: Date; /* date of unregistration. */
-  active: boolean; /* current status of the membership. */
+  active: Status; /* current status of the membership. */
   group: Member.Group; /* group of the member. */
 
   /* some private fields for members */
@@ -39,4 +40,9 @@ export class Member {
     [Member.Group.ACTIVE]: "Aktif Üye",
     [Member.Group.PASSIVE]: "Pasif Üye",
   };
+
+  public static genders: Utils.IHash = {
+    [Member.Gender.MALE]: "Erkek",
+    [Member.Gender.FEMALE]: "Kadın",
+  }
 }

@@ -12,7 +12,7 @@ import { FormBuilder } from '@angular/forms';
 
 // TODO. add selector for activeness.
 export class CampaignFormComponent extends CustomFormComponent<Campaign> implements OnInit {
-  public statuses = statusValues;
+  public readonly statuses = statusValues;
   
   constructor(public formBuilder: FormBuilder) {
     super(formBuilder);
