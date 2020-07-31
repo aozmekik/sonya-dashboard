@@ -4,18 +4,21 @@
     <input type="text" required [pattern]="regexPattern" [class.status-danger]="getData.touched && getData.invalid"
       [class.is-invalid]="getData.touched && getData.invalid" class="form-control" nbInput fullWidth
       [placeholder]="rowName" name="formControl" [formControlName]="formControlName" />
-    <div *ngIf="getData.errors && getData.invalid && getData.touched">
+    <div class="text-danger" *ngIf="getData && getData.errors && (getData.dirty || getData.touched)">
+      <div *ngIf="getData.errors.required"><small>Bu alanın doldurulması gerekli.</small></div>
+      <div *ngIf="getData.errors.minlength"><small>En az {{minLength}} karakter olabilir.</small></div>
+      <div *ngIf="getData.errors.maxlength"><small>En çok {{maxLength}} karakter olabilir. </small></div>
       <div class="text-danger" *ngIf="getData.errors.pattern && alpha && numeric; else elseBlock1">
-        Sadece harf ve rakam içerebilir.
+      <small>Sadece harf ve rakam içerebilir.</small>
       </div>
       <ng-template #elseBlock1>
         <div class="text-danger" *ngIf="getData.errors.pattern && alpha; else elseBlock2">
-          Sadece harf içerebilir.
+          <small>Sadece harf içerebilir.</small>
         </div>
       </ng-template>
       <ng-template #elseBlock2>
         <div class="text-danger" *ngIf="getData.errors.pattern && numeric">
-          Sadece rakam içerebilir.
+          <small> Sadece rakam içerebilir. </small>
         </div>
       </ng-template>
     </div>
