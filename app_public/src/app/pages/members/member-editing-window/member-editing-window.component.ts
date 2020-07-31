@@ -1,5 +1,4 @@
-import { MembersData } from "./../members-data";
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { NbWindowRef } from "@nebular/theme";
 import { Member } from "../member";
 
@@ -9,7 +8,7 @@ import { Member } from "../member";
   styleUrls: ["./member-editing-window.component.scss"],
 })
 export class MemberEditingWindowComponent {
-  public member: Member = MembersData.getData()[0];
+  @Input() member: Member;
 
   constructor(public windowRef: NbWindowRef) {}
 

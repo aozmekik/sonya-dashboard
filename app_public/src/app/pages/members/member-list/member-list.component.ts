@@ -84,8 +84,7 @@ export class MemberListComponent {
     this.router.navigateByUrl("/pages/members/member-adding");
   }
 
-  onSelect(event)
-  {
+  onSelect(event) {
     this.windowService.open(MemberViewingWindowComponent, {
       title: "Üye Bilgileri",
       context: {
@@ -98,9 +97,14 @@ export class MemberListComponent {
    * creates an editing form window when edit is clicked.
    * @param e is the event.
    */
-  public onEdit() {
+  public onEdit(event) {
     this.windowService.open(MemberEditingWindowComponent, {
       title: "Üye Düzenle",
+      context: {
+        member: event.data,
+      }
     });
   }
+
+
 }
