@@ -1,6 +1,5 @@
 import { Stash } from '../stash';
-import { InventoryData } from '../inventory-data';
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { NbWindowRef } from "@nebular/theme";
 
 @Component({
@@ -9,7 +8,7 @@ import { NbWindowRef } from "@nebular/theme";
   styleUrls: ["./stash-editing-window.component.scss"],
 })
 export class StashEditingWindowFormComponent {
-  public stash: Stash = InventoryData.getData()[0];
+  @Input() stash: Stash;
 
   constructor(public windowRef: NbWindowRef) {}
 

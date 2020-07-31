@@ -10,7 +10,6 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./campaign-form.component.scss']
 })
 
-// TODO. add selector for activeness.
 export class CampaignFormComponent extends CustomFormComponent<Campaign> implements OnInit {
   public readonly statuses = statusValues;
   
@@ -20,10 +19,10 @@ export class CampaignFormComponent extends CustomFormComponent<Campaign> impleme
 
   ngOnInit() {
     super.ngOnInit();
-    console.log(this.statuses);
   }
 
   onSubmit(): void {
+    console.log(this.form.value);
   }
 }
 

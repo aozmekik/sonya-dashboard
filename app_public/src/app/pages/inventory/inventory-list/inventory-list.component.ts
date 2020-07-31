@@ -60,16 +60,19 @@ export class InventoryListComponent {
    * links to member adding page.
    */
   onCreate() {
-    this.router.navigateByUrl("/pages/members/member-adding");
+    this.router.navigateByUrl("/pages/inventory/stash-adding");
   }
 
   /**
    * creates an editing form window when edit is clicked.
    * @param e is the event.
    */
-  public onEdit() {
+  public onEdit(event) {
     this.windowService.open(StashEditingWindowFormComponent, {
       title: "Stok Düzenle",
+      context: {
+        stash: event.data,
+      }
     });
   }
 }
