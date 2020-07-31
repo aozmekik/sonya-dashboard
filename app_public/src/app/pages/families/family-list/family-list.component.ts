@@ -44,13 +44,11 @@ export class FamilyListComponent {
       regDate: {
         title: "Kayıt Tarihi",
         type: "string",
-        valuePrepareFunction: Utils.datePrepareFunction,
 
       },
       unregDate: {
         title: "Kayıt Durdurulma Tarihi",
         type: "string",
-        valuePrepareFunction: Utils.datePrepareFunction,
 
       },
       memberCount: {
@@ -95,9 +93,12 @@ export class FamilyListComponent {
    * creates an editing form window when edit is clicked.
    * @param e is the event.
    */
-  public onEdit() {
+  public onEdit(event) {
     this.windowService.open(FamilyEditingWindowFormComponent, {
       title: "Aile Düzenle",
+      context: {
+        family: event.data
+      }
     });
   }
 }
