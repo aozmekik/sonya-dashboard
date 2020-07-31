@@ -31,13 +31,15 @@ export namespace Family {
 export class Family {
   _id: string;
   name: string; /* family surname. */
-  regDate: Date; /* date of registration. */
-  unregDate: Date; /* date of unregistration. */
+  regDate: string; /* date of registration. */
+  unregDate: string; /* date of unregistration. */
   memberCount: number; /* number of members in the family. */
   area: Family.Area; /* the region where the family lives. */
+  address: string; /* home address of the family */
   registeredMember: string; /* person who registered the family. */
-  status: Family.Status;
+  status: Family.Status; /* aid and identification status about the family.*/
   members: Family.FamilyMember[]; /* members living in the family */
+  comment: string; /* additional information about the family */
 
   public static readonly Areas: Utils.IHash = {
     [Family.Area.ANATOLIA]: "Anadolu",

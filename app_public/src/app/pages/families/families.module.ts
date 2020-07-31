@@ -1,4 +1,5 @@
-import { FormsModule } from "@angular/forms";
+import { GenericComponentsModule } from './../generic-components/generic-components.module';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -36,6 +37,8 @@ import { FamilyEditingWindowFormComponent } from './family-editing-window/family
     NbSelectModule,
     NbButtonModule,
     NbWindowModule.forChild(),
+    GenericComponentsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     ...routedComponents,
