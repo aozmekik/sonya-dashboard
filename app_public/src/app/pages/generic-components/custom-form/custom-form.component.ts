@@ -17,13 +17,9 @@ export abstract class CustomFormComponent<T> implements OnInit {
   ngOnInit() {
     /* those keys are strict literals and hard-coded in the .html file */
     this.form = this.formBuilder.group(this.model);
-    if (this.disable) {
+    if (this.disable)
       for (let d of this.disable)
-      {
-        console.log(d);
         this.form.controls[d].disable();
-      }
-    }
   }
 
   abstract onSubmit(): void;
