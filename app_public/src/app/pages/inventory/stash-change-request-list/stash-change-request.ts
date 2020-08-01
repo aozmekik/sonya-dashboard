@@ -50,7 +50,7 @@ export class StashChangeRequest {
     _id: string;
     change: Stash; // changing stash.
     take: number; // taking request.
-    date: Date; // time of the request.
+    date: string; // time of the request.
     changer: Member; // owner of the request
     group: StashChangeRequest.Group; // group of the owner.
     status: StashChangeRequest.Status;

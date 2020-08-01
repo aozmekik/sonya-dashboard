@@ -22,8 +22,8 @@ export namespace Member {
 export class Member {
   _id: string;
   name: string;
-  regDate: Date; /* date of registration. */
-  unregDate: Date; /* date of unregistration. */
+  regDate: string; /* date of registration. */
+  unregDate: string; /* date of unregistration. */
   active: Status; /* current status of the membership. */
   group: Member.Group; /* group of the member. */
 

@@ -35,7 +35,7 @@ export class StashChangeRequestListComponent {
       cancelButtonContent: '<i class="nb-close"></i>',
     },
     delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
+      deleteButtonContent: '<i class="nb-close"></i>',
     },
     columns: {
       change: {
@@ -52,16 +52,11 @@ export class StashChangeRequestListComponent {
       date: {
         title: "Alınma Tarihi",
         type: "string",
-        valuePrepareFunction: (value) => {
-          return value.toLocaleDateString();
-        },
+        
       },
       changer: {
         title: "Alan Üye",
         type: "string",
-        valuePrepareFunction: (value: Member) => {
-          return value.name;
-        },
       },
     },
     

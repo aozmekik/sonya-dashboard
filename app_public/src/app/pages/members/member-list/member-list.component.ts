@@ -4,7 +4,6 @@ import { LocalDataSource } from "ng2-smart-table";
 import { Router } from "@angular/router";
 import { NbWindowService } from "@nebular/theme";
 import { MemberEditingWindowComponent } from "../member-editing-window/member-editing-window.component";
-import { Utils } from '../../../utils/utils.module';
 import { Member } from '../member';
 import { MemberViewingWindowComponent } from '../member-viewing-window/member-viewing-window.component';
 
@@ -45,13 +44,10 @@ export class MemberListComponent {
       regDate: {
         title: "Kayıt Tarihi",
         type: "string",
-        valuePrepareFunction: Utils.datePrepareFunction,
-
       },
       unregDate: {
         title: "Kayıt Durdurulma Tarihi",
         type: "string",
-        valuePrepareFunction: Utils.datePrepareFunction,
       },
       group: {
         title: "Grup",

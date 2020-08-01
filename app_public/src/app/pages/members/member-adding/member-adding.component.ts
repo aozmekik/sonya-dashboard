@@ -8,7 +8,7 @@ import { Component, OnInit} from "@angular/core";
   styleUrls: ["./member-adding.component.scss"],
 })
 export class MemberAddingComponent implements OnInit {
-  public member: Member = MembersData.getData()[0];
+  public member: Member = MembersData.getData()[0]; /* try to add new Member */
 
   constructor() {}
 

@@ -8,8 +8,8 @@ export class MembersData {
     {
       _id: "id",
       name: "member name a",
-      regDate: new Date(),
-      unregDate: new Date(),
+      regDate: new Date().toLocaleString(),
+      unregDate: new Date().toLocaleString(),
       active: Status.ACTIVE,
       group: Member.Group.ACTIVE,
       telephone: 12345678911,
@@ -22,8 +22,8 @@ export class MembersData {
     {
       _id: "id",
       name: "member name b",
-      regDate: new Date(),
-      unregDate: new Date(),
+      regDate: new Date().toLocaleString(),
+      unregDate: new Date().toLocaleString(),
       active: Status.ACTIVE,
       group: Member.Group.ACTIVE,
       telephone: 12345678911,
