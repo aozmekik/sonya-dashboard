@@ -1,0 +1,51 @@
+<nb-card style="width:600px;">
+  <nb-card-body>
+    <form #userForm="ngForm">
+      <ng-container *ngTemplateOutlet="row; context: {label: 'İsim', value: family.name}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt', value: family.regDate}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Aile Üye Sayısı', value: family.memberCount}">
+      </ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Bölge', value: family.area}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Adres', value: family.address}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt Eden Üye', value: family.registeredMember}">
+      </ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Durum', value: family.status}"></ng-container>
+      <!-- <ng-container *ngTemplateOutlet="row; context: {label: 'Durum', value: family.activeArea | area}"></ng-container> -->
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Açıklama', value: family.comment}"></ng-container>
+      <div class="row show-grid"></div>      
+      <div class="row show-grid">
+        <label class="label col-sm-3 col-form-label">Aile Üyeleri: </label>
+        <div class="col-sm-9 label col-form-label">
+        <nb-card size="tiny" style="width:160px;height:110px;">
+            <nb-list>
+              <nb-list-item *ngFor="let member of family.members; let i=index">
+                <div class="row show-grid">
+                  <label class="label col-form-label"></label>
+                  <div class="col-sm-12 label col-form-label">
+                    <div>{{member.name}}, {{member.age}}</div>
+                  </div>
+                </div>
+              </nb-list-item>
+            </nb-list>
+        </nb-card>
+        </div>
+      </div>
+
+
+      <!-- <div *ngFor="let member of family.members; let i=index">
+        <ng-container *ngTemplateOutlet="row; context:{label: 'Aile Üyesi ' + i.toString(), value: member.name + ', ' + member.age.toString()}"></ng-container>
+     </div> -->
+
+      <ng-template #row let-label="label" let-value="value">
+        <div class="row show-grid">
+          <label class="label col-sm-3 col-form-label">{{label}}: </label>
+          <div class="col-sm-9 label col-form-label">
+            <div>{{value}}</div>
+          </div>
+        </div>
+      </ng-template>
+
+
+    </form>
+  </nb-card-body>
+</nb-card>
