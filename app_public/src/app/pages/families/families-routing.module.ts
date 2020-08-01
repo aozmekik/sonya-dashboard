@@ -1,3 +1,4 @@
+import { FieldActivityListComponent } from './field-activity-list/field-activity-list.component';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
@@ -18,6 +19,10 @@ const routes: Routes = [
         path: "family-adding",
         component: FamilyAddingComponent,
       },
+      {
+        path: "field-activity-list",
+        component: FieldActivityListComponent
+      }
     ],
   },
 ];

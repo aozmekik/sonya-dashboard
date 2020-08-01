@@ -105,6 +105,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: "Aile Girişi",
         link: "/pages/families/family-adding",
       },
+      {
+        title: "Saha Hareketleri",
+        link: "/pages/families/field-activity-list"
+      }
     ],
   },
 
