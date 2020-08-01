@@ -1,4 +1,4 @@
-import { FamiliesData } from './../families-data';
+import { FamiliesData } from '../families-data';
 import { Component, OnInit} from "@angular/core";
 import { Family } from '../family';
 

@@ -1,3 +1,4 @@
+import { FamilyViewingWindowComponent } from './family-viewing-window/family-viewing-window.component';
 import { GenericComponentsModule } from './../generic-components/generic-components.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Ng2SmartTableModule } from "ng2-smart-table";
@@ -17,10 +18,12 @@ import {
   NbInputModule,
   NbIconModule,
   NbCardModule,
+  NbListModule,
 } from "@nebular/theme";
 import { ThemeModule } from "../../@theme/theme.module";
 import { FamilyFormComponent } from './family-form/family-form.component';
 import { FamilyEditingWindowFormComponent } from './family-editing-window/family-editing-window.component';
+import { FieldActivityListComponent } from './field-activity-list/field-activity-list.component';
 
 @NgModule({
   imports: [
@@ -36,6 +39,7 @@ import { FamilyEditingWindowFormComponent } from './family-editing-window/family
     NbRadioModule,
     NbSelectModule,
     NbButtonModule,
+    NbListModule,
     NbWindowModule.forChild(),
     GenericComponentsModule,
     ReactiveFormsModule,
@@ -43,12 +47,15 @@ import { FamilyEditingWindowFormComponent } from './family-editing-window/family
   declarations: [
     ...routedComponents,
     FamilyEditingWindowFormComponent,
+    FamilyViewingWindowComponent,
     FamilyFormComponent,
+    FieldActivityListComponent,
   ],
   exports: [
     FamilyEditingWindowFormComponent,
+    FamilyViewingWindowComponent,
     FamilyFormComponent,
   ],
-  entryComponents: [FamilyEditingWindowFormComponent],
+  entryComponents: [FamilyEditingWindowFormComponent, FamilyViewingWindowComponent],
 })
 export class FamiliesModule {}

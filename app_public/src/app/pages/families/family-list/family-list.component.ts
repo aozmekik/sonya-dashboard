@@ -1,3 +1,4 @@
+import { FamilyViewingWindowComponent } from './../family-viewing-window/family-viewing-window.component';
 import { FamilyEditingWindowFormComponent } from './../family-editing-window/family-editing-window.component';
 import { FamiliesData } from './../families-data';
 import { Component } from "@angular/core";
@@ -13,7 +14,7 @@ import { Utils } from '../../../utils/utils.module';
   styleUrls: ["./family-list.component.scss"],
 })
 export class FamilyListComponent {
-  constructor(private router: Router, private windowService: NbWindowService) {
+  constructor(public router: Router, public windowService: NbWindowService) {
     const mydata = FamiliesData.getData();
     this.source.load(mydata);
   }
@@ -43,11 +44,6 @@ export class FamilyListComponent {
       },
       regDate: {
         title: "Kayıt Tarihi",
-        type: "string",
-
-      },
-      unregDate: {
-        title: "Kayıt Durdurulma Tarihi",
         type: "string",
 
       },
@@ -101,4 +97,14 @@ export class FamilyListComponent {
       }
     });
   }
+
+  onSelect(event) {
+    this.windowService.open(FamilyViewingWindowComponent, {
+      title: "Aile Bilgileri",
+      context: {
+        family: event.data
+      }
+    });
+  }
+
 }

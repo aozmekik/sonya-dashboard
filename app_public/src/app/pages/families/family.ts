@@ -32,7 +32,6 @@ export class Family {
   _id: string;
   name: string; /* family surname. */
   regDate: string; /* date of registration. */
-  unregDate: string; /* date of unregistration. */
   memberCount: number; /* number of members in the family. */
   area: Family.Area; /* the region where the family lives. */
   address: string; /* home address of the family */
