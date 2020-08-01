@@ -1,83 +1,26 @@
 <nb-card>
   <nb-card-body>
-    <form #userForm="ngForm">
-      <div class="row show-grid">
-        <label for="nameId" class="label col-sm-3 col-form-label">İsim: </label>
-        <div class="col-sm-9 label col-form-label">
-          <div>{{member.name}}</div>
-        </div>
-      </div>
+    <form #userForm="ngForm">  
+      <ng-container *ngTemplateOutlet="row; context: {label: 'İsim', value: member.name}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt', value: member.regDate}"></ng-container>      
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt Silme', value: member.unregDate}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Durum', value: member.active}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Grup', value: member.group}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Telefon', value: member.telephone}"></ng-container>    
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Adres', value: member.address}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Bölge', value: member.activeArea | area}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Yaş', value: member.age}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Cinsiyet', value: member.gender}"></ng-container>      
+      <ng-container *ngTemplateOutlet="row; context: {label: 'İş', value: member.job}"></ng-container>
 
-      <div class="row show-grid">
-        <label for="nameId" class="label col-sm-3 col-form-label">Kayıt: </label>
-        <div class="col-sm-9 label col-form-label">
-          <div>{{member.regDate | date:'medium' }}</div>
+      <ng-template #row let-label="label" let-value="value">
+        <div class="row show-grid">
+          <label for="nameId" class="label col-sm-3 col-form-label">{{label}}: </label>
+          <div class="col-sm-9 label  col-form-label">
+            <div>{{value}}</div>
+          </div>
         </div>
-      </div>
-
-      <div class="row show-grid">
-        <label for="nameId" class="label col-sm-3 col-form-label">Kayıt Silme: </label>
-        <div class="col-sm-9 label col-form-label">
-          <div>{{member.unregDate | date:'medium' }}</div>
-        </div>
-      </div>
-
-      <div class="row show-grid">
-        <label for="nameId" class="label col-sm-3 col-form-label">Aktif: </label>
-        <div class="col-sm-9 label col-form-label">
-          <div>{{member.activeArea}}</div>
-        </div>
-      </div>
-
-      <div class="row show-grid">
-        <label for="nameId" class="label col-sm-3 col-form-label">Grup: </label>
-        <div class="col-sm-9 label  col-form-label">
-          <div>{{member.group | memberGroup}}</div>
-        </div>
-      </div>
-
-      <div class="row show-grid">
-        <label for="nameId" class="label col-sm-3 col-form-label">Telefon: </label>
-        <div class="col-sm-9 label  col-form-label">
-          <div>{{member.telephone}}</div>
-        </div>
-      </div>
-
-      <div class="row show-grid">
-        <label for="nameId" class="label col-sm-3 col-form-label">Adres: </label>
-        <div class="col-sm-9 label  col-form-label">
-          <div>{{member.address}}</div>
-        </div>
-      </div>
-
-      <div class="row show-grid">
-        <label for="nameId" class="label col-sm-3 col-form-label">Bölge: </label>
-        <div class="col-sm-9 label col-form-label">
-          <div>{{member.activeArea | area}}</div>
-        </div>
-      </div>
-
-      <div class="row show-grid">
-        <label for="nameId" class="label col-sm-3 col-form-label">Yaş: </label>
-        <div class="col-sm-9 label col-form-label">
-          <div>{{member.age}}</div>
-        </div>
-      </div>
-
-      <div class="row show-grid">
-        <label for="nameId" class="label col-sm-3 col-form-label">Cinsiyet: </label>
-        <div class="col-sm-9 label col-form-label">
-          <div>{{member.gender}}</div>
-        </div>
-      </div>
-
-      <div class="row show-grid">
-        <label for="nameId" class="label col-sm-3 col-form-label">İş: </label>
-        <div class="col-sm-9 label  col-form-label">
-          <div>{{member.job}}</div>
-        </div>
-      </div>
-
+     </ng-template>
 
 
     </form>
