@@ -29,6 +29,8 @@ export class CustomInputBoxComponent implements OnInit, ControlValueAccessor {
   // private readonly regexNumeric: string = "^[0-9]+$";
   @Input() minLength: number = 1;
   @Input() maxLength: number = 64;
+  public maxNumber: number;
+  public minNumber: number;
 
 
   constructor(private cd: ChangeDetectorRef) { }
@@ -48,9 +50,9 @@ export class CustomInputBoxComponent implements OnInit, ControlValueAccessor {
     else if (this.alpha)
       this.regexPattern = this.regexAlpha;
     else if (this.numeric) {
-      const maxNumber = +"9".repeat(this.maxLength); /* <maxLength>-digits largest number */
-      const minNumber = +("1" + "0".repeat(this.minLength - 1)); /* <maxLength>-digits smallest number */
-      this.formGroup.controls[this.formControlName].setValidators([Validators.min(minNumber), Validators.max(maxNumber)]);
+      this.maxNumber = +"9".repeat(this.maxLength); /* <maxLength>-digits largest number */
+      this.minNumber = +("1" + "0".repeat(this.minLength - 1)); /* <maxLength>-digits smallest number */
+      this.formGroup.controls[this.formControlName].setValidators([Validators.min(this.minNumber), Validators.max(this.maxNumber)]);
     }
     else
       this.regexPattern = "";

@@ -14,8 +14,8 @@
       <div *ngIf="getData.errors.required"><small>Bu alanın doldurulması gerekli.</small></div>
       <div *ngIf="getData.errors.minlength"><small>En az {{minLength}} karakter olabilir.</small></div>
       <div *ngIf="getData.errors.maxlength"><small>En çok {{maxLength}} karakter olabilir. </small></div>
-      <div *ngIf="getData.errors.min"><small>En az {{minLength}} haneli olabilir.</small></div>
-      <div *ngIf="getData.errors.max"><small>En çok {{maxLength}} haneli olabilir. </small></div>
+      <div *ngIf="getData.errors.min"><small>En az {{minNumber}} olabilir.</small></div>
+      <div *ngIf="getData.errors.max"><small>En çok {{maxNumber}} olabilir. </small></div>
       <div class="text-danger" *ngIf="getData.errors.pattern && alpha && numeric; else elseBlock1">
         <small>Sadece harf ve rakam içerebilir.</small>
       </div>
