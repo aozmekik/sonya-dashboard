@@ -4,11 +4,11 @@
       <ng-container *ngTemplateOutlet="row; context: {label: 'İsim', value: member.name}"></ng-container>
       <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt', value: member.regDate}"></ng-container>      
       <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt Silme', value: member.unregDate}"></ng-container>
-      <ng-container *ngTemplateOutlet="row; context: {label: 'Durum', value: member.active}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Durum', value: member.status}"></ng-container>
       <ng-container *ngTemplateOutlet="row; context: {label: 'Grup', value: member.group}"></ng-container>
       <ng-container *ngTemplateOutlet="row; context: {label: 'Telefon', value: member.telephone}"></ng-container>    
       <ng-container *ngTemplateOutlet="row; context: {label: 'Adres', value: member.address}"></ng-container>
-      <ng-container *ngTemplateOutlet="row; context: {label: 'Bölge', value: member.activeArea | area}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Bölge', value: member.area | area}"></ng-container>
       <ng-container *ngTemplateOutlet="row; context: {label: 'Yaş', value: member.age}"></ng-container>
       <ng-container *ngTemplateOutlet="row; context: {label: 'Cinsiyet', value: member.gender}"></ng-container>      
       <ng-container *ngTemplateOutlet="row; context: {label: 'İş', value: member.job}"></ng-container>
