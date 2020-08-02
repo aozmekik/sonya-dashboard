@@ -51,4 +51,22 @@ export class Family {
     [Family.Status.UNAIDED]: "Yardım Edilmedi",
     [Family.Status.UNFIT]: "Uygun Görülmedi",
   };
+
+
+  public static default(): Family {
+    const family = {
+      _id: "id123",
+      name: null,
+      regDate: new Date().toLocaleString(),
+      memberCount: null,
+      status: this.Status.UNIDENTIFIED,
+      telephone: null,
+      address: null,
+      area: Family.Area.ANATOLIA,
+      registeredMember: null,
+      members: null,
+      comment: null
+    };
+    return family;
+  }
 }

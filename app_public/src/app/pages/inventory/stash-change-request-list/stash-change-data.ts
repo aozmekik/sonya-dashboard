@@ -16,18 +16,20 @@ export class StashChangeData {
       change: InventoryData.getData()[0],
       take: 2,
       date: new Date().toLocaleString(),
-      changer: MembersData.getData()[0],
+      changer: MembersData.getData()[0].name,
       group: StashChangeRequest.Group.MEMBER,
       status: StashChangeRequest.Status.UNTOUCHED,
+      reason: "reason1",
     },
     {
       _id: "id",
       change:  InventoryData.getData()[1],
       take: 5,
       date: new Date().toLocaleString(),
-      changer: MembersData.getData()[1],
+      changer: MembersData.getData()[1].name,
       group: StashChangeRequest.Group.MEMBER,
       status: StashChangeRequest.Status.UNTOUCHED,
+      reason: "reason2",
     },
   ];
 

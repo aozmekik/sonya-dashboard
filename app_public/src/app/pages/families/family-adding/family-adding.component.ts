@@ -8,7 +8,7 @@ import { Family } from '../family';
   styleUrls: ["./family-adding.component.scss"],
 })
 export class FamilyAddingComponent implements OnInit {
-  public family: Family = FamiliesData.getData()[0];
+  public family: Family = Family.default();
 
   constructor() {}
 

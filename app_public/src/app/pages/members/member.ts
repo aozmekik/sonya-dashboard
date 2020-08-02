@@ -24,13 +24,13 @@ export class Member {
   name: string;
   regDate: string; /* date of registration. */
   unregDate: string; /* date of unregistration. */
-  active: Status; /* current status of the membership. */
+  status: Status; /* current status of the membership. */
   group: Member.Group; /* group of the member. */
 
   /* some private fields for members */
   telephone: number;
   address: string;
-  activeArea: Family.Area; // TODO. change the place of area.
+  area: Family.Area; // TODO. change the place of area.
   age: number;
   gender: Member.Gender;
   job: string;
@@ -44,5 +44,23 @@ export class Member {
   public static genders: Utils.IHash = {
     [Member.Gender.MALE]: "Erkek",
     [Member.Gender.FEMALE]: "Kadın",
+  }
+
+  public static default(): Member {
+    const member = {
+      _id: "id123",
+      name: null,
+      regDate: new Date().toLocaleString(),
+      unregDate: null,
+      status: Status.ACTIVE,
+      group: this.Group.COMMITTEE,
+      telephone: null,
+      address: null,
+      area: Family.Area.ANATOLIA,
+      age: null,
+      gender: this.Gender.MALE,
+      job: null,
+    };
+    return member;
   }
 }

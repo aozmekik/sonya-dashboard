@@ -56,7 +56,7 @@ export class MemberListComponent {
           return Member.groups[value];
         },
       },
-      active: {
+      status: {
         title: "Aktif",
         type: "string",
       },

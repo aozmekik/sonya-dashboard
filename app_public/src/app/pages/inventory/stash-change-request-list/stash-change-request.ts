@@ -1,5 +1,4 @@
 import { Stash } from '../stash';
-import { Member } from '../../members/member';
 
 export namespace StashChangeRequest {
     export const enum Group {
@@ -51,7 +50,8 @@ export class StashChangeRequest {
     change: Stash; // changing stash.
     take: number; // taking request.
     date: string; // time of the request.
-    changer: Member; // owner of the request
+    changer: string; // owner of the request
     group: StashChangeRequest.Group; // group of the owner.
     status: StashChangeRequest.Status;
+    reason: string;
 }

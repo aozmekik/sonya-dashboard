@@ -27,4 +27,13 @@ export class Stash {
   _id: string;
   name: string; // name of the item category. this should be very repsentative.
   total: number; // how many items inside category.
+
+
+  public static default(): Stash {
+    return {
+      _id: "id",
+      name: null,
+      total: null,
+    }
+  }
 }

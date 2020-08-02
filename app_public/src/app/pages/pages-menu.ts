@@ -1,7 +1,8 @@
 import { NbMenuItem } from "@nebular/theme";
 
-// dashboard's language is turkish, therefore titles will also be in turkish.
-// to prevent complications, paths are also kept in turkish.
+/* dashboard's language is turkish, therefore titles will also be in turkish.
+** to prevent consistency on code, paths are not kept as turkish. 
+**/
 
 export const MENU_ITEMS: NbMenuItem[] = [
   // TODO. consider integrating. cameras.
@@ -89,6 +90,25 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: "Stok Hareketleri",
         link: "/pages/inventory/stash-change-request-list",
+      }
+    ],
+  },
+
+  {
+    title: "İhtiyaçlar",
+    icon: "layout-outline",
+    children: [
+      {
+        title: "İhtiyaç Listesi",
+        link: "/pages/needs/need-list",
+      },
+      {
+        title: "İhtiyaç Girişi",
+        link: "/pages/needs/need-adding",
+      },
+      {
+        title: "İhtiyaç Hareketleri",
+        link: "/pages/needs/need-request-list",
       }
     ],
   },

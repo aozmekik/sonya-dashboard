@@ -1,5 +1,4 @@
 import { Stash } from '../stash';
-import { InventoryData } from "../inventory-data";
 import { Component, OnInit} from "@angular/core";
 
 @Component({
@@ -8,7 +7,7 @@ import { Component, OnInit} from "@angular/core";
   styleUrls: ["./stash-adding.component.scss"],
 })
 export class StashAddingComponent implements OnInit {
-  public stash: Stash = InventoryData.getData()[0];
+  public stash: Stash = Stash.default();
 
   constructor() {}
 
