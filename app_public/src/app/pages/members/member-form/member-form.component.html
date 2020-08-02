@@ -13,14 +13,14 @@
       <ngx-custom-selector rowName="Tip" [selectingList]="groups" [(formGroup)]="form" formControlName="group">
       </ngx-custom-selector>
       <ngx-custom-selector rowName="Durum" [selectingList]="statuses" [(formGroup)]="form"
-        formControlName="active">
+        formControlName="status">
       </ngx-custom-selector>
       <ngx-custom-input-box rowName="Telefon" [minLength]="11" [maxLength]="11" [alpha]="false" [(formGroup)]="form" formControlName="telephone">
       </ngx-custom-input-box>
       <ngx-custom-input-box rowName="Adres" [(formGroup)]="form" formControlName="address">
       </ngx-custom-input-box>
       <ngx-custom-selector rowName="Bölge" [selectingList]="areas" [(formGroup)]="form"
-        formControlName="activeArea">
+        formControlName="area">
       </ngx-custom-selector>
       <ngx-custom-input-box rowName="Yaş" [alpha]="false" [(formGroup)]="form" formControlName="age">
       </ngx-custom-input-box>

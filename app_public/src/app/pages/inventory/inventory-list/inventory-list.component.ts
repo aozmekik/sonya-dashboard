@@ -11,7 +11,7 @@ import { StashEditingWindowFormComponent } from "../stash-editing-window/stash-e
   styleUrls: ["./inventory-list.component.scss"],
 })
 export class InventoryListComponent {
-  constructor(private router: Router, private windowService: NbWindowService) {
+  constructor(public router: Router, public windowService: NbWindowService) {
     const mydata = InventoryData.getData();
     this.source.load(mydata);
   }

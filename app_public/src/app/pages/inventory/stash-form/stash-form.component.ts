@@ -10,8 +10,6 @@ import { CustomFormComponent } from '../../generic-components/custom-form/custom
 })
 
 export class StashFormComponent extends CustomFormComponent<Stash> implements OnInit {
-
-
   constructor(public formBuilder: FormBuilder) {
     super(formBuilder);
   }
