@@ -17,6 +17,8 @@
       </ngx-custom-selector>
       <ngx-custom-input-box rowName="Açıklama" [(formGroup)]="form" formControlName="comment">
       </ngx-custom-input-box>
+      <ngx-custom-input-box rowName="Gelir" [alpha]="false" [(formGroup)]="form" formControlName="income">
+      </ngx-custom-input-box>
 
       <ngx-custom-input-box rowName="Aile Üye Sayısı" [maxLength]="2" [alpha]="false" [(formGroup)]="form"
         formControlName="memberCount">

@@ -39,6 +39,7 @@ export class Family {
   status: Family.Status; /* aid and identification status about the family.*/
   members: Family.FamilyMember[]; /* members living in the family */
   comment: string; /* additional information about the family */
+  income: number; /* total income of the family */
 
   public static readonly Areas: Utils.IHash = {
     [Family.Area.ANATOLIA]: "Anadolu",
@@ -65,7 +66,8 @@ export class Family {
       area: Family.Area.ANATOLIA,
       registeredMember: null,
       members: null,
-      comment: null
+      comment: null,
+      income: null,
     };
     return family;
   }

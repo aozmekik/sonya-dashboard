@@ -13,7 +13,8 @@ export class FamiliesData {
       registeredMember: "member1",
       status: Family.Status.UNAIDED,
       members: [{name: "membera", age:12}, {name: "memberb", age:6}],
-      comment: "comment1"
+      comment: "comment1",
+      income: 500,
     },
     {
       _id: "id",
@@ -25,7 +26,8 @@ export class FamiliesData {
       registeredMember: "member2",
       status: Family.Status.UNIDENTIFIED,
       members: [{name: "membera", age:40}, {name: "memberb", age:12}, {name: "memberc", age:12}],
-      comment: "comment2"
+      comment: "comment2",
+      income: 100,
     },
   ];
 

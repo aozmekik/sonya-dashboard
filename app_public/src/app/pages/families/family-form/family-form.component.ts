@@ -41,6 +41,7 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
       'status': new FormControl(this.model.status),
       'comment': new FormControl(this.model.comment),
       'members': new FormArray([]),
+      'income': new FormControl(this.model.income),
     });
 
     this.memberCount.valueChanges

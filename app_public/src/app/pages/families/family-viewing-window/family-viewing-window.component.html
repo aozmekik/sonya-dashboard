@@ -10,8 +10,8 @@
       <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt Eden Üye', value: family.registeredMember}">
       </ng-container>
       <ng-container *ngTemplateOutlet="row; context: {label: 'Durum', value: family.status}"></ng-container>
-      <!-- <ng-container *ngTemplateOutlet="row; context: {label: 'Durum', value: family.activeArea | area}"></ng-container> -->
       <ng-container *ngTemplateOutlet="row; context: {label: 'Açıklama', value: family.comment}"></ng-container>
+      <ng-container *ngTemplateOutlet="row; context: {label: 'Gelir', value: family.income}"></ng-container>
       <div class="row show-grid"></div>      
       <div class="row show-grid">
         <label class="label col-sm-3 col-form-label">Aile Üyeleri: </label>
