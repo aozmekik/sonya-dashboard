@@ -18,7 +18,7 @@ export class FamiliesData {
     },
     {
       _id: "id",
-      name: "family_name#2",
+      name: "family_name",
       regDate: new Date().toLocaleString(),
       memberCount: 3,
       area: Family.Area.EUROPE,
