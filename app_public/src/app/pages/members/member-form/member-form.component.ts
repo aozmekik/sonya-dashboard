@@ -5,6 +5,7 @@ import { Utils } from '../../../utils/utils.module';
 import { CustomFormComponent } from '../../generic-components/custom-form/custom-form.component';
 import { statusValues } from '../../../@core/data/status';
 import { Family } from '../../families/family';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: "ngx-member-form",
@@ -20,16 +21,12 @@ export class MemberFormComponent extends CustomFormComponent<Member> implements 
   public readonly genders: string[] = Utils.keys(Member.genders);
 
 
-  constructor(public formBuilder: FormBuilder) {
-    super(formBuilder);
+  constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService) {
+    super(formBuilder, toastrService);
   }
 
   ngOnInit() { 
     super.ngOnInit();
     this.form.controls['unregDate'].disable();
-  }
-
-  onSubmit(): void {
-    console.log(this.form.value);
   }
 }

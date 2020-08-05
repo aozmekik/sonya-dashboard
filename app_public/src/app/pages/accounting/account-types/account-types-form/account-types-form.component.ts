@@ -5,6 +5,7 @@ import { Utils } from '../../../../utils/utils.module';
 import { FormBuilder } from '@angular/forms';
 import { CustomFormComponent } from '../../../generic-components/custom-form/custom-form.component';
 import { Status } from '../../../../@core/data/status';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: "ngx-account-types-form",
@@ -22,15 +23,11 @@ export class AccountTypesFormComponent extends CustomFormComponent<Activity.Acco
     status: Status.ACTIVE,
   };
 
-  constructor(public formBuilder: FormBuilder) { 
-    super(formBuilder);
+  constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService) {
+    super(formBuilder, toastrService);
   }
 
   ngOnInit() {
     super.ngOnInit();
-  }
-
-  public onSubmit(): void {
-    console.log(this.form.value);
   }
 }

@@ -5,6 +5,7 @@ import { Utils } from '../../../utils/utils.module';
 import { CustomFormComponent } from '../../generic-components/custom-form/custom-form.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: "ngx-family-form",
@@ -25,8 +26,8 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
 
   private destroy$ = new Subject();
 
-  constructor(public formBuilder: FormBuilder) {
-    super(formBuilder);
+  constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService) {
+    super(formBuilder, toastrService);
   }
 
   ngOnInit() {
@@ -72,10 +73,6 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
 
   ngOnDestroy() {
     this.destroy$.next();
-  }
-
-  onSubmit(): void {
-    console.log(this.form.value);
   }
 
   generateMemberForm() {

@@ -3,6 +3,7 @@ import { CustomFormComponent } from './../../generic-components/custom-form/cust
 import { Campaign } from '../campaign';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-campaign-form',
@@ -13,16 +14,12 @@ import { FormBuilder } from '@angular/forms';
 export class CampaignFormComponent extends CustomFormComponent<Campaign> implements OnInit {
   public readonly statuses = statusValues;
   
-  constructor(public formBuilder: FormBuilder) {
-    super(formBuilder);
+  constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService) {
+    super(formBuilder, toastrService);
   }
 
   ngOnInit() {
     super.ngOnInit();
-  }
-
-  onSubmit(): void {
-    console.log(this.form.value);
   }
 }
 

@@ -1,5 +1,4 @@
-import { FamiliesData } from './../families-data';
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { NbWindowRef } from "@nebular/theme";
 import { Family } from '../family';
 
@@ -9,7 +8,7 @@ import { Family } from '../family';
   styleUrls: ["./family-editing-window.component.scss"],
 })
 export class FamilyEditingWindowFormComponent {
-  public family: Family = FamiliesData.getData()[0];
+  @Input() family: Family;
 
   constructor(public windowRef: NbWindowRef) {}
 

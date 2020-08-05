@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Activity } from "../activity";
 import { Utils } from '../../../utils/utils.module';
 import { FormBuilder } from '@angular/forms';
+import { NbToastrService } from '@nebular/theme';
 
 
 @Component({
@@ -15,14 +16,12 @@ export class ActivityFormComponent extends CustomFormComponent<Activity> impleme
   public activityAbouts = Utils.keys(Activity.ActivityAbouts);
   public activityBankSafes = Utils.keys(Activity.ActivityBankSafes);
 
-  constructor(public formBuilder: FormBuilder) {
-    super(formBuilder);
-   }
+  constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService) {
+    super(formBuilder, toastrService);
+  }
   ngOnInit() {
     super.ngOnInit();
   }
-  public onSubmit(): void {
-    console.log(this.form.value); // FIXME. carefull with disabled fields.
-  }
+
 
 }
