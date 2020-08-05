@@ -5,12 +5,12 @@ export class InventoryData {
   private static inventory: Stash[] = [
     {
       _id: "id",
-      name: "stash#1",
+      name: "stash name a",
       total: 400,
     },
     {
       _id: "id",
-      name: "stash#2",
+      name: "stash name b",
       total: 100,
     },
   ];
