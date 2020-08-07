@@ -1,4 +1,4 @@
-import { OnInit, Input } from '@angular/core';
+import { OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService, NbGlobalPositionStrategy } from '@nebular/theme';
 
@@ -8,6 +8,7 @@ export abstract class CustomFormComponent<T> implements OnInit {
   @Input() model: T;
   @Input() buttonName: string;
   @Input() disable: string[];
+  @Output() submit: EventEmitter<boolean> = new EventEmitter<boolean>();
   public form: FormGroup;
 
   public readonly types: NbComponentStatus[] = [
@@ -25,6 +26,7 @@ export abstract class CustomFormComponent<T> implements OnInit {
     hasIcon: true, /* an insignificant detail */
     position: NbGlobalPhysicalPosition.TOP_RIGHT, /* toast will be on top-right */
     preventDuplicates: false, /* duplicate is possible */
+    toastClass: null,
   };
 
   constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService) { }
@@ -37,6 +39,11 @@ export abstract class CustomFormComponent<T> implements OnInit {
         this.form.controls[d].disable();
   }
 
+  public setClass(style: string)
+  {
+    this.config.toastClass = style;
+  }
+
   public showToast(type: NbComponentStatus, title: string, body: string) {
     this.config.status = type;
     this.toastrService.show(body, title, this.config);
@@ -46,6 +53,7 @@ export abstract class CustomFormComponent<T> implements OnInit {
     console.log(this.form.value); // FIXME. carefull with disabled fields.
     this.showToast(this.types[1], 'İşlem Başarılı!',
       `${this.buttonName}me İşlemi Başarı İle Gerçekleştirildi!`);
+    this.submit.emit(true);
   }
 
 

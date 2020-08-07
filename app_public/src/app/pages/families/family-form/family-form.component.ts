@@ -66,9 +66,12 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
         }
       });
 
-    this.model.members.forEach(member => {
-      this.members.push(this.formBuilder.group({ name: member.name, age: member.age }))
-    });
+    if (this.model.members) {
+      this.model.members.forEach(member => {
+        this.members.push(this.formBuilder.group({ name: member.name, age: member.age }))
+      });
+    }
+
   }
 
   ngOnDestroy() {
@@ -78,15 +81,14 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
   generateMemberForm() {
     this.members.clear();
     let count;
-    if (this.model.members)
-    {
+    if (this.model.members) {
       count = this.memberCount.value >= this.model.members.length ?
-      this.memberCount.value - this.model.members.length :
-      this.memberCount.value;
+        this.memberCount.value - this.model.members.length :
+        this.memberCount.value;
     }
     else
       count = this.memberCount.value;
-    
+
     if (this.memberCount.value <= 99) {
       for (let x = 0; x < count; x++) {
         this.members.push(this.createMember());

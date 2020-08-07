@@ -1,4 +1,3 @@
-import { CampaignsData } from "../campaigns-data";
 import { Component, OnInit, Input } from "@angular/core";
 import { Campaign } from "../campaign";
 import { NbWindowRef } from "@nebular/theme";
@@ -15,7 +14,7 @@ export class CampaignEditingWindowComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  close() {
+  close(event) {
     this.windowRef.close();
   }
 }

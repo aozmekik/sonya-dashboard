@@ -12,7 +12,7 @@ export class FamilyEditingWindowFormComponent {
 
   constructor(public windowRef: NbWindowRef) {}
 
-  close() {
+  close(event) {
     this.windowRef.close();
   }
 }

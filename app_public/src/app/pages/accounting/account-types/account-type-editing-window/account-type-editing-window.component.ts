@@ -15,7 +15,7 @@ export class AccountTypeEditingWindowComponent implements OnInit {
 
   ngOnInit() {}
 
-  close() {
+  close(event) {
     this.windowRef.close();
   }
   

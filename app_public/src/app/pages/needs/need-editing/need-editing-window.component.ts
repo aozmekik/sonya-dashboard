@@ -13,7 +13,7 @@ export class NeedEditingWindowFormComponent {
   constructor(public windowRef: NbWindowRef) {
   }
 
-  close() {
+  close(event) {
     this.windowRef.close();
   }
 }
