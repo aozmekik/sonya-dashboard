@@ -5,7 +5,7 @@ export class CampaignsData {
   private static campaigns: Campaign[] = [
     {
       _id: "id",
-      name: "campaign1",
+      name: "campaign a",
       share: 50,
       goal: 1000,
       total: 200,
@@ -15,7 +15,7 @@ export class CampaignsData {
     },
     {
       _id: "id",
-      name: "campaign2",
+      name: "campaign b",
       share: 60,
       goal: 1000,
       total: 200,
