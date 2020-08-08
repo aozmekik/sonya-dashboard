@@ -51,7 +51,7 @@ export abstract class CustomFormComponent<T> implements OnInit {
 
   public onSubmit(): void {
     console.log(this.form.value); // FIXME. carefull with disabled fields.
-    this.showToast(this.types[1], 'İşlem Başarılı!',
+    this.showToast(this.types[0], 'İşlem Başarılı!',
       `${this.buttonName}me İşlemi Başarı İle Gerçekleştirildi!`);
     this.submit.emit(true);
   }
