@@ -1,4 +1,5 @@
 import { Utils } from '../../utils/utils.module';
+import { Member } from '../members/member';
 
 export namespace Family {
 
@@ -16,10 +17,54 @@ export namespace Family {
     UNFIT, /* the family was identified and help was deemed unsuitable */
   }
 
+  export const enum Body
+  {
+    XS,
+    S,
+    M,
+    L,
+    XL,
+    XXL,
+  }
+
   export interface FamilyMember
   {
+    idNo: number;
     name: string;
-    age: number; 
+    birthyear: number;
+    gender: Member.Gender;
+    job: string;
+    income: number;
+    body: Family.Body;
+    shoe: number;
+    disease: string;
+  }
+
+  /* records of the corporations that helped this family */
+  export interface Income
+  {
+    name: string; /* name of the organization */
+    amount: number; /* amount helped */
+  }
+
+  /* educational records of children in the family */
+  export interface Education
+  {
+    name: string;
+    school: string;
+    grade: number;
+  }
+
+  export interface Outgo
+  {
+    name: string;
+    amount: number;
+  }
+
+  export interface Bill
+  {
+    name: string;
+    contract: number; /* mukavele no */
   }
 
 }
@@ -31,6 +76,7 @@ export namespace Family {
 export class Family {
   _id: string;
   name: string; /* family surname. */
+  nation: Member.Nation; /* family nationality */
   regDate: string; /* date of registration. */
   memberCount: number; /* number of members in the family. */
   area: Family.Area; /* the region where the family lives. */
@@ -38,8 +84,11 @@ export class Family {
   registeredMember: string; /* person who registered the family. */
   status: Family.Status; /* aid and identification status about the family.*/
   members: Family.FamilyMember[]; /* members living in the family */
+  incomes: Family.Income[]; /* organizations where the family receives assistance */
+  educations: Family.Education[]; /* educational status of children in the family */
+  outgoes: Family.Outgo[]; /* family expenses */
+  bills: Family.Bill[]; /* family bills */
   comment: string; /* additional information about the family */
-  income: number; /* total income of the family */
 
   public static readonly Areas: Utils.IHash = {
     [Family.Area.ANATOLIA]: "Anadolu",
@@ -53,11 +102,20 @@ export class Family {
     [Family.Status.UNFIT]: "Uygun Görülmedi",
   };
 
+  public static readonly bodies: Utils.IHash = {
+    [Family.Body.XS]: "XS",
+    [Family.Body.S]: "S",
+    [Family.Body.M]: "M",
+    [Family.Body.L]: "L",
+    [Family.Body.XL]: "XL",
+    [Family.Body.XXL]: "XXL",
+  }
 
   public static default(): Family {
     const family = {
       _id: "id123",
       name: null,
+      nation: Member.Nation.Syrian,
       regDate: new Date().toLocaleString(),
       memberCount: null,
       status: this.Status.UNIDENTIFIED,
@@ -67,7 +125,15 @@ export class Family {
       registeredMember: null,
       members: null,
       comment: null,
-      income: null,
+      incomes: null,
+      educations: null,
+      outgoes: null,
+      bills: [
+        {name:"Elektrik", contract: null}, 
+        {name:"Su", contract: null},
+        {name:"Doğalgaz", contract: null},
+        {name:"Diğer", contract: null},
+      ]
     };
     return family;
   }
