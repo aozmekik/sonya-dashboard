@@ -13,6 +13,41 @@ export namespace Member {
     MALE,
     FEMALE
   }
+
+  export const enum Nation {
+    Turk,
+    Syrian,
+  }
+
+  export const enum MaritalStatus {
+    Married,
+    Single,
+  }
+
+  export const enum Education {
+    Undergraduate,
+    Graduate,
+    HighSchool,
+  }
+
+  export const enum Committee {
+    Education,
+    Orphan,
+    Buy,
+    Media,
+    Identification,
+  }
+
+  export const enum BloodType {
+    APositive,
+    ANegative,
+    BPositive,
+    BNegative,
+    ABPositive,
+    ABNegative,
+    ZeroPositive,
+    ZeroNegative,
+  }
 }
 
 /**
@@ -31,9 +66,22 @@ export class Member {
   telephone: number;
   address: string;
   area: Family.Area; // TODO. change the place of area.
-  age: number;
   gender: Member.Gender;
   job: string;
+
+  birthday: string;
+  birthplace: string;
+  idNo: number; /* TC */
+  fatherName: string;
+  motherName: string;
+  nation: Member.Nation;
+  maritalStatus: Member.MaritalStatus;
+  bloodType: Member.BloodType;
+  email: string;
+  education: Member.Education;
+  workplace: string;
+  registeredProvince: string;
+  committee: Member.Committee;
 
   public static groups: Utils.IHash = {
     [Member.Group.COMMITTEE]: "Yönetici Üye",
@@ -44,6 +92,41 @@ export class Member {
   public static genders: Utils.IHash = {
     [Member.Gender.MALE]: "Erkek",
     [Member.Gender.FEMALE]: "Kadın",
+  }
+
+  public static nations: Utils.IHash = {
+    [Member.Nation.Turk]: "T.C.",
+    [Member.Nation.Syrian]: "Suriye"
+  }
+
+  public static maritalStatutes: Utils.IHash = {
+    [Member.MaritalStatus.Married]: "Evli",
+    [Member.MaritalStatus.Single]: "Bekar"
+  }
+
+  public static educations: Utils.IHash = {
+    [Member.Education.Graduate]: "Yüksek Lisans",
+    [Member.Education.Undergraduate]: "Lisans",
+    [Member.Education.HighSchool]: "Lise"
+  }
+
+  public static committees: Utils.IHash = {
+    [Member.Committee.Buy]: "Satın Alma",
+    [Member.Committee.Education]: "Eğitim",
+    [Member.Committee.Identification]: "Tespit",
+    [Member.Committee.Media]: "Medya",
+    [Member.Committee.Orphan]: "Yetim",
+  }
+
+  public static bloodTypes: Utils.IHash = {
+    [Member.BloodType.APositive]: "A+",
+    [Member.BloodType.ANegative]: "A-",
+    [Member.BloodType.BPositive]: "B+",
+    [Member.BloodType.BNegative]: "B-",
+    [Member.BloodType.ABPositive]: "AB+",
+    [Member.BloodType.ABNegative]: "AB-",
+    [Member.BloodType.ZeroPositive]: "0+",
+    [Member.BloodType.ZeroNegative]: "0-",
   }
 
   public static default(): Member {
@@ -57,9 +140,21 @@ export class Member {
       telephone: null,
       address: null,
       area: Family.Area.ANATOLIA,
-      age: null,
       gender: this.Gender.MALE,
       job: null,
+      birthday: null,
+      birthplace: null,
+      idNo: null,
+      fatherName: null,
+      motherName: null,
+      nation: Member.Nation.Turk,
+      maritalStatus: Member.MaritalStatus.Single,
+      bloodType: Member.BloodType.APositive,
+      email: null,
+      education: Member.Education.Undergraduate,
+      workplace: null,
+      registeredProvince: null,
+      committee: Member.Committee.Identification
     };
     return member;
   }

@@ -5,38 +5,87 @@
       {{ form.value | json }}
       <hr />
 
+      <div class="sub-entry">
+        <ngx-custom-input-box rowName="İsim" [numeric]="false" [(formGroup)]="form" formControlName="name">
+        </ngx-custom-input-box>
+        <ngx-custom-date-picker rowName="Kayıt Tarihi" [(formGroup)]="form" formControlName="regDate">
+        </ngx-custom-date-picker>
 
-      <ngx-custom-input-box rowName="İsim" [numeric]="false" [(formGroup)]="form" formControlName="name">
-      </ngx-custom-input-box>
-      <ngx-custom-date-picker rowName="Kayıt Tarihi" [(formGroup)]="form" formControlName="regDate">
-      </ngx-custom-date-picker>
-      <ngx-custom-selector rowName="Tip" [selectingList]="groups" [(formGroup)]="form" formControlName="group">
-      </ngx-custom-selector>
-      <ngx-custom-selector rowName="Durum" [selectingList]="statuses" [(formGroup)]="form"
-        formControlName="status">
-      </ngx-custom-selector>
-      <ngx-custom-input-box rowName="Telefon" [minLength]="11" [maxLength]="11" [alpha]="false" [(formGroup)]="form" formControlName="telephone">
-      </ngx-custom-input-box>
-      <ngx-custom-input-box rowName="Adres" [(formGroup)]="form" formControlName="address">
-      </ngx-custom-input-box>
-      <ngx-custom-selector rowName="Bölge" [selectingList]="areas" [(formGroup)]="form"
-        formControlName="area">
-      </ngx-custom-selector>
-      <ngx-custom-input-box rowName="Yaş" [alpha]="false" [(formGroup)]="form" formControlName="age">
-      </ngx-custom-input-box>
-      <ngx-custom-selector rowName="Cinsiyet" [selectingList]="genders" [(formGroup)]="form"
-        formControlName="gender">
-      </ngx-custom-selector>
-      <ngx-custom-input-box rowName="Meslek" [numeric]="false" [(formGroup)]="form" formControlName="job">
-      </ngx-custom-input-box>
+        <ngx-custom-date-picker rowName="Doğum Tarihi" [(formGroup)]="form" formControlName="birthday">
+        </ngx-custom-date-picker>
 
-      <div class="form-group row">
-        <div class="offset-sm-3 col-sm-9">
-          <button (click)="onSubmit()" nbButton status="primary" hero [disabled]="form.invalid">
-            {{buttonName}}
-          </button>
-        </div>
+        <ngx-custom-input-box rowName="Doğum Yeri" [numeric]="false" [(formGroup)]="form" formControlName="birthplace">
+        </ngx-custom-input-box>
+
+        <ngx-custom-input-box rowName="T.C. Kimlik No" [minLength]="11" [maxLength]="11" [alpha]="false"
+          [(formGroup)]="form" formControlName="idNo">
+        </ngx-custom-input-box>
+
+        <ngx-custom-selector rowName="Uyruk" [selectingList]="nations" [(formGroup)]="form" formControlName="nation">
+        </ngx-custom-selector>
+
+        <ngx-custom-input-box rowName="Baba Adı" [numeric]="false" [(formGroup)]="form" formControlName="fatherName">
+        </ngx-custom-input-box>
+
+        <ngx-custom-input-box rowName="Anne Adı" [numeric]="false" [(formGroup)]="form" formControlName="motherName">
+        </ngx-custom-input-box>
+
+        <ngx-custom-selector rowName="Medeni Hâl" [selectingList]="maritalStatutes" [(formGroup)]="form"
+          formControlName="maritalStatus">
+        </ngx-custom-selector>
+
+        <ngx-custom-input-box rowName="Adres" [(formGroup)]="form" formControlName="address">
+        </ngx-custom-input-box>
+
+        <ngx-custom-input-box rowName="Telefon" [minLength]="11" [maxLength]="11" [alpha]="false" [(formGroup)]="form"
+          formControlName="telephone">
+        </ngx-custom-input-box>
       </div>
+
+      <div class="mid-entry"> <br> </div>
+
+      <div class="sub-entry">
+        <ngx-custom-selector rowName="Bölge" [selectingList]="areas" [(formGroup)]="form" formControlName="area">
+        </ngx-custom-selector>
+
+        <ngx-custom-selector rowName="Cinsiyet" [selectingList]="genders" [(formGroup)]="form" formControlName="gender">
+        </ngx-custom-selector>
+        <ngx-custom-selector rowName="Kan Grubu" [selectingList]="bloodTypes" [(formGroup)]="form"
+          formControlName="bloodType">
+        </ngx-custom-selector>
+
+        <ngx-custom-input-box rowName="E-Posta" [(formGroup)]="form" formControlName="email">
+        </ngx-custom-input-box>
+
+        <ngx-custom-selector rowName="Eğitim Durumu" [selectingList]="educations" [(formGroup)]="form"
+          formControlName="education">
+        </ngx-custom-selector>
+
+        <ngx-custom-input-box rowName="İş Yeri" [(formGroup)]="form" formControlName="workplace">
+        </ngx-custom-input-box>
+
+        <ngx-custom-input-box rowName="Meslek" [numeric]="false" [(formGroup)]="form" formControlName="job">
+        </ngx-custom-input-box>
+
+        <ngx-custom-input-box rowName="Kütük" [(formGroup)]="form" formControlName="registeredProvince">
+        </ngx-custom-input-box>
+
+        <ngx-custom-selector rowName="Çalışma Komitesi" [selectingList]="committees" [(formGroup)]="form"
+          formControlName="committee">
+        </ngx-custom-selector>
+
+        <ngx-custom-selector rowName="Grup" [selectingList]="groups" [(formGroup)]="form" formControlName="group">
+        </ngx-custom-selector>
+        <ngx-custom-selector rowName="Durum" [selectingList]="statuses" [(formGroup)]="form" formControlName="status">
+        </ngx-custom-selector>
+      </div>
+
+      <div class="button">
+        <button (click)="onSubmit()" nbButton status="primary" hero [disabled]="form.invalid">
+          {{buttonName}}
+        </button>
+      </div>
+
 
     </form>
   </nb-card-body>

@@ -1,6 +1,6 @@
 import { OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService, NbGlobalPositionStrategy } from '@nebular/theme';
+import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService} from '@nebular/theme';
 
 
 export abstract class CustomFormComponent<T> implements OnInit {
