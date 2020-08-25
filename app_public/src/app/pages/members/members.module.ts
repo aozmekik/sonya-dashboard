@@ -19,6 +19,7 @@ import {
   NbInputModule,
   NbIconModule,
   NbCardModule,
+  NbStepperModule,
 } from "@nebular/theme";
 import { ThemeModule } from "../../@theme/theme.module";
 
@@ -39,6 +40,7 @@ import { ThemeModule } from "../../@theme/theme.module";
     NbWindowModule.forChild(),
     GenericComponentsModule,
     ReactiveFormsModule,
+    NbStepperModule,
   ],
   declarations: [
     ...routedComponents,
