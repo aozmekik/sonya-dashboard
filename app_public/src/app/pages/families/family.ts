@@ -123,17 +123,12 @@ export class Family {
       address: null,
       area: Family.Area.ANATOLIA,
       registeredMember: null,
-      members: null,
+      members: [],
       comment: null,
-      incomes: null,
-      educations: null,
-      outgoes: null,
-      bills: [
-        {name:"Elektrik", contract: null}, 
-        {name:"Su", contract: null},
-        {name:"Doğalgaz", contract: null},
-        {name:"Diğer", contract: null},
-      ]
+      incomes: [],
+      educations: [],
+      outgoes: [],
+      bills: []
     };
     return family;
   }

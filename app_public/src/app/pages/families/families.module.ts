@@ -19,6 +19,8 @@ import {
   NbIconModule,
   NbCardModule,
   NbListModule,
+  NbStepperModule,
+  NbAccordionModule,
 } from "@nebular/theme";
 import { ThemeModule } from "../../@theme/theme.module";
 import { FamilyFormComponent } from './family-form/family-form.component';
@@ -43,6 +45,8 @@ import { FieldActivityListComponent } from './field-activity-list/field-activity
     NbWindowModule.forChild(),
     GenericComponentsModule,
     ReactiveFormsModule,
+    NbStepperModule,
+    NbAccordionModule,
   ],
   declarations: [
     ...routedComponents,
