@@ -1,10 +1,25 @@
-<div class="form-group row" [formGroup]="formGroup">
-  <label class="label col-sm-3 col-form-label">{{rowName}}</label>
-  <div class="col-sm-9">
+<div *ngIf="!sideBySide; else elseTemplate">
+  <div class="form-group row">
+    <label class="label col-sm-3 col-form-label">{{rowName}}</label>
+    <div class="col-sm-9">
+      <ng-container *ngTemplateOutlet="body"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #elseTemplate>
+  <div class="form-group">
+    <label [for]="formControlName" class="label">{{rowName}}</label>
+    <ng-container *ngTemplateOutlet="body"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #body>
+  <div [formGroup]="formGroup">
     <nb-select status="primary" [formControlName]="formControlName">
       <nb-option *ngFor="let select of selectingList; let i = index" [value]="i">
         {{ select }}
       </nb-option>
     </nb-select>
   </div>
-</div>
+</ng-template>

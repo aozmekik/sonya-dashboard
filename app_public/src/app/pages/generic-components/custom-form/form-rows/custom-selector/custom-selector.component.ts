@@ -19,6 +19,7 @@ export class CustomSelectorComponent implements OnInit, ControlValueAccessor {
 
   @Input() formGroup: FormGroup;
   @Input() formControlName: string;
+  @Input() sideBySide: boolean = false;
 
 
   constructor() { }
