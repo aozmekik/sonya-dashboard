@@ -17,21 +17,19 @@
         </ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'Telefon', value: member.telephone}"></ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'Adres', value: member.address}"></ng-container>
-        <ng-container *ngTemplateOutlet="row; context: {label: 'Bölge', value: areas[member.area]}"></ng-container>
+        <ng-container *ngTemplateOutlet="row; context: {label: 'Bölge', value: familyKeys.areas[member.area]}">
+        </ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'Cinsiyet', value: member.gender}"></ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'İş', value: member.job}"></ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'Doğum Tarihi', value: member.birthday}"></ng-container>
-        <ng-container *ngTemplateOutlet="row; context: {label: 'Doğum Yeri', value: member.birthplace}"></ng-container>
       </div>
       <div style="float:right;">
+        <ng-container *ngTemplateOutlet="row; context: {label: 'Doğum Yeri', value: member.birthplace}"></ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'Baba Adı', value: member.fatherName}"></ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'Anne Adı', value: member.motherName}"></ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'İş', value: member.job}"></ng-container>
         <ng-container
           *ngTemplateOutlet="row; context: {label: 'Medeni Hâl', value: memberKeys.maritalStatuses[member.maritalStatus]}">
-        </ng-container>
-        <ng-container
-          *ngTemplateOutlet="row; context: {label: 'Kan Grubu', value: memberKeys.bloodTypes[member.bloodType]}">
         </ng-container>
         <ng-container
           *ngTemplateOutlet="row; context: {label: 'Kan Grubu', value: memberKeys.bloodTypes[member.bloodType]}">
@@ -43,13 +41,7 @@
         <ng-container
           *ngTemplateOutlet="row; context: {label: 'Eğitim', value: memberKeys.educations[member.education]}">
         </ng-container>
-        <ng-container
-          *ngTemplateOutlet="row; context: {label: 'Kan Grubu', value: memberKeys.bloodTypes[member.bloodType]}">
-        </ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'İş Yeri', value: member.workplace}"></ng-container>
-        <ng-container
-          *ngTemplateOutlet="row; context: {label: 'Kan Grubu', value: memberKeys.bloodTypes[member.bloodType]}">
-        </ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıtlı İl', value: member.registeredProvince}">
         </ng-container>
       </div>

@@ -30,10 +30,8 @@ import { Member } from '../../members/member';
  */
 
 export class FamilyFormComponent extends CustomFormComponent<Family> implements OnInit {
-  public readonly areas: string[] = Utils.keys(Family.Areas);
-  public readonly statuses: string[] = Utils.keys(Family.statutes);
-  public readonly genders: string[] = Utils.keys(Member.genders);
-  public readonly bodies: string[] = Utils.keys(Family.bodies);
+  public readonly familyKeys: Family.Keys = Family.keys;
+  public readonly memberKeys: Member.Keys = Member.keys;
 
   private destroy$ = new Subject();
   public income: number = null;

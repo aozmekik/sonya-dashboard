@@ -67,6 +67,12 @@ export namespace Family {
     contract: number; /* mukavele no */
   }
 
+  export interface Keys {
+    areas: string[];
+    statuses: string[];
+    bodies: string[];
+  }
+
 }
 
 /**
@@ -83,19 +89,19 @@ export class Family {
   address: string; /* home address of the family */
   registeredMember: string; /* person who registered the family. */
   status: Family.Status; /* aid and identification status about the family.*/
+  comment: string; /* additional information about the family */
   members: Family.FamilyMember[]; /* members living in the family */
   incomes: Family.Income[]; /* organizations where the family receives assistance */
   educations: Family.Education[]; /* educational status of children in the family */
   outgoes: Family.Outgo[]; /* family expenses */
   bills: Family.Bill[]; /* family bills */
-  comment: string; /* additional information about the family */
 
-  public static readonly Areas: Utils.IHash = {
+  public static readonly areas: Utils.IHash = {
     [Family.Area.ANATOLIA]: "Anadolu",
     [Family.Area.EUROPE]: "Avrupa",
   };
 
-  public static readonly statutes: Utils.IHash = {
+  public static readonly statuses: Utils.IHash = {
     [Family.Status.UNIDENTIFIED]: "Tespit Yapılmadı",
     [Family.Status.AIDED]: "Yardım Edildi",
     [Family.Status.UNAIDED]: "Yardım Edilmedi",
@@ -110,6 +116,12 @@ export class Family {
     [Family.Body.XL]: "XL",
     [Family.Body.XXL]: "XXL",
   }
+
+  public static readonly keys: Family.Keys = {
+    areas: Utils.keys(Family.areas),
+    statuses: Utils.keys(Family.statuses),
+    bodies: Utils.keys(Family.bodies),
+  };
 
   public static default(): Family {
     const family = {

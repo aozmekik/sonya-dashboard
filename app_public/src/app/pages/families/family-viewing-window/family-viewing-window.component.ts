@@ -1,6 +1,7 @@
 import { Family } from './../family';
 import { Component, Input } from "@angular/core";
 import { NbWindowRef } from "@nebular/theme";
+import { Member } from '../../members/member';
 
 @Component({
   selector: "ngx-family-viewing-window",
@@ -8,15 +9,14 @@ import { NbWindowRef } from "@nebular/theme";
   styleUrls: ["./family-viewing-window.component.scss"],
 })
 export class FamilyViewingWindowComponent {
+  public readonly familyKeys: Family.Keys = Family.keys;
+  public readonly memberKeys: Member.Keys = Member.keys;
   @Input() family: Family;
   
   constructor(public windowRef: NbWindowRef) {
     this.family = windowRef.config.context as Family;
   }
-
-  // TODO. add pipe for gender.
-  // TODO. aile üye sayısı string alıyor
-
+  
   close() {
     this.windowRef.close();
   }

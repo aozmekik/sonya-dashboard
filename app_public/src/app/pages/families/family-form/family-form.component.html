@@ -17,11 +17,11 @@
           </ngx-custom-input-box>
           <ngx-custom-date-picker rowName="Kayıt Tarihi" [(formGroup)]="form" formControlName="regDate">
           </ngx-custom-date-picker>
-          <ngx-custom-selector rowName="Bölge" [selectingList]="areas" [(formGroup)]="form" formControlName="area">
+          <ngx-custom-selector rowName="Bölge" [selectingList]="familyKeys.areas" [(formGroup)]="form" formControlName="area">
           </ngx-custom-selector>
           <ngx-custom-input-box rowName="Adres" [(formGroup)]="form" formControlName="address">
           </ngx-custom-input-box>
-          <ngx-custom-selector rowName="Durum" [selectingList]="statuses" [(formGroup)]="form" formControlName="status">
+          <ngx-custom-selector rowName="Durum" [selectingList]="familyKeys.statuses" [(formGroup)]="form" formControlName="status">
           </ngx-custom-selector>
           <ngx-custom-input-box rowName="Açıklama" [(formGroup)]="form" formControlName="comment">
           </ngx-custom-input-box>
@@ -77,7 +77,7 @@
                                   [formGroup]="member" formControlName="income"></ngx-custom-input-box>
                               </div>
                               <div class="col-sm-6">
-                                <ngx-custom-selector [sideBySide]="true" rowName="Cinsiyet" [selectingList]="genders"
+                                <ngx-custom-selector [sideBySide]="true" rowName="Cinsiyet" [selectingList]="memberKeys.genders"
                                   [(formGroup)]="member" formControlName="gender">
                                 </ngx-custom-selector>
                               </div>
@@ -88,7 +88,7 @@
                                   [formGroup]="member" formControlName="shoe"></ngx-custom-input-box>
                               </div>
                               <div class="col-sm-6">
-                                <ngx-custom-selector [sideBySide]="true" rowName="Beden" [selectingList]="bodies"
+                                <ngx-custom-selector [sideBySide]="true" rowName="Beden" [selectingList]="familyKeys.bodies"
                                   [(formGroup)]="member" formControlName="body">
                                 </ngx-custom-selector>
                               </div>

@@ -1,3 +1,4 @@
+import { statusValues } from './../../../@core/data/status';
 import { MembersData } from "./../members-data";
 import { Component } from "@angular/core";
 import { LocalDataSource } from "ng2-smart-table";
@@ -6,6 +7,8 @@ import { NbWindowService } from "@nebular/theme";
 import { MemberEditingWindowComponent } from "../member-editing-window/member-editing-window.component";
 import { Member } from '../member';
 import { MemberViewingWindowComponent } from '../member-viewing-window/member-viewing-window.component';
+import { Family } from '../../families/family';
+import { Utils } from '../../../utils/utils.module';
 
 @Component({
   selector: "ngx-member-list",
@@ -45,9 +48,33 @@ export class MemberListComponent {
         title: "Kayıt Tarihi",
         type: "string",
       },
-      unregDate: {
-        title: "Kayıt Durdurulma Tarihi",
+      committee: {
+        title: "Komite",
         type: "string",
+        valuePrepareFunction: (value) => {
+          return Member.committees[value];
+        },
+        filter: {
+          type: "list",
+          config: {
+            selectText: "Seç.",
+            list: Utils.table2selector(Member.committees),
+          },
+        },
+      },
+      area: {
+        title: "Bölge",
+        type: "string",
+        valuePrepareFunction: (value) => {
+          return Family.areas[value];
+        },
+        filter: {
+          type: "list",
+          config: {
+            selectText: "Seç.",
+            list: Utils.table2selector(Family.areas),
+          },
+        },
       },
       group: {
         title: "Grup",
@@ -55,10 +82,27 @@ export class MemberListComponent {
         valuePrepareFunction: (value) => {
           return Member.groups[value];
         },
+        filter: {
+          type: "list",
+          config: {
+            selectText: "Seç.",
+            list: Utils.table2selector(Member.groups),
+          },
+        },
       },
       status: {
         title: "Aktif",
         type: "string",
+        valuePrepareFunction: (value) => {
+          return statusValues[value];
+        },
+        filter: {
+          type: "list",
+          config: {
+            selectText: "Seç.",
+            list: Utils.table2selector(statusValues),
+          },
+        },
       },
     },
   };

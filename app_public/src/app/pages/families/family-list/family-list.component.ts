@@ -47,6 +47,10 @@ export class FamilyListComponent {
         type: "string",
 
       },
+      registeredMember: {
+        title: "Kayıt Eden Üye",
+        type: "string",
+      },
       memberCount: {
         title: "Aile Üye Sayısı",
         type: "string",
@@ -55,13 +59,13 @@ export class FamilyListComponent {
         title: "Bölge",
         type: "string",
         valuePrepareFunction: (value) => {
-          return Family.Areas[value];
+          return Family.areas[value];
         },
         filter: {
           type: "list",
           config: {
             selectText: "Seç.",
-            list: Utils.table2selector(Family.Areas),
+            list: Utils.table2selector(Family.areas),
           },
         },
       },

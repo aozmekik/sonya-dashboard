@@ -12,7 +12,7 @@ import { statusValues } from '../../../@core/data/status';
 })
 export class MemberViewingWindowComponent {
   public readonly memberKeys: Member.Keys = Member.keys
-  public readonly areas: string[] = Utils.keys(Family.Areas);
+  public readonly familyKeys: Family.Keys = Family.keys;
 
 
   @Input() member: Member;

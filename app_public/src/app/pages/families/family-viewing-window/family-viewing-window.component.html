@@ -1,42 +1,138 @@
 <nb-card style="width:600px;">
   <nb-card-body>
-    <form #userForm="ngForm">
-      <ng-container *ngTemplateOutlet="row; context: {label: 'İsim', value: family.name}"></ng-container>
-      <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt', value: family.regDate}"></ng-container>
-      <ng-container *ngTemplateOutlet="row; context: {label: 'Aile Üye Sayısı', value: family.memberCount}">
-      </ng-container>
-      <ng-container *ngTemplateOutlet="row; context: {label: 'Bölge', value: family.area}"></ng-container>
-      <ng-container *ngTemplateOutlet="row; context: {label: 'Adres', value: family.address}"></ng-container>
-      <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt Eden Üye', value: family.registeredMember}">
-      </ng-container>
-      <ng-container *ngTemplateOutlet="row; context: {label: 'Durum', value: family.status}"></ng-container>
-      <ng-container *ngTemplateOutlet="row; context: {label: 'Açıklama', value: family.comment}"></ng-container>
-      <!-- <ng-container *ngTemplateOutlet="row; context: {label: 'Gelir', value: family.income}"></ng-container> -->
-      <div class="row show-grid"></div>
-      <div class="row show-grid">
-        <label class="label col-sm-3 col-form-label">Aile Üyeleri: </label>
-        <div class="col-sm-9 label col-form-label">
-          <nb-card size="tiny" style="width:160px;height:110px;">
-            <nb-list>
-              <nb-list-item *ngFor="let member of family.members; let i=index">
-                <div class="row show-grid">
-                  <label class="label col-form-label"></label>
-                  <div class="col-sm-12 label col-form-label">
-                    <!-- <div>{{member.name}}, {{member.age}}</div> -->
-                    <div>{{member.name}}</div>
-
-                  </div>
-                </div>
-              </nb-list-item>
-            </nb-list>
-          </nb-card>
+    <nb-stepper orientation="horizontal" [linear]="false">
+      <nb-step label="Sayfa 1">
+        <div class="button">
+          <button nbButton outline disabled nbStepperPrevious>Önceki</button>
+          <button nbButton outline nbStepperNext>Sonraki</button>
         </div>
-      </div>
+        <hr />
+        <ng-container *ngTemplateOutlet="row; context: {label: 'İsim', value: family.name}"></ng-container>
+        <ng-container *ngTemplateOutlet="row; context: {label: 'Uyruk', value: memberKeys.nations[family.nation]}"></ng-container>
+        <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt', value: family.regDate}"></ng-container>
+        <ng-container *ngTemplateOutlet="row; context: {label: 'Aile Üye Sayısı', value: family.memberCount}">
+        </ng-container>
+        <ng-container *ngTemplateOutlet="row; context: {label: 'Bölge', value: familyKeys.areas[family.area]}">
+        </ng-container>
+        <ng-container *ngTemplateOutlet="row; context: {label: 'Adres', value: family.address}"></ng-container>
+        <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt Eden Üye', value: family.registeredMember}">
+        </ng-container>
+        <ng-container *ngTemplateOutlet="row; context: {label: 'Durum', value: familyKeys.statuses[family.status]}">
+        </ng-container>
+        <ng-container *ngTemplateOutlet="row; context: {label: 'Açıklama', value: family.comment}"></ng-container>
+      </nb-step>
+
+      <nb-step label="Sayfa 2">
+        <div class="button">
+          <button nbButton outline nbStepperPrevious>Önceki</button>
+          <button nbButton outline nbStepperNext>Sonraki</button>
+        </div>
+        <hr />
+        <div class="row show-grid"></div>
+        <div class="row show-grid">
+          <label class="label col-sm-3 col-form-label">Aile Üyeleri: </label>
+          <div class="col-sm-9 label col-form-label">
+            <nb-card>
+              <nb-list>
+                <nb-list-item *ngFor="let member of family.members; let i=index">
+
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'T.C.', value: member.idNo}"></ng-container>
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'İsim', value: member.name}"></ng-container>
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Doğum Yılı', value: member.birthyear}">
+                  </ng-container>
+                  <ng-container
+                    *ngTemplateOutlet="row; context: {label: 'Cinsiyet', value: memberKeys.genders[member.gender]}">
+                  </ng-container>
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Meslek', value: member.job}"></ng-container>
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Gelir', value: member.income}"></ng-container>
+                  <ng-container
+                    *ngTemplateOutlet="row; context: {label: 'Beden', value: familyKeys.bodies[member.body]}">
+                  </ng-container>
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Ayakkabı Numarası', value: member.shoe}">
+                  </ng-container>
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Engel', value: member.disease}">
+                  </ng-container>
+                </nb-list-item>
+              </nb-list>
+            </nb-card>
+          </div>
+        </div>
+
+        <div class="row show-grid">
+          <label class="label col-sm-3 col-form-label">Eğitim Bilgileri: </label>
+          <div class="col-sm-9 label col-form-label">
+            <nb-card>
+              <nb-list>
+                <nb-list-item *ngFor="let education of family.educations; let i=index">
+
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Ad', value: education.name}"></ng-container>
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Okul', value: education.school}">
+                  </ng-container>
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Sınıf', value: education.grade}">
+                  </ng-container>
+                </nb-list-item>
+              </nb-list>
+            </nb-card>
+          </div>
+        </div>
+      </nb-step>
+
+      <nb-step label="Sayfa 3">
+        <div class="button">
+          <button nbButton outline nbStepperPrevious>Önceki</button>
+          <button nbButton outline disabled nbStepperNext>Sonraki</button>
+        </div>
+        <hr />
+        <div class="row show-grid">
+          <label class="label col-sm-3 col-form-label">Gelirler: </label>
+          <div class="col-sm-9 label col-form-label">
+            <nb-card>
+              <nb-list>
+                <nb-list-item *ngFor="let income of family.incomes; let i=index">
+
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Ad', value: income.name}"></ng-container>
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Tutar', value: income.amount}"></ng-container>
+                </nb-list-item>
+              </nb-list>
+            </nb-card>
+          </div>
+        </div>
+
+        <div class="row show-grid">
+          <label class="label col-sm-3 col-form-label">Giderler: </label>
+          <div class="col-sm-9 label col-form-label">
+            <nb-card>
+              <nb-list>
+                <nb-list-item *ngFor="let outgo of family.outgoes; let i=index">
+
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Ad', value: outgo.name}"></ng-container>
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Tutar', value: outgo.amount}"></ng-container>
+                </nb-list-item>
+              </nb-list>
+            </nb-card>
+          </div>
+        </div>
+
+        <div class="row show-grid">
+          <label class="label col-sm-3 col-form-label">Faturalar: </label>
+          <div class="col-sm-9 label col-form-label">
+            <nb-card>
+              <nb-list>
+                <nb-list-item *ngFor="let bill of family.bills; let i=index">
+
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Ad', value: bill.name}"></ng-container>
+                  <ng-container *ngTemplateOutlet="row; context: {label: 'Mukabele No', value: bill.contract}">
+                  </ng-container>
+                </nb-list-item>
+              </nb-list>
+            </nb-card>
+          </div>
+        </div>
 
 
-      <!-- <div *ngFor="let member of family.members; let i=index">
-        <ng-container *ngTemplateOutlet="row; context:{label: 'Aile Üyesi ' + i.toString(), value: member.name + ', ' + member.age.toString()}"></ng-container>
-     </div> -->
+      </nb-step>
+    </nb-stepper>
+
 
       <ng-template #row let-label="label" let-value="value">
         <div class="row show-grid">
@@ -48,6 +144,7 @@
       </ng-template>
 
 
-    </form>
+
+
   </nb-card-body>
 </nb-card>
