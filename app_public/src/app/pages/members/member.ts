@@ -1,6 +1,8 @@
+import { statusValues } from './../../@core/data/status';
 import { Utils } from '../../utils/utils.module';
 import { Family } from '../families/family';
 import { Status } from '../../@core/data/status';
+import { Util } from 'leaflet';
 
 export namespace Member {
   export const enum Group {
@@ -48,6 +50,17 @@ export namespace Member {
     ZeroPositive,
     ZeroNegative,
   }
+
+  export interface Keys {
+    groups: string[];
+    genders: string[];
+    nations: string[];
+    maritalStatuses: string[];
+    educations: string[];
+    committees: string[];
+    bloodTypes: string[];
+    statuses: string[];
+  }
 }
 
 /**
@@ -83,40 +96,40 @@ export class Member {
   registeredProvince: string;
   committee: Member.Committee;
 
-  public static groups: Utils.IHash = {
+  public static readonly groups: Utils.IHash = {
     [Member.Group.COMMITTEE]: "Yönetici Üye",
     [Member.Group.ACTIVE]: "Aktif Üye",
     [Member.Group.PASSIVE]: "Pasif Üye",
   };
 
-  public static genders: Utils.IHash = {
+  public static readonly genders: Utils.IHash = {
     [Member.Gender.MALE]: "Erkek",
     [Member.Gender.FEMALE]: "Kadın",
-  }
+  };
 
-  public static nations: Utils.IHash = {
+  public static readonly nations: Utils.IHash = {
     [Member.Nation.Turk]: "T.C.",
     [Member.Nation.Syrian]: "Suriye"
-  }
+  };
 
-  public static maritalStatutes: Utils.IHash = {
+  public static readonly maritalStatutes: Utils.IHash = {
     [Member.MaritalStatus.Married]: "Evli",
     [Member.MaritalStatus.Single]: "Bekar"
-  }
+  };
 
-  public static educations: Utils.IHash = {
+  public static readonly educations: Utils.IHash = {
     [Member.Education.Graduate]: "Yüksek Lisans",
     [Member.Education.Undergraduate]: "Lisans",
     [Member.Education.HighSchool]: "Lise"
-  }
+  };
 
-  public static committees: Utils.IHash = {
+  public static readonly committees: Utils.IHash = {
     [Member.Committee.Buy]: "Satın Alma",
     [Member.Committee.Education]: "Eğitim",
     [Member.Committee.Identification]: "Tespit",
     [Member.Committee.Media]: "Medya",
     [Member.Committee.Orphan]: "Yetim",
-  }
+  };
 
   public static bloodTypes: Utils.IHash = {
     [Member.BloodType.APositive]: "A+",
@@ -127,7 +140,7 @@ export class Member {
     [Member.BloodType.ABNegative]: "AB-",
     [Member.BloodType.ZeroPositive]: "0+",
     [Member.BloodType.ZeroNegative]: "0-",
-  }
+  };
 
   public static default(): Member {
     const member = {
@@ -136,11 +149,11 @@ export class Member {
       regDate: new Date().toLocaleString(),
       unregDate: null,
       status: Status.ACTIVE,
-      group: this.Group.COMMITTEE,
+      group: Member.Group.COMMITTEE,
       telephone: null,
       address: null,
       area: Family.Area.ANATOLIA,
-      gender: this.Gender.MALE,
+      gender: Member.Gender.MALE,
       job: null,
       birthday: null,
       birthplace: null,
@@ -157,5 +170,18 @@ export class Member {
       committee: Member.Committee.Identification
     };
     return member;
-  }
+  };
+
+  public static readonly keys: Member.Keys = {
+    groups: Utils.keys(Member.groups),
+    genders: Utils.keys(Member.genders),
+    nations: Utils.keys(Member.nations),
+    maritalStatuses: Utils.keys(Member.maritalStatutes),
+    educations: Utils.keys(Member.educations),
+    committees: Utils.keys(Member.committees),
+    bloodTypes: Utils.keys(Member.bloodTypes),
+    statuses: statusValues,
+  };
+
+
 }

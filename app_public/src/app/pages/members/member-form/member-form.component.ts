@@ -15,15 +15,8 @@ import { NbToastrService } from '@nebular/theme';
 
 export class MemberFormComponent extends CustomFormComponent<Member> implements OnInit {
 
-  public readonly statuses: string[] = statusValues;
-  public readonly groups: string[] = Utils.keys(Member.groups);
+  public readonly memberKeys: Member.Keys = Member.keys
   public readonly areas: string[] = Utils.keys(Family.Areas);
-  public readonly genders: string[] = Utils.keys(Member.genders);
-  public readonly nations: string[] = Utils.keys(Member.nations);
-  public readonly maritalStatutes: string[] = Utils.keys(Member.maritalStatutes);
-  public readonly bloodTypes: string[] = Utils.keys(Member.bloodTypes);
-  public readonly educations: string[] = Utils.keys(Member.educations);
-  public readonly committees: string[] = Utils.keys(Member.committees);
 
 
   constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService) {

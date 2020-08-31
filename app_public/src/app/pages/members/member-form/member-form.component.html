@@ -28,7 +28,7 @@
             [(formGroup)]="form" formControlName="idNo">
           </ngx-custom-input-box>
 
-          <ngx-custom-selector rowName="Uyruk" [selectingList]="nations" [(formGroup)]="form" formControlName="nation">
+          <ngx-custom-selector rowName="Uyruk" [selectingList]="memberKeys.nations" [(formGroup)]="form" formControlName="nation">
           </ngx-custom-selector>
 
           <ngx-custom-input-box rowName="Baba Adı" [numeric]="false" [(formGroup)]="form" formControlName="fatherName">
@@ -48,17 +48,17 @@
           <ngx-custom-selector rowName="Bölge" [selectingList]="areas" [(formGroup)]="form" formControlName="area">
           </ngx-custom-selector>
 
-          <ngx-custom-selector rowName="Cinsiyet" [selectingList]="genders" [(formGroup)]="form"
+          <ngx-custom-selector rowName="Cinsiyet" [selectingList]="memberKeys.genders" [(formGroup)]="form"
             formControlName="gender">
           </ngx-custom-selector>
-          <ngx-custom-selector rowName="Kan Grubu" [selectingList]="bloodTypes" [(formGroup)]="form"
+          <ngx-custom-selector rowName="Kan Grubu" [selectingList]="memberKeys.bloodTypes" [(formGroup)]="form"
             formControlName="bloodType">
           </ngx-custom-selector>
 
           <ngx-custom-input-box rowName="E-Posta" [alpha]="false" [numeric]="false" [(formGroup)]="form" formControlName="email">
           </ngx-custom-input-box>
 
-          <ngx-custom-selector rowName="Eğitim Durumu" [selectingList]="educations" [(formGroup)]="form"
+          <ngx-custom-selector rowName="Eğitim Durumu" [selectingList]="memberKeys.educations" [(formGroup)]="form"
             formControlName="education">
           </ngx-custom-selector>
 
@@ -80,15 +80,15 @@
           <hr />
           <ngx-custom-input-box rowName="Kütük" [(formGroup)]="form" formControlName="registeredProvince">
           </ngx-custom-input-box>
-          <ngx-custom-selector rowName="Çalışma Komitesi" [selectingList]="committees" [(formGroup)]="form"
+          <ngx-custom-selector rowName="Çalışma Komitesi" [selectingList]="memberKeys.committees" [(formGroup)]="form"
             formControlName="committee">
           </ngx-custom-selector>
 
-          <ngx-custom-selector rowName="Grup" [selectingList]="groups" [(formGroup)]="form" formControlName="group">
+          <ngx-custom-selector rowName="Grup" [selectingList]="memberKeys.groups" [(formGroup)]="form" formControlName="group">
           </ngx-custom-selector>
-          <ngx-custom-selector rowName="Durum" [selectingList]="statuses" [(formGroup)]="form" formControlName="status">
+          <ngx-custom-selector rowName="Durum" [selectingList]="memberKeys.statuses" [(formGroup)]="form" formControlName="status">
           </ngx-custom-selector>
-          <ngx-custom-selector rowName="Medeni Hâl" [selectingList]="maritalStatutes" [(formGroup)]="form"
+          <ngx-custom-selector rowName="Medeni Hâl" [selectingList]="memberKeys.maritalStatuses" [(formGroup)]="form"
             formControlName="maritalStatus">
           </ngx-custom-selector>
 
