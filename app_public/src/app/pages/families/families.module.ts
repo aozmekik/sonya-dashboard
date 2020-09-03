@@ -1,3 +1,4 @@
+import { FamilyViewingPopoverComponent } from './family-viewing-window/family-viewing-popover.component';
 import { FamilyViewingWindowComponent } from './family-viewing-window/family-viewing-window.component';
 import { GenericComponentsModule } from './../generic-components/generic-components.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -21,6 +22,7 @@ import {
   NbListModule,
   NbStepperModule,
   NbAccordionModule,
+  NbPopoverModule,
 } from "@nebular/theme";
 import { ThemeModule } from "../../@theme/theme.module";
 import { FamilyFormComponent } from './family-form/family-form.component';
@@ -47,6 +49,7 @@ import { FieldActivityListComponent } from './field-activity-list/field-activity
     ReactiveFormsModule,
     NbStepperModule,
     NbAccordionModule,
+    NbPopoverModule,
   ],
   declarations: [
     ...routedComponents,
@@ -54,12 +57,13 @@ import { FieldActivityListComponent } from './field-activity-list/field-activity
     FamilyViewingWindowComponent,
     FamilyFormComponent,
     FieldActivityListComponent,
+    FamilyViewingPopoverComponent,
   ],
   exports: [
     FamilyEditingWindowFormComponent,
     FamilyViewingWindowComponent,
     FamilyFormComponent,
   ],
-  entryComponents: [FamilyEditingWindowFormComponent, FamilyViewingWindowComponent],
+  entryComponents: [FamilyEditingWindowFormComponent, FamilyViewingWindowComponent, FamilyViewingPopoverComponent],
 })
 export class FamiliesModule {}

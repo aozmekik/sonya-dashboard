@@ -1,11 +1,11 @@
-import { OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { OnInit, Input, Output, EventEmitter, Directive, Inject, LOCALE_ID } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService} from '@nebular/theme';
 
-
+@Directive()
 export abstract class CustomFormComponent<T> implements OnInit {
 
-  @Input() model: T;
+  @Input() model: any;
   @Input() buttonName: string;
   @Input() disable: string[];
   @Output() submit: EventEmitter<boolean> = new EventEmitter<boolean>();

@@ -1,3 +1,4 @@
+import { FamilyViewingPopoverComponent } from './family-viewing-popover.component';
 import { Family } from './../family';
 import { Component, Input } from "@angular/core";
 import { NbWindowRef } from "@nebular/theme";
@@ -12,6 +13,8 @@ export class FamilyViewingWindowComponent {
   public readonly familyKeys: Family.Keys = Family.keys;
   public readonly memberKeys: Member.Keys = Member.keys;
   @Input() family: Family;
+
+  cardComponent = FamilyViewingPopoverComponent;
   
   constructor(public windowRef: NbWindowRef) {
     this.family = windowRef.config.context as Family;

@@ -8,7 +8,8 @@
         </div>
         <hr />
         <ng-container *ngTemplateOutlet="row; context: {label: 'İsim', value: family.name}"></ng-container>
-        <ng-container *ngTemplateOutlet="row; context: {label: 'Uyruk', value: memberKeys.nations[family.nation]}"></ng-container>
+        <ng-container *ngTemplateOutlet="row; context: {label: 'Uyruk', value: memberKeys.nations[family.nation]}">
+        </ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt', value: family.regDate}"></ng-container>
         <ng-container *ngTemplateOutlet="row; context: {label: 'Aile Üye Sayısı', value: family.memberCount}">
         </ng-container>
@@ -31,27 +32,16 @@
         <div class="row show-grid"></div>
         <div class="row show-grid">
           <label class="label col-sm-3 col-form-label">Aile Üyeleri: </label>
-          <div class="col-sm-9 label col-form-label">
+          <div class="col-sm-9">
             <nb-card>
               <nb-list>
                 <nb-list-item *ngFor="let member of family.members; let i=index">
+                  <!-- <label class="label col-sm-3 col-form-label">İsim: </label>
+                  <div class="col-sm-9 label col-form-label">
+                    <button nbButton status="success" [nbPopover]="cardComponent" [nbPopoverContext]="member"
+                      nbPopoverTrigger="hover">{{member.name}}</button>
+                  </div> -->
 
-                  <ng-container *ngTemplateOutlet="row; context: {label: 'T.C.', value: member.idNo}"></ng-container>
-                  <ng-container *ngTemplateOutlet="row; context: {label: 'İsim', value: member.name}"></ng-container>
-                  <ng-container *ngTemplateOutlet="row; context: {label: 'Doğum Yılı', value: member.birthyear}">
-                  </ng-container>
-                  <ng-container
-                    *ngTemplateOutlet="row; context: {label: 'Cinsiyet', value: memberKeys.genders[member.gender]}">
-                  </ng-container>
-                  <ng-container *ngTemplateOutlet="row; context: {label: 'Meslek', value: member.job}"></ng-container>
-                  <ng-container *ngTemplateOutlet="row; context: {label: 'Gelir', value: member.income}"></ng-container>
-                  <ng-container
-                    *ngTemplateOutlet="row; context: {label: 'Beden', value: familyKeys.bodies[member.body]}">
-                  </ng-container>
-                  <ng-container *ngTemplateOutlet="row; context: {label: 'Ayakkabı Numarası', value: member.shoe}">
-                  </ng-container>
-                  <ng-container *ngTemplateOutlet="row; context: {label: 'Engel', value: member.disease}">
-                  </ng-container>
                 </nb-list-item>
               </nb-list>
             </nb-card>
@@ -134,16 +124,39 @@
     </nb-stepper>
 
 
-      <ng-template #row let-label="label" let-value="value">
-        <div class="row show-grid">
-          <label class="label col-sm-3 col-form-label">{{label}}: </label>
-          <div class="col-sm-9 label col-form-label">
-            <div>{{value}}</div>
-          </div>
+    <ng-template #row let-label="label" let-value="value">
+      <div class="row show-grid">
+        <label class="label col-sm-3 col-form-label">{{label}}: </label>
+        <div class="col-sm-9 label col-form-label">
+          <div>{{value}}</div>
         </div>
-      </ng-template>
+      </div>
+    </ng-template>
 
 
+    <ng-template #card let-member="member">
+      <nb-card class="popover-card">
+        <nb-card-header status="warning">
+          Hello!
+        </nb-card-header>
+        <nb-card-body>
+          <ng-container *ngTemplateOutlet="row; context: {label: 'İsim',   value: member.name}"></ng-container> -->
+          <ng-container *ngTemplateOutlet="row; context: {label: 'T.C.', value: member.idNo}"></ng-container>
+          <ng-container *ngTemplateOutlet="row; context: {label: 'Doğum Yılı', value: member.birthyear}">
+          </ng-container>
+          <ng-container *ngTemplateOutlet="row; context: {label: 'Cinsiyet', value: memberKeys.genders[member.gender]}">
+          </ng-container>
+          <ng-container *ngTemplateOutlet="row; context: {label: 'Meslek', value: member.job}"></ng-container>
+          <ng-container *ngTemplateOutlet="row; context: {label: 'Gelir', value: member.income}"></ng-container>
+          <ng-container *ngTemplateOutlet="row; context: {label: 'Beden', value: familyKeys.bodies[member.body]}">
+          </ng-container>
+          <ng-container *ngTemplateOutlet="row; context: {label: 'Ayakkabı Numarası', value: member.shoe}">
+          </ng-container>
+          <ng-container *ngTemplateOutlet="row; context: {label: 'Engel', value: member.disease}">
+          </ng-container>
+        </nb-card-body>
+      </nb-card>
+    </ng-template>
 
 
   </nb-card-body>

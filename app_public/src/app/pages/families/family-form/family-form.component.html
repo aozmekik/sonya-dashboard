@@ -53,50 +53,50 @@
                             <div class="row">
                               <div class="col-sm-6">
                                 <ngx-custom-input-box [sideBySide]="true" [numeric]="false" rowName="Ad Soyad"
-                                  [formGroup]="member" formControlName="name"></ngx-custom-input-box>
+                                  [formGroup]="members.controls[i]" formControlName="name"></ngx-custom-input-box>
                               </div>
                               <div class="col-sm-6">
                                 <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Kimlik No"
-                                  [formGroup]="member" formControlName="idNo"></ngx-custom-input-box>
+                                  [formGroup]="members.controls[i]" formControlName="idNo"></ngx-custom-input-box>
                               </div>
                             </div>
                             <div class="row">
                               <div class="col-sm-6">
                                 <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
-                                  rowName="Meslek" [formGroup]="member" formControlName="job"></ngx-custom-input-box>
+                                  rowName="Meslek" [formGroup]="members.controls[i]" formControlName="job"></ngx-custom-input-box>
                               </div>
                               <div class="col-sm-6">
                                 <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [minLength]="4"
-                                  [maxLength]="4" rowName="Doğum Yılı" [formGroup]="member" formControlName="birthyear">
+                                  [maxLength]="4" rowName="Doğum Yılı" [formGroup]="members.controls[i]" formControlName="birthyear">
                                 </ngx-custom-input-box>
                               </div>
                             </div>
                             <div class="row">
                               <div class="col-sm-6">
                                 <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Gelir"
-                                  [formGroup]="member" formControlName="income"></ngx-custom-input-box>
+                                  [formGroup]="members.controls[i]" formControlName="income"></ngx-custom-input-box>
                               </div>
                               <div class="col-sm-6">
                                 <ngx-custom-selector [sideBySide]="true" rowName="Cinsiyet" [selectingList]="memberKeys.genders"
-                                  [(formGroup)]="member" formControlName="gender">
+                                  [(formGroup)]="members.controls[i]" formControlName="gender">
                                 </ngx-custom-selector>
                               </div>
                             </div>
                             <div class="row">
                               <div class="col-sm-6">
                                 <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Ayakkabı Numarası"
-                                  [formGroup]="member" formControlName="shoe"></ngx-custom-input-box>
+                                  [formGroup]="members.controls[i]" formControlName="shoe"></ngx-custom-input-box>
                               </div>
                               <div class="col-sm-6">
                                 <ngx-custom-selector [sideBySide]="true" rowName="Beden" [selectingList]="familyKeys.bodies"
-                                  [(formGroup)]="member" formControlName="body">
+                                  [(formGroup)]="members.controls[i]" formControlName="body">
                                 </ngx-custom-selector>
                               </div>
                             </div>
                             <div class="row">
                               <div class="col-sm-6">
                                 <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
-                                  rowName="Hastalık / Engel" [formGroup]="member" formControlName="disease">
+                                  rowName="Hastalık / Engel" [formGroup]="members.controls[i]" formControlName="disease">
                                 </ngx-custom-input-box>
                               </div>
                             </div>

@@ -19,11 +19,11 @@
     <div *ngIf="alpha || (!alpha && !numeric); else elseBlock0">
       <input type="text" required [pattern]="regexPattern" [class.status-danger]="getData.touched && getData.invalid"
         [class.is-invalid]="getData.touched && getData.invalid" class="form-control" nbInput fullWidth
-        [placeholder]="rowName" [id]="formControlName" name="formControl" [formControlName]="formControlName" /> </div>
+        [placeholder]="rowName" name="formControl" [formControlName]="formControlName" /> </div>
     <ng-template #elseBlock0>
       <input type="number" required [class.status-danger]="getData.touched && getData.invalid"
         [class.is-invalid]="getData.touched && getData.invalid" class="form-control" nbInput fullWidth
-        [placeholder]="rowName" [id]="formControlName" name="formControl" [formControlName]="formControlName" />
+        [placeholder]="rowName" name="formControl" [formControlName]="formControlName" />
     </ng-template>
     <div class="text-danger" *ngIf="getData && getData.errors && (getData.dirty || getData.touched)">
       <div *ngIf="getData.errors.required"><small>Bu alanın doldurulması gerekli.</small></div>
