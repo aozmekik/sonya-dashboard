@@ -1,8 +1,8 @@
-import { FamilyViewingPopoverComponent } from './family-viewing-popover.component';
 import { Family } from './../family';
 import { Component, Input } from "@angular/core";
 import { NbWindowRef } from "@nebular/theme";
-import { Member } from '../../members/member';
+import { FamilyBudgetViewingPopoverComponent } from './family-budget-viewing-popover.component';
+import { FamilyMemberViewingPopoverComponent } from './family-member-viewing-popover.component';
 
 @Component({
   selector: "ngx-family-viewing-window",
@@ -11,10 +11,11 @@ import { Member } from '../../members/member';
 })
 export class FamilyViewingWindowComponent {
   public readonly familyKeys: Family.Keys = Family.keys;
-  public readonly memberKeys: Member.Keys = Member.keys;
   @Input() family: Family;
 
-  cardComponent = FamilyViewingPopoverComponent;
+  memberViewingPopoverComponent = FamilyMemberViewingPopoverComponent;
+  budgetViewingPopoverComponent = FamilyBudgetViewingPopoverComponent;
+
   
   constructor(public windowRef: NbWindowRef) {
     this.family = windowRef.config.context as Family;

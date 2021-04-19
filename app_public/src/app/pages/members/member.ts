@@ -78,7 +78,7 @@ export class Member {
   /* some private fields for members */
   telephone: number;
   address: string;
-  area: Family.Area; // TODO. change the place of area.
+  area: string; // TODO. change the place of area.Family.Area
   gender: Member.Gender;
   job: string;
 
@@ -152,7 +152,7 @@ export class Member {
       group: Member.Group.COMMITTEE,
       telephone: null,
       address: null,
-      area: Family.Area.ANATOLIA,
+      area: null,
       gender: Member.Gender.MALE,
       job: null,
       birthday: null,

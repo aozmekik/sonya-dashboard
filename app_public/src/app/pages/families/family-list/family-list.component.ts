@@ -40,35 +40,32 @@ export class FamilyListComponent {
     columns: {
       name: {
         title: "Aile Adı",
-        type: "string",
       },
       regDate: {
         title: "Kayıt Tarihi",
-        type: "string",
-
       },
-      registeredMember: {
+      district: {
+        title: "İlçe",
+      },
+      clerk: {
         title: "Kayıt Eden Üye",
-        type: "string",
       },
-      memberCount: {
-        title: "Aile Üye Sayısı",
-        type: "string",
-      },
-      area: {
-        title: "Bölge",
-        type: "string",
+      status: {
+        title: "Durum",
         valuePrepareFunction: (value) => {
-          return Family.areas[value];
+          return Family.statuses[value];
         },
         filter: {
           type: "list",
           config: {
             selectText: "Seç.",
-            list: Utils.table2selector(Family.areas),
+            list: Utils.table2selector(Family.statuses),
           },
         },
       },
+      nation: {
+        title: "Uyruk",
+      }
     },
   };
 

@@ -5,7 +5,6 @@ import { NbMenuItem } from "@nebular/theme";
 **/
 
 export const MENU_ITEMS: NbMenuItem[] = [
-  // TODO. consider integrating. cameras.
   {
     title: "Panel",
     icon: "home-outline",
@@ -13,16 +12,36 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: "Kamera",
-    icon: "home-outline",
+    icon: "video-outline",
     link: "/pages/camera",
   },
   {
     title: "Yönet",
     group: true,
   },
+
+  {
+    title: "Aileler",
+    icon: "people-outline",
+    children: [
+      {
+        title: "Aile Listesi",
+        link: "/pages/families/family-list",
+      },
+      {
+        title: "Aile Girişi",
+        link: "/pages/families/family-adding",
+      },
+      {
+        title: "Saha Hareketleri",
+        link: "/pages/families/field-activity-list"
+      }
+    ],
+  },
+
   {
     title: "Muhasebe",
-    icon: "layout-outline",
+    icon: "file-text-outline",
     children: [
       {
         title: "Hareketler",
@@ -40,7 +59,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: "Kampanyalar",
-    icon: "layout-outline",
+    icon: "gift-outline",
     children: [
       {
         title: "Kampanya Listesi",
@@ -64,20 +83,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: "Üye Girişi",
         link: "/pages/members/member-adding",
-      },
-      {
-        title: "Gruplar",
-        link: "/pages/members/member-groups",
-      },
-      {
-        title: "Raporlar",
-        link: "/pages/members/member-reports",
-      },
+      }
     ],
   },
   {
     title: "Envanter",
-    icon: "layout-outline",
+    icon: "archive-outline",
     children: [
       {
         title: "Envanter Listesi",
@@ -96,7 +107,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
   {
     title: "İhtiyaçlar",
-    icon: "layout-outline",
+    icon: "shopping-cart-outline",
     children: [
       {
         title: "İhtiyaç Listesi",
@@ -113,29 +124,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
 
-  {
-    title: "Aileler",
-    icon: "layout-outline",
-    children: [
-      {
-        title: "Aile Listesi",
-        link: "/pages/families/family-list",
-      },
-      {
-        title: "Aile Girişi",
-        link: "/pages/families/family-adding",
-      },
-      {
-        title: "Saha Hareketleri",
-        link: "/pages/families/field-activity-list"
-      }
-    ],
-  },
-
 
   {
     title: "Karar Defteri",
-    icon: "layout-outline",
+    icon: "checkmark-circle-outline",
     children: [
       {
         title: "Yeni Karar Girişi",
@@ -148,11 +140,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
 
-  {
-    title: "Dernek Bilgileri",
-    icon: "layout-outline",
-    link: "/pages/dernek-bilgileri",
-  },
   {
     title: "Hesap",
     icon: "lock-outline",

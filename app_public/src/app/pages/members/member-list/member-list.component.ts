@@ -62,20 +62,20 @@ export class MemberListComponent {
           },
         },
       },
-      area: {
-        title: "Bölge",
-        type: "string",
-        valuePrepareFunction: (value) => {
-          return Family.areas[value];
-        },
-        filter: {
-          type: "list",
-          config: {
-            selectText: "Seç.",
-            list: Utils.table2selector(Family.areas),
-          },
-        },
-      },
+      // area: {
+      //   title: "Bölge",
+      //   type: "string",
+      //   valuePrepareFunction: (value) => {
+      //     return Family.areas[value];
+      //   },
+      //   filter: {
+      //     type: "list",
+      //     config: {
+      //       selectText: "Seç.",
+      //       list: Utils.table2selector(Family.areas),
+      //     },
+      //   },
+      // },
       group: {
         title: "Grup",
         type: "string",

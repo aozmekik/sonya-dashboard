@@ -1,12 +1,10 @@
 import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from "@angular/core";
 import { Family } from "../family";
-import { Utils } from '../../../utils/utils.module';
 import { CustomFormComponent } from '../../generic-components/custom-form/custom-form.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NbToastrService } from '@nebular/theme';
-import { Member } from '../../members/member';
 
 @Component({
   selector: "ngx-family-form",
@@ -21,23 +19,11 @@ import { Member } from '../../members/member';
  * The reason for this was obviusly the use of a dynamic form structures.
  */
 
-/**
- * // TODO.
- * This component seriously needs a refactor. 
- * It contains four discrete (also similar) dynamic form components. 
- * A refactor should be made using a generic construct for these.
- * Dynamic form generation was the reason for all the complexity of this code. 
- */
-
 export class FamilyFormComponent extends CustomFormComponent<Family> implements OnInit {
   public readonly familyKeys: Family.Keys = Family.keys;
-  public readonly memberKeys: Member.Keys = Member.keys;
+
 
   private destroy$ = new Subject();
-  public income: number = null;
-  public outgo: number = null;
-  public education: number = null;
-  public bill: number = null;
 
   constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService) {
     super(formBuilder, toastrService);
@@ -47,23 +33,24 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
     this.form = new FormGroup({
       '_id': new FormControl(this.model._id),
       'name': new FormControl(this.model.name),
+      'idNumber': new FormControl(this.model.idNumber),
+      'telephone': new FormControl(this.model.telephone),
+      'rent': new FormControl(this.model.rent),
       'regDate': new FormControl(this.model.regDate),
-      'area': new FormControl(this.model.area),
+      'warmingType': new FormControl(this.model.warmingType),
       'address': new FormControl(this.model.address),
-      'registeredMember': new FormControl(this.model.registeredMember),
+      'district': new FormControl(this.model.district),
+      'nation': new FormControl(this.model.nation),
       'status': new FormControl(this.model.status),
-      'comment': new FormControl(this.model.comment),
-      'memberCount': new FormControl(this.model.memberCount),
+      'budgets': new FormArray([]),
       'members': new FormArray([]),
-      'incomeCount': new FormControl(this.income),
-      'incomes': new FormArray([]),
-      'outgoCount': new FormControl(this.outgo),
-      'outgoes': new FormArray([]),
-      'educations': new FormArray([]),
-      'educationCount': new FormControl(this.education),
-      'bills': new FormArray([]),
-      'billCount': new FormControl(this.bill),
+      'needs': new FormArray([]),
+      'notes': new FormArray([]),
+      'memberCount': new FormControl(this.model.members.length),
+      'budgetCount': new FormControl(this.model.budgets.length)
     });
+
+    /* member dynamic list handler assignment */
 
     this.memberCount.valueChanges
       .pipe(
@@ -71,200 +58,27 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
       )
       .subscribe(() => {
         this.generateMemberForm();
+        if (this.memberCount.value >= this.model.members.length)
+          this.updateMembers();
       });
 
+    if (this.model.members)
+      this.updateMembers();
 
-    this.educationCount.valueChanges
+    /* budget dynamic list handler assignment */
+
+    this.budgetCount.valueChanges
       .pipe(
         takeUntil(this.destroy$)
       )
       .subscribe(() => {
-        this.generateEducationForm();
+        this.generateBudgetForm();
+        if (this.budgetCount.value >= this.model.budgets.length)
+          this.updateBudgets();
       });
 
-    this.incomeCount.valueChanges
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.generateIncomeForm();
-      });
-
-    this.outgoCount.valueChanges
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.generateOutgoForm();
-      });
-
-    this.billCount.valueChanges
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.generateBillForm();
-      });
-
-
-    this.memberCount.valueChanges
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        if (this.memberCount.value >= this.model.members.length) {
-          this.model.members.forEach(member => {
-            this.members.push(this.formBuilder.group(
-              {
-                idNo: member.idNo,
-                name: member.name,
-                birthyear: member.birthyear,
-                gender: member.gender,
-                job: member.job,
-                income: member.income,
-                body: member.body,
-                shoe: member.shoe,
-                disease: member.disease,
-              }
-            ));
-          });
-        }
-      });
-
-    this.outgoCount.valueChanges
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        if (this.outgoCount.value >= this.model.outgoes.length) {
-          this.model.outgoes.forEach(outgo => {
-            this.outgoes.push(this.formBuilder.group(
-              {
-                name: outgo.name,
-                amount: outgo.amount,
-              }
-            ));
-          });
-        }
-      });
-
-    this.billCount.valueChanges
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        if (this.billCount.value >= this.model.bills.length) {
-          this.model.bills.forEach(bill => {
-            this.bills.push(this.formBuilder.group(
-              {
-                name: bill.name,
-                contract: bill.contract,
-              }
-            ));
-          });
-        }
-      });
-
-
-    this.educationCount.valueChanges
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        if (this.educationCount.value >= this.model.educations.length) {
-          this.model.educations.forEach(education => {
-            this.educations.push(this.formBuilder.group(
-              {
-                name: education.name,
-                school: education.school,
-                grade: education.grade,
-              }
-            ));
-          });
-        }
-      });
-
-    this.incomeCount.valueChanges
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        if (this.incomeCount.value >= this.model.incomes.length) {
-          this.model.incomes.forEach(income => {
-            this.incomes.push(this.formBuilder.group(
-              {
-                name: income.name,
-                amount: income.amount,
-              }
-            ));
-          });
-        }
-      });
-
-    if (this.model.members) {
-      this.model.members.forEach(member => {
-        this.members.push(this.formBuilder.group(
-          {
-            idNo: member.idNo,
-            name: member.name,
-            birthyear: member.birthyear,
-            gender: member.gender,
-            job: member.job,
-            income: member.income,
-            body: member.body,
-            shoe: member.shoe,
-            disease: member.disease,
-          }
-        ))
-      });
-    }
-
-    if (this.model.educations) {
-      this.model.educations.forEach(education => {
-        this.educations.push(this.formBuilder.group(
-          {
-            name: education.name,
-            school: education.school,
-            grade: education.grade,
-          }
-        ));
-      });
-    };
-
-    if (this.model.incomes) {
-      this.model.incomes.forEach(income => {
-        this.incomes.push(this.formBuilder.group(
-          {
-            name: income.name,
-            amount: income.amount,
-          }
-        ));
-      });
-    };
-
-    if (this.model.outgoes) {
-      this.model.outgoes.forEach(outgo => {
-        this.outgoes.push(this.formBuilder.group(
-          {
-            name: outgo.name,
-            amount: outgo.amount,
-          }
-        ));
-      });
-    };
-
-    if (this.model.bills) {
-      this.model.bills.forEach(bill => {
-        this.bills.push(this.formBuilder.group(
-          {
-            name: bill.name,
-            contract: bill.contract,
-          }
-        ));
-      });
-    };
-
-
+    if (this.model.budgets)
+      this.updateBudgets();
 
   }
 
@@ -290,20 +104,20 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
     }
   }
 
-  generateEducationForm() {
-    this.educations.clear();
+  generateBudgetForm() {
+    this.budgets.clear();
     let count;
-    if (this.model.educations) {
-      count = this.educationCount.value >= this.model.educations.length ?
-        this.educationCount.value - this.model.educations.length :
-        this.educationCount.value;
+    if (this.model.budgets) {
+      count = this.budgetCount.value >= this.model.budgets.length ?
+        this.budgetCount.value - this.model.budgets.length :
+        this.budgetCount.value;
     }
     else
-      count = this.educationCount.value;
+      count = this.budgetCount.value;
 
-    if (this.educationCount.value <= 10) {
+    if (this.budgetCount.value <= 10) {
       for (let x = 0; x < count; x++) {
-        this.educations.push(this.createEducation());
+        this.budgets.push(this.createBudget());
       }
     }
   }
@@ -316,89 +130,59 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
       'gender': new FormControl(0, { validators: [Validators.required] }),
       'job': new FormControl(null, { validators: [Validators.required] }),
       'income': new FormControl(null, { validators: [Validators.required] }),
-      'body': new FormControl(0, { validators: [Validators.required] }),
+      'size': new FormControl(null, { validators: [Validators.required] }),
       'shoe': new FormControl(null, { validators: [Validators.required] }),
       'disease': new FormControl(null, { validators: [Validators.required] }),
+      'note': new FormControl(null, { validators: [Validators.required] }),
+      'school': new FormControl(null, { validators: [Validators.required] }),
+      'grade': new FormControl(null, { validators: [Validators.required] }),
+      'kinship': new FormControl(null, { validators: [Validators.required] }),
     });
   }
 
-  createEducation() {
-    return new FormGroup({
-      'name': new FormControl(null, { validators: [Validators.required] }),
-      'school': new FormControl(null, { validators: [Validators.required] }),
-      'grade': new FormControl(null, { validators: [Validators.required] }),
-    })
-  }
 
-  generateIncomeForm() {
-    this.incomes.clear();
-    let count;
-    if (this.model.incomes) {
-      count = this.incomeCount.value >= this.model.incomes.length ?
-        this.incomeCount.value - this.model.incomes.length :
-        this.incomeCount.value;
-    }
-    else
-      count = this.incomeCount.value;
-
-    if (this.incomeCount.value <= 10) {
-      for (let x = 0; x < count; x++) {
-        this.incomes.push(this.createIncome());
-      }
-    }
-  }
-
-  generateOutgoForm() {
-    this.outgoes.clear();
-    let count;
-    if (this.model.outgoes) {
-      count = this.outgoCount.value >= this.model.outgoes.length ?
-        this.outgoCount.value - this.model.outgoes.length :
-        this.outgoCount.value;
-    }
-    else
-      count = this.outgoCount.value;
-
-    if (this.outgoCount.value <= 10) {
-      for (let x = 0; x < count; x++) {
-        this.outgoes.push(this.createIncome()); /* income and outgo's interface are same */
-      }
-    }
-  }
-
-  generateBillForm() {
-    this.bills.clear();
-    let count;
-    if (this.model.bills) {
-      count = this.billCount.value >= this.model.bills.length ?
-        this.billCount.value - this.model.bills.length :
-        this.billCount.value;
-    }
-    else
-      count = this.billCount.value;
-
-    if (this.billCount.value <= 10) {
-      for (let x = 0; x < count; x++) {
-        this.bills.push(this.createBill()); 
-      }
-    }
-  }
-
-
-
-  createIncome() {
+  createBudget() {
     return new FormGroup({
       'name': new FormControl(null, { validators: [Validators.required] }),
       'amount': new FormControl(null, { validators: [Validators.required] }),
+      'type': new FormControl(Family.BudgetType.INCOME, { validators: [Validators.required] }),
     });
   }
 
-  createBill() {
-    return new FormGroup({
-      'name': new FormControl(null, { validators: [Validators.required] }),
-      'contract': new FormControl(null, { validators: [Validators.required] }),
+  updateMembers() {
+    this.model.members.forEach(member => {
+      this.members.push(this.formBuilder.group(
+        {
+          idNo: member.idNo,
+          name: member.name,
+          birthyear: member.birthyear,
+          gender: member.gender,
+          job: member.job,
+          income: member.income,
+          size: member.size,
+          shoe: member.shoe,
+          disease: member.disease,
+          note: member.note,
+          school: member.school,
+          grade: member.grade,
+          kinship: member.kinship
+        }
+      ))
     });
   }
+
+  updateBudgets() {
+    this.model.budgets.forEach(budget => {
+      this.budgets.push(this.formBuilder.group(
+        {
+          name: budget.name,
+          amount: budget.amount,
+          type: budget.type
+        }
+      ));
+    });
+  }
+
 
 
   get memberCount() {
@@ -409,36 +193,13 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
     return this.form.get('members') as FormArray;
   }
 
-  get incomeCount() {
-    return this.form.get('incomeCount');
+  get budgetCount() {
+    return this.form.get('budgetCount');
   }
 
-  get incomes() {
-    return this.form.get('incomes') as FormArray;
+  get budgets() {
+    return this.form.get('budgets') as FormArray;
   }
 
-  get outgoCount() {
-    return this.form.get('outgoCount');
-  }
-
-  get outgoes() {
-    return this.form.get('outgoes') as FormArray;
-  }
-
-  get educations() {
-    return this.form.get('educations') as FormArray;
-  }
-
-  get educationCount() {
-    return this.form.get('educationCount');
-  }
-
-  get bills() {
-    return this.form.get('bills') as FormArray;
-  }
-
-  get billCount() {
-    return this.form.get('billCount');
-  }
 
 }

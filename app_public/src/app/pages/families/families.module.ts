@@ -1,4 +1,5 @@
-import { FamilyViewingPopoverComponent } from './family-viewing-window/family-viewing-popover.component';
+import { FamilyMemberViewingPopoverComponent } from './family-viewing-window/family-member-viewing-popover.component';
+import { FamilyBudgetViewingPopoverComponent } from './family-viewing-window/family-budget-viewing-popover.component';
 import { FamilyViewingWindowComponent } from './family-viewing-window/family-viewing-window.component';
 import { GenericComponentsModule } from './../generic-components/generic-components.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -8,7 +9,6 @@ import { CommonModule } from "@angular/common";
 import {
   routedComponents,
   FamiliesRoutingModule,
-  // TODO. so much changes.
 } from "./families-routing.module";
 import {
   NbWindowModule,
@@ -57,13 +57,14 @@ import { FieldActivityListComponent } from './field-activity-list/field-activity
     FamilyViewingWindowComponent,
     FamilyFormComponent,
     FieldActivityListComponent,
-    FamilyViewingPopoverComponent,
+    FamilyMemberViewingPopoverComponent,
+    FamilyBudgetViewingPopoverComponent
   ],
   exports: [
     FamilyEditingWindowFormComponent,
     FamilyViewingWindowComponent,
     FamilyFormComponent,
   ],
-  entryComponents: [FamilyEditingWindowFormComponent, FamilyViewingWindowComponent, FamilyViewingPopoverComponent],
+  entryComponents: [FamilyEditingWindowFormComponent, FamilyViewingWindowComponent, FamilyMemberViewingPopoverComponent],
 })
-export class FamiliesModule {}
+export class FamiliesModule { }

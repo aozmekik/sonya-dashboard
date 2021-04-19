@@ -1,77 +1,79 @@
 import { Utils } from '../../utils/utils.module';
-import { Member } from '../members/member';
 
 export namespace Family {
 
-  /* representative, pretty straight forward areas for the time-being. */
-  export const enum Area {
-    ANATOLIA,
-    EUROPE,
+  export const enum Status {
+    NOT_QUESTIONED, // to be questioned.
+    QUESTIONED,
+    HELP, // suitable for help.
+    TRACE, // suitable for trace.
+    EDUCATION, // suitable for education.
+    NO_HELP,
+    NO_TRACE,
+    NO_EDUCATION,
   }
 
-  export const enum Status
-  {
-    UNIDENTIFIED, /* the family is not identified */
-    AIDED, /* the family identified and help has been made */
-    UNAIDED, /* the family identified and help has not been made */
-    UNFIT, /* the family was identified and help was deemed unsuitable */
+  export const enum WarmingType {
+    NATURAL_GAS,
+    STOVE,
+    ELECTRIC_HEATER
   }
 
-  export const enum Body
-  {
-    XS,
-    S,
-    M,
-    L,
-    XL,
-    XXL,
+  export const enum Gender {
+    MAN,
+    WOMAN
   }
 
-  export interface FamilyMember
-  {
+  export interface FamilyMember {
     idNo: number;
     name: string;
     birthyear: number;
-    gender: Member.Gender;
+    gender: Gender;
     job: string;
     income: number;
-    body: Family.Body;
+    size: string;
     shoe: number;
     disease: string;
-  }
-
-  /* records of the corporations that helped this family */
-  export interface Income
-  {
-    name: string; /* name of the organization */
-    amount: number; /* amount helped */
-  }
-
-  /* educational records of children in the family */
-  export interface Education
-  {
-    name: string;
+    note: string;
     school: string;
-    grade: number;
+    grade: string;
+    kinship: string;
   }
 
-  export interface Outgo
-  {
+  export const enum BudgetType {
+    INCOME,
+    EXPENSE,
+    BILL
+  }
+
+  export const enum Rating {
+    VERY_LOW,
+    LOW,
+    NORMAL,
+    GOOD,
+    VERY_GOOD
+  }
+
+  export interface Budget {
     name: string;
     amount: number;
+    type: BudgetType;
   }
 
-  export interface Bill
-  {
-    name: string;
-    contract: number; /* mukavele no */
+  export interface Note {
+    statement: string;
+    members: string[];
+    rating: Rating;
   }
 
   export interface Keys {
-    areas: string[];
     statuses: string[];
-    bodies: string[];
+    genders: string[],
+    warmingTypes: string[],
+    budgetTypes: string[],
+    ratings: string[]
   }
+
 
 }
 
@@ -81,66 +83,90 @@ export namespace Family {
  */
 export class Family {
   _id: string;
-  name: string; /* family surname. */
-  nation: Member.Nation; /* family nationality */
-  regDate: string; /* date of registration. */
-  memberCount: number; /* number of members in the family. */
-  area: Family.Area; /* the region where the family lives. */
-  address: string; /* home address of the family */
-  registeredMember: string; /* person who registered the family. */
-  status: Family.Status; /* aid and identification status about the family.*/
-  comment: string; /* additional information about the family */
-  members: Family.FamilyMember[]; /* members living in the family */
-  incomes: Family.Income[]; /* organizations where the family receives assistance */
-  educations: Family.Education[]; /* educational status of children in the family */
-  outgoes: Family.Outgo[]; /* family expenses */
-  bills: Family.Bill[]; /* family bills */
 
-  public static readonly areas: Utils.IHash = {
-    [Family.Area.ANATOLIA]: "Anadolu",
-    [Family.Area.EUROPE]: "Avrupa",
-  };
+  clerk: string; // the member who added this family
+
+  /* general */
+  name: string;
+  idNumber: number;
+  telephone: number;
+  rent: number;
+  regDate: string;
+  warmingType: Family.WarmingType;
+  address: string;
+  district: string;
+  nation: string;
+
+  /* details */
+  status: Family.Status;
+  budgets: Family.Budget[];
+  members: Family.FamilyMember[];
+  needs: string[];
+  notes: Family.Note[];
+
 
   public static readonly statuses: Utils.IHash = {
-    [Family.Status.UNIDENTIFIED]: "Tespit Yapılmadı",
-    [Family.Status.AIDED]: "Yardım Edildi",
-    [Family.Status.UNAIDED]: "Yardım Edilmedi",
-    [Family.Status.UNFIT]: "Uygun Görülmedi",
+    [Family.Status.NOT_QUESTIONED]: 'Sorgulama Yapılacak',
+    [Family.Status.QUESTIONED]: 'Sorgulama Yapıldı',
+    [Family.Status.HELP]: 'Yardıma Uygun',
+    [Family.Status.TRACE]: 'Takibe Uygun',
+    [Family.Status.EDUCATION]: 'Eğitime Uygun',
+    [Family.Status.NO_HELP]: 'Yardıma Uygun Değil',
+    [Family.Status.NO_TRACE]: 'Takibe Uygun Değil',
+    [Family.Status.NO_EDUCATION]: 'Eğitime Uygun Değil',
   };
 
-  public static readonly bodies: Utils.IHash = {
-    [Family.Body.XS]: "XS",
-    [Family.Body.S]: "S",
-    [Family.Body.M]: "M",
-    [Family.Body.L]: "L",
-    [Family.Body.XL]: "XL",
-    [Family.Body.XXL]: "XXL",
+  public static readonly genders: Utils.IHash = {
+    [Family.Gender.MAN]: 'Erkek',
+    [Family.Gender.WOMAN]: 'Kadın',
+  }
+
+  public static readonly warmingTypes: Utils.IHash = {
+    [Family.WarmingType.NATURAL_GAS]: 'Doğal Gaz',
+    [Family.WarmingType.ELECTRIC_HEATER]: 'Elektrikli Isıtıcı',
+    [Family.WarmingType.STOVE]: 'Kömür',
+  }
+
+  public static readonly budgetTypes: Utils.IHash = {
+    [Family.BudgetType.INCOME]: 'Gelir',
+    [Family.BudgetType.EXPENSE]: 'Gider',
+    [Family.BudgetType.BILL]: 'Fatura',
+  }
+
+  public static readonly ratings: Utils.IHash = {
+    [Family.Rating.VERY_LOW]: 'Çok Zayıf',
+    [Family.Rating.LOW]: 'Zayıf',
+    [Family.Rating.NORMAL]: 'Normal',
+    [Family.Rating.GOOD]: 'İyi',
+    [Family.Rating.VERY_GOOD]: 'Çok İyi'
   }
 
   public static readonly keys: Family.Keys = {
-    areas: Utils.keys(Family.areas),
     statuses: Utils.keys(Family.statuses),
-    bodies: Utils.keys(Family.bodies),
+    genders: Utils.keys(Family.genders),
+    warmingTypes: Utils.keys(Family.warmingTypes),
+    budgetTypes: Utils.keys(Family.budgetTypes),
+    ratings: Utils.keys(Family.ratings),
   };
 
   public static default(): Family {
     const family = {
-      _id: "id123",
+      _id: 'id123',
+      clerk: null,
       name: null,
-      nation: Member.Nation.Syrian,
-      regDate: new Date().toLocaleString(),
-      memberCount: null,
-      status: this.Status.UNIDENTIFIED,
+      idNumber: null,
       telephone: null,
+      rent: null,
+      regDate: new Date().toLocaleString(),
+      warmingType: this.WarmingType.NATURAL_GAS,
       address: null,
-      area: Family.Area.ANATOLIA,
-      registeredMember: null,
+      district: null,
+      nation: null,
+      status: this.Status.NOT_QUESTIONED,
+      budgets: [],
       members: [],
-      comment: null,
-      incomes: [],
-      educations: [],
-      outgoes: [],
-      bills: []
+      needs: [],
+      notes: [],
     };
     return family;
   }

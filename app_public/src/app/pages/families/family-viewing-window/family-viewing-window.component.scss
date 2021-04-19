@@ -7,7 +7,7 @@
     }
 
     div[class^="col-"] {
-      //   padding: 0.5rem;
+      // padding: 0.5rem;
       box-sizing: border-box;
 
       div {
@@ -31,15 +31,31 @@
     margin-top: 1rem;
   }
 }
-nb-list {
-  max-height: 8.25rem;
-}
 
 .button {
   text-align: center;
 
   button {
-      cursor: pointer;
-      margin: 0.5rem;
+    cursor: pointer;
+    margin: 0.5rem;
   }
+}
+
+.container {
+  width: 1200px;
+  height: 800px;
+}
+
+// * {
+//   outline: 0.1em solid red;
+// }
+
+nb-list-item {
+  margin: 0;
+  padding: 0;
+}
+
+
+.popover-row {
+  margin: 0.5em;
 }
