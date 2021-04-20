@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build": "cd app_public && ng build --prod"
   },
   "engines": {
     "node": ">=12.16.1",
