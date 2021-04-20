@@ -5,7 +5,7 @@
       {{ form.value | json }}
       <hr /> -->
       <nb-stepper orientation="horizontal" [linear]="false">
-        <nb-step label="Sayfa 1" [stepControl]="form">
+        <nb-step label="Genel" [stepControl]="form">
           <div class="button">
             <button nbButton outline disabled nbStepperPrevious>Önceki</button>
             <button nbButton outline nbStepperNext>Sonraki</button>
@@ -36,7 +36,7 @@
           </ngx-custom-selector>
         </nb-step>
 
-        <nb-step label="Sayfa 2" [stepControl]="form">
+        <nb-step label="Aile Üyeleri" [stepControl]="form">
           <div class="button">
             <button nbButton outline nbStepperPrevious>Önceki</button>
             <button nbButton outline nbStepperNext>Sonraki</button>
@@ -161,10 +161,10 @@
           </div>
         </nb-step>
 
-        <nb-step label="Sayfa 3" [stepControl]="form">
+        <nb-step label="Bütçe" [stepControl]="form">
           <div class="button">
             <button nbButton outline nbStepperPrevious>Önceki</button>
-            <button nbButton outline disabled nbStepperNext>Sonraki</button>
+            <button nbButton outline nbStepperNext>Sonraki</button>
           </div>
           <hr />
           <div class="row form-group">
@@ -319,6 +319,31 @@
               </ul>
             </div>
           </div>
+        </nb-step>
+
+        <nb-step label="Resim" [stepControl]="form">
+          <div class="button">
+            <button nbButton outline nbStepperPrevious>Önceki</button>
+            <button nbButton outline disabled nbStepperNext>Sonraki</button>
+          </div>
+          <hr />
+          <input nbInput style="display: none" type="file" accept="image/*" multiple (change)="onFileChanged($event)"
+            #fileInput>
+          <button nbButton (click)="fileInput.click()">
+            <nb-icon icon="upload-outline"></nb-icon> Resim Yükle
+          </button>
+
+          <nb-card class="image-card">
+            <div class="row">
+              <div class="image-container" *ngFor="let image of model.images; index as i">
+                <img [src]="image" height="300">
+                <button status="primary" (click)="deleteFile(i)" shape="round" nbButton>
+                  <nb-icon icon="close-outline"></nb-icon>
+                </button>
+              </div>
+            </div>
+
+          </nb-card>
         </nb-step>
       </nb-stepper>
 

@@ -2,7 +2,7 @@
   <nb-card>
     <nb-card-body>
       <nb-stepper orientation="horizontal" [linear]="false">
-        <nb-step label="Sayfa 1">
+        <nb-step label="Genel">
           <div class="button">
             <button nbButton outline disabled nbStepperPrevious>Önceki</button>
             <button nbButton outline nbStepperNext>Sonraki</button>
@@ -19,7 +19,7 @@
           </ng-container>
         </nb-step>
 
-        <nb-step label="Sayfa 2">
+        <nb-step label="Aile Üyeleri">
           <div class="button">
             <button nbButton outline nbStepperPrevious>Önceki</button>
             <button nbButton outline nbStepperNext>Sonraki</button>
@@ -43,10 +43,10 @@
           </div>
         </nb-step>
 
-        <nb-step label="Sayfa 3">
+        <nb-step label="Bütçe">
           <div class="button">
             <button nbButton outline nbStepperPrevious>Önceki</button>
-            <button nbButton outline disabled nbStepperNext>Sonraki</button>
+            <button nbButton outline nbStepperNext>Sonraki</button>
           </div>
           <hr />
           <div class="row section">
@@ -100,6 +100,26 @@
             </div>
           </div>
         </nb-step>
+
+        <nb-step label="Resim">
+          <div class="button">
+            <button nbButton outline nbStepperPrevious>Önceki</button>
+            <button nbButton outline disabled nbStepperNext>Sonraki</button>
+          </div>
+          <hr />
+
+          <nb-card class="image-card">
+            <div class="minus" *ngIf="family.images.length == 0">
+              <nb-icon icon="minus-outline"></nb-icon>
+            </div>
+            <div class="row">
+              <div class="image-container" *ngFor="let image of family.images; index as i">
+                <img [src]="image" height="400">
+              </div>
+            </div>
+          </nb-card>
+        </nb-step>
+
       </nb-stepper>
 
 

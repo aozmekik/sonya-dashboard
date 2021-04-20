@@ -59,7 +59,21 @@ nb-list-item {
   margin: 0.5em;
 }
 
-
 .section {
   margin-top: 2em;
+}
+
+.image-card {
+  .minus {
+    margin: 1em;
+  }
+}
+
+.image-container {
+  margin: 2em;
+
+  img {
+    border-radius: 5%;
+  }
+
 }

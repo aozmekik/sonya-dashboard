@@ -106,6 +106,7 @@ export class Family {
   members: Family.FamilyMember[];
   needs: Family.Need[];
   notes: Family.Note[];
+  images: string[];
 
 
   public static readonly statuses: Utils.IHash = {
@@ -170,6 +171,7 @@ export class Family {
       members: [],
       needs: [],
       notes: [],
+      images: [],
     };
     return family;
   }

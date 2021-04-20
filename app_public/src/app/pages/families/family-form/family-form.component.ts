@@ -235,6 +235,25 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
     (this.form.get(list) as FormArray).removeAt(idx);
   }
 
+  onFileChanged(event) {
+    if (event.target.files && event.target.files[0]) {
+      var filesAmount = event.target.files.length;
+      for (let i = 0; i < filesAmount; i++) {
+        var reader = new FileReader();
+
+        reader.onload = (event: any) => {
+          this.model.images.push(event.target.result);
+        }
+
+        reader.readAsDataURL(event.target.files[i]);
+      }
+    }
+
+  }
+
+  deleteFile(idx: number) {
+    this.model.images.splice(idx, 1)
+  }
 
 
 }

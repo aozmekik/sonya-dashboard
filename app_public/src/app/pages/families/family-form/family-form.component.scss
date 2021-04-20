@@ -23,3 +23,23 @@ li {
 .form-label {
   margin: auto;
 }
+
+.image-container {
+  margin: 2em;
+  position: relative;
+
+  img {
+    border-radius: 5%;
+  }
+
+  button {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+  }
+
+}
+
+.image-card {
+  margin-top: 1em;
+}

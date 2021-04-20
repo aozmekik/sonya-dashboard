@@ -64,7 +64,7 @@ import { FamilyNoteViewingPopoverComponent } from './family-viewing-window/pop-o
     FamilyBudgetViewingPopoverComponent,
     FamilyNeedViewingPopoverComponent,
     FamilyNoteViewingPopoverComponent,
-    DynamicFormComponent
+    DynamicFormComponent,
   ],
   exports: [
     FamilyEditingWindowFormComponent,

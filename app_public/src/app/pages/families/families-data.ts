@@ -86,6 +86,7 @@ export class FamiliesData {
           rating: Family.Rating.GOOD
         },
       ],
+      images: []
     },
     {
       _id: "id123",
@@ -140,6 +141,7 @@ export class FamiliesData {
           rating: Family.Rating.GOOD
         },
       ],
+      images: []
     },
   ];
 
