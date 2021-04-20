@@ -78,11 +78,11 @@ export class FamiliesData {
         kinship: "kinship2"
       },
       ],
-      needs: ["need1", "need2"],
+      needs: [{name: "need1"}, {name: "need2"}],
       notes: [
         {
           statement: "statement1",
-          members: ["member1", "member2", "member3"],
+          members: "member1, member2, member3",
           rating: Family.Rating.GOOD
         },
       ],
@@ -132,11 +132,11 @@ export class FamiliesData {
         kinship: "kinship2"
       },
       ],
-      needs: ["need1", "need2"],
+      needs: [{name: "need1"}, {name: "need2"}],
       notes: [
         {
           statement: "statement1",
-          members: ["member1", "member2", "member3"],
+          members: "member1, member2, member3",
           rating: Family.Rating.GOOD
         },
       ],

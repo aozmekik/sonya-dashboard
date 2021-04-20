@@ -1,0 +1,40 @@
+<div class="row form-group">
+    <label [for]="count" class="col-1 label form-label">{{name}}: {{ getCount.value }}</label>
+    <div class="col-11">
+        <button class="form-button" [disabled]="getCount.value >= 5" (click)="addForm()" nbButton>
+            <nb-icon icon="plus-outline"></nb-icon>
+        </button>
+    </div>
+</div>
+<div [formGroup]="form" class="form-group row">
+    <div class="col">
+        <ul [formArrayName]="list">
+            <li *ngFor="let item of getList.controls; let i = index">
+                <span [formGroupName]="i">
+                    <div class="row">
+                        <div class="col-10">
+                            <nb-accordion>
+                                <nb-accordion-item>
+                                    <nb-accordion-item-header>
+                                        {{item.value.name}}
+                                    </nb-accordion-item-header>
+                                    <nb-accordion-item-body>
+                                        <ng-template [ngTemplateOutlet]="template"
+                                            [ngTemplateOutletContext]="{formGroup: getList.controls[i]}"></ng-template>
+                                    </nb-accordion-item-body>
+                                </nb-accordion-item>
+                            </nb-accordion>
+                        </div>
+                        <div class="col-2">
+                            <button class="remove-button" [disabled]="getCount.value <= 0 " (click)="removeForm(i)"
+                                nbButton>
+                                <nb-icon icon="close-outline"></nb-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <hr />
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>

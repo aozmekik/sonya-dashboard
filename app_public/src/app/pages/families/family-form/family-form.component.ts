@@ -1,4 +1,4 @@
-import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Component, OnInit } from "@angular/core";
 import { Family } from "../family";
 import { CustomFormComponent } from '../../generic-components/custom-form/custom-form.component';
@@ -22,7 +22,7 @@ import { NbToastrService } from '@nebular/theme';
 export class FamilyFormComponent extends CustomFormComponent<Family> implements OnInit {
   public readonly familyKeys: Family.Keys = Family.keys;
 
-
+  // public memberCount: number = 0;
   private destroy$ = new Subject();
 
   constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService) {
@@ -47,38 +47,16 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
       'needs': new FormArray([]),
       'notes': new FormArray([]),
       'memberCount': new FormControl(this.model.members.length),
-      'budgetCount': new FormControl(this.model.budgets.length)
+      'budgetCount': new FormControl(this.model.budgets.length),
+      'needCount': new FormControl(this.model.needs.length),
+      'noteCount': new FormControl(this.model.notes.length)
     });
 
-    /* member dynamic list handler assignment */
+    this.assignDynamicHandler(this.members, this.model.members, this.memberCount, this.createMember, () => this.updateMembers());
+    this.assignDynamicHandler(this.budgets, this.model.budgets, this.budgetCount, this.createBudget, () => this.updateBudgets());
+    this.assignDynamicHandler(this.needs, this.model.needs, this.needCount, this.createNeed, () => this.updateNeeds());
+    this.assignDynamicHandler(this.notes, this.model.notes, this.noteCount, this.createNotes, () => this.updateNotes());
 
-    this.memberCount.valueChanges
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.generateMemberForm();
-        if (this.memberCount.value >= this.model.members.length)
-          this.updateMembers();
-      });
-
-    if (this.model.members)
-      this.updateMembers();
-
-    /* budget dynamic list handler assignment */
-
-    this.budgetCount.valueChanges
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.generateBudgetForm();
-        if (this.budgetCount.value >= this.model.budgets.length)
-          this.updateBudgets();
-      });
-
-    if (this.model.budgets)
-      this.updateBudgets();
 
   }
 
@@ -86,40 +64,37 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
     this.destroy$.next();
   }
 
-  generateMemberForm() {
-    this.members.clear();
-    let count;
-    if (this.model.members) {
-      count = this.memberCount.value >= this.model.members.length ?
-        this.memberCount.value - this.model.members.length :
-        this.memberCount.value;
-    }
-    else
-      count = this.memberCount.value;
+  assignDynamicHandler(list: FormArray, model: any[], count: any, creator, updater) {
+    count.valueChanges
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.generateForm(list, model, count, creator);
+        // if (count.value >= model.length)
+        //   updater();
+      });
 
-    if (this.memberCount.value <= 10) {
-      for (let x = 0; x < count; x++) {
-        this.members.push(this.createMember());
-      }
-    }
+    if (model)
+      updater();
+
   }
 
-  generateBudgetForm() {
-    this.budgets.clear();
-    let count;
-    if (this.model.budgets) {
-      count = this.budgetCount.value >= this.model.budgets.length ?
-        this.budgetCount.value - this.model.budgets.length :
-        this.budgetCount.value;
+  generateForm(list: FormArray, model: any[], count: AbstractControl, creator) {
+    if (model) {
+      let diff = count.value - list.length;
+      if (diff > 0) // append
+        list.push(creator())
+      // else { // remove
+      //   for (let x = 0; x < -diff; x++)
+      //     list.removeAt((list.length - 1) - x);
+      // }
     }
-    else
-      count = this.budgetCount.value;
+    else { // add from scratch
+      for (let x = 0; x < count.value; x++)
+        list.push(creator())
+    }
 
-    if (this.budgetCount.value <= 10) {
-      for (let x = 0; x < count; x++) {
-        this.budgets.push(this.createBudget());
-      }
-    }
   }
 
   createMember() {
@@ -146,6 +121,20 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
       'name': new FormControl(null, { validators: [Validators.required] }),
       'amount': new FormControl(null, { validators: [Validators.required] }),
       'type': new FormControl(Family.BudgetType.INCOME, { validators: [Validators.required] }),
+    });
+  }
+
+  createNeed() {
+    return new FormGroup({
+      'name': new FormControl(null, { validators: [Validators.required] }),
+    });
+  }
+
+  createNotes() {
+    return new FormGroup({
+      'statement': new FormControl(null, { validators: [Validators.required] }),
+      'members': new FormControl(null, { validators: [Validators.required] }),
+      'rating': new FormControl(null, { validators: [Validators.required] }),
     });
   }
 
@@ -183,7 +172,27 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
     });
   }
 
+  updateNeeds() {
+    this.model.needs.forEach(need => {
+      this.needs.push(this.formBuilder.group(
+        {
+          name: need.name,
+        }
+      ));
+    });
+  }
 
+  updateNotes() {
+    this.model.notes.forEach(note => {
+      this.notes.push(this.formBuilder.group(
+        {
+          statement: note.statement,
+          members: note.members,
+          rating: note.rating
+        }
+      ));
+    });
+  }
 
   get memberCount() {
     return this.form.get('memberCount');
@@ -200,6 +209,32 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
   get budgets() {
     return this.form.get('budgets') as FormArray;
   }
+
+  get needCount() {
+    return this.form.get('needCount');
+  }
+
+  get needs() {
+    return this.form.get('needs') as FormArray;
+  }
+
+  get noteCount() {
+    return this.form.get('noteCount');
+  }
+
+  get notes() {
+    return this.form.get('notes') as FormArray;
+  }
+
+  addForm(count: string) {
+    this.form.controls[count].setValue(this.form.get(count).value + 1);
+  }
+
+  removeForm(count: string, list: string, idx: number) {
+    this.form.controls[count].setValue(this.form.get(count).value - 1);
+    (this.form.get(list) as FormArray).removeAt(idx);
+  }
+
 
 
 }

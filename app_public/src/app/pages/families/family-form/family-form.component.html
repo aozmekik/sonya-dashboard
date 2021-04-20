@@ -42,104 +42,117 @@
             <button nbButton outline nbStepperNext>Sonraki</button>
           </div>
           <hr />
-          <ngx-custom-input-box rowName="Aile Üye Sayısı" [maxLength]="2" [alpha]="false" [(formGroup)]="form"
-            formControlName="memberCount">
-          </ngx-custom-input-box>
+          <div class="row form-group">
+            <label for="memberCount" class="col-1 label form-label">Aile Üye: {{ memberCount.value}}</label>
+            <div class="col-11">
+              <button class="form-button" [disabled]="memberCount.value >= 10" (click)="addForm('memberCount')"
+                nbButton>
+                <nb-icon icon="plus-outline"></nb-icon>
+              </button>
+            </div>
+          </div>
           <div class="form-group row">
-            <label class="label col-sm-3 col-form-label"></label>
-            <div class="col-sm-9">
+            <div class="col">
               <ul formArrayName="members">
                 <li *ngFor="let member of members.controls; let i = index">
                   <span [formGroupName]="i">
-                    <div>
-                      <nb-accordion>
-                        <nb-accordion-item>
-                          <nb-accordion-item-header>
-                            {{member.value.name}}
-                          </nb-accordion-item-header>
-                          <nb-accordion-item-body>
-                            <div class="row">
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [numeric]="false" rowName="Ad Soyad"
-                                  [formGroup]="members.controls[i]" formControlName="name"></ngx-custom-input-box>
+                    <div class="row">
+                      <div class="col-10">
+                        <nb-accordion>
+                          <nb-accordion-item>
+                            <nb-accordion-item-header>
+                              {{member.value.name ? member.value.name: "-"}}
+                            </nb-accordion-item-header>
+                            <nb-accordion-item-body>
+                              <div class="row">
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [numeric]="false" rowName="Ad Soyad"
+                                    [formGroup]="members.controls[i]" formControlName="name"></ngx-custom-input-box>
+                                </div>
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Kimlik No"
+                                    [formGroup]="members.controls[i]" formControlName="idNo"></ngx-custom-input-box>
+                                </div>
                               </div>
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Kimlik No"
-                                  [formGroup]="members.controls[i]" formControlName="idNo"></ngx-custom-input-box>
+                              <div class="row">
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
+                                    rowName="Akrabalık Derecesi" [formGroup]="members.controls[i]"
+                                    formControlName="kinship">
+                                  </ngx-custom-input-box>
+                                </div>
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [minLength]="4"
+                                    [maxLength]="4" rowName="Doğum Yılı" [formGroup]="members.controls[i]"
+                                    formControlName="birthyear">
+                                  </ngx-custom-input-box>
+                                </div>
                               </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
-                                  rowName="Akrabalık Derecesi" [formGroup]="members.controls[i]"
-                                  formControlName="kinship">
-                                </ngx-custom-input-box>
+                              <div class="row">
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Gelir"
+                                    [formGroup]="members.controls[i]" formControlName="income"></ngx-custom-input-box>
+                                </div>
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
+                                    rowName="Meslek" [formGroup]="members.controls[i]" formControlName="job">
+                                  </ngx-custom-input-box>
+                                </div>
                               </div>
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [minLength]="4"
-                                  [maxLength]="4" rowName="Doğum Yılı" [formGroup]="members.controls[i]"
-                                  formControlName="birthyear">
-                                </ngx-custom-input-box>
+                              <div class="row">
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Beden"
+                                    [formGroup]="members.controls[i]" formControlName="size"></ngx-custom-input-box>
+                                </div>
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Ayakkabı Numarası"
+                                    [formGroup]="members.controls[i]" formControlName="shoe"></ngx-custom-input-box>
+                                </div>
                               </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Gelir"
-                                  [formGroup]="members.controls[i]" formControlName="income"></ngx-custom-input-box>
+                              <div class="row">
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
+                                    rowName="Hastalık / Engel" [formGroup]="members.controls[i]"
+                                    formControlName="disease">
+                                  </ngx-custom-input-box>
+                                </div>
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
+                                    rowName="Not" [formGroup]="members.controls[i]" formControlName="note">
+                                  </ngx-custom-input-box>
+                                </div>
                               </div>
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
-                                  rowName="Meslek" [formGroup]="members.controls[i]" formControlName="job">
-                                </ngx-custom-input-box>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Beden"
-                                  [formGroup]="members.controls[i]" formControlName="size"></ngx-custom-input-box>
-                              </div>
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Ayakkabı Numarası"
-                                  [formGroup]="members.controls[i]" formControlName="shoe"></ngx-custom-input-box>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
-                                  rowName="Hastalık / Engel" [formGroup]="members.controls[i]"
-                                  formControlName="disease">
-                                </ngx-custom-input-box>
-                              </div>
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
-                                  rowName="Not" [formGroup]="members.controls[i]" formControlName="note">
-                                </ngx-custom-input-box>
-                              </div>
-                            </div>
 
-                            <div class="row">
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
-                                  rowName="Okul" [formGroup]="members.controls[i]" formControlName="school">
-                                </ngx-custom-input-box>
+                              <div class="row">
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
+                                    rowName="Okul" [formGroup]="members.controls[i]" formControlName="school">
+                                  </ngx-custom-input-box>
+                                </div>
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
+                                    rowName="Sınıf" [formGroup]="members.controls[i]" formControlName="grade">
+                                  </ngx-custom-input-box>
+                                </div>
                               </div>
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" [numeric]="false"
-                                  rowName="Sınıf" [formGroup]="members.controls[i]" formControlName="grade">
-                                </ngx-custom-input-box>
+                              <div class="row">
+                                <div class="col-6">
+                                  <ngx-custom-selector [sideBySide]="true" rowName="Cinsiyet"
+                                    [selectingList]="familyKeys.genders" [(formGroup)]="members.controls[i]"
+                                    formControlName="gender">
+                                  </ngx-custom-selector>
+                                </div>
                               </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-6">
-                                <ngx-custom-selector [sideBySide]="true" rowName="Cinsiyet"
-                                  [selectingList]="familyKeys.genders" [(formGroup)]="members.controls[i]"
-                                  formControlName="gender">
-                                </ngx-custom-selector>
-                              </div>
-                            </div>
-                          </nb-accordion-item-body>
-                        </nb-accordion-item>
-                      </nb-accordion>
+                            </nb-accordion-item-body>
+                          </nb-accordion-item>
+                        </nb-accordion>
+                      </div>
+                      <div class="col-2">
+                        <button class="remove-button" [disabled]="memberCount.value <= 0 "
+                          (click)="removeForm('memberCount', 'members', i)" nbButton>
+                          <nb-icon icon="close-outline"></nb-icon>
+                        </button>
+                      </div>
                     </div>
                     <hr />
                   </span>
@@ -155,45 +168,57 @@
             <button nbButton outline disabled nbStepperNext>Sonraki</button>
           </div>
           <hr />
-          <ngx-custom-input-box rowName="Bütçe Sayısı" [maxLength]="2" [alpha]="false" [(formGroup)]="form"
-            formControlName="budgetCount">
-          </ngx-custom-input-box>
+          <div class="row form-group">
+            <label for="budgetCount" class="col-1 label form-label">Bütçe: {{ budgetCount.value }}</label>
+            <div class="col-11">
+              <button class="form-button" [disabled]="budgetCount.value >= 5" (click)="addForm('budgetCount')" nbButton>
+                <nb-icon icon="plus-outline"></nb-icon>
+              </button>
+            </div>
+          </div>
           <div class="form-group row">
-            <label class="label col-sm-3 col-form-label"></label>
-            <div class="col-sm-9">
+            <div class="col">
               <ul formArrayName="budgets">
                 <li *ngFor="let budget of budgets.controls; let i = index">
                   <span [formGroupName]="i">
-                    <div>
-                      <nb-accordion>
-                        <nb-accordion-item>
-                          <nb-accordion-item-header>
-                            {{budget.value.name}}
-                          </nb-accordion-item-header>
-                          <nb-accordion-item-body>
-                            <div class="row">
-                              <div class="col-6">
-                                <ngx-custom-selector [sideBySide]="true" rowName="Tip"
-                                  [selectingList]="familyKeys.budgetTypes" [(formGroup)]="budgets.controls[i]"
-                                  formControlName="type">
-                                </ngx-custom-selector>
+                    <div class="row">
+                      <div class="col-10">
+                        <nb-accordion>
+                          <nb-accordion-item>
+                            <nb-accordion-item-header>
+                              {{budget.value.name}}
+                            </nb-accordion-item-header>
+                            <nb-accordion-item-body>
+                              <div class="row">
+                                <div class="col-6">
+                                  <ngx-custom-selector [sideBySide]="true" rowName="Tip"
+                                    [selectingList]="familyKeys.budgetTypes" [(formGroup)]="budgets.controls[i]"
+                                    formControlName="type">
+                                  </ngx-custom-selector>
+                                </div>
                               </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [numeric]="false" [alpha]="false"
-                                  rowName="Bütçe Adı" [(formGroup)]="budgets.controls[i]" formControlName="name">
-                                </ngx-custom-input-box>
+                              <div class="row">
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [numeric]="false" [alpha]="false"
+                                    rowName="Bütçe Adı" [(formGroup)]="budgets.controls[i]" formControlName="name">
+                                  </ngx-custom-input-box>
+                                </div>
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Tutar"
+                                    [(formGroup)]="budgets.controls[i]" formControlName="amount">
+                                  </ngx-custom-input-box>
+                                </div>
                               </div>
-                              <div class="col-6">
-                                <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Tutar"
-                                  [(formGroup)]="budgets.controls[i]" formControlName="amount">
-                                </ngx-custom-input-box>
-                              </div>
-                            </div>
-                          </nb-accordion-item-body>
-                        </nb-accordion-item>
-                      </nb-accordion>
+                            </nb-accordion-item-body>
+                          </nb-accordion-item>
+                        </nb-accordion>
+                      </div>
+                      <div class="col-2">
+                        <button class="remove-button" [disabled]="budgetCount.value <= 0 "
+                          (click)="removeForm('budgetCount', 'budgets', i)" nbButton>
+                          <nb-icon icon="close-outline"></nb-icon>
+                        </button>
+                      </div>
                     </div>
                     <hr />
                   </span>
@@ -201,11 +226,124 @@
               </ul>
             </div>
           </div>
+          <hr />
+
+          <div class="row form-group">
+            <label for="noteCount" class="col-1 label form-label">Not: {{ noteCount.value}}</label>
+            <div class="col-11">
+              <button class="form-button" [disabled]="noteCount.value >= 5" (click)="addForm('noteCount')" nbButton>
+                <nb-icon icon="plus-outline"></nb-icon>
+              </button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col">
+              <ul formArrayName="notes">
+                <li *ngFor="let note of notes.controls; let i = index">
+                  <span [formGroupName]="i">
+                    <div class="row">
+                      <div class="col-12">
+                        <nb-accordion>
+                          <nb-accordion-item>
+                            <nb-accordion-item-header>
+                              {{note.value.statement}}
+                            </nb-accordion-item-header>
+                            <nb-accordion-item-body>
+                              <div class="row">
+                                <div class="col-6">
+                                  <ngx-custom-input-box [sideBySide]="true" [numeric]="false" [alpha]="false"
+                                    rowName="Not" [(formGroup)]="notes.controls[i]" formControlName="statement">
+                                  </ngx-custom-input-box>
+                                </div>
+                                <div class="col-6">
+                                  <ngx-custom-selector [sideBySide]="true" rowName="İhtiyaç Derecesi"
+                                    [selectingList]="familyKeys.ratings" [(formGroup)]="notes.controls[i]"
+                                    formControlName="rating">
+                                  </ngx-custom-selector>
+                                </div>
+                              </div>
+                            </nb-accordion-item-body>
+                          </nb-accordion-item>
+                        </nb-accordion>
+                      </div>
+                      <div class="col-2">
+                        <button class="remove-button" [disabled]="noteCount.value <= 0 "
+                          (click)="removeForm('noteCount', 'notes', i)" nbButton>
+                          <nb-icon icon="close-outline"></nb-icon>
+                        </button>
+                      </div>
+                    </div>
+                    <hr />
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <hr />
+
+          <ngx-dynamic-form count="needCount" list="needs" [(form)]="form" [template]="needsTemplate"></ngx-dynamic-form>
+
+
+          <!-- <div class="row form-group">
+            <label for="needCount" class="col-1 label form-label">İhtiyaç: {{ needCount.value}}</label>
+            <div class="col-11">
+              <button class="form-button" [disabled]="needCount.value >= 5" (click)="addForm('needCount')" nbButton>
+                <nb-icon icon="plus-outline"></nb-icon>
+              </button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col">
+              <ul formArrayName="needs">
+                <li *ngFor="let need of needs.controls; let i = index">
+                  <span [formGroupName]="i">
+                    <div class="row">
+                      <div class="col-10">
+                        <nb-accordion>
+                          <nb-accordion-item>
+                            <nb-accordion-item-header>
+                              {{need.value.name}}
+                            </nb-accordion-item-header>
+                            <nb-accordion-item-body>
+                              <div class="row">
+                                <div class="col-12">
+                                  <ngx-custom-input-box [sideBySide]="true" [numeric]="false" [alpha]="false"
+                                    rowName="İhtiyaç" [(formGroup)]="needs.controls[i]" formControlName="name">
+                                  </ngx-custom-input-box>
+                                </div>
+                              </div>
+                            </nb-accordion-item-body>
+                          </nb-accordion-item>
+                        </nb-accordion>
+                      </div>
+                      <div class="col-2">
+                        <button class="remove-button" [disabled]="needCount.value <= 0 "
+                          (click)="removeForm('needCount', 'needs', i)" nbButton>
+                          <nb-icon icon="close-outline"></nb-icon>
+                        </button>
+                      </div>
+                    </div>
+                    <hr />
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div> -->
+          <ng-template #needsTemplate let-formGroup="formGroup">
+            <div class="row">
+              <div class="col-12">
+                <ngx-custom-input-box [sideBySide]="true" [numeric]="false" [alpha]="false" rowName="İhtiyaç"
+                [formGroup]="formGroup" formControlName="name">
+                </ngx-custom-input-box>
+              </div>
+            </div>
+          </ng-template>
+
         </nb-step>
       </nb-stepper>
 
       <div class="form-group row">
-        <div class="offset-sm-3 col-sm-9">
+        <div class="offset-sm-3 col-9">
           <button (click)="onSubmit()" nbButton status="primary" hero [disabled]="form.invalid">
             {{buttonName}}
           </button>

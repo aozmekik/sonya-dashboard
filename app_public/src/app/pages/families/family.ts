@@ -62,7 +62,7 @@ export namespace Family {
 
   export interface Note {
     statement: string;
-    members: string[];
+    members: string;
     rating: Rating;
   }
 
@@ -74,6 +74,9 @@ export namespace Family {
     ratings: string[]
   }
 
+  export interface Need {
+    name: string;
+  }
 
 }
 
@@ -101,7 +104,7 @@ export class Family {
   status: Family.Status;
   budgets: Family.Budget[];
   members: Family.FamilyMember[];
-  needs: string[];
+  needs: Family.Need[];
   notes: Family.Note[];
 
 
