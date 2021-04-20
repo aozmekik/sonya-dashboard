@@ -16,7 +16,7 @@ export class FamiliesData {
       district: "discrict1",
       nation: "nation1",
       status: Family.Status.NOT_QUESTIONED,
-      budgets: [],
+      budgets: [{ name: "budget1", amount: 100, type: Family.BudgetType.BILL }],
       members: [{
         idNo: 123,
         name: "name1ablaskdflasdlfkasd",
@@ -78,7 +78,7 @@ export class FamiliesData {
         kinship: "kinship2"
       },
       ],
-      needs: [{name: "need1"}, {name: "need2"}],
+      needs: [{ name: "need1" }, { name: "need2" }],
       notes: [
         {
           statement: "statement1",
@@ -132,7 +132,7 @@ export class FamiliesData {
         kinship: "kinship2"
       },
       ],
-      needs: [{name: "need1"}, {name: "need2"}],
+      needs: [{ name: "need1" }, { name: "need2" }],
       notes: [
         {
           statement: "statement1",

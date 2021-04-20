@@ -1,5 +1,5 @@
-import { FamilyMemberViewingPopoverComponent } from './family-viewing-window/family-member-viewing-popover.component';
-import { FamilyBudgetViewingPopoverComponent } from './family-viewing-window/family-budget-viewing-popover.component';
+import { FamilyMemberViewingPopoverComponent } from './family-viewing-window/pop-overs/family-member-viewing-popover.component';
+import { FamilyBudgetViewingPopoverComponent } from './family-viewing-window/pop-overs/family-budget-viewing-popover.component';
 import { FamilyViewingWindowComponent } from './family-viewing-window/family-viewing-window.component';
 import { GenericComponentsModule } from './../generic-components/generic-components.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -29,6 +29,8 @@ import { FamilyFormComponent } from './family-form/family-form.component';
 import { FamilyEditingWindowFormComponent } from './family-editing-window/family-editing-window.component';
 import { FieldActivityListComponent } from './field-activity-list/field-activity-list.component';
 import { DynamicFormComponent } from './family-form/dynamic-form/dynamic-form.component';
+import { FamilyNeedViewingPopoverComponent } from './family-viewing-window/pop-overs/family-need-viewing-popover.component';
+import { FamilyNoteViewingPopoverComponent } from './family-viewing-window/pop-overs/family-note-viewing-popover.component';
 
 @NgModule({
   imports: [
@@ -60,6 +62,8 @@ import { DynamicFormComponent } from './family-form/dynamic-form/dynamic-form.co
     FieldActivityListComponent,
     FamilyMemberViewingPopoverComponent,
     FamilyBudgetViewingPopoverComponent,
+    FamilyNeedViewingPopoverComponent,
+    FamilyNoteViewingPopoverComponent,
     DynamicFormComponent
   ],
   exports: [
@@ -67,6 +71,6 @@ import { DynamicFormComponent } from './family-form/dynamic-form/dynamic-form.co
     FamilyViewingWindowComponent,
     FamilyFormComponent,
   ],
-  entryComponents: [FamilyEditingWindowFormComponent, FamilyViewingWindowComponent, FamilyMemberViewingPopoverComponent],
+  entryComponents: [FamilyEditingWindowFormComponent, FamilyViewingWindowComponent],
 })
 export class FamiliesModule { }

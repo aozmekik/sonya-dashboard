@@ -154,7 +154,6 @@
                         </button>
                       </div>
                     </div>
-                    <hr />
                   </span>
                 </li>
               </ul>
@@ -186,7 +185,7 @@
                         <nb-accordion>
                           <nb-accordion-item>
                             <nb-accordion-item-header>
-                              {{budget.value.name}}
+                              {{budget.value.name ? budget.value.name: "-"}}
                             </nb-accordion-item-header>
                             <nb-accordion-item-body>
                               <div class="row">
@@ -220,14 +219,11 @@
                         </button>
                       </div>
                     </div>
-                    <hr />
                   </span>
                 </li>
               </ul>
             </div>
           </div>
-          <hr />
-
           <div class="row form-group">
             <label for="noteCount" class="col-1 label form-label">Not: {{ noteCount.value}}</label>
             <div class="col-11">
@@ -242,11 +238,11 @@
                 <li *ngFor="let note of notes.controls; let i = index">
                   <span [formGroupName]="i">
                     <div class="row">
-                      <div class="col-12">
+                      <div class="col-10">
                         <nb-accordion>
                           <nb-accordion-item>
                             <nb-accordion-item-header>
-                              {{note.value.statement}}
+                              {{note.value.statement ? note.value.statement: "-"}}
                             </nb-accordion-item-header>
                             <nb-accordion-item-body>
                               <div class="row">
@@ -273,18 +269,13 @@
                         </button>
                       </div>
                     </div>
-                    <hr />
                   </span>
                 </li>
               </ul>
             </div>
           </div>
-          <hr />
 
-          <ngx-dynamic-form count="needCount" list="needs" [(form)]="form" [template]="needsTemplate"></ngx-dynamic-form>
-
-
-          <!-- <div class="row form-group">
+          <div class="row form-group">
             <label for="needCount" class="col-1 label form-label">İhtiyaç: {{ needCount.value}}</label>
             <div class="col-11">
               <button class="form-button" [disabled]="needCount.value >= 5" (click)="addForm('needCount')" nbButton>
@@ -302,7 +293,7 @@
                         <nb-accordion>
                           <nb-accordion-item>
                             <nb-accordion-item-header>
-                              {{need.value.name}}
+                              {{need.value.name? need.value.name : "-"}}
                             </nb-accordion-item-header>
                             <nb-accordion-item-body>
                               <div class="row">
@@ -323,22 +314,11 @@
                         </button>
                       </div>
                     </div>
-                    <hr />
                   </span>
                 </li>
               </ul>
             </div>
-          </div> -->
-          <ng-template #needsTemplate let-formGroup="formGroup">
-            <div class="row">
-              <div class="col-12">
-                <ngx-custom-input-box [sideBySide]="true" [numeric]="false" [alpha]="false" rowName="İhtiyaç"
-                [formGroup]="formGroup" formControlName="name">
-                </ngx-custom-input-box>
-              </div>
-            </div>
-          </ng-template>
-
+          </div>
         </nb-step>
       </nb-stepper>
 

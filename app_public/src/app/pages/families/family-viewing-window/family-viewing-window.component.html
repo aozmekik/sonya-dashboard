@@ -49,7 +49,7 @@
             <button nbButton outline disabled nbStepperNext>Sonraki</button>
           </div>
           <hr />
-          <div class="row">
+          <div class="row section">
             <label class="label col-3 col-form-label">Bütçe</label>
             <div class="col-9">
               <nb-list>
@@ -59,6 +59,40 @@
                       <button fullWidth nbButton nbPopoverAdjustment="noop" nbPopoverPlacement="right"
                         [nbPopover]="budgetViewingPopoverComponent"
                         [nbPopoverContext]="{budget: budget}">{{budget.name}}</button>
+                    </div>
+                  </div>
+                </nb-list-item>
+              </nb-list>
+            </div>
+          </div>
+
+          <div class="row section">
+            <label class="label col-3 col-form-label">İhtiyaç</label>
+            <div class="col-9">
+              <nb-list>
+                <nb-list-item *ngFor="let need of family.needs; let i=index">
+                  <div class="row justify-content-start popover-row">
+                    <div class="col-12">
+                      <button fullWidth nbButton nbPopoverAdjustment="noop" nbPopoverPlacement="right"
+                        [nbPopover]="needViewingPopoverComponent"
+                        [nbPopoverContext]="{need: need}">{{need.name}}</button>
+                    </div>
+                  </div>
+                </nb-list-item>
+              </nb-list>
+            </div>
+          </div>
+
+          <div class="row section">
+            <label class="label col-3 col-form-label">Not</label>
+            <div class="col-9">
+              <nb-list>
+                <nb-list-item *ngFor="let note of family.notes; let i=index">
+                  <div class="row justify-content-start popover-row">
+                    <div class="col-12">
+                      <button fullWidth nbButton nbPopoverAdjustment="noop" nbPopoverPlacement="right"
+                        [nbPopover]="noteViewingPopoverComponent"
+                        [nbPopoverContext]="{note: note}">{{note.statement}}</button>
                     </div>
                   </div>
                 </nb-list-item>
