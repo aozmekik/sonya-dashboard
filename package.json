@@ -22,7 +22,7 @@
     "mongoose": "^5.12.4",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.7",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "@akveo/ng2-completer": "^9.0.1",
     "@angular/animations": "^11.0.9",
     "@angular/cdk": "11.0.4",
