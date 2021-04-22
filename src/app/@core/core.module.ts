@@ -1,9 +1,3 @@
-import { SecurityCamerasService } from './mock/security-cameras.service';
-import { LayoutService } from './utils/layout.service';
-import { PlayerService } from './utils/player.service';
-import { TrafficListService } from './mock/traffic-list.service';
-import { TrafficBarData } from './data/traffic-bar';
-import { StatsProgressBarService } from './mock/stats-progress-bar.service';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
@@ -11,55 +5,20 @@ import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 import { of as observableOf } from 'rxjs';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
-import { AnalyticsService } from './utils';
-import { UserData } from './data/users';
-import { UserService } from './mock/users.service';
-import { MockDataModule } from './mock/mock-data.module';
-import { StatsBarData } from './data/stats-bar';
-import { StatsBarService } from './mock/stats-bar.service';
-import { StatsProgressBarData } from './data/stats-progress-bar';
-import { ProfitBarAnimationChartData } from './data/profit-bar-animation-chart';
-import { ProfitBarAnimationChartService } from './mock/profit-bar-animation-chart.service';
-import { TrafficBarService } from './mock/traffic-bar.service';
-import { TrafficListData } from './data/traffic-list';
-import { OrdersChartData } from './data/orders-chart';
-import { OrdersChartService } from './mock/orders-chart.service';
-import { OrdersProfitChartData } from './data/orders-profit-chart';
-import { OrdersProfitChartService } from './mock/orders-profit-chart.service';
-import { UserActivityData } from './data/user-activity';
-import { UserActivityService } from './mock/user-activity.service';
-import { SecurityCamerasData } from './data/security-cameras';
 
-const socialLinks = [
-  // {
-  //   url: 'https://github.com/akveo/nebular',
-  //   target: '_blank',
-  //   icon: 'github',
-  // },
-  {
-    url: 'https://www.facebook.com/akveo/',
-    target: '_blank',
-    icon: 'facebook',
-  },
-  {
-    url: 'https://twitter.com/akveo_inc',
-    target: '_blank',
-    icon: 'twitter',
-  },
-];
 
-const DATA_SERVICES = [
-  { provide: UserData, useClass: UserService },
-  { provide: StatsBarData, useClass: StatsBarService},
-  { provide: StatsProgressBarData, useClass: StatsProgressBarService},
-  { provide: ProfitBarAnimationChartData, useClass: ProfitBarAnimationChartService},
-  { provide: TrafficBarData, useClass: TrafficBarService},
-  { provide: TrafficListData, useClass: TrafficListService},
-  { provide: OrdersChartData, useClass: OrdersChartService},
-  { provide: OrdersProfitChartData, useClass: OrdersProfitChartService},
-  { provide: UserActivityData, useClass: UserActivityService},
-  { provide: SecurityCamerasData, useClass: SecurityCamerasService},
-];
+// const DATA_SERVICES = [
+//   { provide: Us"erData, useClass: UserService },
+//   { provide: StatsBarData, useClass: StatsBarService },
+//   { provide: StatsProgressBarData, useClass: StatsProgressBarService },
+//   { provide: ProfitBarAnimationChartData, useClass: ProfitBarAnimationChartService },
+//   { provide: TrafficBarData, useClass: TrafficBarService },
+//   { provide: TrafficListData, useClass: TrafficListService },
+//   { provide: OrdersChartData, useClass: OrdersChartService },
+//   { provide: OrdersProfitChartData, useClass: OrdersProfitChartService },
+//   { provide: UserActivityData, useClass: UserActivityService },
+//   { provide: SecurityCamerasData, useClass: SecurityCamerasService },
+// ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
   getRole() {
@@ -69,8 +28,7 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 }
 
 export const NB_CORE_PROVIDERS = [
-  ...MockDataModule.forRoot().providers,
-  ...DATA_SERVICES,
+  //   ...DATA_SERVICES,
   ...NbAuthModule.forRoot({
 
     strategies: [
@@ -79,14 +37,14 @@ export const NB_CORE_PROVIDERS = [
         delay: 3000,
       }),
     ],
-    forms: {
-      login: {
-        socialLinks: socialLinks,
-      },
-      register: {
-        socialLinks: socialLinks,
-      },
-    },
+    // forms: {
+    //   login: {
+    //     socialLinks: socialLinks,
+    //   },
+    //   register: {
+    //     socialLinks: socialLinks,
+    //   },
+    // },
   }).providers,
 
   NbSecurityModule.forRoot({
@@ -102,13 +60,12 @@ export const NB_CORE_PROVIDERS = [
       },
     },
   }).providers,
-
   {
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
-  },
-  AnalyticsService,
-  LayoutService,
-  PlayerService,
+  }
+  //   AnalyticsService,
+  //   LayoutService,
+  //   PlayerService,
 ];
 
 @NgModule({
