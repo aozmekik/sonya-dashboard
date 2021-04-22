@@ -1,5 +1,4 @@
 import { Member } from "./member";
-import { Family } from '../families/family';
 import { Status } from '../../@core/data/status';
 
 // only for representative frontend. will be deleted soon.

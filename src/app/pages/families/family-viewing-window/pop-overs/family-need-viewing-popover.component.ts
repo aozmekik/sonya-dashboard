@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Family } from '../../family';
 
 @Component({
   selector: 'ngx-need-popover-card',
@@ -7,10 +6,10 @@ import { Family } from '../../family';
     <div class="container"> 
       <nb-card class="popover-card">
         <nb-card-header status="warning">
-          {{need.name}}
+          {{need}}
         </nb-card-header>
         <nb-card-body>
-          <ng-container *ngTemplateOutlet="row; context: {label: 'İhtiyaç', value: need.name}"></ng-container>
+          <ng-container *ngTemplateOutlet="row; context: {label: 'İhtiyaç', value: need}"></ng-container>
           
         </nb-card-body>
       </nb-card>

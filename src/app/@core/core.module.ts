@@ -5,20 +5,13 @@ import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 import { of as observableOf } from 'rxjs';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
+import { FamilyService } from './services/family.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
-// const DATA_SERVICES = [
-//   { provide: Us"erData, useClass: UserService },
-//   { provide: StatsBarData, useClass: StatsBarService },
-//   { provide: StatsProgressBarData, useClass: StatsProgressBarService },
-//   { provide: ProfitBarAnimationChartData, useClass: ProfitBarAnimationChartService },
-//   { provide: TrafficBarData, useClass: TrafficBarService },
-//   { provide: TrafficListData, useClass: TrafficListService },
-//   { provide: OrdersChartData, useClass: OrdersChartService },
-//   { provide: OrdersProfitChartData, useClass: OrdersProfitChartService },
-//   { provide: UserActivityData, useClass: UserActivityService },
-//   { provide: SecurityCamerasData, useClass: SecurityCamerasService },
-// ];
+const SERVICES = [
+  FamilyService
+];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
   getRole() {
@@ -28,7 +21,7 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 }
 
 export const NB_CORE_PROVIDERS = [
-  //   ...DATA_SERVICES,
+  ...SERVICES,
   ...NbAuthModule.forRoot({
 
     strategies: [
@@ -63,14 +56,13 @@ export const NB_CORE_PROVIDERS = [
   {
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
   }
-  //   AnalyticsService,
-  //   LayoutService,
-  //   PlayerService,
+
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule
   ],
   exports: [
     NbAuthModule,

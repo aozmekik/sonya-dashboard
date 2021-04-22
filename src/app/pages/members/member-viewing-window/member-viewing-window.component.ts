@@ -1,9 +1,7 @@
-import { Family } from './../../families/family';
 import { Member } from './../member';
 import { Component, Input } from "@angular/core";
 import { NbWindowRef } from "@nebular/theme";
-import { Utils } from '../../../utils/utils.module';
-import { statusValues } from '../../../@core/data/status';
+import { Family } from '../../../@core/data/family';
 
 @Component({
   selector: "ngx-member-viewing-window",

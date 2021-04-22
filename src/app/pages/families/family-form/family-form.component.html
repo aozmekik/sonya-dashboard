@@ -11,10 +11,12 @@
             <button nbButton outline nbStepperNext>Sonraki</button>
           </div>
           <hr />
-          <ngx-custom-input-box rowName="İsim" [numeric]="false" [(formGroup)]="form" formControlName="name">
+          <!-- <input type="text" formControlName="name" /> -->
+          <ngx-custom-input-box [required]="true" rowName="İsim" [numeric]="false" [(formGroup)]="form"
+            formControlName="name">
           </ngx-custom-input-box>
           <ngx-custom-input-box rowName="Kimlik Numarası" [alpha]="false" [(formGroup)]="form"
-            formControlName="idNumber">
+            formControlName="idNo">
           </ngx-custom-input-box>
           <ngx-custom-input-box rowName="Uyruk" [numeric]="false" [(formGroup)]="form" formControlName="nation">
           </ngx-custom-input-box>
@@ -22,8 +24,6 @@
           </ngx-custom-input-box>
           <ngx-custom-input-box rowName="Kira" [alpha]="false" [(formGroup)]="form" formControlName="rent">
           </ngx-custom-input-box>
-          <ngx-custom-date-picker rowName="Kayıt Tarihi" [(formGroup)]="form" formControlName="regDate">
-          </ngx-custom-date-picker>
           <ngx-custom-selector rowName="Isınma Tipi" [selectingList]="familyKeys.warmingTypes" [(formGroup)]="form"
             formControlName="warmingType">
           </ngx-custom-selector>
@@ -67,7 +67,8 @@
                               <div class="row">
                                 <div class="col-6">
                                   <ngx-custom-input-box [sideBySide]="true" [numeric]="false" rowName="Ad Soyad"
-                                    [formGroup]="members.controls[i]" formControlName="name"></ngx-custom-input-box>
+                                    [formGroup]="members.controls[i]" [required]="true" formControlName="name">
+                                  </ngx-custom-input-box>
                                 </div>
                                 <div class="col-6">
                                   <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Kimlik No"
@@ -198,13 +199,14 @@
                               </div>
                               <div class="row">
                                 <div class="col-6">
-                                  <ngx-custom-input-box [sideBySide]="true" [numeric]="false" [alpha]="false"
-                                    rowName="Bütçe Adı" [(formGroup)]="budgets.controls[i]" formControlName="name">
+                                  <ngx-custom-input-box [sideBySide]="true" [required]="true" [numeric]="false"
+                                    [alpha]="false" rowName="Bütçe Adı" [(formGroup)]="budgets.controls[i]"
+                                    formControlName="name">
                                   </ngx-custom-input-box>
                                 </div>
                                 <div class="col-6">
-                                  <ngx-custom-input-box [sideBySide]="true" [alpha]="false" rowName="Tutar"
-                                    [(formGroup)]="budgets.controls[i]" formControlName="amount">
+                                  <ngx-custom-input-box [sideBySide]="true" [required]="true" [alpha]=" false"
+                                    rowName="Tutar" [(formGroup)]="budgets.controls[i]" formControlName="amount">
                                   </ngx-custom-input-box>
                                 </div>
                               </div>
@@ -248,7 +250,7 @@
                               <div class="row">
                                 <div class="col-6">
                                   <ngx-custom-input-box [sideBySide]="true" [numeric]="false" [alpha]="false"
-                                    rowName="Not" [(formGroup)]="notes.controls[i]" formControlName="statement">
+                                    rowName="Not" [(formGroup)]="notes.controls[i]" [required]="true" formControlName="statement">
                                   </ngx-custom-input-box>
                                 </div>
                                 <div class="col-6">
@@ -299,7 +301,7 @@
                               <div class="row">
                                 <div class="col-12">
                                   <ngx-custom-input-box [sideBySide]="true" [numeric]="false" [alpha]="false"
-                                    rowName="İhtiyaç" [(formGroup)]="needs.controls[i]" formControlName="name">
+                                    rowName="İhtiyaç" [required]="true" [(formGroup)]="needs.controls[i]" formControlName="name">
                                   </ngx-custom-input-box>
                                 </div>
                               </div>
@@ -335,7 +337,7 @@
 
           <nb-card class="image-card">
             <div class="row">
-              <div class="image-container" *ngFor="let image of model.images; index as i">
+              <div class="image-container" *ngFor="let image of form.value.images; index as i">
                 <img [src]="image" height="300">
                 <button status="primary" (click)="deleteFile(i)" shape="round" nbButton>
                   <nb-icon icon="close-outline"></nb-icon>

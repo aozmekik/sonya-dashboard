@@ -1,4 +1,4 @@
 <nb-card>
   <nb-card-header>Aile Girişi</nb-card-header>
-  <ngx-family-form buttonName="Aile Ekle" [(model)]="family"></ngx-family-form>
+  <ngx-family-form buttonName="Aile Ekle" (formSubmit)="onSubmit($event)" [model]="family"></ngx-family-form>
 </nb-card>

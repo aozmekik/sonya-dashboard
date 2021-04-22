@@ -1,6 +1,5 @@
 import { statusValues } from './../../@core/data/status';
 import { Utils } from '../../utils/utils.module';
-import { Family } from '../families/family';
 import { Status } from '../../@core/data/status';
 import { Util } from 'leaflet';
 

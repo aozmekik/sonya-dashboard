@@ -28,6 +28,9 @@
           <div class="row">
             <label class="label col-3 col-form-label">Aile Üyeleri</label>
             <div class="col-9">
+              <div class="minus" *ngIf="family.members.length == 0">
+                <nb-icon icon="minus-outline"></nb-icon>
+              </div>
               <nb-list>
                 <nb-list-item *ngFor="let member of family.members; let i=index">
                   <div class="row justify-content-start popover-row">
@@ -52,7 +55,11 @@
           <div class="row section">
             <label class="label col-3 col-form-label">Bütçe</label>
             <div class="col-9">
+              <div class="minus" *ngIf="family.budgets.length == 0">
+                <nb-icon icon="minus-outline"></nb-icon>
+              </div>
               <nb-list>
+                <nb-icon icon="minus-outline"></nb-icon>
                 <nb-list-item *ngFor="let budget of family.budgets; let i=index">
                   <div class="row justify-content-start popover-row">
                     <div class="col-12">
@@ -69,13 +76,15 @@
           <div class="row section">
             <label class="label col-3 col-form-label">İhtiyaç</label>
             <div class="col-9">
+              <div class="minus" *ngIf="family.needs.length == 0">
+                <nb-icon icon="minus-outline"></nb-icon>
+              </div>
               <nb-list>
                 <nb-list-item *ngFor="let need of family.needs; let i=index">
                   <div class="row justify-content-start popover-row">
                     <div class="col-12">
                       <button fullWidth nbButton nbPopoverAdjustment="noop" nbPopoverPlacement="right"
-                        [nbPopover]="needViewingPopoverComponent"
-                        [nbPopoverContext]="{need: need}">{{need.name}}</button>
+                        [nbPopover]="needViewingPopoverComponent" [nbPopoverContext]="{need: need}">{{need}}</button>
                     </div>
                   </div>
                 </nb-list-item>
@@ -86,6 +95,9 @@
           <div class="row section">
             <label class="label col-3 col-form-label">Not</label>
             <div class="col-9">
+              <div class="minus" *ngIf="family.notes.length == 0">
+                <nb-icon icon="minus-outline"></nb-icon>
+              </div>
               <nb-list>
                 <nb-list-item *ngFor="let note of family.notes; let i=index">
                   <div class="row justify-content-start popover-row">

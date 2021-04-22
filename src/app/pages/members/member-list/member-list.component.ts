@@ -7,7 +7,6 @@ import { NbWindowService } from "@nebular/theme";
 import { MemberEditingWindowComponent } from "../member-editing-window/member-editing-window.component";
 import { Member } from '../member';
 import { MemberViewingWindowComponent } from '../member-viewing-window/member-viewing-window.component';
-import { Family } from '../../families/family';
 import { Utils } from '../../../utils/utils.module';
 
 @Component({

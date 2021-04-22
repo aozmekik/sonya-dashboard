@@ -1,6 +1,6 @@
-import { Family } from './../family';
 import { Component, Input } from "@angular/core";
 import { NbWindowRef } from "@nebular/theme";
+import { Family } from "../../../@core/data/family";
 import { FamilyBudgetViewingPopoverComponent } from './pop-overs/family-budget-viewing-popover.component';
 import { FamilyMemberViewingPopoverComponent } from './pop-overs/family-member-viewing-popover.component';
 import { FamilyNeedViewingPopoverComponent } from './pop-overs/family-need-viewing-popover.component';

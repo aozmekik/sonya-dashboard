@@ -2,6 +2,7 @@ import { FamilyListComponent } from './../family-list/family-list.component';
 import { Component, OnInit } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
 import { Router } from '@angular/router';
+import { FamilyService } from '../../../@core/services/family.service';
 
 @Component({
   selector: 'ngx-field-activity-list',
@@ -10,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class FieldActivityListComponent extends FamilyListComponent implements OnInit {
 
-  constructor(public router: Router, public windowService: NbWindowService) {
-    super(router, windowService);
+  constructor(public router: Router, public windowService: NbWindowService, private _familyService: FamilyService) {
+    super(router, windowService, _familyService);
     // this.source.load, load different data.
 
     /* little adjustments to the base's settings */
@@ -29,7 +30,7 @@ export class FieldActivityListComponent extends FamilyListComponent implements O
   ngOnInit() {
   }
 
-  onDelete(event): void {
+  async onDelete(event) {
     if (window.confirm("Kaydı silmek istediğinize emin misiniz?")) {
       event.confirm.resolve();
     } else {

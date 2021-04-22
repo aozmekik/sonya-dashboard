@@ -1,6 +1,6 @@
 <div *ngIf="!sideBySide; else elseTemplate">
   <div class="form-group row">
-    <label class="label col-sm-3 col-form-label">{{rowName}}</label>
+    <label class="label col-sm-3 col-form-label">{{rowName}}<span *ngIf="required">*</span> </label>
     <div class="col-sm-9">
       <ng-container *ngTemplateOutlet="body"></ng-container>
     </div>
@@ -9,7 +9,7 @@
 
 <ng-template #elseTemplate>
   <div class="form-group">
-    <label [for]="formControlName" class="label">{{rowName}}</label>
+    <label [for]="formControlName" class="label">{{rowName}}<span *ngIf="required">*</span></label>
     <ng-container *ngTemplateOutlet="body"></ng-container>
   </div>
 </ng-template>
@@ -17,13 +17,15 @@
 <ng-template #body>
   <div [formGroup]="formGroup">
     <div *ngIf="alpha || (!alpha && !numeric); else elseBlock0">
-      <input type="text" required [pattern]="regexPattern" [class.status-danger]="getData.touched && getData.invalid"
-        [class.is-invalid]="getData.touched && getData.invalid" class="form-control" nbInput fullWidth
-        [placeholder]="rowName" name="formControl" [formControlName]="formControlName" /> </div>
+      <input type="text" [required]="required" [pattern]="regexPattern"
+        [class.status-danger]="getData.touched && getData.invalid"
+        [class.is-invalid]="getData.touched && getData.invalid" nbInput fullWidth [placeholder]="rowName"
+        name="formControl" [formControlName]="formControlName" />
+    </div>
     <ng-template #elseBlock0>
-      <input type="number" required [class.status-danger]="getData.touched && getData.invalid"
-        [class.is-invalid]="getData.touched && getData.invalid" class="form-control" nbInput fullWidth
-        [placeholder]="rowName" name="formControl" [formControlName]="formControlName" />
+      <input type="number" [class.status-danger]="getData.touched && getData.invalid"
+        [class.is-invalid]="getData.touched && getData.invalid" nbInput fullWidth [placeholder]="rowName"
+        name="formControl" [formControlName]="formControlName" />
     </ng-template>
     <div class="text-danger" *ngIf="getData && getData.errors && (getData.dirty || getData.touched)">
       <div *ngIf="getData.errors.required"><small>Bu alanın doldurulması gerekli.</small></div>

@@ -1,23 +1,32 @@
 import { FamilyViewingWindowComponent } from './../family-viewing-window/family-viewing-window.component';
 import { FamilyEditingWindowFormComponent } from './../family-editing-window/family-editing-window.component';
-import { FamiliesData } from './../families-data';
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { LocalDataSource } from "ng2-smart-table";
 import { Router } from "@angular/router";
 import { NbWindowService } from "@nebular/theme";
-import { Family } from '../family';
 import { Utils } from '../../../utils/utils.module';
+import { FamilyService } from '../../../@core/services/family.service';
+import { Family } from '../../../@core/data/family';
 
 @Component({
   selector: "ngx-family-list",
   templateUrl: "./family-list.component.html",
   styleUrls: ["./family-list.component.scss"],
 })
-export class FamilyListComponent {
-  constructor(public router: Router, public windowService: NbWindowService) {
-    const mydata = FamiliesData.getData();
-    this.source.load(mydata);
+export class FamilyListComponent implements OnInit {
+  public families: Family[];
+
+  constructor(
+    public router: Router,
+    public windowService: NbWindowService,
+    private familyService: FamilyService) {
+    this.getFamilies();
   }
+
+  ngOnInit(): void {
+  }
+
+
   settings = {
     actions: {
       columnTitle: "Eylemler",
@@ -71,11 +80,10 @@ export class FamilyListComponent {
 
   source = new LocalDataSource();
 
-  onDelete(event): void {
+  async onDelete(event) {
     if (window.confirm("Kaydı silmek istediğinize emin misiniz?")) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
+      await this.familyService.deleteFamily(event.data);
+      this.getFamilies();
     }
   }
 
@@ -94,9 +102,13 @@ export class FamilyListComponent {
     this.windowService.open(FamilyEditingWindowFormComponent, {
       title: "Aile Düzenle",
       context: {
-        family: event.data
+        family: event.data,
       }
-    });
+    })
+      .onClose
+      .toPromise()
+      .then(this.getFamilies.bind(this));
+    // FIXME. you don't have to read all of them again.
   }
 
   onSelect(event) {
@@ -108,4 +120,8 @@ export class FamilyListComponent {
     });
   }
 
+  private async getFamilies() {
+    this.families = await this.familyService.getFamilies();
+    this.source.load(this.families);
+  }
 }

@@ -94,7 +94,8 @@ var familySchema = new mongoose.Schema({
     {
         type: Number,
         min: 0,
-        max: 6
+        max: 6,
+        required: true
     },
     budgets: [budgetSchema],
     members: [memberSchema],

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Family } from '../../family';
+import { Family } from '../../../../@core/data/family';
 
 @Component({
   selector: 'ngx-budget-popover-card',

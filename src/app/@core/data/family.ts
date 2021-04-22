@@ -155,7 +155,7 @@ export class Family {
 
   public static default(): Family {
     const family = {
-      _id: 'id123',
+      _id: null,
       clerk: null,
       name: null,
       idNo: null,

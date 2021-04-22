@@ -1,10 +1,10 @@
 import { FormBuilder, FormArray, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Component, OnInit } from "@angular/core";
-import { Family } from "../family";
 import { CustomFormComponent } from '../../generic-components/custom-form/custom-form.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NbToastrService } from '@nebular/theme';
+import { Family } from '../../../@core/data/family';
 
 @Component({
   selector: "ngx-family-form",
@@ -32,11 +32,12 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
   ngOnInit() {
     this.form = new FormGroup({
       '_id': new FormControl(this.model._id),
-      'name': new FormControl(this.model.name),
-      'idNumber': new FormControl(this.model.idNumber),
+      'clerk': new FormControl(this.model.clerk),
+      'regDate': new FormControl(this.model.regDate),
+      'name': new FormControl(this.model.name, Validators.required),
+      'idNo': new FormControl(this.model.idNo),
       'telephone': new FormControl(this.model.telephone),
       'rent': new FormControl(this.model.rent),
-      'regDate': new FormControl(this.model.regDate),
       'warmingType': new FormControl(this.model.warmingType),
       'address': new FormControl(this.model.address),
       'district': new FormControl(this.model.district),
@@ -46,6 +47,7 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
       'members': new FormArray([]),
       'needs': new FormArray([]),
       'notes': new FormArray([]),
+      'images': new FormControl([]),
       'memberCount': new FormControl(this.model.members.length),
       'budgetCount': new FormControl(this.model.budgets.length),
       'needCount': new FormControl(this.model.needs.length),
@@ -71,8 +73,7 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
       )
       .subscribe(() => {
         this.generateForm(list, model, count, creator);
-        // if (count.value >= model.length)
-        //   updater();
+
       });
 
     if (model)
@@ -85,10 +86,7 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
       let diff = count.value - list.length;
       if (diff > 0) // append
         list.push(creator())
-      // else { // remove
-      //   for (let x = 0; x < -diff; x++)
-      //     list.removeAt((list.length - 1) - x);
-      // }
+
     }
     else { // add from scratch
       for (let x = 0; x < count.value; x++)
@@ -241,18 +239,18 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
       for (let i = 0; i < filesAmount; i++) {
         var reader = new FileReader();
 
-        reader.onload = (event: any) => {
-          this.model.images.push(event.target.result);
-        }
-
         reader.readAsDataURL(event.target.files[i]);
+
+        reader.onload = (innerEvent: any) => {
+          this.form.value.images.push(innerEvent.target.result);
+        }
       }
     }
 
   }
 
   deleteFile(idx: number) {
-    this.model.images.splice(idx, 1)
+    this.form.value.images.splice(idx, 1)
   }
 
 

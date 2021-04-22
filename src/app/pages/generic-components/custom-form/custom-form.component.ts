@@ -1,6 +1,7 @@
 import { OnInit, Input, Output, EventEmitter, Directive, Inject, LOCALE_ID } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService} from '@nebular/theme';
+import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { Family } from '../../../@core/data/family';
 
 @Directive()
 export abstract class CustomFormComponent<T> implements OnInit {
@@ -8,7 +9,7 @@ export abstract class CustomFormComponent<T> implements OnInit {
   @Input() model: any;
   @Input() buttonName: string;
   @Input() disable: string[];
-  @Output() submit: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() formSubmit: EventEmitter<Family> = new EventEmitter<Family>();
   public form: FormGroup;
 
   public readonly types: NbComponentStatus[] = [
@@ -39,8 +40,7 @@ export abstract class CustomFormComponent<T> implements OnInit {
         this.form.controls[d].disable();
   }
 
-  public setClass(style: string)
-  {
+  public setClass(style: string) {
     this.config.toastClass = style;
   }
 
@@ -50,10 +50,10 @@ export abstract class CustomFormComponent<T> implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log(this.form.value); // FIXME. carefull with disabled fields.
+    this.model = this.form.value;
     this.showToast(this.types[0], 'İşlem Başarılı!',
       `${this.buttonName}me İşlemi Başarı İle Gerçekleştirildi!`);
-    this.submit.emit(true);
+    this.formSubmit.emit(this.model);
   }
 
 

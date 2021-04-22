@@ -19,6 +19,7 @@ export class CustomInputBoxComponent implements OnInit, ControlValueAccessor {
   @Input() alpha: boolean = true;
   @Input() numeric: boolean = true;
   @Input() sideBySide: boolean = false;
+  @Input() required: boolean = false;
 
   @Input() formGroup: FormGroup;
   @Input() formControlName: string;

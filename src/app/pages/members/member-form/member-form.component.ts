@@ -1,11 +1,9 @@
 import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from "@angular/core";
 import { Member } from "../member";
-import { Utils } from '../../../utils/utils.module';
 import { CustomFormComponent } from '../../generic-components/custom-form/custom-form.component';
-import { statusValues } from '../../../@core/data/status';
-import { Family } from '../../families/family';
 import { NbToastrService } from '@nebular/theme';
+import { Family } from '../../../@core/data/family';
 
 @Component({
   selector: "ngx-member-form",

@@ -1,4 +1,4 @@
-import { Family } from "./family";
+import { Family } from "../../@core/data/family";
 
 // only for representative frontend. will be deleted soon.
 export class FamiliesData {

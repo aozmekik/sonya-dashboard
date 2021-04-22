@@ -1,6 +1,7 @@
 import { FamiliesData } from '../families-data';
-import { Component, OnInit} from "@angular/core";
-import { Family } from '../family';
+import { Component, OnInit } from "@angular/core";
+import { Family } from '../../../@core/data/family';
+import { FamilyService } from '../../../@core/services/family.service';
 
 @Component({
   selector: "ngx-family-adding",
@@ -10,7 +11,12 @@ import { Family } from '../family';
 export class FamilyAddingComponent implements OnInit {
   public family: Family = Family.default();
 
-  constructor() {}
+  constructor(private familyService: FamilyService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  public async onSubmit(event: Family) {
+    event.clerk = 'admin';
+    await this.familyService.createFamily(event);
+  }
 }
