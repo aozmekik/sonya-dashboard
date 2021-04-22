@@ -7,7 +7,7 @@ export class FamiliesData {
       _id: "id123",
       clerk: "member1",
       name: "family1",
-      idNumber: 123,
+      idNo: 123,
       telephone: 1234,
       rent: 123,
       regDate: new Date().toLocaleString().split(",")[0],
@@ -29,7 +29,7 @@ export class FamiliesData {
         disease: "disease1",
         note: "note1",
         school: "school1",
-        grade: "grade1",
+        grade: 1,
         kinship: "kinship1"
       },
       {
@@ -44,7 +44,7 @@ export class FamiliesData {
         disease: "disease2",
         note: "note2",
         school: "school2",
-        grade: "grade2",
+        grade: 1,
         kinship: "kinship2"
       },
       {
@@ -59,7 +59,7 @@ export class FamiliesData {
         disease: "disease2",
         note: "note2",
         school: "school2",
-        grade: "grade2",
+        grade: 2,
         kinship: "kinship2"
       },
       {
@@ -74,7 +74,7 @@ export class FamiliesData {
         disease: "disease2",
         note: "note2",
         school: "school2",
-        grade: "grade2",
+        grade: 2,
         kinship: "kinship2"
       },
       ],
@@ -92,7 +92,7 @@ export class FamiliesData {
       _id: "id123",
       clerk: "member2",
       name: "family2",
-      idNumber: 123,
+      idNo: 123,
       telephone: 123,
       rent: 123,
       regDate: new Date().toLocaleString().split(",")[0],
@@ -114,7 +114,7 @@ export class FamiliesData {
         disease: "disease1",
         note: "note1",
         school: "school1",
-        grade: "grade1",
+        grade: 1,
         kinship: "kinship1"
       },
       {
@@ -129,7 +129,7 @@ export class FamiliesData {
         disease: "disease2",
         note: "note2",
         school: "school2",
-        grade: "grade2",
+        grade: 2,
         kinship: "kinship2"
       },
       ],

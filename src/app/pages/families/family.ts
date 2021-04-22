@@ -36,7 +36,7 @@ export namespace Family {
     disease: string;
     note: string;
     school: string;
-    grade: string;
+    grade: number;
     kinship: string;
   }
 
@@ -91,7 +91,7 @@ export class Family {
 
   /* general */
   name: string;
-  idNumber: number;
+  idNo: number;
   telephone: number;
   rent: number;
   regDate: string;
@@ -158,7 +158,7 @@ export class Family {
       _id: 'id123',
       clerk: null,
       name: null,
-      idNumber: null,
+      idNo: null,
       telephone: null,
       rent: null,
       regDate: new Date().toLocaleString(),
