@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Family } from '../data/family';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ export class FamilyService {
   private apiBaseUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {
+    if (environment.production)
+      this.apiBaseUrl = 'http://sonyadev.herokuapp.com/api';
   }
 
   public getFamilies(): Promise<Family[]> {
