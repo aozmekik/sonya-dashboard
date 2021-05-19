@@ -47,18 +47,16 @@ var noteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    members: [String],
-    rating: {
-        type: Number,
-        min: 0,
-        max: 4,
-    }
+    clerks: {
+        type: [String],
+        required: true
+    },
 });
 
 
 var familySchema = new mongoose.Schema({
-    clerk: {
-        type: String,
+    clerks: {
+        type: [String],
         required: true
     },
     name: {
@@ -83,19 +81,30 @@ var familySchema = new mongoose.Schema({
         max: 2
     },
     address: String,
-    district:
-    {
-        type: Number,
-        min: 0,
-        max: 38
-    },
+    city: Number,
+    district: Number,
+    town: Number,
+    street: Number,
     nation: String,
     status:
     {
         type: Number,
         min: 0,
-        max: 6,
+        max: 4,
         required: true
+    },
+    rating: {
+        type: Number,
+        min: 0,
+        max: 4,
+    },
+    health:
+    {
+        type: Boolean,
+    },
+    education:
+    {
+        type: Boolean,
     },
     budgets: [budgetSchema],
     members: [memberSchema],

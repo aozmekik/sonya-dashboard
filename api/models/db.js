@@ -59,3 +59,4 @@ process.on('SIGTERM', () => {
 connect();
 
 require('./family');
+require('./location');

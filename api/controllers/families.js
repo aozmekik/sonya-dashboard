@@ -18,7 +18,7 @@ const familiesList = (req, res) => {
 
 const familiesCreate = (req, res) => {
     Fam.create({
-        clerk: req.body.clerk,
+        clerks: req.body.clerks,
         name: req.body.name,
         idNo: req.body.idNo,
         tel: req.body.tel,
@@ -26,9 +26,15 @@ const familiesCreate = (req, res) => {
         regDate: new Date().toLocaleDateString(),
         warmingType: req.body.warmingType,
         address: req.body.address,
+        city: req.body.city,
         district: req.body.district,
+        town: req.body.town,
+        street: req.body.street,
         nation: req.body.nation,
         status: req.body.status,
+        rating: req.body.rating,
+        health: req.body.health,
+        education: req.body.education,
         budgets: req.body.budgets,
         members: req.body.members,
         needs: req.body.needs,
