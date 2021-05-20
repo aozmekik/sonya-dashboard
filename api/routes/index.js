@@ -1,37 +1,56 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('express-jwt');
+const auth = jwt({
+    secret: process.env.JWT_SECRET,
+    userProperty: 'payload',
+    algorithms: ['RS256']
+})
+
+
 const ctrlFamilies = require('../controllers/families');
 const ctrlLocations = require('../controllers/locations');
+const ctrlAuth = require('../controllers/authentication');
+
 
 
 // families
 router
     .route('/families')
-    .get(ctrlFamilies.familiesList)
-    .post(ctrlFamilies.familiesCreate);
+    .get(auth, ctrlFamilies.familiesList)
+    .post(auth, ctrlFamilies.familiesCreate);
 
 router
     .route('/families/:familyid')
-    .get(ctrlFamilies.familiesReadOne)
-    .put(ctrlFamilies.familiesUpdateOne)
-    .delete(ctrlFamilies.familiesDeleteOne);
+    .get(auth, ctrlFamilies.familiesReadOne)
+    .put(auth, ctrlFamilies.familiesUpdateOne)
+    .delete(auth, ctrlFamilies.familiesDeleteOne);
 
 // locations
 router
     .route('/locations/cities')
-    .get(ctrlLocations.citiesList);
+    .get(auth, ctrlLocations.citiesList);
 
 router
     .route('/locations/towns/:cityid')
-    .get(ctrlLocations.townsList)
+    .get(auth, ctrlLocations.townsList);
 
 router
     .route('/locations/districts/:townid')
-    .get(ctrlLocations.districtsList)
+    .get(auth, ctrlLocations.districtsList);
 
 router
     .route('/locations/streets/:districtid')
-    .get(ctrlLocations.streetsList)
+    .get(auth, ctrlLocations.streetsList);
 
+
+// authentications
+router
+    .route('/register')
+    .post(ctrlAuth.register);
+
+router
+    .route('/login')
+    .post(ctrlAuth.login);
 
 module.exports = router;

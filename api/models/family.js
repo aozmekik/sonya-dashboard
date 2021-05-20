@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var budgetSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     amount: {
         type: Number,
@@ -13,39 +14,67 @@ var budgetSchema = new mongoose.Schema({
     type: {
         type: Number,
         required: true,
-        min: 0,
-        max: 2
+        enum: [0, 1, 2]
     }
 });
 
 var memberSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
-    idNo: Number,
-    birthyear: Number,
+    idNo: {
+        type: Number,
+        min: 10000000000,
+        max: 99999999999,
+    },
+    birthyear: {
+        type: Number,
+        min: 1920,
+        max: 1900,
+    },
     gender: {
         type: Number,
-        min: 0,
-        max: 1
+        enum: [0, 1, null]
     },
-    job: String,
+    job: {
+        type: String,
+        trim: true
+    },
     income: Number,
-    size: String,
+    size: {
+        type: String,
+        trim: true
+    },
     shoe: Number,
-    disease: String,
-    note: String,
-    school: String,
+    disease:
+    {
+        type: String,
+        trim: true
+    },
+    note: {
+        type: String,
+        trim: true
+    },
+    school:
+    {
+        type: String,
+        trim: true
+    },
     grade: Number,
-    kinship: String,
+    kinship: {
+        type: String,
+        trim: true
+    }
 });
 
 var noteSchema = new mongoose.Schema({
     statement:
     {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     clerks: {
         type: [String],
@@ -61,10 +90,19 @@ var familySchema = new mongoose.Schema({
     },
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
-    idNo: Number,
-    tel: Number,
+    idNo: {
+        type: Number,
+        min: 10000000000,
+        max: 99999999999,
+    },
+    tel: {
+        type: Number,
+        min: 10000000000,
+        max: 99999999999,
+    },
     rent: {
         type: Number,
         min: 0
@@ -77,26 +115,33 @@ var familySchema = new mongoose.Schema({
     warmingType:
     {
         type: Number,
-        min: 0,
-        max: 2
+        enum: [0, 1, 2, null]
     },
-    address: String,
-    city: Number,
+    address: {
+        type: String,
+        trim: true
+    },
+    city: {
+        type: Number,
+        min: 0,
+        max: 81,
+    },
     district: Number,
     town: Number,
     street: Number,
-    nation: String,
+    nation: {
+        type: String,
+        trim: true
+    },
     status:
     {
         type: Number,
-        min: 0,
-        max: 4,
+        enum: [0, 1, 2, 3, 4, null],
         required: true
     },
     rating: {
         type: Number,
-        min: 0,
-        max: 4,
+        enum: [0, 1, 2, 3, 4, null]
     },
     health:
     {
@@ -110,7 +155,7 @@ var familySchema = new mongoose.Schema({
     members: [memberSchema],
     needs: [String],
     notes: [noteSchema],
-    images: [String]
+    images: [String] // FIXME. make it buffer and change only from API.
 });
 
 mongoose.model('Family', familySchema, 'Families');

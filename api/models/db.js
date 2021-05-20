@@ -60,3 +60,4 @@ connect();
 
 require('./family');
 require('./location');
+require('./user');
