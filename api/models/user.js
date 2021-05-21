@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
+function isEmail(email) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
 var userSchema = new mongoose.Schema({
     name: {
@@ -12,6 +16,7 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+        validate: [{ validator: value => isEmail(value), msg: 'Invalid email.' }]
     },
     hash: {
         type: String,
