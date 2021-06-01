@@ -19,6 +19,17 @@ passport.use(new LocalStrategy({
                     errorCode: 1, // incorrect password
                 });
             }
+            if (!user.emailConfirmed()) {
+                return done(null, false, {
+                    errorCode: 2, // unconfirmed email
+                })
+            }
+            if (!user.userConfirmed()) {
+                return done(null, false, {
+                    errorCode: 3, // unconfirmed user
+                })
+            }
+
             return done(null, user);
         });
     }

@@ -53,4 +53,12 @@ router
     .route('/login')
     .post(ctrlAuth.login);
 
+router
+    .route('/confirm/:token')
+    .get(ctrlAuth.confirm);
+
+router
+    .route('/resend')
+    .post(ctrlAuth.resend);
+
 module.exports = router;

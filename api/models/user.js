@@ -32,6 +32,12 @@ var userSchema = new mongoose.Schema({
         enum: [0, 1, 2],
         default: 0
     },
+    status: {
+        type: Number,
+        required: true,
+        enum: [0, 1, 2],
+        default: 0
+    },
     image: Buffer,
 });
 
@@ -60,5 +66,47 @@ userSchema.methods.generateJwt = function () {
     }, process.env.JWT_SECRET);
 };
 
+userSchema.methods.emailConfirmed = function () {
+    return this.status === 1;
+}
+
+userSchema.methods.userConfirmed = function () {
+    return this.status === 2;
+}
+
+
+const tokenSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
+    token: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        required: true,
+        default: Date.now,
+        expires: 43200
+    }
+});
+
+tokenSchema.methods.generate = function (userid) {
+    const expiry = new Date();
+    expiry.setDate(expiry.getDate() + 7);
+    
+    this.userId = userid;
+    this.token = jwt.sign(
+        {
+            _id: this._id,
+            exp: parseInt(expiry.getTime() / 1000, 10)
+        },
+        process.env.JWT_SECRET,
+    );
+};
+
 
 mongoose.model('User', userSchema, 'Users');
+mongoose.model('Token', tokenSchema, 'Tokens');
