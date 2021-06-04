@@ -127,17 +127,14 @@ const cleanUser = (user) => {
 }
 
 const restore = (req, res) => {
-    let payload = null;
+    let _id = null;
     try {
-        payload = jwt.verify(
-            req.params.token,
-            process.env.JWT_SECRET
-        );
+        _id = User.getIDfromJWT(req.params.token);
     } catch (err) {
         return res.status(500).json(err);
     }
 
-    User.findOne({ _id: payload._id }, (err, user) => {
+    User.findOne({ _id: _id }, (err, user) => {
         if (!user)
             return res.status(400).json({ type: 'restore', msg: 'Unvalid token. Your token my have expired.' });
 
@@ -146,18 +143,15 @@ const restore = (req, res) => {
 };
 
 const confirm = (req, res, next) => {
-    let payload = null;
+    let _id = null;
     try {
-        payload = jwt.verify(
-            req.params.token,
-            process.env.JWT_SECRET
-        );
+        _id = User.getIDfromJWT(req.params.token);
     } catch (err) {
         return res.status(500).json(err);
     }
 
     // find a matching token
-    Token.findOne({ _id: payload._id }, (err, token) => {
+    Token.findOne({ _id: _id }, (err, token) => {
         if (!token)
             return res.status(400).json({ type: 'not-verified', msg: 'We were unable to find a valid token. Your token my have expired.' });
 

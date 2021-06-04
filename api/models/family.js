@@ -84,8 +84,8 @@ var noteSchema = new mongoose.Schema({
 
 
 var familySchema = new mongoose.Schema({
-    clerks: {
-        type: [String],
+    registrant: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
     name: {
@@ -125,9 +125,13 @@ var familySchema = new mongoose.Schema({
         type: Number,
         min: 0,
         max: 81,
+        required: true
+    },
+    town: {
+        type: Number,
+        required: true
     },
     district: Number,
-    town: Number,
     street: Number,
     nation: {
         type: String,
