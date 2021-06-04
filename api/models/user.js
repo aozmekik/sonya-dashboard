@@ -38,6 +38,7 @@ var userSchema = new mongoose.Schema({
         enum: [0, 1, 2],
         default: 0
     },
+    towns: [Number], // towns where the member can show activity
     image: Buffer,
 });
 
@@ -96,7 +97,7 @@ const tokenSchema = new mongoose.Schema({
 tokenSchema.methods.generate = function (userid) {
     const expiry = new Date();
     expiry.setDate(expiry.getDate() + 7);
-    
+
     this.userId = userid;
     this.token = jwt.sign(
         {

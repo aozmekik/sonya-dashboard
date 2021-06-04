@@ -24,11 +24,11 @@ passport.use(new LocalStrategy({
                     errorCode: 2, // unconfirmed email
                 })
             }
-            if (!user.userConfirmed()) {
-                return done(null, false, {
-                    errorCode: 3, // unconfirmed user
-                })
-            }
+            // if (!user.userConfirmed()) {
+            //     return done(null, false, {
+            //         errorCode: 3, // unconfirmed user
+            //     })
+            // }
 
             return done(null, user);
         });

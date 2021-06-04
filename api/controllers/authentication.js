@@ -46,6 +46,7 @@ const register = (req, res) => {
         user.email = req.body.email;
         user.role = 0; // each user starts as guest.
         user.status = 0; // each user starts in status: unconfirmed e-mail.
+        user.towns = [2048];
         user.image = null;
         user.setPassword(req.body.password);
         user.save((err) => {
@@ -106,7 +107,7 @@ const login = (req, res) => {
             const token = user.generateJwt();
             res
                 .status(200)
-                .json({ token });
+                .json({ user: cleanUser(user), token: token });
         } else {
             res
                 .status(401)
@@ -115,9 +116,37 @@ const login = (req, res) => {
     })(req, res);
 };
 
+const cleanUser = (user) => {
+    // do not send trivial fields
+    user = user.toObject();
+    delete user.hash;
+    delete user.salt;
+    delete user.id;
+    delete user.__v;
+    return user;
+}
+
+const restore = (req, res) => {
+    let payload = null;
+    try {
+        payload = jwt.verify(
+            req.params.token,
+            process.env.JWT_SECRET
+        );
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+
+    User.findOne({ _id: payload._id }, (err, user) => {
+        if (!user)
+            return res.status(400).json({ type: 'restore', msg: 'Unvalid token. Your token my have expired.' });
+
+        return res.status(200).json(cleanUser(user));
+    })
+};
 
 const confirm = (req, res, next) => {
-    let payload = null
+    let payload = null;
     try {
         payload = jwt.verify(
             req.params.token,
@@ -200,5 +229,6 @@ module.exports = {
     register,
     login,
     confirm,
-    resend
+    resend,
+    restore
 };

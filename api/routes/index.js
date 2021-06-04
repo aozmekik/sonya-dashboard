@@ -61,4 +61,8 @@ router
     .route('/resend')
     .post(ctrlAuth.resend);
 
+router
+    .route('/restore/:token')
+    .get(ctrlAuth.restore);
+
 module.exports = router;
