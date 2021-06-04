@@ -11,6 +11,7 @@ const auth = jwt({
 const ctrlFamilies = require('../controllers/families');
 const ctrlLocations = require('../controllers/locations');
 const ctrlAuth = require('../controllers/authentication');
+const ctrlUsers = require('../controllers/users');
 
 
 
@@ -64,5 +65,14 @@ router
 router
     .route('/restore/:token')
     .get(ctrlAuth.restore);
+
+// users
+router
+    .route('/users/:name')
+    .get(auth, ctrlUsers.usersList);
+
+router
+    .route('/users/privilege/:userid')
+    .post(auth, ctrlUsers.usersPrivilege)
 
 module.exports = router;

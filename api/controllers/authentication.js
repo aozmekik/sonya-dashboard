@@ -25,6 +25,7 @@ const emailSender = (mailOptions, callback) => {
 
 
 const register = (req, res) => {
+    // FIXME. this is not working. delete them.
     body('name', 'Name cannot be blank').notEmpty();
     body('email', 'Email is not valid').notEmpty().isEmail();
     body('password', 'Password must be at least 4 characters long').notEmpty().isLength({ min: 5 });
