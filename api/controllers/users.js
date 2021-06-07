@@ -79,7 +79,7 @@ const usersPrivilege = (req, res) => {
             user.save((err) => {
                 if (err)
                     return res.status(400).json(err);
-                return res.status(200).json(user);
+                return res.status(200).json(user.clean());
             })
 
 

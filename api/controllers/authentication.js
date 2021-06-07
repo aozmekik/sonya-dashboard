@@ -108,7 +108,7 @@ const login = (req, res) => {
             const token = user.generateJwt();
             res
                 .status(200)
-                .json({ user: cleanUser(user), token: token });
+                .json({ user: user.clean(), token: token });
         } else {
             res
                 .status(401)
@@ -117,15 +117,6 @@ const login = (req, res) => {
     })(req, res);
 };
 
-const cleanUser = (user) => {
-    // do not send trivial fields
-    user = user.toObject();
-    delete user.hash;
-    delete user.salt;
-    delete user.id;
-    delete user.__v;
-    return user;
-}
 
 const restore = (req, res) => {
     let _id = null;
@@ -139,7 +130,7 @@ const restore = (req, res) => {
         if (!user)
             return res.status(400).json({ type: 'restore', msg: 'Unvalid token. Your token my have expired.' });
 
-        return res.status(200).json(cleanUser(user));
+        return res.status(200).json(user.clean());
     })
 };
 

@@ -76,8 +76,8 @@ var noteSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    clerks: {
-        type: [String],
+    registrant: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
 });
@@ -137,23 +137,23 @@ var familySchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    status:
-    {
-        type: Number,
-        enum: [0, 1, 2, 3, 4, null],
-        required: true
-    },
     rating: {
         type: Number,
         enum: [0, 1, 2, 3, 4, null]
     },
+    aid: {
+        type: Boolean,
+        default: false
+    },
     health:
     {
         type: Boolean,
+        default: false
     },
     education:
     {
         type: Boolean,
+        default: false
     },
     budgets: [budgetSchema],
     members: [memberSchema],

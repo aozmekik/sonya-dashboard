@@ -42,21 +42,21 @@ var userSchema = new mongoose.Schema({
     image: Buffer,
 });
 
-userSchema.methods.setPassword = (password) => {
+userSchema.methods.setPassword = function (password) {
     this.salt = crypto.randomBytes(16).toString('hex');
     this.hash = crypto
         .pbkdf2Sync(password, this.salt, 1000, 64, 'sha512')
         .toString('hex');
 };
 
-userSchema.methods.validPassword = (password) => {
+userSchema.methods.validPassword = function (password) {
     const hash = crypto
         .pbkdf2Sync(password, this.salt, 1000, 64, 'sha512')
         .toString('hex');
     return this.hash === hash;
 };
 
-userSchema.methods.generateJwt = () => {
+userSchema.methods.generateJwt = function () {
     const expiry = new Date();
     expiry.setDate(expiry.getDate() + 7);
     return jwt.sign({
@@ -67,15 +67,27 @@ userSchema.methods.generateJwt = () => {
     }, process.env.JWT_SECRET);
 };
 
-userSchema.methods.emailConfirmed = () => {
+userSchema.methods.emailConfirmed = function () {
     return this.status === 1;
 }
 
-userSchema.methods.userConfirmed = () => {
+userSchema.methods.userConfirmed = function () {
     return this.status === 2;
 }
 
-userSchema.statics.getIDfromJWT = (token) => {
+userSchema.methods.clean = function () {
+    return {
+        _id: this._id,
+        role: this.role,
+        status: this.status,
+        towns: this.towns,
+        name: this.name,
+        image: this.image
+    };
+};
+
+
+userSchema.statics.getIDfromJWT = function (token) {
     let payload = null;
     payload = jwt.verify(
         token,

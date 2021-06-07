@@ -18,7 +18,10 @@ const ctrlUsers = require('../controllers/users');
 // families
 router
     .route('/families')
-    .get(auth, ctrlFamilies.familiesList)
+    .post(auth, ctrlFamilies.familiesList)
+
+router
+    .route('/families/create')
     .post(auth, ctrlFamilies.familiesCreate);
 
 router
