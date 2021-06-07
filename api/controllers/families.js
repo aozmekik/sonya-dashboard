@@ -40,6 +40,7 @@ const familiesList = (req, res) => {
             return res.status(400).json({ msg: 'User cannot do operation in this region.' })
 
         const query = {
+            name: req.body.name ? new RegExp(req.body.name, 'ig') : null,
             city: req.body.city,
             town: req.body.town,
             district: req.body.district,
