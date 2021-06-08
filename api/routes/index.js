@@ -12,6 +12,8 @@ const ctrlFamilies = require('../controllers/families');
 const ctrlLocations = require('../controllers/locations');
 const ctrlAuth = require('../controllers/authentication');
 const ctrlUsers = require('../controllers/users');
+const ctrlPosts = require('../controllers/posts');
+const ctrlImages = require('../controllers/images');
 
 
 
@@ -76,6 +78,22 @@ router
 
 router
     .route('/users/privilege/:userid')
-    .post(auth, ctrlUsers.usersPrivilege)
+    .post(auth, ctrlUsers.usersPrivilege);
+
+router
+    .route('/posts')
+    .get(auth, ctrlPosts.postsList);
+
+router
+    .route('/posts/:userid')
+    .get(auth, ctrlPosts.postsListOfUser);
+
+router
+    .route('/posts')
+    .post(auth, ctrlPosts.postsCreate);
+
+router
+    .route('/images/:imageid')
+    .get(auth, ctrlImages.postsReadOne);
 
 module.exports = router;

@@ -1,7 +1,6 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
-const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 
 const User = mongoose.model('User');

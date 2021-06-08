@@ -110,6 +110,7 @@ var familySchema = new mongoose.Schema({
     regDate:
     {
         type: String,
+        // FIXME. same time stampt.
         default: new Date().toLocaleDateString()
     },
     warmingType:

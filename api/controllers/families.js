@@ -1,20 +1,9 @@
 const mongoose = require('mongoose');
 const Fam = mongoose.model('Family');
 const User = mongoose.model('User');
+const Utils = require('./utils');
 
-const userID = (req) => {
-    const token = req.headers.authorization.split(' ')[1];
-    return User.getIDfromJWT(token);
-}
 
-const checkUserPrivileges = (res, req, user) => {
-    if (!user)
-        return res.status(400).json({ msg: 'We were unable to find a user.' });
-    if (user.role === 0)
-        return res.status(400).json({ msg: 'Guest user cannot do this operation.' });
-
-    return null;
-}
 
 // TODO. maybe index on date.
 const familiesList = (req, res) => {
@@ -24,7 +13,7 @@ const familiesList = (req, res) => {
 
     let _id = null;
     try {
-        _id = userID(req);
+        _id = Utils.getUserID(req);
     } catch (err) {
         return res.status(500).json(err);
     }
@@ -33,7 +22,7 @@ const familiesList = (req, res) => {
     User.findOne({ _id: _id }, (err, user) => {
         if (err)
             return res.status(400).json(err);
-        if ((err = checkUserPrivileges(res, req, user)))
+        if ((err = Utils.checkUserPrivileges(res, req, user)))
             return err;
 
         if (req.body.town && !user.towns.includes(req.body.town))
@@ -72,7 +61,7 @@ const familiesCreate = (req, res) => {
     User.findOne({ _id: req.body.registrant }, (err, user) => {
         if (err)
             return res.status(400).json(err);
-        if ((err = checkUserPrivileges(res, req, user)))
+        if ((err = Utils.checkUserPrivileges(res, req, user)))
             return err;
         if (!user.towns.includes(req.body.town))
             return res.status(400).json({ msg: 'User cannot do operation in this region.' })
@@ -131,7 +120,7 @@ const familiesUpdateOne = (req, res) => {
 
     let _id = null;
     try {
-        _id = userID(req);
+        _id = Utils.getUserID(req);
     } catch (err) {
         return res.status(500).json(err);
     }
@@ -139,7 +128,7 @@ const familiesUpdateOne = (req, res) => {
     User.findOne({ _id: _id }, (err, user) => {
         if (err)
             return res.status(400).json(err);
-        if ((err = checkUserPrivileges(res, req, user)))
+        if ((err = Utils.checkUserPrivileges(res, req, user)))
             return err;
         if (req.body.town && !user.towns.includes(req.body.town))
             return res.status(400).json({ msg: 'User cannot do operation in this region.' })
@@ -196,7 +185,7 @@ const familiesDeleteOne = (req, res) => {
 
     let _id = null;
     try {
-        _id = userID(req);
+        _id = Utils.getUserID(req);
     } catch (err) {
         return res.status(500).json(err);
     }
@@ -204,7 +193,7 @@ const familiesDeleteOne = (req, res) => {
     User.findOne({ _id: _id }, (err, user) => {
         if (err)
             return res.status(400).json(err);
-        if ((err = checkUserPrivileges(res, req, user)))
+        if ((err = Utils.checkUserPrivileges(res, req, user)))
             return err;
         if (req.body.town && !user.towns.includes(req.body.town))
             return res.status(400).json({ msg: 'User cannot do operation in this region.' })
