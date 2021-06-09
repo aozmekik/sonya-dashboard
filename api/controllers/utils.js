@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const sharp = require('sharp');
 const User = mongoose.model('User');
 
 
@@ -16,12 +17,23 @@ const checkUserPrivileges = (res, req, user) => {
     return null;
 }
 
-const imgToBuffer = (img) => {
-    return Buffer.from(img.split(',')[1], 'base64');
+const resize = async (buffer, width) => {
+    return await sharp(buffer)
+        .resize(width)
+        .jpeg({ mozjpeg: true })
+        .toBuffer();
+}
+
+const toIcon = async (buffer) => {
+    return await resize(buffer, 360);
+}
+
+const imgToBuffer = async (img) => {
+    return await resize(Buffer.from(img.split(',')[1], 'base64'), 1080);
 };
 
 const bufferToImg = (buffer) => {
-    return `data:image/png;base64,${buffer.toString('base64')}`;
+    return `data:image/jpeg;base64,${buffer.toString('base64')}`;
 };
 
 
@@ -30,6 +42,7 @@ module.exports = {
     getUserID,
     checkUserPrivileges,
     imgToBuffer,
-    bufferToImg
+    bufferToImg,
+    toIcon
 };
 

@@ -106,14 +106,14 @@ const postsListOfUser = (req, res) => {
                     new Promise((resolve, reject) => {
                         let len = 0;
                         posts.forEach((post, index, array) =>
-                            Image.findOne({ _id: post.image }, (err, image) => {
+                            Image.findOne({ _id: post.image }, async (err, image) => {
                                 if (err)
                                     return res.status(400).json(err);
-                                if (!user)
+                                if (!image)
                                     return res.status(400).json({ msg: 'Image not found.' });
 
-
-                                array[index] = { ...post.toObject(), icon: Utils.bufferToImg(image.data[0]) };
+                                const icon = await Utils.toIcon(image.data[0]);
+                                array[index] = { ...post.toObject(), icon: Utils.bufferToImg(icon) };
                                 len++;
                                 if (len === array.length)
                                     resolve();
@@ -144,7 +144,7 @@ const postsCreate = (req, res) => {
     }
 
 
-    User.findOne({ _id: _id }, (err, user) => {
+    User.findOne({ _id: _id }, async (err, user) => {
         if (err)
             return res.status(400).json(err);
         if ((err = Utils.checkUserPrivileges(res, req, user)))
@@ -152,8 +152,13 @@ const postsCreate = (req, res) => {
         if (req.body.town && !user.towns.includes(req.body.town))
             return res.status(400).json({ msg: 'User cannot do operation in this region.' });
 
-
-        const data = req.body.images.map(img => { return Utils.imgToBuffer(img) });
+        const x = [];
+        const images = req.body.images;
+        for (let i = 0; i < images.length; ++i) {
+            let y = await Utils.imgToBuffer(images[i]);
+            x.push(y);
+        }
+        const data = x;
         Image.create(
             { data: data },
             (err, image) => {
@@ -181,8 +186,50 @@ const postsCreate = (req, res) => {
     });
 }
 
+const commentsCreate = (req, res) => {
+    if (!req.body.statement)
+        return res.status(404).json({ 'message': 'Comment missing' });
+
+    let _id = null;
+    try {
+        _id = Utils.getUserID(req);
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+
+
+    User.findOne({ _id: _id }, (err, user) => {
+        if (err)
+            return res.status(400).json(err);
+        if (!user)
+            return res.status(400).json({ msg: 'We were unable to find a user.' });
+
+
+        Post.find({ _id: req.params.postid }, (err, post) => {
+            if (err)
+                return res.status(400).json(err);
+            if (!post)
+                return res.status(400).json({ msg: 'We were unable to find a post.' });
+
+
+            post.comments.push({
+                userid: _id,
+                statement: req.body.statement
+            });
+
+            post.save((err, p) => {
+                if (err)
+                    res.status(404).json(err);
+                else
+                    res.status(200).json(p);
+            });
+        });
+    });
+
+}
+
 module.exports = {
     postsList,
     postsListOfUser,
-    postsCreate
+    postsCreate,
 };
