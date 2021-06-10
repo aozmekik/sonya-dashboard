@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../@core/services/authentication.service';
 
 import { MENU_ITEMS } from './pages-menu';
 
@@ -13,6 +15,5 @@ import { MENU_ITEMS } from './pages-menu';
   `,
 })
 export class PagesComponent {
-
   menu = MENU_ITEMS;
 }

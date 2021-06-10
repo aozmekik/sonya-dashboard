@@ -6,4 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
+
+  redirectDelay: number = 0;
+  showMessages: any = {};
+  strategy: string = '';
+
+  errors: string[] = [];
+  messages: string[] = [];
+  user: any = {};
+  submitted: boolean = false;
+  rememberMe = false;
 }

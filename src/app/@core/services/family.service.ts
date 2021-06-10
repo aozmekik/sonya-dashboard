@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Family } from '../data/family';
 import { environment } from '../../../environments/environment';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,22 @@ import { environment } from '../../../environments/environment';
 export class FamilyService {
   private apiBaseUrl = 'http://localhost:8080/api';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
     if (environment.production)
       this.apiBaseUrl = 'http://sonyadev.herokuapp.com/api';
   }
 
+  private getHeaders() {
+    return {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.authenticationService.getToken()}`
+      })
+    };
+  }
   public getFamilies(): Promise<Family[]> {
     const url = `${this.apiBaseUrl}/families`;
     return this.http
-      .get(url)
+      .get(url, this.getHeaders())
       .toPromise()
       .then(response => response as Family[])
       .catch(this.handleError);
@@ -26,7 +34,7 @@ export class FamilyService {
   public createFamily(family: Family): Promise<Family> {
     const url = `${this.apiBaseUrl}/families`;
     return this.http
-      .post(url, family)
+      .post(url, family, this.getHeaders())
       .toPromise()
       .then(response => response as Family)
       .catch(this.handleError);
@@ -35,7 +43,7 @@ export class FamilyService {
   public deleteFamily(family: Family): Promise<any> {
     const url = `${this.apiBaseUrl}/families/${family._id}`;
     return this.http
-      .delete(url)
+      .delete(url, this.getHeaders())
       .toPromise()
       .then(response => response)
       .catch(this.handleError);
@@ -44,7 +52,7 @@ export class FamilyService {
   public updateFamily(family: Family): Promise<Family> {
     const url = `${this.apiBaseUrl}/families/${family._id}`;
     return this.http
-      .put(url, family)
+      .put(url, family, this.getHeaders())
       .toPromise()
       .then(response => response as Family)
       .catch(this.handleError);

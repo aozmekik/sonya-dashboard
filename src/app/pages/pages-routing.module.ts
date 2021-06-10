@@ -1,61 +1,64 @@
 import { CameraComponent } from './camera/camera.component';
-import { RouterModule, Routes } from "@angular/router";
-import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 
-import { PagesComponent } from "./pages.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
+import { PagesComponent } from './pages.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: PagesComponent,
     children: [
       {
-        path: "dashboard",
+        path: 'dashboard',
         component: DashboardComponent,
       },
       {
-        path: "camera",
+        path: 'camera',
         component: CameraComponent,
       },
       {
-        path: "accounting",
+        path: 'accounting',
         loadChildren: () =>
-          import("./accounting/accounting.module").then(
+          import('./accounting/accounting.module').then(
             (m) => m.AccountingModule
           ),
       },
       {
-        path: "campaigns",
+        path: 'campaigns',
         loadChildren: () =>
-          import("./campaigns/campaigns.module").then((m) => m.CampaignsModule),
+          import('./campaigns/campaigns.module').then((m) => m.CampaignsModule),
       },
       {
-        path: "members",
+        path: 'members',
         loadChildren: () =>
-          import("./members/members.module").then((m) => m.MembersModule),
+          import('./members/members.module').then((m) => m.MembersModule),
       },
       {
-        path: "inventory",
+        path: 'inventory',
         loadChildren: () =>
-          import("./inventory/inventory.module").then((m) => m.InventoryModule),
+          import('./inventory/inventory.module').then((m) => m.InventoryModule),
       },
       {
-        path: "needs",
+        path: 'needs',
         loadChildren: () =>
-        import("./needs/needs.module").then((m) => m.NeedsModule),
+          import('./needs/needs.module').then((m) => m.NeedsModule),
       },
       {
-        path: "families",
+        path: 'families',
         loadChildren: () =>
-          import("./families/families.module").then((m) => m.FamiliesModule),
+          import('./families/families.module').then((m) => m.FamiliesModule),
 
       },
-
+      // {
+      //   path: 'login',
+      //   component: LoginComponent
+      // },
       {
-        path: "",
-        redirectTo: "dashboard",
-        pathMatch: "full",
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
       },
     ],
   },

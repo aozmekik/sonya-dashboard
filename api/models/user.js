@@ -29,7 +29,7 @@ var userSchema = new mongoose.Schema({
     role: {
         type: Number,
         required: true,
-        enum: [0, 1, 2],
+        enum: [0, 1, 2, 3],
         default: 0
     },
     status: {

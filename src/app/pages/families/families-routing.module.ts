@@ -19,10 +19,10 @@ const routes: Routes = [
         path: "family-adding",
         component: FamilyAddingComponent,
       },
-      {
-        path: "field-activity-list",
-        component: FieldActivityListComponent
-      }
+      // {
+      //   path: "field-activity-list",
+      //   component: FieldActivityListComponent
+      // }
     ],
   },
 ];

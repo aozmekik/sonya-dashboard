@@ -14,6 +14,8 @@ const ctrlAuth = require('../controllers/authentication');
 const ctrlUsers = require('../controllers/users');
 const ctrlPosts = require('../controllers/posts');
 const ctrlImages = require('../controllers/images');
+const ctrlAdmin = require('../controllers/admin');
+
 
 
 
@@ -95,5 +97,11 @@ router
 router
     .route('/images/:imageid')
     .get(auth, ctrlImages.postsReadOne);
+
+// api for admin
+
+router
+    .route('/admin/login')
+    .post(ctrlAdmin.login);
 
 module.exports = router;

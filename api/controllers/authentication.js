@@ -86,16 +86,10 @@ const register = (req, res) => {
 };
 
 const login = (req, res) => {
-    body('email', 'Email is not valid').isEmail();
-    body('email', 'Email cannot be blank').notEmpty();
-    body('password', 'Password cannot be blank').notEmpty();
-
-
-    // Check for validation errors
-    var errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+    if (!req.body.email && !req.body.password)
+        return res.status(400).json({ msg: 'Fields are missing' });
+    if (req.body.password.length < 8)
+        return res.status(400).json({ msg: 'Password too short' });
 
     passport.authenticate('local', (err, user, info) => {
         if (err) {
@@ -215,5 +209,5 @@ module.exports = {
     login,
     confirm,
     resend,
-    restore
+    restore,
 };
