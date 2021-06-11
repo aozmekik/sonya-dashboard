@@ -20,8 +20,8 @@ export class FamilyEditingWindowFormComponent implements OnInit {
 
 
   async onSubmit(event: Family) {
-    console.log(event);
-    await this.familyService.updateFamily(event);
-    this.windowRef.close();
+    // console.log(event);
+    // await this.familyService.updateFamily(event);
+    // this.windowRef.close();
   }
 }

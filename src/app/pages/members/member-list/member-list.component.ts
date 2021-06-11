@@ -1,13 +1,10 @@
-import { statusValues } from './../../../@core/data/status';
-import { MembersData } from "./../members-data";
 import { Component } from "@angular/core";
 import { LocalDataSource } from "ng2-smart-table";
 import { Router } from "@angular/router";
 import { NbWindowService } from "@nebular/theme";
 import { MemberEditingWindowComponent } from "../member-editing-window/member-editing-window.component";
-import { Member } from '../member';
-import { MemberViewingWindowComponent } from '../member-viewing-window/member-viewing-window.component';
-import { Utils } from '../../../utils/utils.module';
+import { UserService } from '../../../@core/services/user.service';
+import { User } from '../../../@core/data/user';
 
 @Component({
   selector: "ngx-member-list",
@@ -15,9 +12,13 @@ import { Utils } from '../../../utils/utils.module';
   styleUrls: ["./member-list.component.scss"],
 })
 export class MemberListComponent {
-  constructor(private router: Router, private windowService: NbWindowService) {
-    const mydata = MembersData.getData();
-    this.source.load(mydata);
+  public users: User[];
+
+  constructor(
+    private router: Router,
+    private windowService: NbWindowService,
+    private userService: UserService) {
+    this.getUsers();
   }
   settings = {
     actions: {
@@ -43,65 +44,15 @@ export class MemberListComponent {
         title: "Üye Adı",
         type: "string",
       },
-      regDate: {
+      createdAt: {
         title: "Kayıt Tarihi",
         type: "string",
       },
-      committee: {
-        title: "Komite",
-        type: "string",
-        valuePrepareFunction: (value) => {
-          return Member.committees[value];
-        },
-        filter: {
-          type: "list",
-          config: {
-            selectText: "Seç.",
-            list: Utils.table2selector(Member.committees),
-          },
-        },
-      },
-      // area: {
-      //   title: "Bölge",
-      //   type: "string",
-      //   valuePrepareFunction: (value) => {
-      //     return Family.areas[value];
-      //   },
-      //   filter: {
-      //     type: "list",
-      //     config: {
-      //       selectText: "Seç.",
-      //       list: Utils.table2selector(Family.areas),
-      //     },
-      //   },
-      // },
-      group: {
-        title: "Grup",
-        type: "string",
-        valuePrepareFunction: (value) => {
-          return Member.groups[value];
-        },
-        filter: {
-          type: "list",
-          config: {
-            selectText: "Seç.",
-            list: Utils.table2selector(Member.groups),
-          },
-        },
+      role: {
+        title: "Rol",
       },
       status: {
-        title: "Aktif",
-        type: "string",
-        valuePrepareFunction: (value) => {
-          return statusValues[value];
-        },
-        filter: {
-          type: "list",
-          config: {
-            selectText: "Seç.",
-            list: Utils.table2selector(statusValues),
-          },
-        },
+        title: "Durum"
       },
     },
   };
@@ -124,12 +75,7 @@ export class MemberListComponent {
   }
 
   onSelect(event) {
-    this.windowService.open(MemberViewingWindowComponent, {
-      title: "Üye Bilgileri",
-      context: {
-        member: event.data
-      }
-    });
+    this.onEdit(event);
   }
 
   /**
@@ -142,7 +88,14 @@ export class MemberListComponent {
       context: {
         member: event.data,
       }
-    });
+    }).onClose
+      .toPromise()
+      .then(this.getUsers.bind(this))
+  }
+
+  private async getUsers() {
+    this.users = await this.userService.getUsers();
+    this.source.load(this.users);
   }
 
 

@@ -1,5 +1,4 @@
 import { GenericComponentsModule } from './../generic-components/generic-components.module';
-import { MemberViewingWindowComponent } from './member-viewing-window/member-viewing-window.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 import { MemberFormComponent } from "./member-form/member-form.component";
@@ -45,14 +44,12 @@ import { ThemeModule } from "../../@theme/theme.module";
   declarations: [
     ...routedComponents,
     MemberEditingWindowComponent,
-    MemberViewingWindowComponent,
     MemberFormComponent,
   ],
   exports: [
     MemberEditingWindowComponent,
-    MemberViewingWindowComponent,
     MemberFormComponent,
   ],
-  entryComponents: [MemberEditingWindowComponent, MemberViewingWindowComponent],
+  entryComponents: [MemberEditingWindowComponent],
 })
 export class MembersModule { }

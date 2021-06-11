@@ -14,8 +14,10 @@ const ctrlAuth = require('../controllers/authentication');
 const ctrlUsers = require('../controllers/users');
 const ctrlPosts = require('../controllers/posts');
 const ctrlImages = require('../controllers/images');
-const ctrlAdmin = require('../controllers/admin');
 
+const ctrlAdminAuth = require('../controllers/admin/authentication');
+const ctrlAdminFamilies = require('../controllers/admin/families');
+const ctrlAdminUsers = require('../controllers/admin/users');
 
 
 
@@ -99,9 +101,24 @@ router
     .get(auth, ctrlImages.postsReadOne);
 
 // api for admin
-
 router
     .route('/admin/login')
-    .post(ctrlAdmin.login);
+    .post(ctrlAdminAuth.login);
+
+// families
+
+router
+    .route('/admin/families')
+    .get(auth, ctrlAdminFamilies.familiesList);
+
+// users
+
+router
+    .route('/admin/users')
+    .get(auth, ctrlAdminUsers.usersList);
+
+router
+    .route('/admin/users/:userid')
+    .post(auth, ctrlAdminUsers.usersUpdateOne);
 
 module.exports = router;

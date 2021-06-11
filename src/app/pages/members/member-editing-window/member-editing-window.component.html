@@ -1,3 +1,5 @@
-<nb-card>
-  <ngx-member-form (submit)="close($event)" buttonName="Üye Düzenle" [model]="member"></ngx-member-form>
-</nb-card>
+<div class="container">
+  <nb-card>
+    <ngx-member-form (formSubmit)="onSubmit($event)" buttonName="Üye Düzenle" [model]="member"></ngx-member-form>
+  </nb-card>
+</div>

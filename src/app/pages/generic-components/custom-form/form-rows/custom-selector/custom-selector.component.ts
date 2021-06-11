@@ -15,11 +15,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from '@angular/for
 })
 export class CustomSelectorComponent implements OnInit, ControlValueAccessor {
   @Input() rowName: string;
-  @Input() selectingList: string[];
+  @Input() selectingList: any[];
 
   @Input() formGroup: FormGroup;
   @Input() formControlName: string;
   @Input() sideBySide: boolean = false;
+  @Input() multiple: boolean = false;
+  @Input() placeholder: string;
 
 
   constructor() { }

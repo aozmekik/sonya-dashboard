@@ -32,11 +32,11 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
   ngOnInit() {
     this.form = new FormGroup({
       '_id': new FormControl(this.model._id),
-      'clerk': new FormControl(this.model.clerk),
-      'regDate': new FormControl(this.model.regDate),
+      'registrant': new FormControl(this.model.registrant),
+      'createdAt': new FormControl(this.model.createdAt),
       'name': new FormControl(this.model.name, Validators.required),
       'idNo': new FormControl(this.model.idNo),
-      'telephone': new FormControl(this.model.telephone),
+      'tel': new FormControl(this.model.tel),
       'rent': new FormControl(this.model.rent),
       'warmingType': new FormControl(this.model.warmingType),
       'address': new FormControl(this.model.address),

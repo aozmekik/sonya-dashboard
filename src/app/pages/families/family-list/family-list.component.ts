@@ -56,21 +56,8 @@ export class FamilyListComponent implements OnInit {
       district: {
         title: "İlçe",
       },
-      clerk: {
+      registrant: {
         title: "Kayıt Eden Üye",
-      },
-      status: {
-        title: "Durum",
-        valuePrepareFunction: (value) => {
-          return Family.statuses[value];
-        },
-        filter: {
-          type: "list",
-          config: {
-            selectText: "Seç.",
-            list: Utils.table2selector(Family.statuses),
-          },
-        },
       },
       nation: {
         title: "Uyruk",
@@ -82,8 +69,8 @@ export class FamilyListComponent implements OnInit {
 
   async onDelete(event) {
     if (window.confirm("Kaydı silmek istediğinize emin misiniz?")) {
-      await this.familyService.deleteFamily(event.data);
-      this.getFamilies();
+      // await this.familyService.deleteFamily(event.data);
+      // this.getFamilies();
     }
   }
 

@@ -16,9 +16,9 @@
 
 <ng-template #body>
   <div [formGroup]="formGroup">
-    <nb-select status="primary" [formControlName]="formControlName">
-      <nb-option *ngFor="let select of selectingList; let i = index" [value]="i">
-        {{ select }}
+    <nb-select status="primary" [multiple]="multiple" [placeholder]="placeholder" [formControlName]="formControlName">
+      <nb-option *ngFor="let select of selectingList" [value]="select.value">
+        {{ select.label }}
       </nb-option>
     </nb-select>
   </div>

@@ -9,7 +9,7 @@ export abstract class CustomFormComponent<T> implements OnInit {
   @Input() model: any;
   @Input() buttonName: string;
   @Input() disable: string[];
-  @Output() formSubmit: EventEmitter<Family> = new EventEmitter<Family>();
+  @Output() formSubmit: EventEmitter<T> = new EventEmitter<T>();
   public form: FormGroup;
 
   public readonly types: NbComponentStatus[] = [
@@ -50,10 +50,10 @@ export abstract class CustomFormComponent<T> implements OnInit {
   }
 
   public onSubmit(): void {
-    this.model = this.form.value;
     this.showToast(this.types[0], 'İşlem Başarılı!',
       `${this.buttonName}me İşlemi Başarı İle Gerçekleştirildi!`);
-    this.formSubmit.emit(this.model);
+    console.log(this.form.value);
+    this.formSubmit.emit(this.form.value);
   }
 
 

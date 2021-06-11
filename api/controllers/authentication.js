@@ -98,6 +98,8 @@ const login = (req, res) => {
                 .json(err);
         }
         if (user) {
+            if (user.role === 3)
+                return res.status(404).json({ msg: 'Admin can not use mobile' });
             const token = user.generateJwt();
             res
                 .status(200)
@@ -120,6 +122,8 @@ const restore = (req, res) => {
     }
 
     User.findOne({ _id: _id }, (err, user) => {
+        if (err)
+            return res.status(400).json(err);
         if (!user)
             return res.status(400).json({ type: 'restore', msg: 'Unvalid token. Your token my have expired.' });
 
@@ -145,7 +149,7 @@ const confirm = (req, res, next) => {
         User.findOne({ _id: token.userId }, (err, user) => {
             if (!user)
                 return res.status(400).json({ msg: 'We were unable to find a user for this token.' });
-            if (user.emailConfirmed())
+            if (!user.emailNotConfirmed())
                 return res.status(400).json({ type: 'already-verified', msg: 'This user has already been verified.' });
 
             // verify and save the user

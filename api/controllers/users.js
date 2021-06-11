@@ -11,7 +11,7 @@ const usersList = (req, res) => {
     }
 
     const projection = { salt: 0, hash: 0, __v: 0, email: 0 };
-    User.find({ name: new RegExp(req.params.name, 'ig'), _id: { $ne: _id } }, projection, (err, user) => {
+    User.find({ name: new RegExp(req.params.name, 'ig'), _id: { $ne: _id }, status: 2, role: { $ne: 3 } }, projection, (err, user) => {
         if (err)
             return res.status(400).json(err);
         // FIXME. limit results & sort maybe?

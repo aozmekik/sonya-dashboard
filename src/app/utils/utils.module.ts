@@ -23,10 +23,18 @@ export namespace Utils {
   export function keys(table): string[] {
     return Object.keys(table).map((key) => table[key]);
   }
+
+  export function toSelectingList(table: IHash): any {
+    const selectingList = [];
+
+    for (let key in table)
+      selectingList.push({ label: table[key], value: +key });
+    return selectingList;
+  }
 }
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
 })
-export class UtilsModule {}
+export class UtilsModule { }

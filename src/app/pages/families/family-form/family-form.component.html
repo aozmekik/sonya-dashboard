@@ -20,7 +20,7 @@
           </ngx-custom-input-box>
           <ngx-custom-input-box rowName="Uyruk" [numeric]="false" [(formGroup)]="form" formControlName="nation">
           </ngx-custom-input-box>
-          <ngx-custom-input-box rowName="Telefon" [alpha]="false" [(formGroup)]="form" formControlName="telephone">
+          <ngx-custom-input-box rowName="Telefon" [alpha]="false" [(formGroup)]="form" formControlName="tel">
           </ngx-custom-input-box>
           <ngx-custom-input-box rowName="Kira" [alpha]="false" [(formGroup)]="form" formControlName="rent">
           </ngx-custom-input-box>
@@ -31,9 +31,6 @@
           </ngx-custom-input-box>
           <ngx-custom-input-box rowName="İlçe" [numeric]="false" [(formGroup)]="form" formControlName="district">
           </ngx-custom-input-box>
-          <ngx-custom-selector rowName="Durum" [selectingList]="familyKeys.statuses" [(formGroup)]="form"
-            formControlName="status">
-          </ngx-custom-selector>
         </nb-step>
 
         <nb-step label="Aile Üyeleri" [stepControl]="form">

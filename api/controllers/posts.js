@@ -82,7 +82,7 @@ const postsListOfUser = (req, res) => {
                     for (item of posts) {
                         let icon = await Utils.toIcon(item.image.data[0])
                         let postJSON = item.toObject();
-                        delete postJSON.image.data;
+                        postJSON.image = postJSON.image._id;
                         postsJSON.push({ ...postJSON, icon: Utils.bufferToImg(icon) })
                     }
                 }

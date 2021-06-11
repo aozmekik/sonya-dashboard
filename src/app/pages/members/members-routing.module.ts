@@ -3,7 +3,6 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { MembersComponent } from "./members.component";
 import { MemberListComponent } from "./member-list/member-list.component";
-import { MemberAddingComponent } from "./member-adding/member-adding.component";
 
 const routes: Routes = [
   {
@@ -14,10 +13,6 @@ const routes: Routes = [
         path: "member-list",
         component: MemberListComponent,
       },
-      {
-        path: "member-adding",
-        component: MemberAddingComponent,
-      },
     ],
   },
 ];
@@ -26,10 +21,9 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MembersRoutingModule {}
+export class MembersRoutingModule { }
 
 export const routedComponents = [
   MembersComponent,
   MemberListComponent,
-  MemberAddingComponent,
 ];

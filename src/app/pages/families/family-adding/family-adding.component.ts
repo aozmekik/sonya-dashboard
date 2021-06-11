@@ -1,4 +1,4 @@
-import { FamiliesData } from '../families-data';
+// import { FamiliesData } from '../families-data';
 import { Component, OnInit } from "@angular/core";
 import { Family } from '../../../@core/data/family';
 import { FamilyService } from '../../../@core/services/family.service';
@@ -16,7 +16,7 @@ export class FamilyAddingComponent implements OnInit {
   ngOnInit() { }
 
   public async onSubmit(event: Family) {
-    event.clerk = 'admin';
-    await this.familyService.createFamily(event);
+    // event.clerk = 'admin';
+    // await this.familyService.createFamily(event);
   }
 }

@@ -50,6 +50,17 @@ export namespace Member {
     ZeroNegative,
   }
 
+  export const enum Role {
+    GUEST,
+    MEMBER,
+    MANAGER
+  }
+
+  export const enum Status {
+    MAIL_VERIFIED = 1,
+    ADMIN_VERIFIED
+  }
+
   export interface Keys {
     groups: string[];
     genders: string[];
@@ -59,6 +70,7 @@ export namespace Member {
     committees: string[];
     bloodTypes: string[];
     statuses: string[];
+    roles: string[];
   }
 }
 
@@ -66,34 +78,48 @@ export namespace Member {
  * represents the member model.
  * very earlier prototype of a model.
  */
+export class User {
+  email: string;
+  name: string;
+  role: string;
+  status: string;
+  towns: [number];
+  image: string;
+}
+
 export class Member {
   _id: string;
-  name: string;
-  regDate: string; /* date of registration. */
-  unregDate: string; /* date of unregistration. */
-  status: Status; /* current status of the membership. */
-  group: Member.Group; /* group of the member. */
-
-  /* some private fields for members */
-  telephone: number;
-  address: string;
-  area: string; // TODO. change the place of area.Family.Area
-  gender: Member.Gender;
-  job: string;
-
-  birthday: string;
-  birthplace: string;
-  idNo: number; /* TC */
-  fatherName: string;
-  motherName: string;
-  nation: Member.Nation;
-  maritalStatus: Member.MaritalStatus;
-  bloodType: Member.BloodType;
   email: string;
-  education: Member.Education;
-  workplace: string;
-  registeredProvince: string;
-  committee: Member.Committee;
+  name: string;
+  role: number;
+  status: number;
+  towns: [number];
+  image: string;
+  // regDate: string; /* date of registration. */
+  // unregDate: string; /* date of unregistration. */
+  // status: Status; /* current status of the membership. */
+  // group: Member.Group; /* group of the member. */
+
+  // /* some private fields for members */
+  // telephone: number;
+  // address: string;
+  // area: string; // TODO. change the place of area.Family.Area
+  // gender: Member.Gender;
+  // job: string;
+
+  // birthday: string;
+  // birthplace: string;
+  // idNo: number; /* TC */
+  // fatherName: string;
+  // motherName: string;
+  // nation: Member.Nation;
+  // maritalStatus: Member.MaritalStatus;
+  // bloodType: Member.BloodType;
+  // email: string;
+  // education: Member.Education;
+  // workplace: string;
+  // registeredProvince: string;
+  // committee: Member.Committee;
 
   public static readonly groups: Utils.IHash = {
     [Member.Group.COMMITTEE]: "Yönetici Üye",
@@ -105,6 +131,7 @@ export class Member {
     [Member.Gender.MALE]: "Erkek",
     [Member.Gender.FEMALE]: "Kadın",
   };
+
 
   public static readonly nations: Utils.IHash = {
     [Member.Nation.Turk]: "T.C.",
@@ -121,6 +148,18 @@ export class Member {
     [Member.Education.Undergraduate]: "Lisans",
     [Member.Education.HighSchool]: "Lise"
   };
+
+  public static readonly roles: Utils.IHash = {
+    [Member.Role.GUEST]: "Ziyaretçi",
+    [Member.Role.MEMBER]: "İlçe Görevlisi",
+    [Member.Role.MANAGER]: "İlçe Sorumlusu"
+  };
+
+  public static readonly statuses: Utils.IHash = {
+    [Member.Status.MAIL_VERIFIED]: "Onaylanmamış",
+    [Member.Status.ADMIN_VERIFIED]: "Onaylanmış"
+  };
+
 
   public static readonly committees: Utils.IHash = {
     [Member.Committee.Buy]: "Satın Alma",
@@ -140,36 +179,35 @@ export class Member {
     [Member.BloodType.ZeroPositive]: "0+",
     [Member.BloodType.ZeroNegative]: "0-",
   };
-
-  public static default(): Member {
-    const member = {
-      _id: "id123",
-      name: null,
-      regDate: new Date().toLocaleString(),
-      unregDate: null,
-      status: Status.ACTIVE,
-      group: Member.Group.COMMITTEE,
-      telephone: null,
-      address: null,
-      area: null,
-      gender: Member.Gender.MALE,
-      job: null,
-      birthday: null,
-      birthplace: null,
-      idNo: null,
-      fatherName: null,
-      motherName: null,
-      nation: Member.Nation.Turk,
-      maritalStatus: Member.MaritalStatus.Single,
-      bloodType: Member.BloodType.APositive,
-      email: null,
-      education: Member.Education.Undergraduate,
-      workplace: null,
-      registeredProvince: null,
-      committee: Member.Committee.Identification
-    };
-    return member;
-  };
+  // public static default(): Member {
+  //   const member = {
+  //     _id: "id123",
+  //     name: null,
+  //     regDate: new Date().toLocaleString(),
+  //     unregDate: null,
+  //     status: Status.ACTIVE,
+  //     group: Member.Group.COMMITTEE,
+  //     telephone: null,
+  //     address: null,
+  //     area: null,
+  //     gender: Member.Gender.MALE,
+  //     job: null,
+  //     birthday: null,
+  //     birthplace: null,
+  //     idNo: null,
+  //     fatherName: null,
+  //     motherName: null,
+  //     nation: Member.Nation.Turk,
+  //     maritalStatus: Member.MaritalStatus.Single,
+  //     bloodType: Member.BloodType.APositive,
+  //     email: null,
+  //     education: Member.Education.Undergraduate,
+  //     workplace: null,
+  //     registeredProvince: null,
+  //     committee: Member.Committee.Identification
+  //   };
+  //   return member;
+  // };
 
   public static readonly keys: Member.Keys = {
     groups: Utils.keys(Member.groups),
@@ -179,7 +217,8 @@ export class Member {
     educations: Utils.keys(Member.educations),
     committees: Utils.keys(Member.committees),
     bloodTypes: Utils.keys(Member.bloodTypes),
-    statuses: statusValues,
+    statuses: Utils.toSelectingList(Member.statuses),
+    roles: Utils.toSelectingList(Member.roles)
   };
 
 

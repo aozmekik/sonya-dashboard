@@ -107,11 +107,11 @@ var familySchema = new mongoose.Schema({
         type: Number,
         min: 0
     },
-    regDate:
+    createdAt:
     {
-        type: String,
-        // FIXME. same time stampt.
-        default: new Date().toLocaleDateString()
+        required: true,
+        type: Date,
+        default: Date.now
     },
     warmingType:
     {
@@ -160,7 +160,7 @@ var familySchema = new mongoose.Schema({
     members: [memberSchema],
     needs: [String],
     notes: [noteSchema],
-    images: [String] // FIXME. make it buffer and change only from API.
+    images: mongoose.Schema.Types.ObjectId
 });
 
 mongoose.model('Family', familySchema, 'Families');

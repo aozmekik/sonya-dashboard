@@ -2,17 +2,6 @@ import { Utils } from '../../utils/utils.module';
 
 export namespace Family {
 
-  export const enum Status {
-    NOT_QUESTIONED, // to be questioned.
-    QUESTIONED,
-    HELP, // suitable for help.
-    TRACE, // suitable for trace.
-    EDUCATION, // suitable for education.
-    NO_HELP,
-    NO_TRACE,
-    NO_EDUCATION,
-  }
-
   export const enum WarmingType {
     NATURAL_GAS,
     STOVE,
@@ -67,7 +56,6 @@ export namespace Family {
   }
 
   export interface Keys {
-    statuses: string[];
     genders: string[],
     warmingTypes: string[],
     budgetTypes: string[],
@@ -86,39 +74,29 @@ export namespace Family {
  */
 export class Family {
   _id: string;
-
-  clerk: string; // the member who added this family
-
-  /* general */
+  registrant: string;
   name: string;
   idNo: number;
-  telephone: number;
+  tel: number;
   rent: number;
-  regDate: string;
-  warmingType: Family.WarmingType;
   address: string;
-  district: string;
+  createdAt: Date;
+  warmingType: Family.WarmingType;
+  city: number;
+  town: number;
+  district: number;
+  street: number;
   nation: string;
-
-  /* details */
-  status: Family.Status;
+  rating: number;
+  aid: boolean;
+  health: boolean;
+  education: boolean;
   budgets: Family.Budget[];
   members: Family.FamilyMember[];
   needs: Family.Need[];
   notes: Family.Note[];
-  images: string[];
+  images: string;
 
-
-  public static readonly statuses: Utils.IHash = {
-    [Family.Status.NOT_QUESTIONED]: 'Sorgulama Yapılacak',
-    [Family.Status.QUESTIONED]: 'Sorgulama Yapıldı',
-    [Family.Status.HELP]: 'Yardıma Uygun',
-    [Family.Status.TRACE]: 'Takibe Uygun',
-    [Family.Status.EDUCATION]: 'Eğitime Uygun',
-    [Family.Status.NO_HELP]: 'Yardıma Uygun Değil',
-    [Family.Status.NO_TRACE]: 'Takibe Uygun Değil',
-    [Family.Status.NO_EDUCATION]: 'Eğitime Uygun Değil',
-  };
 
   public static readonly genders: Utils.IHash = {
     [Family.Gender.MAN]: 'Erkek',
@@ -146,32 +124,37 @@ export class Family {
   }
 
   public static readonly keys: Family.Keys = {
-    statuses: Utils.keys(Family.statuses),
-    genders: Utils.keys(Family.genders),
-    warmingTypes: Utils.keys(Family.warmingTypes),
-    budgetTypes: Utils.keys(Family.budgetTypes),
-    ratings: Utils.keys(Family.ratings),
+    genders: Utils.toSelectingList(Family.genders),
+    warmingTypes: Utils.toSelectingList(Family.warmingTypes),
+    budgetTypes: Utils.toSelectingList(Family.budgetTypes),
+    ratings: Utils.toSelectingList(Family.ratings),
   };
 
   public static default(): Family {
     const family = {
       _id: null,
-      clerk: null,
+      registrant: null,
       name: null,
       idNo: null,
-      telephone: null,
+      tel: null,
       rent: null,
-      regDate: new Date().toLocaleString(),
+      createdAt: null,
       warmingType: this.WarmingType.NATURAL_GAS,
-      address: null,
+      city: null,
+      town: null,
       district: null,
+      street: null,
+      address: null,
       nation: null,
-      status: this.Status.NOT_QUESTIONED,
+      rating: null,
+      aid: false,
+      health: false,
+      education: false,
       budgets: [],
       members: [],
       needs: [],
       notes: [],
-      images: [],
+      images: null,
     };
     return family;
   }

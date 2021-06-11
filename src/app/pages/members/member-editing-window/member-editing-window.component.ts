@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { NbWindowRef } from "@nebular/theme";
+import { UserService } from "../../../@core/services/user.service";
 import { Member } from "../member";
 
 @Component({
@@ -10,9 +11,12 @@ import { Member } from "../member";
 export class MemberEditingWindowComponent {
   @Input() member: Member;
 
-  constructor(public windowRef: NbWindowRef) {}
+  constructor(public windowRef: NbWindowRef, private userService: UserService) { }
 
-  close(event) {
+
+  async onSubmit(event: Member) {
+    console.log(event);
+    await this.userService.updateUser(event);
     this.windowRef.close();
   }
 }

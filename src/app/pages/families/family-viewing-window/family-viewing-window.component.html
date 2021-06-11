@@ -11,11 +11,9 @@
           <ng-container *ngTemplateOutlet="row; context: {label: 'İsim', value: family.name}"></ng-container>
           <ng-container *ngTemplateOutlet="row; context: {label: 'Uyruk', value: family.nation}">
           </ng-container>
-          <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt', value: family.regDate}"></ng-container>
+          <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt', value: family.createdAt}"></ng-container>
           <ng-container *ngTemplateOutlet="row; context: {label: 'Adres', value: family.address}"></ng-container>
-          <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt Eden Üye', value: family.clerk}">
-          </ng-container>
-          <ng-container *ngTemplateOutlet="row; context: {label: 'Durum', value: familyKeys.statuses[family.status]}">
+          <ng-container *ngTemplateOutlet="row; context: {label: 'Kayıt Eden Üye', value: family.registrant}">
           </ng-container>
         </nb-step>
 
@@ -112,7 +110,7 @@
             </div>
           </div>
         </nb-step>
-
+<!-- 
         <nb-step label="Resim">
           <div class="button">
             <button nbButton outline nbStepperPrevious>Önceki</button>
@@ -130,7 +128,7 @@
               </div>
             </div>
           </nb-card>
-        </nb-step>
+        </nb-step> -->
 
       </nb-stepper>
 

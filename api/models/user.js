@@ -40,6 +40,11 @@ var userSchema = new mongoose.Schema({
     },
     towns: [Number], // towns where the member can show activity
     image: Buffer,
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        required: true
+    }
 });
 
 userSchema.methods.setPassword = function (password) {
@@ -67,12 +72,16 @@ userSchema.methods.generateJwt = function () {
     }, process.env.JWT_SECRET);
 };
 
-userSchema.methods.emailConfirmed = function () {
-    return this.status === 1;
+userSchema.methods.emailNotConfirmed = function () {
+    return this.status === 0;
 }
 
-userSchema.methods.userConfirmed = function () {
-    return this.status === 2;
+userSchema.methods.userNotConfirmed = function () {
+    return this.status === 0 || this.status === 1;
+}
+
+userSchema.methods.isAdmin = function () {
+    return this.role === 3;
 }
 
 userSchema.methods.clean = function () {

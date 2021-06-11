@@ -79,11 +79,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: "Üye Listesi",
         link: "/pages/members/member-list",
       },
-
-      {
-        title: "Üye Girişi",
-        link: "/pages/members/member-adding",
-      }
     ],
   },
   // {
