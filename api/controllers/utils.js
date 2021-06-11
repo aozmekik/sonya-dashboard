@@ -36,6 +36,16 @@ const bufferToImg = (buffer) => {
     return `data:image/jpeg;base64,${buffer.toString('base64')}`;
 };
 
+const imgsToBuffers = async (imgs) => {
+    const x = [];
+    const images = imgs;
+    for (let i = 0; i < images.length; ++i) {
+        let y = await imgToBuffer(images[i]);
+        x.push(y);
+    }
+    return x;
+}
+
 
 
 module.exports = {
@@ -43,6 +53,7 @@ module.exports = {
     checkUserPrivileges,
     imgToBuffer,
     bufferToImg,
-    toIcon
+    toIcon,
+    imgsToBuffers
 };
 

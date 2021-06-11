@@ -7,9 +7,6 @@ const Image = mongoose.model('Image');
 
 
 const postsList = (req, res) => {
-    // if (!req.body.city)
-    // return res.status(404).json({ 'message': 'City is required' });
-
     const nPerPage = 5;
 
     let query;
@@ -34,32 +31,11 @@ const postsList = (req, res) => {
     }
 
     query
+        .populate({ path: 'createdBy', select: { 'salt': 0, 'hash': 0 }, model: User })
         .exec((err, posts) => {
             if (err)
                 return res.status(400).json(err);
-
-            if (posts.length > 0) {
-                new Promise((resolve, reject) => {
-                    let len = 0;
-                    posts.forEach((post, index, array) =>
-                        User.findOne({ _id: post.userid }, (err, user) => {
-                            if (err)
-                                return res.status(400).json(err);
-                            if (!user)
-                                return res.status(400).json({ msg: 'We were unable to find a user.' });
-
-                            array[index] = { ...post.toObject(), user: user.clean() };
-                            len++;
-                            if (len === array.length)
-                                resolve();
-                        }));
-                })
-                    .then(() => res.status(200).json(posts));
-            }
-            else
-                return res.status(200).json(posts);
-
-
+            return res.status(200).json(posts);
         });
 
 
@@ -79,51 +55,43 @@ const postsListOfUser = (req, res) => {
         let query;
         if (req.query.before) {
             query = Post
-                .find({ userid: userid, createdAt: { $lt: new Date(req.query.before) } })
+                .find({ createdBy: userid, createdAt: { $lt: new Date(req.query.before) } })
                 .sort({ createdAt: -1 })
         }
         else if (req.query.after) {
             query = Post
-                .find({ userid: userid, createdAt: { $gt: new Date(req.query.after) } })
+                .find({ createdBy: userid, createdAt: { $gt: new Date(req.query.after) } })
                 .sort({ createdAt: -1 })
                 .limit(nPerPage)
         }
         else {
             query = Post
-                .find({ userid: userid })
+                .find({ createdBy: userid })
                 .sort({ createdAt: -1 })
                 .limit(nPerPage)
         }
 
-
         query
-            .sort({ createdAt: -1 })
-            .exec((err, posts) => {
+            .populate({ path: 'image', model: Image })
+            .exec(async (err, posts) => {
                 if (err)
                     return res.status(400).json(err);
 
-                if (posts.length > 0) {
-                    new Promise((resolve, reject) => {
-                        let len = 0;
-                        posts.forEach((post, index, array) =>
-                            Image.findOne({ _id: post.image }, async (err, image) => {
-                                if (err)
-                                    return res.status(400).json(err);
-                                if (!image)
-                                    return res.status(400).json({ msg: 'Image not found.' });
-
-                                const icon = await Utils.toIcon(image.data[0]);
-                                array[index] = { ...post.toObject(), icon: Utils.bufferToImg(icon) };
-                                len++;
-                                if (len === array.length)
-                                    resolve();
-                            }));
-                    })
-                        .then(() => { res.status(200).json(posts) });
+                let postsJSON = [];
+                try {
+                    for (item of posts) {
+                        let icon = await Utils.toIcon(item.image.data[0])
+                        let postJSON = item.toObject();
+                        delete postJSON.image.data;
+                        postsJSON.push({ ...postJSON, icon: Utils.bufferToImg(icon) })
+                    }
                 }
-                else
-                    return res.status(200).json(posts);
+                catch (e) {
+                    return res.status(500).json(e);
+                }
 
+
+                return res.status(200).json(postsJSON);
             });
     });
 
@@ -167,7 +135,7 @@ const postsCreate = (req, res) => {
 
 
                 Post.create({
-                    userid: _id,
+                    createdBy: _id,
                     statement: req.body.statement,
                     image: image._id,
                     city: req.body.city,

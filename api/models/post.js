@@ -16,9 +16,9 @@ var commentSchema = new mongoose.Schema({
 });
 
 var postSchema = new mongoose.Schema({
-    userid: {
+    createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
+        required: true,
     },
     statement: String,
     image: {
