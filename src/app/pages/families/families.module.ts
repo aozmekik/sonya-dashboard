@@ -25,7 +25,6 @@ import {
 import { ThemeModule } from "../../@theme/theme.module";
 import { FamilyFormComponent } from './family-form/family-form.component';
 import { FamilyEditingWindowFormComponent } from './family-editing-window/family-editing-window.component';
-import { FieldActivityListComponent } from './field-activity-list/field-activity-list.component';
 import { DynamicFormComponent } from './family-form/dynamic-form/dynamic-form.component';
 
 @NgModule({
@@ -55,7 +54,6 @@ import { DynamicFormComponent } from './family-form/dynamic-form/dynamic-form.co
     ...routedComponents,
     FamilyEditingWindowFormComponent,
     FamilyFormComponent,
-    FieldActivityListComponent,
     DynamicFormComponent,
   ],
   exports: [

@@ -1,4 +1,3 @@
-import { FieldActivityListComponent } from './field-activity-list/field-activity-list.component';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
@@ -31,7 +30,7 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FamiliesRoutingModule {}
+export class FamiliesRoutingModule { }
 
 export const routedComponents = [
   FamiliesComponent,
