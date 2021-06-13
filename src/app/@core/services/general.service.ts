@@ -8,7 +8,7 @@ export class GeneralService {
 
     constructor(private httpClient: HttpClient, private authenticationService: AuthenticationService) {
         if (environment.production)
-            this.apiBaseUrl = 'http://sonyadev.herokuapp.com/api';
+            this.apiBaseUrl = 'https://sonyadev.herokuapp.com/api';
     }
 
     protected getHeaders() {

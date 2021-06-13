@@ -98,8 +98,6 @@ const login = (req, res) => {
                 .json(err);
         }
         if (user) {
-            if (user.role === 3)
-                return res.status(404).json({ msg: 'Admin can not use mobile' });
             const token = user.generateJwt();
             res
                 .status(200)

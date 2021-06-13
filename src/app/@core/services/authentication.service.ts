@@ -18,7 +18,7 @@ export class AuthenticationService {
     private http: HttpClient
   ) {
     if (environment.production)
-      this.apiBaseUrl = 'http://sonyadev.herokuapp.com/api';
+      this.apiBaseUrl = 'https://sonyadev.herokuapp.com/api';
   }
 
   public getToken(): string {
