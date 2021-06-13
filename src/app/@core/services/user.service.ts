@@ -23,6 +23,15 @@ export class UserService extends GeneralService {
       .catch(this.handleError);
   }
 
+  public getUser(userid): Promise<User> {
+    const url = `${this.apiBaseUrl}/admin/users/${userid}`;
+    return this.http
+      .get(url, this.getHeaders())
+      .toPromise()
+      .then(response => response as User)
+      .catch(this.handleError);
+  }
+
   public updateUser(user): Promise<User> {
     const url = `${this.apiBaseUrl}/admin/users/${user._id}`;
     return this.http

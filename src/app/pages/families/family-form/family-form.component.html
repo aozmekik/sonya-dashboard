@@ -24,7 +24,7 @@
           </ngx-custom-input-box>
           <ngx-custom-input-box rowName="Kira" [alpha]="false" [(formGroup)]="form" formControlName="rent">
           </ngx-custom-input-box>
-          <ngx-custom-selector rowName="Isınma Tipi" [selectingList]="familyKeys.warmingTypes" [(formGroup)]="form"
+          <ngx-custom-selector placeholder="Isınma Tipi" rowName="Isınma Tipi" [selectingList]="familyKeys.warmingTypes" [(formGroup)]="form"
             formControlName="warmingType">
           </ngx-custom-selector>
           <ngx-custom-input-box rowName="Adres" [(formGroup)]="form" formControlName="address">
@@ -245,16 +245,10 @@
                             </nb-accordion-item-header>
                             <nb-accordion-item-body>
                               <div class="row">
-                                <div class="col-6">
+                                <div class="col-12">
                                   <ngx-custom-input-box [sideBySide]="true" [numeric]="false" [alpha]="false"
                                     rowName="Not" [(formGroup)]="notes.controls[i]" [required]="true" formControlName="statement">
                                   </ngx-custom-input-box>
-                                </div>
-                                <div class="col-6">
-                                  <ngx-custom-selector [sideBySide]="true" rowName="İhtiyaç Derecesi"
-                                    [selectingList]="familyKeys.ratings" [(formGroup)]="notes.controls[i]"
-                                    formControlName="rating">
-                                  </ngx-custom-selector>
                                 </div>
                               </div>
                             </nb-accordion-item-body>
@@ -344,7 +338,7 @@
 
           </nb-card>
         </nb-step>
-      </nb-stepper>
+      </nb-stepper> 
 
       <div class="form-group row">
         <div class="offset-sm-3 col-9">

@@ -51,8 +51,6 @@ export namespace Family {
 
   export interface Note {
     statement: string;
-    members: string;
-    rating: Rating;
   }
 
   export interface Keys {
@@ -74,7 +72,7 @@ export namespace Family {
  */
 export class Family {
   _id: string;
-  registrant: string;
+  createdBy: string;
   name: string;
   idNo: number;
   tel: number;
@@ -95,7 +93,7 @@ export class Family {
   members: Family.FamilyMember[];
   needs: Family.Need[];
   notes: Family.Note[];
-  images: string;
+  images: string[];
 
 
   public static readonly genders: Utils.IHash = {
@@ -133,7 +131,7 @@ export class Family {
   public static default(): Family {
     const family = {
       _id: null,
-      registrant: null,
+      createdBy: null,
       name: null,
       idNo: null,
       tel: null,

@@ -1,12 +1,12 @@
-import { FamilyViewingWindowComponent } from './../family-viewing-window/family-viewing-window.component';
 import { FamilyEditingWindowFormComponent } from './../family-editing-window/family-editing-window.component';
 import { Component, OnInit } from "@angular/core";
 import { LocalDataSource } from "ng2-smart-table";
 import { Router } from "@angular/router";
 import { NbWindowService } from "@nebular/theme";
-import { Utils } from '../../../utils/utils.module';
 import { FamilyService } from '../../../@core/services/family.service';
 import { Family } from '../../../@core/data/family';
+import { LocationService } from '../../../@core/services/location.service';
+import { Town } from '../../../@core/data/location';
 
 @Component({
   selector: "ngx-family-list",
@@ -14,13 +14,16 @@ import { Family } from '../../../@core/data/family';
   styleUrls: ["./family-list.component.scss"],
 })
 export class FamilyListComponent implements OnInit {
-  public families: Family[];
+  public families;
+  private townKeys: { [id: number]: string } = {};
 
   constructor(
     public router: Router,
     public windowService: NbWindowService,
-    private familyService: FamilyService) {
+    private familyService: FamilyService,
+    private locationService: LocationService) {
     this.getFamilies();
+    this.getTowns();
   }
 
   ngOnInit(): void {
@@ -50,17 +53,44 @@ export class FamilyListComponent implements OnInit {
       name: {
         title: "Aile Adı",
       },
-      regDate: {
+      createdAt: {
         title: "Kayıt Tarihi",
+        valuePrepareFunction: (value) => {
+          return value.substring(0, 10);
+        },
       },
-      district: {
+      town: {
         title: "İlçe",
+        valuePrepareFunction: (value) => {
+          return this.townKeys[value];
+        },
       },
-      registrant: {
+      createdBy: {
         title: "Kayıt Eden Üye",
+        valuePrepareFunction: (value) => {
+          return value.name;
+        },
       },
-      nation: {
-        title: "Uyruk",
+      rating: {
+        title: "Derece",
+      },
+      aid: {
+        title: "Yardım Takibi",
+        valuePrepareFunction: (value) => {
+          return this.boolToString(value);
+        }
+      },
+      health: {
+        title: "Sağlık Takibi",
+        valuePrepareFunction: (value) => {
+          return this.boolToString(value);
+        }
+      },
+      education: {
+        title: "Eğitim Takibi",
+        valuePrepareFunction: (value) => {
+          return this.boolToString(value);
+        }
       }
     },
   };
@@ -99,16 +129,25 @@ export class FamilyListComponent implements OnInit {
   }
 
   onSelect(event) {
-    this.windowService.open(FamilyViewingWindowComponent, {
-      title: "Aile Bilgileri",
-      context: {
-        family: event.data
-      }
-    });
+    this.onEdit(event);
   }
 
   private async getFamilies() {
     this.families = await this.familyService.getFamilies();
     this.source.load(this.families);
+  }
+
+  private async getTowns() {
+    const towns = await this.locationService.getTowns(34);
+    for (let town of towns)
+      this.townKeys[town.ilce_id] = town.ilce_adi;
+  }
+
+  public isLoaded() {
+    return this.families && Object.keys(this.townKeys).length > 0;
+  }
+
+  public boolToString(value) {
+    return value ? 'Evet' : 'Hayır';
   }
 }

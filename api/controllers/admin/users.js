@@ -126,5 +126,5 @@ const usersUpdateOne = (req, res) => {
 
 module.exports = {
     usersList,
-    usersUpdateOne
+    usersUpdateOne,
 };

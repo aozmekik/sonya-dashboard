@@ -120,13 +120,7 @@ const postsCreate = (req, res) => {
         if (req.body.town && !user.towns.includes(req.body.town))
             return res.status(400).json({ msg: 'User cannot do operation in this region.' });
 
-        const x = [];
-        const images = req.body.images;
-        for (let i = 0; i < images.length; ++i) {
-            let y = await Utils.imgToBuffer(images[i]);
-            x.push(y);
-        }
-        const data = x;
+        const data = await Utils.imgsToBuffers(req.body.images);
         Image.create(
             { data: data },
             (err, image) => {

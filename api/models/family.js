@@ -76,7 +76,7 @@ var noteSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    registrant: {
+    createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
@@ -84,7 +84,7 @@ var noteSchema = new mongoose.Schema({
 
 
 var familySchema = new mongoose.Schema({
-    registrant: {
+    createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },

@@ -3,6 +3,7 @@ const Utils = require('../utils');
 
 const Fam = mongoose.model('Family');
 const User = mongoose.model('User');
+const Image = mongoose.model('Image');
 
 
 const familiesList = (req, res) => {
@@ -19,12 +20,24 @@ const familiesList = (req, res) => {
         if (!user.isAdmin())
             return err;
 
-        Fam.find({}, (err, families) => {
-            if (err)
-                res.status(400).json(err);
-            else
-                res.status(201).json(families);
-        });
+
+        Fam
+            .find({})
+            .populate({ path: 'createdBy', select: { 'salt': 0, 'hash': 0 }, model: User })
+            .populate({ path: 'images', model: Image })
+            .exec((err, families) => {
+                if (err)
+                    return res.status(400).json(err);
+
+                const familiesJSON = [];
+                for (let family of families) {
+                    familyJSON = family.toObject();
+                    familyJSON.images.data = familyJSON.images.data.map(buf => Utils.bufferToImg(buf));
+                    familiesJSON.push(familyJSON);
+                }
+
+                return res.status(201).json(familiesJSON);
+            });
     });
 
 
@@ -94,5 +107,5 @@ const familiesCreate = (req, res) => {
 module.exports = {
     familiesList,
     familiesCreate,
-    
+
 };

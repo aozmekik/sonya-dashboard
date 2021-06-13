@@ -49,11 +49,11 @@ const imgsToBuffers = async (imgs) => {
 
 
 module.exports = {
+    toIcon,
     getUserID,
-    checkUserPrivileges,
     imgToBuffer,
     bufferToImg,
-    toIcon,
-    imgsToBuffers
+    imgsToBuffers,
+    checkUserPrivileges,
 };
 

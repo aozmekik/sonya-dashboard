@@ -36,6 +36,10 @@ router
     .put(auth, ctrlFamilies.familiesUpdateOne)
     .delete(auth, ctrlFamilies.familiesDeleteOne);
 
+router
+    .route('/families/pdf/:familyid')
+    .get(ctrlFamilies.familiesPDF);
+
 // locations
 router
     .route('/locations/cities')

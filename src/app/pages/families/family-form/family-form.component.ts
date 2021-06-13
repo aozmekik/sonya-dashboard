@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NbToastrService } from '@nebular/theme';
 import { Family } from '../../../@core/data/family';
+import { AuthenticationService } from '../../../@core/services/authentication.service';
 
 @Component({
   selector: "ngx-family-form",
@@ -25,14 +26,16 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
   // public memberCount: number = 0;
   private destroy$ = new Subject();
 
-  constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService) {
+  constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService,
+    private authService: AuthenticationService) {
     super(formBuilder, toastrService);
   }
 
   ngOnInit() {
+    console.log(this.model);
     this.form = new FormGroup({
       '_id': new FormControl(this.model._id),
-      'registrant': new FormControl(this.model.registrant),
+      'createdBy': new FormControl(this.authService.getCurrentUser()._id),
       'createdAt': new FormControl(this.model.createdAt),
       'name': new FormControl(this.model.name, Validators.required),
       'idNo': new FormControl(this.model.idNo),
@@ -47,7 +50,7 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
       'members': new FormArray(this.model.members),
       'needs': new FormArray(this.model.needs),
       'notes': new FormArray(this.model.notes),
-      'images': new FormControl(this.model.images),
+      'images': new FormControl(this.model.images ? this.model.images.data : []),
       'memberCount': new FormControl(this.model.members.length),
       'budgetCount': new FormControl(this.model.budgets.length),
       'needCount': new FormControl(this.model.needs.length),
