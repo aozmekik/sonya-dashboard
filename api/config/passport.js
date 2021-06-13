@@ -30,11 +30,6 @@ passport.use(new LocalStrategy({
                 })
             }
 
-            if (user.isAdmin())
-                return done(null, false, {
-                    errorCode: 4, // user is admin
-                })
-
             return done(null, user);
         });
     }

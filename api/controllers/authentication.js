@@ -98,6 +98,8 @@ const login = (req, res) => {
                 .json(err);
         }
         if (user) {
+            if (user.role == 3)
+                return res.status(401).json({ errorCode: 3 });
             const token = user.generateJwt();
             res
                 .status(200)
