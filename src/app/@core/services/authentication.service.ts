@@ -3,6 +3,8 @@ import { BROWSER_STORAGE } from '../data/storage';
 import { User } from '../data/user';
 import { AuthResponse } from '../data/authresponse';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,10 @@ export class AuthenticationService {
   constructor(
     @Inject(BROWSER_STORAGE) private storage: Storage,
     private http: HttpClient
-  ) { }
+  ) {
+    if (environment.production)
+      this.apiBaseUrl = 'http://sonyadev.herokuapp.com/api';
+  }
 
   public getToken(): string {
     return this.storage.getItem('sonya-token');
