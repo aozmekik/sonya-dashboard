@@ -28,8 +28,7 @@ const familiesList = (req, res) => {
         if (err)
             return res.status(400).json(err);
         if ((err = Utils.checkUserPrivileges(res, req, user)))
-            return err;
-
+            return res.status(400).json(err);
         if (req.body.town && !user.towns.includes(req.body.town))
             return res.status(400).json({ msg: 'User cannot do operation in this region.' })
 

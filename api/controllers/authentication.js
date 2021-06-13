@@ -99,7 +99,7 @@ const login = (req, res) => {
         }
         if (user) {
             if (user.role == 3)
-                return res.status(401).json({ errorCode: 3 });
+                return res.status(401).json({ errorCode: 4 });
             const token = user.generateJwt();
             res
                 .status(200)

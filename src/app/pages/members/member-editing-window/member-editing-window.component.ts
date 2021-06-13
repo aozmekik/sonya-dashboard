@@ -15,7 +15,6 @@ export class MemberEditingWindowComponent {
 
 
   async onSubmit(event: Member) {
-    console.log(event);
     await this.userService.updateUser(event);
     this.windowRef.close();
   }
