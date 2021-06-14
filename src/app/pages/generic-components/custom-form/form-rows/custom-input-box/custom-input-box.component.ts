@@ -27,7 +27,7 @@ export class CustomInputBoxComponent implements OnInit, ControlValueAccessor {
   public regexPattern: string;
 
   private readonly regexAlphaNumeric: string = "^[A-Za-z0-9]+$";
-  private readonly regexAlpha: string = "^[a-zA-Z öçşiğüÖÇŞİĞÜ]+$";
+  private readonly regexAlpha: string = "^[a-zA-Z öçşiığüÖÇŞİĞÜ]+$";
   // private readonly regexNumeric: string = "^[0-9]+$";
   @Input() minLength: number = 1;
   @Input() maxLength: number = 64;

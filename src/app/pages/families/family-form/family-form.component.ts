@@ -70,7 +70,7 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
     this.assignDynamicHandler(this.needs, this.model.needs, this.needCount, this.createNeed, () => this.updateNeeds());
     this.assignDynamicHandler(this.notes, this.model.notes, this.noteCount, () => this.createNotes(), () => this.updateNotes());
 
-
+    console.log(this.model);
   }
 
   ngOnDestroy() {
@@ -92,6 +92,20 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
 
   }
 
+  // public findInvalidControls() {
+  //   const invalid = [];
+  //   const controls = this.form.controls;
+  //   for (const name in controls) {
+  //     console.log(name, ' ', controls[name].invalid)
+  //     if (controls[name].invalid) {
+  //       invalid.push(name);
+  //     }
+  //   }
+  //   console.log(invalid)
+  //   console.log(this.form.invalid);
+  //   return invalid;
+  // }
+
   generateForm(list: FormArray, model: any[], count: AbstractControl, creator) {
     if (model) {
       let diff = count.value - list.length;
@@ -108,41 +122,41 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
 
   createMember() {
     return new FormGroup({
-      'idNo': new FormControl(null, { validators: [Validators.required] }),
       'name': new FormControl(null, { validators: [Validators.required] }),
-      'birthyear': new FormControl(null, { validators: [Validators.required, Validators.minLength(4), Validators.maxLength(4)] }),
-      'gender': new FormControl(0, { validators: [Validators.required] }),
-      'job': new FormControl(null, { validators: [Validators.required] }),
-      'income': new FormControl(null, { validators: [Validators.required] }),
-      'size': new FormControl(null, { validators: [Validators.required] }),
-      'shoe': new FormControl(null, { validators: [Validators.required] }),
-      'disease': new FormControl(null, { validators: [Validators.required] }),
-      'note': new FormControl(null, { validators: [Validators.required] }),
-      'school': new FormControl(null, { validators: [Validators.required] }),
-      'grade': new FormControl(null, { validators: [Validators.required] }),
-      'kinship': new FormControl(null, { validators: [Validators.required] }),
+      'idNo': new FormControl(null),
+      'birthyear': new FormControl(null, { validators: [Validators.minLength(4), Validators.maxLength(4)] }),
+      'gender': new FormControl(0),
+      'job': new FormControl(null),
+      'income': new FormControl(null),
+      'size': new FormControl(null),
+      'shoe': new FormControl(null),
+      'disease': new FormControl(null),
+      'note': new FormControl(null),
+      'school': new FormControl(null),
+      'grade': new FormControl(null),
+      'kinship': new FormControl(null),
     });
   }
 
 
   createBudget() {
     return new FormGroup({
-      'name': new FormControl(null, { validators: [Validators.required] }),
-      'amount': new FormControl(null, { validators: [Validators.required] }),
-      'type': new FormControl(Family.BudgetType.INCOME, { validators: [Validators.required] }),
+      'name': new FormControl(null),
+      'amount': new FormControl(null),
+      'type': new FormControl(Family.BudgetType.INCOME),
     });
   }
 
   createNeed() {
     return new FormGroup({
-      'name': new FormControl(null, { validators: [Validators.required] }),
+      'name': new FormControl(null),
     });
   }
 
   createNotes() {
     return new FormGroup({
-      'statement': new FormControl(null, { validators: [Validators.required] }),
-      'createdBy': new FormControl(this.authService.getCurrentUser()._id, { validators: [Validators.required] }),
+      'statement': new FormControl(null),
+      'createdBy': new FormControl(this.authService.getCurrentUser()._id),
     });
   }
 

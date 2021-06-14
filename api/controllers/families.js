@@ -292,9 +292,9 @@ const familiesDeleteOne = (req, res) => {
 };
 
 const familiesPDF = (req, res) => {
-    const sourceFont = "/home/drh0use/Downloads/project/sonya/api/assets/font.otf";
-    const sourcePDF = "/home/drh0use/Downloads/project/sonya/api/assets/form.pdf";
-    const destinationPDF = "/home/drh0use/Downloads/project/sonya/api/assets/output.pdf";
+    const absolute_path = __dirname + '/../assets/';
+    const sourceFont = absolute_path + 'font.otf';
+    const sourcePDF = absolute_path + 'form.pdf';
 
 
     let _id = null;

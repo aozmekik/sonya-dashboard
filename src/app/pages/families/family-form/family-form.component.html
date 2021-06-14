@@ -339,13 +339,14 @@
         </nb-step>
       </nb-stepper>
 
-      <div class="form-group row" >
-        <div class="offset-3 col-9" >
+      <div class="form-group row">
+        <div class="offset-3 col-9">
           <div class="row" *ngIf="!busy">
             <button class="bottom-button" (click)="onSubmit()" nbButton status="primary" hero [disabled]="form.invalid">
               {{buttonName}}
             </button>
-            <button class="bottom-button" *ngIf="this.model._id != null" (click)="onDownload()" nbButton status="primary" hero>
+            <button class="bottom-button" *ngIf="this.model._id != null" (click)="onDownload()" nbButton
+              status="primary" hero>
               İNDİR
             </button>
           </div>

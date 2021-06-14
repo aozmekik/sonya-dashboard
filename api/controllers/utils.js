@@ -139,7 +139,7 @@ const toForm = async (family) => {
         form[`worker${i + 1}Name`] = workers[i].name;
         form[`worker${i + 1}Age`] = workers[i].birthyear ? new Date().getFullYear() - workers[i].birthyear : null;
         form[`worker${i + 1}Job`] = workers[i].job;
-        form[`worker${i + 1}Salary`] = workers[i].income;
+        form[`worker${i + 1}Salary`] = `${workers[i].income}₺`;
 
     }
 
