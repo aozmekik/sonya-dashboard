@@ -84,6 +84,10 @@ userSchema.methods.isAdmin = function () {
     return this.role === 3;
 }
 
+userSchema.methods.isAllowed = function (town) {
+    return this.isAdmin() || (town && this.towns.includes(town));
+}
+
 userSchema.methods.clean = function () {
     return {
         _id: this._id,

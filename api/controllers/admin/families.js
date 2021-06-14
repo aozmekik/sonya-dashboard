@@ -32,7 +32,8 @@ const familiesList = (req, res) => {
                 const familiesJSON = [];
                 for (let family of families) {
                     familyJSON = family.toObject();
-                    familyJSON.images.data = familyJSON.images.data.map(buf => Utils.bufferToImg(buf));
+                    if (familyJSON.images)
+                        familyJSON.images.data = familyJSON.images.data.map(buf => Utils.bufferToImg(buf));
                     familiesJSON.push(familyJSON);
                 }
 
@@ -107,5 +108,4 @@ const familiesCreate = (req, res) => {
 module.exports = {
     familiesList,
     familiesCreate,
-
 };

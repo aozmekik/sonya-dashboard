@@ -16,7 +16,6 @@ export class FamilyAddingComponent implements OnInit {
   ngOnInit() { }
 
   public async onSubmit(event: Family) {
-    // event.clerk = 'admin';
-    // await this.familyService.createFamily(event);
+    await this.familyService.createFamily(event);
   }
 }

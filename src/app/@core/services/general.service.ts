@@ -20,6 +20,7 @@ export class GeneralService {
     }
 
     protected handleError(error: any): Promise<any> {
+        console.error('handleError', error);
         return Promise.reject(error.message || error);
     }
 }

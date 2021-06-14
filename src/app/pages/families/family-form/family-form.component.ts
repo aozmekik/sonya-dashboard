@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { NbToastrService } from '@nebular/theme';
 import { Family } from '../../../@core/data/family';
 import { AuthenticationService } from '../../../@core/services/authentication.service';
+import { FamilyService } from '../../../@core/services/family.service';
 
 @Component({
   selector: "ngx-family-form",
@@ -22,12 +23,14 @@ import { AuthenticationService } from '../../../@core/services/authentication.se
 
 export class FamilyFormComponent extends CustomFormComponent<Family> implements OnInit {
   public readonly familyKeys: Family.Keys = Family.keys;
+  public busy: boolean = false;
 
   // public memberCount: number = 0;
   private destroy$ = new Subject();
 
   constructor(public formBuilder: FormBuilder, public toastrService: NbToastrService,
-    private authService: AuthenticationService) {
+    private authService: AuthenticationService,
+    private familyService: FamilyService) {
     super(formBuilder, toastrService);
   }
 
@@ -36,20 +39,26 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
     this.form = new FormGroup({
       '_id': new FormControl(this.model._id),
       'createdBy': new FormControl(this.authService.getCurrentUser()._id),
-      'createdAt': new FormControl(this.model.createdAt),
       'name': new FormControl(this.model.name, Validators.required),
       'idNo': new FormControl(this.model.idNo),
       'tel': new FormControl(this.model.tel),
       'rent': new FormControl(this.model.rent),
-      'warmingType': new FormControl(this.model.warmingType),
       'address': new FormControl(this.model.address),
+      'createdAt': new FormControl(this.model.createdAt),
+      'warmingType': new FormControl(this.model.warmingType),
+      'city': new FormControl(this.model.city),
+      'town': new FormControl(this.model.town),
       'district': new FormControl(this.model.district),
+      'street': new FormControl(this.model.street),
       'nation': new FormControl(this.model.nation),
-      'status': new FormControl(this.model.status),
-      'budgets': new FormArray(this.model.budgets),
-      'members': new FormArray(this.model.members),
-      'needs': new FormArray(this.model.needs),
-      'notes': new FormArray(this.model.notes),
+      'rating': new FormControl(this.model.rating),
+      'aid': new FormControl(this.model.aid),
+      'health': new FormControl(this.model.health),
+      'education': new FormControl(this.model.education),
+      'budgets': new FormArray([]),
+      'members': new FormArray([]),
+      'needs': new FormArray([]),
+      'notes': new FormArray([]),
       'images': new FormControl(this.model.images ? this.model.images.data : []),
       'memberCount': new FormControl(this.model.members.length),
       'budgetCount': new FormControl(this.model.budgets.length),
@@ -60,7 +69,7 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
     this.assignDynamicHandler(this.members, this.model.members, this.memberCount, this.createMember, () => this.updateMembers());
     this.assignDynamicHandler(this.budgets, this.model.budgets, this.budgetCount, this.createBudget, () => this.updateBudgets());
     this.assignDynamicHandler(this.needs, this.model.needs, this.needCount, this.createNeed, () => this.updateNeeds());
-    this.assignDynamicHandler(this.notes, this.model.notes, this.noteCount, this.createNotes, () => this.updateNotes());
+    this.assignDynamicHandler(this.notes, this.model.notes, this.noteCount, () => this.createNotes(), () => this.updateNotes());
 
 
   }
@@ -134,8 +143,7 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
   createNotes() {
     return new FormGroup({
       'statement': new FormControl(null, { validators: [Validators.required] }),
-      'members': new FormControl(null, { validators: [Validators.required] }),
-      'rating': new FormControl(null, { validators: [Validators.required] }),
+      'createdBy': new FormControl(this.authService.getCurrentUser()._id, { validators: [Validators.required] }),
     });
   }
 
@@ -177,7 +185,7 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
     this.model.needs.forEach(need => {
       this.needs.push(this.formBuilder.group(
         {
-          name: need.name,
+          name: need,
         }
       ));
     });
@@ -188,8 +196,7 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
       this.notes.push(this.formBuilder.group(
         {
           statement: note.statement,
-          members: note.members,
-          rating: note.rating
+          createdBy: note.createdBy
         }
       ));
     });
@@ -255,6 +262,21 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
   deleteFile(idx: number) {
     this.form.value.images.splice(idx, 1)
   }
+
+  public onSubmit(): void {
+    if (this.form.value.needs) {
+      this.form.value.needs = this.form.value.needs.map(need => need.name);
+    }
+    super.onSubmit();
+  }
+
+  public onDownload(): void {
+    if (this.model._id) {
+      this.busy = true;
+      this.familyService.downloadPDF(this.model, () => { this.busy = false });
+    }
+  }
+
 
 
 }

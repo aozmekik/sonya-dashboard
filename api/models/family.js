@@ -32,7 +32,7 @@ var memberSchema = new mongoose.Schema({
     birthyear: {
         type: Number,
         min: 1920,
-        max: 1900,
+        max: new Date().getFullYear() + 1,
     },
     gender: {
         type: Number,
@@ -100,8 +100,6 @@ var familySchema = new mongoose.Schema({
     },
     tel: {
         type: Number,
-        min: 10000000000,
-        max: 99999999999,
     },
     rent: {
         type: Number,

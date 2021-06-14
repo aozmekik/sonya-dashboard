@@ -3,8 +3,13 @@ const Fam = mongoose.model('Family');
 const User = mongoose.model('User');
 const Image = mongoose.model('Image');
 const Utils = require('./utils');
-const pdfFiller = require('pdffiller');
+
+const pdfLib = require('pdf-lib');
+const fontkit = require('@pdf-lib/fontkit');
 const fs = require('fs');
+
+
+
 
 
 
@@ -12,7 +17,6 @@ const fs = require('fs');
 
 // TODO. maybe index on date.
 const familiesList = (req, res) => {
-
     if (!req.body.city)
         return res.status(404).json({ 'message': 'City is required' });
 
@@ -29,7 +33,7 @@ const familiesList = (req, res) => {
             return res.status(400).json(err);
         if ((err = Utils.checkUserPrivileges(res, req, user)))
             return res.status(400).json(err);
-        if (req.body.town && !user.towns.includes(req.body.town))
+        if (!user.isAllowed(req.body.town))
             return res.status(400).json({ msg: 'User cannot do operation in this region.' })
 
         const query = {
@@ -60,7 +64,8 @@ const familiesList = (req, res) => {
                 const familiesJSON = [];
                 for (let family of families) {
                     familyJSON = family.toObject();
-                    familyJSON.images.data = familyJSON.images.data.map(buf => Utils.bufferToImg(buf));
+                    if (familyJSON.images)
+                        familyJSON.images.data = familyJSON.images.data.map(buf => Utils.bufferToImg(buf));
                     familiesJSON.push(familyJSON);
                 }
 
@@ -72,58 +77,80 @@ const familiesList = (req, res) => {
 };
 
 const familiesCreate = (req, res) => {
-    User.findOne({ _id: req.body.createdBy }, async (err, user) => {
+    if (!req.body.name || !req.body.city || !req.body.town)
+        return res.status(404).json({ 'message': 'Missing fields' });
+
+    let _id = null;
+    try {
+        _id = Utils.getUserID(req);
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+
+    User.findOne({ _id: _id }, (err, user) => {
         if (err)
             return res.status(400).json(err);
         if ((err = Utils.checkUserPrivileges(res, req, user)))
-            return err;
+            return res.status(400).json(err);
+        if (_id != req.body.createdBy)
+            return res.status(400).json({ msg: 'Token does not match with creator' });
 
-        const createFamily = (images) => {
-            Fam.create({
-                createdBy: req.body.createdBy,
-                name: req.body.name,
-                idNo: req.body.idNo,
-                tel: req.body.tel,
-                rent: req.body.rent,
-                warmingType: req.body.warmingType,
-                address: req.body.address,
-                city: req.body.city,
-                town: req.body.town,
-                district: req.body.district,
-                street: req.body.street,
-                nation: req.body.nation,
-                rating: req.body.rating,
-                aid: req.body.aid,
-                health: req.body.health,
-                education: req.body.education,
-                budgets: req.body.budgets,
-                members: req.body.members,
-                needs: req.body.needs,
-                notes: req.body.notes,
-                images: images
-            },
-                (err, family) => {
+
+        User.findOne({ _id: req.body.createdBy }, async (err, user) => {
+            if (err)
+                return res.status(400).json(err);
+            if ((err = Utils.checkUserPrivileges(res, req, user)))
+                return res.status(400).json(err);
+
+            const createFamily = (images) => {
+                Fam.create({
+                    createdBy: req.body.createdBy,
+                    name: req.body.name,
+                    idNo: req.body.idNo,
+                    tel: req.body.tel,
+                    rent: req.body.rent,
+                    warmingType: req.body.warmingType,
+                    address: req.body.address,
+                    city: req.body.city,
+                    town: req.body.town,
+                    district: req.body.district,
+                    street: req.body.street,
+                    nation: req.body.nation,
+                    rating: req.body.rating,
+                    aid: req.body.aid,
+                    health: req.body.health,
+                    education: req.body.education,
+                    budgets: req.body.budgets,
+                    members: req.body.members,
+                    needs: req.body.needs,
+                    notes: req.body.notes,
+                    images: images
+                },
+                    (err, family) => {
+                        if (err)
+                            return res.status(400).json(err);
+                        else
+                            return res.status(201).json(family);
+                    });
+            }
+
+            if (req.body.images && req.body.images.length > 0) {
+                const data = await Utils.imgsToBuffers(req.body.images);
+                Image.create({ data: data }, (err, image) => {
                     if (err)
                         return res.status(400).json(err);
-                    else
-                        return res.status(201).json(family);
+
+                    return createFamily(image._id);
                 });
+            }
+            else
+                return createFamily(null);
+
         }
+        );
+    });
 
-        if (req.body.images) {
-            const data = await Utils.imgsToBuffers(req.body.images);
-            Image.create({ data: data }, (err, image) => {
-                if (err)
-                    return res.status(400).json(err);
 
-                return createFamily(image._id);
-            });
-        }
-        else
-            return createFamily(null);
-
-    }
-    );
 };
 
 
@@ -159,7 +186,7 @@ const familiesUpdateOne = (req, res) => {
             return res.status(400).json(err);
         if ((err = Utils.checkUserPrivileges(res, req, user)))
             return err;
-        if (req.body.town && !user.towns.includes(req.body.town))
+        if (!user.isAllowed(req.body.town))
             return res.status(400).json({ msg: 'User cannot do operation in this region.' })
 
         Fam
@@ -207,7 +234,7 @@ const familiesUpdateOne = (req, res) => {
                     if (err)
                         return res.status(400).json(err);
 
-                    if (req.body.images) {
+                    if (req.body.images && req.body.images.length > 0) {
                         const data = await Utils.imgsToBuffers(req.body.images);
                         // create new img buffer
                         Image.create({ data: data }, (err, image) => {
@@ -245,7 +272,7 @@ const familiesDeleteOne = (req, res) => {
             return res.status(400).json(err);
         if ((err = Utils.checkUserPrivileges(res, req, user)))
             return err;
-        if (req.body.town && !user.towns.includes(req.body.town))
+        if (!user.isAllowed(req.body.town))
             return res.status(400).json({ msg: 'User cannot do operation in this region.' })
 
 
@@ -265,57 +292,72 @@ const familiesDeleteOne = (req, res) => {
 };
 
 const familiesPDF = (req, res) => {
-    // Utils.toPDF();
-    var sourcePDF = "/home/drh0use/Downloads/project/sonya/api/assets/form.pdf";
-    var destinationPDF = "/home/drh0use/Downloads/project/sonya/api/assets/output.pdf";
-    var data = {
-        'name': 'eslem',
-        'nation': 'selam',
-    };
+    const sourceFont = "/home/drh0use/Downloads/project/sonya/api/assets/font.otf";
+    const sourcePDF = "/home/drh0use/Downloads/project/sonya/api/assets/form.pdf";
+    const destinationPDF = "/home/drh0use/Downloads/project/sonya/api/assets/output.pdf";
 
-    pdfFiller.fillForm(sourcePDF, destinationPDF, data, function (err) {
-        if (err) throw err;
-        const file = fs.createReadStream(destinationPDF);
-        const stat = fs.statSync(destinationPDF);
-        res.setHeader('Content-Length', stat.size);
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'attachment; filename=aile.pdf');
-        file.pipe(res);
+
+    let _id = null;
+    try {
+        _id = Utils.getUserID(req);
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+
+    User.findOne({ _id: _id }, (err, user) => {
+        if (err)
+            return res.status(400).json(err);
+        if ((err = Utils.checkUserPrivileges(res, req, user)))
+            return err;
+        if (!user.isAllowed(req.body.town))
+            return res.status(400).json({ msg: 'User cannot do operation in this region.' })
+
+        Fam
+            .findById(req.params.familyid)
+            .exec((err, family) => {
+                if (err)
+                    return res.status(400).json(err);
+                if (!family)
+                    return res.status(400).json({ msg: 'Family not found' });
+
+                Utils
+                    .toForm(family)
+                    .then((form) => {
+
+
+                        fs.readFile(sourcePDF, async (err, data) => {
+                            if (err)
+                                return res.status(500).json(err);
+
+
+                            fs.readFile(sourceFont, async (err, font) => {
+
+
+                                const pdfDoc = await pdfLib.PDFDocument.load(data);
+                                const pdfForm = pdfDoc.getForm();
+
+                                pdfDoc.registerFontkit(fontkit);
+                                const ubuntuFont = await pdfDoc.embedFont(font);
+
+                                Object.keys(form).forEach(function (key) {
+                                    pdfForm.getTextField(key).setText(form[key]);
+                                });
+
+                                pdfForm.updateFieldAppearances(ubuntuFont);
+
+                                const output = await pdfDoc.save();
+                                res.setHeader('Content-Type', 'application/pdf');
+                                res.setHeader('Content-Disposition', 'attachment; filename=aile.pdf');
+                                res.send(Buffer.from(output));
+
+                            });
+
+
+                        });
+
+                    })
+            });
     });
-
-
-
-    // let _id = null;
-    // try {
-    //     _id = Utils.getUserID(req);r
-    // } catch (err) {
-    //     return res.status(500).json(err);
-    // }
-
-    // User.findOne({ _id: _id }, (err, user) => {
-    //     if (err)
-    //         return res.status(400).json(err);
-    //     if ((err = Utils.checkUserPrivileges(res, req, user)))
-    //         return err;
-    //     if (req.body.town && !user.towns.includes(req.body.town))
-    //         return res.status(400).json({ msg: 'User cannot do operation in this region.' })
-
-    //     Fam
-    //         .findById(req.params.familyid)
-    //         .populate({ path: 'createdBy', select: { 'salt': 0, 'hash': 0 }, model: User })
-    //         .populate({ path: 'images', model: Image })
-    //         .exec((err, family) => {
-    //             if (!family)
-    //                 return res.status(404).json({ 'message': 'family not found' });
-    //             else if (err)
-    //                 return res.status(404).json(err);
-    //             else
-    //                 return res.status(200).json(family);
-    //         });
-
-    // });
-
-
 }
 
 
