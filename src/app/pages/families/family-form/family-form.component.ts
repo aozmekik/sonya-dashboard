@@ -35,7 +35,6 @@ export class FamilyFormComponent extends CustomFormComponent<Family> implements 
   }
 
   ngOnInit() {
-    console.log(this.model);
     this.form = new FormGroup({
       '_id': new FormControl(this.model._id),
       'createdBy': new FormControl(this.authService.getCurrentUser()._id),

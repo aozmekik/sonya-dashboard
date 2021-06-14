@@ -85,7 +85,7 @@ userSchema.methods.isAdmin = function () {
 }
 
 userSchema.methods.isAllowed = function (town) {
-    return this.isAdmin() || (town && this.towns.includes(town));
+    return this.isAdmin() || (town ? this.towns.includes(town) : true);
 }
 
 userSchema.methods.clean = function () {

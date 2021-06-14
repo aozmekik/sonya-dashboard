@@ -220,6 +220,9 @@ const toForm = async (family) => {
 
     // notes
     form['notes'] = family.rating ? `Derecelendirme: ${family.rating}/5\n` : '';
+    form['notes'] += `Yardım Takip: ${family.aid ? 'Evet' : 'Hayır'} - `;
+    form['notes'] += `Eğitim Takip: ${family.education ? 'Evet' : 'Hayır'} - `;
+    form['notes'] += `Sağlık Takip: ${family.health ? 'Evet' : 'Hayır'}\n`;
     for (note of family.notes)
         form['notes'] += `${note.statement}\n`;
 

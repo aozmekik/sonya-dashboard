@@ -39,7 +39,7 @@ const familiesList = (req, res) => {
         const query = {
             name: req.body.name ? new RegExp(req.body.name, 'ig') : null,
             city: req.body.city,
-            town: req.body.town,
+            town: req.body.town ? req.body.town : { $in: user.towns },
             district: req.body.district,
             street: req.body.street,
             rating: req.body.rating,
@@ -309,8 +309,6 @@ const familiesPDF = (req, res) => {
             return res.status(400).json(err);
         if ((err = Utils.checkUserPrivileges(res, req, user)))
             return err;
-        if (!user.isAllowed(req.body.town))
-            return res.status(400).json({ msg: 'User cannot do operation in this region.' })
 
         Fam
             .findById(req.params.familyid)
@@ -319,6 +317,8 @@ const familiesPDF = (req, res) => {
                     return res.status(400).json(err);
                 if (!family)
                     return res.status(400).json({ msg: 'Family not found' });
+                if (!user.isAllowed(family.town))
+                    return res.status(400).json({ msg: 'User cannot do operation in this region.' })
 
                 Utils
                     .toForm(family)
