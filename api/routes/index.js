@@ -14,6 +14,7 @@ const ctrlAuth = require('../controllers/authentication');
 const ctrlUsers = require('../controllers/users');
 const ctrlPosts = require('../controllers/posts');
 const ctrlImages = require('../controllers/images');
+const ctrlPasswords = require('../controllers/password');
 
 const ctrlAdminAuth = require('../controllers/admin/authentication');
 const ctrlAdminFamilies = require('../controllers/admin/families');
@@ -78,6 +79,19 @@ router
 router
     .route('/restore/:token')
     .get(ctrlAuth.restore);
+
+// password
+router
+    .route('/forgot')
+    .post(ctrlPasswords.forgot);
+
+router
+    .route('/reset/:token')
+    .post(ctrlPasswords.reset);
+
+router
+    .route('/change')
+    .post(auth, ctrlPasswords.change);
 
 // users
 router

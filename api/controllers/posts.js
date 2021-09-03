@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Utils = require('./utils');
-
 const User = mongoose.model('User');
 const Post = mongoose.model('Post');
 const Image = mongoose.model('Image');
@@ -73,6 +72,7 @@ const postsListOfUser = (req, res) => {
 
         query
             .populate({ path: 'image', model: Image })
+            .populate({ path: 'createdBy', select: { 'salt': 0, 'hash': 0 }, model: User })
             .exec(async (err, posts) => {
                 if (err)
                     return res.status(400).json(err);
