@@ -340,6 +340,11 @@ const familiesPDF = (req, res) => {
                                 const ubuntuFont = await pdfDoc.embedFont(font);
 
                                 Object.keys(form).forEach(function (key) {
+                                    if (key != '_id' && key != 'createdAt')
+                                        pdfForm.getTextField(key).setFontSize(8);
+                                    else
+                                        pdfForm.getTextField(key).setFontSize(5);
+
                                     pdfForm.getTextField(key).setText(form[key]);
                                 });
 

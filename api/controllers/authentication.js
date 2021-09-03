@@ -1,40 +1,16 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
-var nodemailer = require('nodemailer');
-const { body, validationResult } = require('express-validator');
-
+const Utils = require('./utils');
 const User = mongoose.model('User');
 const Token = mongoose.model('Token');
 
-const emailSender = (mailOptions, callback) => {
-    const transporter = nodemailer.createTransport({
-        port: 465,               // true for 465, false for other ports
-        host: 'smtp.gmail.com',
-        auth: {
-            user: process.env.GMAIL_USERNAME,
-            pass: process.env.GMAIL_PASSWORD,
-        },
-        secure: true,
-    });
-
-
-    transporter.sendMail(mailOptions, callback);
-
-};
 
 
 const register = (req, res) => {
-    // FIXME. this is not working. delete them.
-    body('name', 'Name cannot be blank').notEmpty();
-    body('email', 'Email is not valid').notEmpty().isEmail();
-    body('password', 'Password must be at least 4 characters long').notEmpty().isLength({ min: 5 });
-
-
-    // Check for validation errors    
-    var errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+    if (!req.body.name && !req.body.email && !req.body.password)
+        return res.status(400).json({ msg: 'Fields are missing' });
+    if (req.body.password.length < 8)
+        return res.status(400).json({ msg: 'Password too short' });
 
     User.findOne({ email: req.body.email }, (err, user) => {
         if (user) {
@@ -46,7 +22,7 @@ const register = (req, res) => {
         user.email = req.body.email;
         user.role = 0; // each user starts as guest.
         user.status = 0; // each user starts in status: unconfirmed e-mail.
-        user.towns = [2048];
+        user.towns = [];
         user.image = null;
         user.setPassword(req.body.password);
         user.save((err) => {
@@ -65,14 +41,14 @@ const register = (req, res) => {
                     {
                         from: process.env.GMAIL_USERNAME,
                         to: user.email,
-                        subject: 'Account Verification Token',
-                        text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/api/confirm\/' + token.token + '.\n'
+                        subject: 'Hesap Onaylama',
+                        text: 'Merhaba ' + `${user.name},\n\n` + 'Lütfen aşağıdaki linke tıklayarak hesabınızı onaylayınız: \nhttp:\/\/' + req.headers.host + '\/api/confirm\/' + token.token + '.\n\nİyilik Rengi Derneği\n'
                     };
 
-                    emailSender(mailOptions, (err) => {
+                    Utils.emailSender(mailOptions, (err) => {
                         if (err)
                             return res.status(500).json({ msg: err.message });
-                        res.status(200).json({ msg: 'A verification email has been sent to ' + user.email + '.' });
+                        res.status(200).json({ msg: 'E-Posta hesabına doğrulama link gönderildi: ' + user.email + '.' });
                     });
                 });
 
@@ -164,15 +140,10 @@ const confirm = (req, res, next) => {
 };
 
 const resend = (req, res, next) => {
-    body('email', 'Email is not valid').isEmail();
-    body('email', 'Email cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail({ remove_dots: false });
-
-    // check for validation errors    
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+    if (!req.body.name && !req.body.email && !req.body.password)
+        return res.status(400).json({ msg: 'Fields are missing' });
+    if (req.body.password.length < 8)
+        return res.status(400).json({ msg: 'Password too short' });
 
     User.findOne({ email: req.body.email }, (err, user) => {
         if (!user)
@@ -193,11 +164,11 @@ const resend = (req, res, next) => {
             {
                 from: process.env.GMAIL_USERNAME,
                 to: user.email,
-                subject: 'Account Verification Token',
-                text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/api/confirm\/' + token.token + '.\n'
+                subject: 'Şifre Yenileme',
+                text: 'Merhaba ' + `${user.name},\n\n` + 'Lütfen aşağıdaki linke tıklayarak şifre değiştirme talebini onaylayınız: \nhttp:\/\/' + req.headers.host + '\/api/confirm\/' + token.token + '.\n\nİyilik Rengi Derneği\n'
             };
 
-            emailSender(mailOptions, (err) => {
+            Utils.emailSender(mailOptions, (err) => {
                 if (err)
                     return res.status(500).json({ msg: err.message });
                 res.status(200).json({ msg: 'A verification email has been sent to ' + user.email + '.' });

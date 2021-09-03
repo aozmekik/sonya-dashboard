@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const sharp = require('sharp');
+const nodemailer = require('nodemailer');
+
 const User = mongoose.model('User');
 const City = mongoose.model('City');
 const Town = mongoose.model('Town');
@@ -105,7 +107,7 @@ const toForm = async (family) => {
     form['nation'] = family.nation;
     form['idNo'] = family.idNo;
     form['tel'] = family.tel;
-    form['address'] = family.address ? `${family.address}\n` : '';
+    form['address'] = family.address ? `${family.address},` : '';
 
     // fill address from location info
     try {
@@ -166,6 +168,7 @@ const toForm = async (family) => {
     }
 
     // other expenses
+    form['rent'] = family.rent ? `${family.rent}₺` : '';
     form['expenseOther'] = '';
     let expenseTotal = 0;
     for (expense of expenses) {
@@ -209,8 +212,8 @@ const toForm = async (family) => {
     const kids = family.members.filter(member => member.school != null);
     for (let i = 0; i < Math.min(5, kids.length); i++) {
         form[`edu${i + 1}Name`] = kids[i].name;
-        form[`edu${i + 1}School`] = sicks[i].school;
-        form[`edu${i + 1}Grade`] = sicks[i].grade;
+        form[`edu${i + 1}School`] = kids[i].school;
+        form[`edu${i + 1}Grade`] = kids[i].grade;
     }
 
     // registrants 
@@ -239,6 +242,22 @@ const toForm = async (family) => {
     return form;
 };
 
+const emailSender = (mailOptions, callback) => {
+    const transporter = nodemailer.createTransport({
+        port: 465,               // true for 465, false for other ports
+        host: 'smtp.gmail.com',
+        auth: {
+            user: process.env.GMAIL_USERNAME,
+            pass: process.env.GMAIL_PASSWORD,
+        },
+        secure: true,
+    });
+
+
+    transporter.sendMail(mailOptions, callback);
+
+};
+
 
 
 module.exports = {
@@ -249,5 +268,6 @@ module.exports = {
     bufferToImg,
     imgsToBuffers,
     checkUserPrivileges,
+    emailSender
 };
 
