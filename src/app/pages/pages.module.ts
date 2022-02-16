@@ -1,4 +1,3 @@
-import { CameraModule } from './camera/camera.module';
 import { NgModule } from '@angular/core';
 import { NbMenuModule, NbSpinnerModule } from '@nebular/theme';
 
@@ -13,7 +12,6 @@ import { PagesRoutingModule } from './pages-routing.module';
     ThemeModule,
     NbMenuModule,
     DashboardModule,
-    CameraModule,
   ],
   declarations: [
     PagesComponent,

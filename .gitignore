@@ -5,6 +5,8 @@
 app_public/node_modules
 dist
 
+package-lock.json
+
 .idea
 
 # Logs

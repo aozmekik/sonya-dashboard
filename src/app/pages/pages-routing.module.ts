@@ -1,4 +1,3 @@
-import { CameraComponent } from './camera/camera.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -15,35 +14,9 @@ const routes: Routes = [
         component: DashboardComponent,
       },
       {
-        path: 'camera',
-        component: CameraComponent,
-      },
-      {
-        path: 'accounting',
-        loadChildren: () =>
-          import('./accounting/accounting.module').then(
-            (m) => m.AccountingModule
-          ),
-      },
-      {
-        path: 'campaigns',
-        loadChildren: () =>
-          import('./campaigns/campaigns.module').then((m) => m.CampaignsModule),
-      },
-      {
         path: 'members',
         loadChildren: () =>
           import('./members/members.module').then((m) => m.MembersModule),
-      },
-      {
-        path: 'inventory',
-        loadChildren: () =>
-          import('./inventory/inventory.module').then((m) => m.InventoryModule),
-      },
-      {
-        path: 'needs',
-        loadChildren: () =>
-          import('./needs/needs.module').then((m) => m.NeedsModule),
       },
       {
         path: 'families',

@@ -18,44 +18,44 @@
 }
 
 /* ng2-smart-table*/
-:host /deep/ ng2-smart-table table {
+:host ng2-smart-table table {
   box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12) !important;
 }
 
-:host /deep/ ng2-smart-table tbody > tr > td:first-child {
+:host ng2-smart-table tbody > tr > td:first-child {
   color: royalblue;
 }
 
-:host /deep/ ng2-smart-table tbody > tr > td {
+:host ng2-smart-table tbody > tr > td {
   border-bottom: 1px solid grey;
   font-size: .875em;
   padding: .375em .75em;
 }
 
-:host /deep/ ng2-smart-row {
+:host ng2-smart-row {
   border-bottom: 1px solid black !important;
 }
 
-:host /deep/ ng2-smart-row > tr {
+:host ng2-smart-row > tr {
   border-bottom: 1px solid black !important;
 }
 
-:host /deep/ ng2-smart-row > td {
+:host ng2-smart-row > td {
   border-bottom: 1px solid black !important;
 }
 
-:host /deep/ ng2-smart-table_cell {
+:host ng2-smart-table_cell {
   border-bottom: 1px solid red !important;
 }
 
-:host /deep/ ng2-smart-table tbody > tr > td > a {
+:host ng2-smart-table tbody > tr > td > a {
   color: grey;
   text-decoration: none;
   font-size: small;
   font-weight: bold;
 }
 
-:host /deep/ ng2-smart-table tbody > tr > th > a {
+:host ng2-smart-table tbody > tr > th > a {
   color: grey;
   text-decoration: none;
   font-size: small;
@@ -63,7 +63,7 @@
 }
 
 /* clickable paging number */
-:host /deep/ a.ng2-smart-page-link.page-link {
+:host a.ng2-smart-page-link.page-link {
   height: 22px;
   width: 40px;
   text-align: center;
@@ -73,7 +73,7 @@
   line-height: 6px;
 }
 /* selected paging number */
-:host /deep/ span.ng2-smart-page-link.page-link {
+:host span.ng2-smart-page-link.page-link {
   height: 22px;
   width: 40px;
   text-align: center;
@@ -83,7 +83,7 @@
   line-height: 6px;
 }
 
-:host /deep/ span.ng2-smart-page-item.page-item.disabled {
+:host span.ng2-smart-page-item.page-item.disabled {
   height: 22px;
   width: 40px;
   text-align: center;
@@ -94,7 +94,7 @@
 }
 
 /* previous paging button */
-:host /deep/ a.ng2-smart-page-link.page-link.page-link-prev {
+:host a.ng2-smart-page-link.page-link.page-link-prev {
   height: 22px;
   width: 40px;
   text-align: center;
@@ -105,7 +105,7 @@
 }
 
 /* previous paging button disabled */
-:host /deep/ span.ng2-smart-page-link.page-link.page-link-prev.disabled {
+:host span.ng2-smart-page-link.page-link.page-link-prev.disabled {
   height: 22px;
   width: 40px;
   text-align: center;
@@ -116,7 +116,7 @@
 }
 
 /* next paging button */
-:host /deep/ a.ng2-smart-page-link.page-link.page-link-next {
+:host a.ng2-smart-page-link.page-link.page-link-next {
   height: 22px;
   width: 40px;
   text-align: center;
@@ -127,7 +127,7 @@
 }
 
 /* next paging button */
-:host /deep/ span.ng2-smart-page-link.page-link.page-link-next.disabled {
+:host span.ng2-smart-page-link.page-link.page-link-next.disabled {
   height: 22px;
   width: 40px;
   text-align: center;
