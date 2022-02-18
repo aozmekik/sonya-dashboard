@@ -14,12 +14,12 @@ const login = (req, res) => {
     passport.authenticate('local', (err, user, info) => {
         if (err) {
             return res
-                .status(404)
+                .status(404) // TODO. 401
                 .json(err);
         }
         if (user) {
             if (user.role != 3)
-                return res.status(404).json({ msg: 'No admin permissions' });
+                return res.status(404).json({ msg: 'No admin permissions' }); // TODO. 401
             const token = user.generateJwt();
             res
                 .status(200)

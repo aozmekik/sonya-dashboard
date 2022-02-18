@@ -61,5 +61,4 @@ connect();
 require('./family');
 require('./location');
 require('./user');
-require('./post');
 require('./image');
