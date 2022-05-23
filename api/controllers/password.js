@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 const Utils = require('./utils');
 const Token = mongoose.model('Token');
 
+const credentials = require('../../credentials.json');
 
 
 const forgot = (req, res, next) => {
@@ -20,7 +21,7 @@ const forgot = (req, res, next) => {
                 return res.status(500).json({ msg: err.message });
             const mailOptions =
             {
-                from: process.env.GMAIL_USERNAME,
+                from: credentials.GMAIL_USERNAME,
                 to: user.email,
                 subject: 'Şifre Yenileme',
                 text: 'Merhaba ' + `${user.name},\n\n` + 'Lütfen linke tıklayarak şifre değiştirme talebini onaylayınız: \nhttp:\/\/' + req.headers.host + '\/api/reset\/' + token.token + '\n\nİyilik Rengi Derneği\n'
@@ -64,7 +65,7 @@ const reset = (req, res, next) => {
 
                 const mailOptions =
                 {
-                    from: process.env.GMAIL_USERNAME,
+                    from: credentials.GMAIL_USERNAME,
                     to: user.email,
                     subject: 'Yeni Şifreniz',
                     text: 'Merhaba ' + `Merhaba ${user.name},\n\nYeni Şifreniz: ${newPassword}\n Mobil uygulamadan şifreyi değiştirmeyi unutmayınız.\nİyilik Rengi Derneği\n`
@@ -109,7 +110,7 @@ const change = (req, res, next) => {
 
             const mailOptions =
             {
-                from: process.env.GMAIL_USERNAME,
+                from: credentials.GMAIL_USERNAME,
                 to: user.email,
                 subject: 'Yeni Şifreniz',
                 text: 'Merhaba ' + `${user.name},\n\n` + 'Şifreniz değiştirilmiştir.\nİyilik Rengi Derneği\n'

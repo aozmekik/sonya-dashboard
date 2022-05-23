@@ -8,6 +8,8 @@ const Town = mongoose.model('Town');
 const District = mongoose.model('District');
 const Street = mongoose.model('Street');
 
+const credentials = require('../../credentials.json');
+
 
 const getUserID = (req) => {
     const token = req.headers.authorization.split(' ')[1];
@@ -247,8 +249,8 @@ const emailSender = (mailOptions, callback) => {
         port: 465,               // true for 465, false for other ports
         host: 'smtp.gmail.com',
         auth: {
-            user: process.env.GMAIL_USERNAME,
-            pass: process.env.GMAIL_PASSWORD,
+            user: credentials.GMAIL_USERNAME,
+            pass: credentials.GMAIL_PASSWORD,
         },
         secure: true,
     });

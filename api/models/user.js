@@ -7,6 +7,8 @@ function isEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
+const credentials = require('../../credentials.json');
+
 var userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -69,7 +71,7 @@ userSchema.methods.generateJwt = function () {
         email: this.email,
         name: this.name,
         exp: parseInt(expiry.getTime() / 1000, 10),
-    }, process.env.JWT_SECRET);
+    }, credentials.JWT_SECRET);
 };
 
 userSchema.methods.emailNotConfirmed = function () {
@@ -104,7 +106,7 @@ userSchema.statics.getIDfromJWT = function (token) {
     let payload = null;
     payload = jwt.verify(
         token,
-        process.env.JWT_SECRET
+        credentials.JWT_SECRET
     );
     return payload._id;
 }
@@ -137,7 +139,7 @@ tokenSchema.methods.generate = function (userid) {
             _id: this._id,
             exp: parseInt(expiry.getTime() / 1000, 10)
         },
-        process.env.JWT_SECRET,
+        credentials.JWT_SECRET,
     );
 };
 

@@ -6,6 +6,8 @@ const User = mongoose.model('User');
 const Image = mongoose.model('Image');
 
 
+// const queryFamilies(req)
+
 const familiesList = (req, res) => {
     let _id = null;
     try {
@@ -23,6 +25,9 @@ const familiesList = (req, res) => {
 
         Fam
             .find({})
+            .sort({createdAt: -1})
+            .limit(req.body.limit)
+            .skip(req.body.skip)
             .populate({ path: 'createdBy', select: { 'salt': 0, 'hash': 0 }, model: User })
             .populate({ path: 'images', model: Image })
             .exec((err, families) => {

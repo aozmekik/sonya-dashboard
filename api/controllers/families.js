@@ -55,6 +55,8 @@ const familiesList = (req, res) => {
 
         Fam
             .find(query)
+            .sort({createdAt: -1})
+            .limit(20)
             .populate({ path: 'createdBy', select: { 'salt': 0, 'hash': 0 }, model: User })
             .populate({ path: 'images', model: Image })
             .exec((err, families) => {

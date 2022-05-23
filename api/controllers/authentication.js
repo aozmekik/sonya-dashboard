@@ -4,7 +4,7 @@ const Utils = require('./utils');
 const User = mongoose.model('User');
 const Token = mongoose.model('Token');
 
-
+const credentials = require('../../credentials.json');
 
 const register = (req, res) => {
     if (!req.body.name && !req.body.email && !req.body.password)
@@ -39,7 +39,7 @@ const register = (req, res) => {
 
                     const mailOptions =
                     {
-                        from: process.env.GMAIL_USERNAME,
+                        from: credentials.GMAIL_USERNAME,
                         to: user.email,
                         subject: 'Hesap Onaylama',
                         text: 'Merhaba ' + `${user.name},\n\n` + 'Lütfen aşağıdaki linke tıklayarak hesabınızı onaylayınız: \nhttp:\/\/' + req.headers.host + '\/api/confirm\/' + token.token + '.\n\nİyilik Rengi Derneği\n'
@@ -162,7 +162,7 @@ const resend = (req, res, next) => {
 
             const mailOptions =
             {
-                from: process.env.GMAIL_USERNAME,
+                from: credentials.GMAIL_USERNAME,
                 to: user.email,
                 subject: 'Şifre Yenileme',
                 text: 'Merhaba ' + `${user.name},\n\n` + 'Lütfen aşağıdaki linke tıklayarak şifre değiştirme talebini onaylayınız: \nhttp:\/\/' + req.headers.host + '\/api/confirm\/' + token.token + '.\n\nİyilik Rengi Derneği\n'

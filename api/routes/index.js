@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('express-jwt');
+const credentials = require('../../credentials.json');
+
 const auth = jwt({
-    secret: process.env.JWT_SECRET,
+    secret: credentials.JWT_SECRET,
     userProperty: 'payload',
     algorithms: ['HS256']
 })
@@ -115,7 +117,7 @@ router
 
 router
     .route('/admin/families')
-    .get(auth, ctrlAdminFamilies.familiesList);
+    .post(auth, ctrlAdminFamilies.familiesList);
 
 // users
 

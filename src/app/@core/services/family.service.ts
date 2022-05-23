@@ -17,10 +17,18 @@ export class FamilyService extends GeneralService {
     super(http, auth);
   }
 
-  public getFamilies(): Promise<Family[]> {
+  public getFamiliesLength(): Promise<Number> {
+    const url = `${this.apiBaseUrl}/admin/families/length`;
+    return this.http
+      .post(url, null, this.getHeaders())
+      .toPromise()
+      .catch(this.handleError);
+  }
+
+  public getFamilies(query): Promise<Family[]> {
     const url = `${this.apiBaseUrl}/admin/families`;
     return this.http
-      .get(url, this.getHeaders())
+      .post(url, query, this.getHeaders())
       .toPromise()
       .then(response => response as Family[])
       .catch(this.handleError);
