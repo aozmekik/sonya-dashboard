@@ -246,13 +246,16 @@ const toForm = async (family) => {
 
 const emailSender = (mailOptions, callback) => {
     const transporter = nodemailer.createTransport({
-        port: 465,               // true for 465, false for other ports
-        host: 'smtp.gmail.com',
+        port: 587,               // true for 465, false for other ports
+        host: 'smtp-mail.outlook.com',
         auth: {
             user: credentials.GMAIL_USERNAME,
             pass: credentials.GMAIL_PASSWORD,
         },
-        secure: true,
+        secureConnection: false,
+        tls: {
+            ciphers: 'SSLv3'
+        }
     });
 
 
