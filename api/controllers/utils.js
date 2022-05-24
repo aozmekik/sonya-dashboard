@@ -197,7 +197,7 @@ const toForm = async (family) => {
     for (let i = 0; i < Math.min(8, members.length); i++) {
         form[`member${i + 1}Name`] = members[i].name;
         form[`member${i + 1}idNo`] = members[i].idNo;
-        form[`member${i + 1}Gender`] = members[i].gender === 0 ? 'E' : 'K';
+        form[`member${i + 1}Gender`] = members[i].gender != undefined ? members[i].gender === 0 ? 'E' : 'K': '';
         form[`member${i + 1}Birthyear`] = members[i].birthyear;
         form[`member${i + 1}Size`] = members[i].size;
         form[`member${i + 1}Shoe`] = members[i].shoe;
