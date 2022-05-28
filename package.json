@@ -2,6 +2,10 @@
   "name": "ngx-admin",
   "version": "8.0.0",
   "license": "MIT",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/akveo/ngx-admin.git"
