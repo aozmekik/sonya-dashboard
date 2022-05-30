@@ -53,6 +53,10 @@ var memberSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    medicine: {
+        type: String,
+        trim: true
+    },
     note: {
         type: String,
         trim: true

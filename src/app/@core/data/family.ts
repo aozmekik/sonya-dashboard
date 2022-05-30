@@ -23,6 +23,7 @@ export namespace Family {
     size: string;
     shoe: number;
     disease: string;
+    medicine: string;
     note: string;
     school: string;
     grade: number;

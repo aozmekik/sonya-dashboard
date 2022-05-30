@@ -208,6 +208,7 @@ const toForm = async (family) => {
     for (let i = 0; i < Math.min(2, sicks.length); i++) {
         form[`health${i + 1}Name`] = sicks[i].name;
         form[`health${i + 1}Info`] = sicks[i].disease;
+        form[`health${i + 1}Medicine`] = sicks[i].medicine;
     }
 
     // education
