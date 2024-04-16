@@ -6,4 +6,4 @@ Color of Favor Admin Panel Development.
 
     export JWT_SECRET=TOPSECRET
     export GqMAIL_USERNAME='iyilikrengi.noreply@gmail.com'
-    export GMAIL_PASSWORD='xpsspx123'
+    export GMAIL_PASSWORD=''
